@@ -1,0 +1,531 @@
+from __future__ import annotations
+
+import json
+import os
+import uuid
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+from app.classifier import EvidenceRelationClassifier, RelationDecision
+from app.graph_service import GraphService
+
+GUIDANCE_RELATIONS = frozenset({"ACCEPTS", "REJECTS", "CONSTRAINS", "CLARIFIES", "REQUIRES"})
+ANCHOR_RELATIONS = frozenset({"REJECTS", "CONSTRAINS", "REQUIRES"})
+ANCHOR_SCOPES = frozenset({"direct", "parent", "rule"})
+DISAGREEMENT_RELATIONS = frozenset({"PARTIALLY_SUPPORTS", "DOES_NOT_SUPPORT"})
+MAX_CONTEXT_ITEMS = 16
+MAX_NUANCE_ITEMS = 2
+SNIPPET_LENGTH = 160
+QUESTION_TEXT_LIMIT = 500
+USER_STATUSES = frozenset({"dismissed", "explore"})
+
+
+def _utc_now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _snippet(text: str, limit: int = SNIPPET_LENGTH) -> str:
+    cleaned = " ".join(text.split())
+    if len(cleaned) <= limit:
+        return cleaned
+    return cleaned[: limit - 1] + "…"
+
+
+def _criterion_payload(node: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "id": node["id"],
+        "node_type": node["node_type"],
+        "segment_type": node.get("segment_type"),
+        "text": node["text"].strip(),
+    }
+
+
+def _edge_items(graph_service: GraphService, node_id: str, scope: str) -> list[dict[str, Any]]:
+    items: list[dict[str, Any]] = []
+    for edge in graph_service.graph.in_edges.get(node_id, []):
+        if edge["kind"] != "assessment" or edge["relation"] not in GUIDANCE_RELATIONS:
+            continue
+        neighbor = graph_service.graph.nodes[edge["source"]]
+        items.append(
+            {
+                "node_id": neighbor["id"],
+                "node_type": neighbor["node_type"],
+                "relation": edge["relation"],
+                "direction": "incoming",
+                "scope": scope,
+                "target_id": node_id,
+                "text": neighbor["text"].strip(),
+            }
+        )
+    for edge in graph_service.graph.out_edges.get(node_id, []):
+        if edge["kind"] != "assessment" or edge["relation"] not in GUIDANCE_RELATIONS:
+            continue
+        neighbor = graph_service.graph.nodes[edge["target"]]
+        items.append(
+            {
+                "node_id": neighbor["id"],
+                "node_type": neighbor["node_type"],
+                "relation": edge["relation"],
+                "direction": "outgoing",
+                "scope": scope,
+                "target_id": node_id,
+                "text": neighbor["text"].strip(),
+            }
+        )
+    return items
+
+
+def _indicative_parent(graph_service: GraphService, node: dict[str, Any]) -> dict[str, Any] | None:
+    parent_id = node.get("parent_id")
+    if not parent_id or parent_id not in graph_service.graph.nodes:
+        return None
+    parent = graph_service.graph.nodes[parent_id]
+    if parent.get("segment_type") != "indicative_point":
+        return None
+    return parent
+
+
+def _indicative_children(graph_service: GraphService, node_id: str) -> list[dict[str, Any]]:
+    children = [
+        child
+        for child in graph_service.graph.nodes.values()
+        if child.get("parent_id") == node_id and child.get("segment_type") == "indicative_point"
+    ]
+    children.sort(key=lambda child: child["order"])
+    return children
+
+
+def _rule_items(graph_service: GraphService, target_ids: list[str]) -> list[dict[str, Any]]:
+    items: list[dict[str, Any]] = []
+    for node_id, node in graph_service.graph.nodes.items():
+        if node["node_type"] != "level_rule":
+            continue
+        for edge in graph_service.graph.out_edges.get(node_id, []):
+            if edge["kind"] != "assessment" or edge["relation"] != "REQUIRES":
+                continue
+            if edge["target"] not in target_ids:
+                continue
+            items.append(
+                {
+                    "node_id": node_id,
+                    "node_type": "level_rule",
+                    "relation": "REQUIRES",
+                    "direction": "incoming",
+                    "scope": "rule",
+                    "target_id": edge["target"],
+                    "text": node["text"].strip(),
+                }
+            )
+            for rule_edge in graph_service.graph.in_edges.get(node_id, []):
+                if rule_edge["kind"] != "assessment" or rule_edge["relation"] != "CLARIFIES":
+                    continue
+                commentary = graph_service.graph.nodes[rule_edge["source"]]
+                items.append(
+                    {
+                        "node_id": commentary["id"],
+                        "node_type": commentary["node_type"],
+                        "relation": "CLARIFIES",
+                        "direction": "incoming",
+                        "scope": "rule",
+                        "target_id": node_id,
+                        "text": commentary["text"].strip(),
+                    }
+                )
+    return items
+
+
+def _question_text(graph_service: GraphService) -> str | None:
+    question_nodes = [
+        node
+        for node in graph_service.graph.nodes.values()
+        if node["document_type"] == "question" and not node["structural_only"]
+    ]
+    question_nodes.sort(key=lambda node: node["order"])
+    combined = " ".join(node["text"].strip() for node in question_nodes if node["text"].strip())
+    if not combined:
+        return None
+    if len(combined) > QUESTION_TEXT_LIMIT:
+        return combined[: QUESTION_TEXT_LIMIT - 3] + "..."
+    return combined
+
+
+def build_intervention_context(graph_service: GraphService, criterion_id: str) -> dict[str, Any]:
+    node = graph_service.get_node(criterion_id)
+    if node.get("segment_type") != "indicative_point":
+        raise ValueError(f"Node is not an indicative_point criterion: {criterion_id}")
+
+    parent = _indicative_parent(graph_service, node)
+    items: list[dict[str, Any]] = []
+    items.extend(_edge_items(graph_service, criterion_id, "direct"))
+    if parent is not None:
+        items.extend(_edge_items(graph_service, parent["id"], "parent"))
+    for child in _indicative_children(graph_service, criterion_id):
+        items.extend(_edge_items(graph_service, child["id"], "child"))
+
+    rule_targets = [criterion_id] + ([parent["id"]] if parent is not None else [])
+    items.extend(_rule_items(graph_service, rule_targets))
+
+    scope_rank = {"direct": 0, "parent": 1, "rule": 2, "child": 3}
+    seen: set[tuple[str, str, str]] = set()
+    deduped: list[dict[str, Any]] = []
+    for item in sorted(items, key=lambda item: (scope_rank[item["scope"]], item["relation"], item["node_id"])):
+        key = (item["node_id"], item["relation"], item["target_id"])
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(item)
+    deduped = deduped[:MAX_CONTEXT_ITEMS]
+
+    context_node_ids = [criterion_id]
+    if parent is not None:
+        context_node_ids.append(parent["id"])
+    for item in deduped:
+        if item["node_id"] not in context_node_ids:
+            context_node_ids.append(item["node_id"])
+
+    return {
+        "criterion": _criterion_payload(node),
+        "parent_criterion": _criterion_payload(parent) if parent is not None else None,
+        "guidance": [
+            {
+                "relation": item["relation"],
+                "direction": item["direction"],
+                "scope": item["scope"],
+                "node_id": item["node_id"],
+                "text": item["text"],
+            }
+            for item in deduped
+        ],
+        "items": deduped,
+        "question": _question_text(graph_service),
+        "context_node_ids": context_node_ids,
+    }
+
+
+def anchor_items(graph_context: dict[str, Any]) -> list[dict[str, Any]]:
+    return [
+        item
+        for item in graph_context.get("items", [])
+        if item["relation"] in ANCHOR_RELATIONS and item["scope"] in ANCHOR_SCOPES
+    ]
+
+
+def _nuance_payload(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [
+        {
+            "node_id": item["node_id"],
+            "relation": item["relation"],
+            "scope": item["scope"],
+            "text": _snippet(item["text"]),
+        }
+        for item in items[:MAX_NUANCE_ITEMS]
+    ]
+
+
+def _criterion_label(graph_context: dict[str, Any]) -> str:
+    criterion = graph_context.get("criterion")
+    if not criterion:
+        return "this criterion"
+    return _snippet(criterion["text"].lstrip("•o ").strip(), 80)
+
+
+def decide_intervention(decision: dict[str, Any], graph_context: dict[str, Any]) -> dict[str, Any]:
+    relation = decision["relation"]
+    needs_review = bool(decision.get("needs_review"))
+    anchors = anchor_items(graph_context)
+    criterion = _criterion_label(graph_context)
+
+    if relation in DISAGREEMENT_RELATIONS | {"UNCERTAIN"} and anchors:
+        reasons = ["disagreement_with_explicit_guidance"]
+        if needs_review:
+            reasons.append("low_confidence")
+        return {
+            "type": "REANCHOR",
+            "reasons": reasons,
+            "message": (
+                f"Explicit mark-scheme guidance applies to '{criterion}'. "
+                "Check this evidence against it before confirming the link."
+            ),
+            "nuance_items": _nuance_payload(anchors),
+        }
+
+    if relation == "UNCERTAIN" or needs_review:
+        reasons = ["jev_uncertain"] if relation == "UNCERTAIN" else ["close_probabilities"]
+        return {
+            "type": "REVIEW",
+            "reasons": reasons,
+            "message": (
+                f"Jev could not reliably decide whether this evidence supports '{criterion}'. "
+                "Worth a second look."
+            ),
+            "nuance_items": [],
+        }
+
+    if relation in DISAGREEMENT_RELATIONS:
+        reading = "partially supporting" if relation == "PARTIALLY_SUPPORTS" else "not supporting"
+        return {
+            "type": "CHALLENGE",
+            "reasons": ["jev_disagrees"],
+            "message": (
+                f"Jev reads this evidence as {reading} '{criterion}'. "
+                "Check the full step is evidenced."
+            ),
+            "nuance_items": [],
+        }
+
+    if anchors:
+        return {
+            "type": "NUANCE",
+            "reasons": ["supported_with_material_guidance"],
+            "message": (
+                f"Jev agrees this supports '{criterion}', but guidance affects how it is applied."
+            ),
+            "nuance_items": _nuance_payload(anchors),
+        }
+
+    return {
+        "type": "SILENCE",
+        "reasons": ["supported_no_material_guidance"],
+        "message": "",
+        "nuance_items": [],
+    }
+
+
+class AIInterpretationStore:
+    def __init__(self, base_dir: Path) -> None:
+        self.base_dir = base_dir
+
+    def _path(self, marking_session_id: str, response_id: str) -> Path:
+        return self.base_dir / marking_session_id / f"{response_id}.json"
+
+    def load(self, marking_session_id: str, response_id: str) -> dict[str, Any]:
+        path = self._path(marking_session_id, response_id)
+        if not path.is_file():
+            return {
+                "schema_version": 1,
+                "marking_session_id": marking_session_id,
+                "response_id": response_id,
+                "interpretations": [],
+            }
+        with path.open(encoding="utf-8") as handle:
+            return json.load(handle)
+
+    def save(self, payload: dict[str, Any]) -> None:
+        path = self._path(payload["marking_session_id"], payload["response_id"])
+        path.parent.mkdir(parents=True, exist_ok=True)
+        payload["updated_at"] = _utc_now()
+        tmp_path = path.with_suffix(path.suffix + ".tmp")
+        with tmp_path.open("w", encoding="utf-8") as handle:
+            json.dump(payload, handle, indent=2)
+            handle.write("\n")
+        os.replace(tmp_path, path)
+
+    def add(self, payload: dict[str, Any], interpretation: dict[str, Any]) -> dict[str, Any]:
+        now = _utc_now()
+        for existing in payload["interpretations"]:
+            if existing["coding_id"] == interpretation["coding_id"] and existing["status"] != "superseded":
+                existing["status"] = "superseded"
+                existing["superseded_by"] = interpretation["id"]
+                existing["updated_at"] = now
+        payload["interpretations"].append(interpretation)
+        return interpretation
+
+    def find(self, payload: dict[str, Any], ai_id: str) -> dict[str, Any]:
+        for interpretation in payload["interpretations"]:
+            if interpretation["id"] == ai_id:
+                return interpretation
+        raise KeyError(ai_id)
+
+
+def _coding_matches(interpretation: dict[str, Any], relation: dict[str, Any], span: dict[str, Any]) -> bool:
+    return (
+        interpretation["criterion_id"] == relation["target"]
+        and interpretation["start_char"] == span["start_char"]
+        and interpretation["end_char"] == span["end_char"]
+    )
+
+
+def active_interpretations(
+    payload: dict[str, Any],
+    judgement_state: dict[str, Any],
+) -> list[dict[str, Any]]:
+    spans = {span["id"]: span for span in judgement_state.get("evidence_spans", [])}
+    relations = {relation["id"]: relation for relation in judgement_state.get("relations", [])}
+    active: list[dict[str, Any]] = []
+    for interpretation in payload["interpretations"]:
+        if interpretation["status"] == "superseded":
+            continue
+        relation = relations.get(interpretation["coding_id"])
+        if relation is None:
+            continue
+        span = spans.get(relation["source"])
+        if span is None or not _coding_matches(interpretation, relation, span):
+            continue
+        active.append(interpretation)
+    return active
+
+
+def public_interpretation(interpretation: dict[str, Any]) -> dict[str, Any]:
+    return {key: value for key, value in interpretation.items() if key != "response_id"}
+
+
+def _response_local_context(record: dict[str, Any], span: dict[str, Any]) -> dict[str, Any]:
+    segments = record.get("segments", [])
+    index = None
+    for position, segment in enumerate(segments):
+        if segment["start_char"] <= span["start_char"] < segment["end_char"]:
+            index = position
+            break
+
+    def summary(segment: dict[str, Any]) -> dict[str, Any]:
+        return {
+            "segment_id": segment["id"],
+            "order": segment["order"],
+            "text": segment["text"],
+            "start_char": segment["start_char"],
+            "end_char": segment["end_char"],
+        }
+
+    preceding = summary(segments[index - 1]) if index is not None and index > 0 else None
+    following = (
+        summary(segments[index + 1])
+        if index is not None and index + 1 < len(segments)
+        else None
+    )
+    return {"preceding_segment": preceding, "following_segment": following}
+
+
+def run_evidence_check(
+    *,
+    classifier: EvidenceRelationClassifier,
+    graph_service: GraphService,
+    record: dict[str, Any],
+    judgement_state: dict[str, Any],
+    coding_id: str,
+    stage: str,
+    stage_source: str,
+) -> dict[str, Any]:
+    relation = next(
+        (item for item in judgement_state.get("relations", []) if item["id"] == coding_id),
+        None,
+    )
+    if relation is None:
+        raise KeyError(coding_id)
+    span = next(
+        (item for item in judgement_state.get("evidence_spans", []) if item["id"] == relation["source"]),
+        None,
+    )
+    if span is None:
+        raise KeyError(relation["source"])
+
+    graph_context = build_intervention_context(graph_service, relation["target"])
+    now = _utc_now()
+    interpretation: dict[str, Any] = {
+        "id": f"ai-{uuid.uuid4().hex[:8]}",
+        "coding_id": coding_id,
+        "evidence_id": span["id"],
+        "response_id": record["response_id"],
+        "start_char": span["start_char"],
+        "end_char": span["end_char"],
+        "evidence_text": span["text"],
+        "criterion_id": relation["target"],
+        "examiner_relation": relation["relation"],
+        "graph_context": {
+            "node_ids": graph_context["context_node_ids"],
+            "items": [
+                {**item, "text": _snippet(item["text"], 240)} for item in graph_context["items"]
+            ],
+        },
+        "stage": stage,
+        "stage_source": stage_source,
+        "explore_context": None,
+        "created_at": now,
+        "updated_at": now,
+    }
+
+    jev_context = {
+        "evidence_id": span["id"],
+        "start_char": span["start_char"],
+        "end_char": span["end_char"],
+        "context_node_ids": graph_context["context_node_ids"],
+        "parent_criterion": graph_context["parent_criterion"],
+        "guidance": graph_context["guidance"],
+        "question": graph_context["question"],
+        "response_context": _response_local_context(record, span),
+    }
+
+    try:
+        decision: RelationDecision = classifier.classify(
+            span["text"],
+            graph_context["criterion"],
+            jev_context,
+        )
+    except Exception as exc:  # noqa: BLE001
+        interpretation["jev"] = None
+        interpretation["intervention"] = None
+        interpretation["status"] = "error"
+        interpretation["error"] = str(exc)[:500]
+        return interpretation
+
+    jev = decision.to_dict()
+    interpretation["jev"] = {
+        "relation": jev["relation"],
+        "probabilities": jev["probabilities"],
+        "probability": jev["probability"],
+        "confidence": jev["confidence"],
+        "needs_review": jev["needs_review"],
+        "classifier": jev["classifier"],
+        "model": jev["model"],
+    }
+    intervention = decide_intervention(interpretation["jev"], graph_context)
+    interpretation["intervention"] = intervention
+    interpretation["status"] = "silent" if intervention["type"] == "SILENCE" else "pending"
+    return interpretation
+
+
+def build_explore_context(
+    interpretation: dict[str, Any],
+    judgement_state: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "evidence": {
+            "evidence_id": interpretation["evidence_id"],
+            "text": interpretation["evidence_text"],
+            "start_char": interpretation["start_char"],
+            "end_char": interpretation["end_char"],
+        },
+        "criterion_id": interpretation["criterion_id"],
+        "examiner_relation": interpretation["examiner_relation"],
+        "jev": interpretation.get("jev"),
+        "intervention": interpretation.get("intervention"),
+        "graph_context": interpretation["graph_context"],
+        "stage": interpretation["stage"],
+        "tentative_level": judgement_state.get("tentative_level"),
+        "prepared_at": _utc_now(),
+    }
+
+
+def _find_interpretation(payload: dict[str, Any], ai_id: str) -> dict[str, Any]:
+    for interpretation in payload["interpretations"]:
+        if interpretation["id"] == ai_id:
+            return interpretation
+    raise KeyError(ai_id)
+
+
+def update_interpretation_status(
+    payload: dict[str, Any],
+    ai_id: str,
+    status: str,
+    judgement_state: dict[str, Any],
+) -> dict[str, Any]:
+    if status not in USER_STATUSES:
+        raise ValueError(f"Unsupported status: {status}")
+    interpretation = _find_interpretation(payload, ai_id)
+    if interpretation["status"] not in {"pending", "dismissed", "explore"}:
+        raise ValueError(f"Interpretation is not actionable: {interpretation['status']}")
+    interpretation["status"] = status
+    interpretation["updated_at"] = _utc_now()
+    if status == "explore":
+        interpretation["explore_context"] = build_explore_context(interpretation, judgement_state)
+    return interpretation

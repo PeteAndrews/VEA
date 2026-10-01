@@ -706,6 +706,115 @@ button,
   margin-bottom: 0.35rem;
 }
 
+.ai-checking-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.intervention-badge {
+  border: none;
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.intervention-card {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  z-index: 25;
+  width: min(320px, 90vw);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.14);
+  padding: 0.75rem;
+}
+
+.intervention-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.intervention-tag,
+.intervention-nuance,
+.intervention-challenge,
+.intervention-review,
+.intervention-reanchor {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.intervention-nuance,
+.intervention-badge.intervention-nuance {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.intervention-challenge,
+.intervention-badge.intervention-challenge {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.intervention-review,
+.intervention-badge.intervention-review {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+
+.intervention-reanchor,
+.intervention-badge.intervention-reanchor {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.intervention-message {
+  margin: 0 0 0.5rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.intervention-nuance-list {
+  margin: 0 0 0.65rem;
+  padding-left: 1rem;
+  font-size: 0.82rem;
+}
+
+.intervention-relation {
+  display: inline-block;
+  margin-right: 0.35rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.intervention-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
 @media (max-width: 1100px) {
   .marking-layout {
     grid-template-columns: 1fr;

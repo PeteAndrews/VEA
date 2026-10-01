@@ -9,7 +9,15 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, model_validator
 
+from app.classifier import EvidenceRelationClassifier, JevEvidenceRelationClassifier
 from app.graph_service import EdgeKindFilter, GraphService
+from app.intervention import (
+    AIInterpretationStore,
+    active_interpretations,
+    public_interpretation,
+    run_evidence_check,
+    update_interpretation_status,
+)
 from app.judgement import (
     JudgementStore,
     create_coding,
@@ -20,6 +28,7 @@ from app.judgement import (
     update_coding,
 )
 from app.responses import load_response
+from app.stages import resolve_stage
 from app.views import (
     assessment_summary,
     candidate_detail_view,
@@ -38,7 +47,11 @@ from app.views import (
 DATA_DIR = os.getenv("VEA_DATA_DIR", "data")
 RESPONSES_DIR = Path(DATA_DIR) / "responses"
 JUDGEMENTS_DIR = Path(os.getenv("VEA_JUDGEMENTS_DIR", str(Path(DATA_DIR) / "judgements")))
+AI_INTERPRETATIONS_DIR = Path(
+    os.getenv("VEA_AI_INTERPRETATIONS_DIR", str(Path(DATA_DIR) / "ai_interpretations"))
+)
 DEFAULT_ASSESSMENT_ID = os.getenv("VEA_ASSESSMENT_ID", "C-JUN25-8464C1H-02_3")
+_evidence_classifier_instance: EvidenceRelationClassifier | None = None
 
 app = FastAPI(title="VEA Graph API")
 app.add_middleware(
@@ -70,6 +83,17 @@ def _evidence_pipeline(assessment_id: str):
 
 def _judgement_store() -> JudgementStore:
     return JudgementStore(JUDGEMENTS_DIR)
+
+
+def _ai_store() -> AIInterpretationStore:
+    return AIInterpretationStore(AI_INTERPRETATIONS_DIR)
+
+
+def _evidence_classifier() -> EvidenceRelationClassifier:
+    global _evidence_classifier_instance
+    if _evidence_classifier_instance is None:
+        _evidence_classifier_instance = JevEvidenceRelationClassifier()
+    return _evidence_classifier_instance
 
 
 def _require_assessment(assessment_id: str) -> GraphService:
@@ -208,6 +232,15 @@ class UpdateCodingRequest(BaseModel):
 
 class TentativeLevelRequest(BaseModel):
     level: int | None = None
+
+
+class AiCheckRequest(BaseModel):
+    stage: str | None = None
+    last_action: str | None = None
+
+
+class AiInterpretationStatusRequest(BaseModel):
+    status: Literal["dismissed", "explore"]
 
 
 @app.get("/health")
@@ -418,6 +451,104 @@ def put_tentative_level(
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from None
     return _save_and_view(store, state, service)
+
+
+@app.get(
+    "/marking-sessions/{marking_session_id}/assessments/{assessment_id}/candidates/{candidate_id}/ai-interpretations"
+)
+def list_ai_interpretations(
+    marking_session_id: str,
+    assessment_id: str,
+    candidate_id: str,
+) -> dict:
+    _require_session(marking_session_id)
+    service, record, state, _store = _load_judgement_context(
+        marking_session_id,
+        assessment_id,
+        candidate_id,
+    )
+    payload = _ai_store().load(marking_session_id, record["response_id"])
+    interpretations = [
+        public_interpretation(item)
+        for item in active_interpretations(payload, state)
+    ]
+    return {
+        "marking_session_id": marking_session_id,
+        "assessment_id": assessment_id,
+        "interpretations": interpretations,
+    }
+
+
+@app.post(
+    "/marking-sessions/{marking_session_id}/assessments/{assessment_id}/candidates/{candidate_id}/judgement/codings/{coding_id}/ai-check"
+)
+def post_ai_check(
+    marking_session_id: str,
+    assessment_id: str,
+    candidate_id: str,
+    coding_id: str,
+    body: AiCheckRequest,
+) -> dict:
+    _require_session(marking_session_id)
+    service, record, state, _store = _load_judgement_context(
+        marking_session_id,
+        assessment_id,
+        candidate_id,
+    )
+    stage, stage_source = resolve_stage(state, body.stage, body.last_action)
+    try:
+        interpretation = run_evidence_check(
+            classifier=_evidence_classifier(),
+            graph_service=service,
+            record=record,
+            judgement_state=state,
+            coding_id=coding_id,
+            stage=stage,
+            stage_source=stage_source,
+        )
+    except KeyError:
+        raise HTTPException(status_code=404, detail=f"Coding not found: {coding_id}") from None
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from None
+
+    ai_store = _ai_store()
+    payload = ai_store.load(marking_session_id, record["response_id"])
+    ai_store.add(payload, interpretation)
+    ai_store.save(payload)
+    return public_interpretation(interpretation)
+
+
+@app.patch(
+    "/marking-sessions/{marking_session_id}/assessments/{assessment_id}/candidates/{candidate_id}/ai-interpretations/{ai_id}"
+)
+def patch_ai_interpretation(
+    marking_session_id: str,
+    assessment_id: str,
+    candidate_id: str,
+    ai_id: str,
+    body: AiInterpretationStatusRequest,
+) -> dict:
+    _require_session(marking_session_id)
+    _service, record, state, _store = _load_judgement_context(
+        marking_session_id,
+        assessment_id,
+        candidate_id,
+    )
+    ai_store = _ai_store()
+    payload = ai_store.load(marking_session_id, record["response_id"])
+    try:
+        interpretation = update_interpretation_status(
+            payload,
+            ai_id,
+            body.status,
+            state,
+        )
+    except KeyError:
+        raise HTTPException(status_code=404, detail=f"Interpretation not found: {ai_id}") from None
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from None
+    ai_store.save(payload)
+    return public_interpretation(interpretation)
 
 
 @app.get("/assessments/{assessment_id}/levels/{level}/context")

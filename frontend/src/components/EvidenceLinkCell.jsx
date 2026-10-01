@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { showInterventionCard } from "../aiSlice";
 import { snippet } from "../responseUtils";
 import {
   cancelRevise,
@@ -7,6 +8,7 @@ import {
   removeCoding,
   startRevise,
 } from "../judgementSlice";
+import InterventionCard from "./InterventionCard";
 
 export default function EvidenceLinkCell({
   assessmentId,
@@ -20,6 +22,7 @@ export default function EvidenceLinkCell({
   const popoverRef = useRef(null);
   const { markingSessionId } = useSelector((state) => state.auth);
   const { focusedCodingId, reviseCodingId, saving } = useSelector((state) => state.judgement);
+  const { byCodingId, checkingCodingIds, activeCardId } = useSelector((state) => state.ai);
 
   useEffect(() => {
     if (!expanded) return undefined;
@@ -36,14 +39,24 @@ export default function EvidenceLinkCell({
     return <span className="muted-center">—</span>;
   }
 
+  const interpretations = links
+    .map((coding) => byCodingId[coding.id])
+    .filter(Boolean);
+  const pendingInterpretation = interpretations.find((item) => item.status === "pending");
+  const badgeInterpretation = interpretations.find((item) => item.status === "pending");
+  const showCard =
+    pendingInterpretation &&
+    activeCardId === pendingInterpretation.id &&
+    links.some((coding) => coding.id === pendingInterpretation.coding_id);
+  const isChecking = links.some((coding) => checkingCodingIds.includes(coding.id));
+
   function handleFocusEvidence(codingId) {
     dispatch(focusCoding(codingId));
     const coding = links.find((item) => item.id === codingId);
     if (coding) {
-      const target = document.querySelector(
-        `[data-start="${coding.start_char}"][data-end="${coding.end_char}"]`
-      );
-      target?.scrollIntoView({ block: "center", behavior: "smooth" });
+      document
+        .querySelector(`[data-start="${coding.start_char}"][data-end="${coding.end_char}"]`)
+        ?.scrollIntoView({ block: "center", behavior: "smooth" });
     }
   }
 
@@ -79,7 +92,29 @@ export default function EvidenceLinkCell({
       >
         <span className="badge">[{links.length} linked]</span>
         <span className="evidence-snippet">&ldquo;{snippet(links[0].text, 40)}&rdquo;</span>
+        {isChecking ? <span className="ai-checking-dot" title="Checking evidence" /> : null}
+        {badgeInterpretation?.intervention?.type &&
+        badgeInterpretation.status !== "silent" &&
+        !showCard ? (
+          <button
+            type="button"
+            className={`intervention-badge intervention-${badgeInterpretation.intervention.type.toLowerCase()}`}
+            onClick={(event) => {
+              event.stopPropagation();
+              dispatch(showInterventionCard(badgeInterpretation.id));
+            }}
+          >
+            {badgeInterpretation.intervention.type}
+          </button>
+        ) : null}
       </button>
+      {showCard ? (
+        <InterventionCard
+          assessmentId={assessmentId}
+          candidateId={candidateId}
+          interpretation={pendingInterpretation}
+        />
+      ) : null}
       {expanded ? (
         <div className="evidence-popover">
           {links.map((coding) => (

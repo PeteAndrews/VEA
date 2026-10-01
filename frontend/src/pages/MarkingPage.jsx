@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { loadAiInterpretations, resetAi } from "../aiSlice";
 import AppShell from "../components/AppShell";
 import CandidateInfoPanel from "../components/CandidateInfoPanel";
 import IndicativeContentPanel from "../components/IndicativeContentPanel";
@@ -18,17 +19,20 @@ export default function MarkingPage() {
   const { question, levelDescriptors, indicativeContent, selectedResponse, status, error } =
     useSelector((state) => state.marking);
   const { levelContext, saving, error: judgementError } = useSelector((state) => state.judgement);
+  const { error: aiError } = useSelector((state) => state.ai);
 
   useEffect(() => {
     dispatch(loadMarkingScreen({ assessmentId, candidateId }));
     return () => {
       dispatch(resetJudgement());
+      dispatch(resetAi());
     };
   }, [dispatch, assessmentId, candidateId]);
 
   useEffect(() => {
     if (!markingSessionId || status !== "succeeded") return;
     dispatch(loadJudgement({ markingSessionId, assessmentId, candidateId }));
+    dispatch(loadAiInterpretations({ markingSessionId, assessmentId, candidateId }));
   }, [dispatch, markingSessionId, assessmentId, candidateId, status]);
 
   const breadcrumb = `Marking > ${question?.question_label || "Question"} > ${
@@ -40,6 +44,7 @@ export default function MarkingPage() {
       {status === "loading" ? <p>Loading marking screen...</p> : null}
       {error ? <p className="error">{error}</p> : null}
       {judgementError ? <p className="error">{judgementError}</p> : null}
+      {aiError ? <p className="error">{aiError}</p> : null}
       {saving ? <p className="status-text">Saving judgement...</p> : null}
       {status === "succeeded" ? (
         <div className="marking-layout">
