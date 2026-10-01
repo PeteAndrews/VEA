@@ -7,11 +7,16 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app import api
-from app.classifier import RELATIONS, EvidenceRelationClassifier, RelationDecision
+from app.classifier import RELATIONS, EvidenceRelationClassifier, RelationDecision, build_jev_state
 from app.graph_service import GraphService
+from app.evidence import build_response_local_context_for_span
 from app.intervention import (
     build_intervention_context,
     decide_intervention,
+    intervention_needs_review,
+    nuance_items,
+    popup_guidance_items,
+    reanchor_items,
     run_evidence_check,
 )
 from app.judgement import create_coding
@@ -21,6 +26,8 @@ from app.views import resolve_response_id
 
 ASSESSMENT_ID = "C-JUN25-8464C1H-02_3"
 CANDIDATE_ID = "A"
+DETAIL_2A = "ms_02_3-detail-2a"
+DETAIL_3B = "ms_02_3-detail-3b"
 DETAIL_4A = "ms_02_3-detail-4a"
 POINT_4 = "ms_02_3-point-4"
 POINT_5 = "ms_02_3-point-5"
@@ -131,20 +138,119 @@ def test_point_6_context_includes_rule_requires(graph_service):
     assert any(item["relation"] == "REQUIRES" for item in context["items"])
 
 
+def test_point_4_context_includes_parsed_alternatives(graph_service):
+    context = build_intervention_context(graph_service, POINT_4)
+    criterion = context["criterion"]
+    assert criterion["alternatives"]
+    assert "highest temperature reached by the mixture" in criterion["primary"]
+    assert any("set time period" in alt for alt in criterion["alternatives"])
+
+
+def test_jev_state_notes_alternatives_for_or_criterion(graph_service):
+    context = build_intervention_context(graph_service, POINT_4)
+    state = build_jev_state(
+        "Record the highest temperature reached.",
+        context["criterion"],
+        {"guidance": context["guidance"], "response_context": {}},
+    )
+    assert "alternatives_note" in state["criterion_context"]
+    assert state["criterion_context"]["criterion"]["alternatives"]
+
+
+def _decision(
+    relation: str,
+    *,
+    probability: float = 0.90,
+    probabilities: dict[str, float] | None = None,
+    needs_review: bool = False,
+) -> dict:
+    if probabilities is None:
+        probabilities = {item: 0.0 for item in RELATIONS}
+        probabilities[relation] = probability
+        if relation != "UNCERTAIN":
+            probabilities["UNCERTAIN"] = 0.05
+    return {
+        "relation": relation,
+        "probability": probability,
+        "probabilities": probabilities,
+        "needs_review": needs_review,
+    }
+
+
 def test_policy_reanchor_over_review_with_anchor(graph_service):
     context = build_intervention_context(graph_service, DETAIL_4A)
-    decision = {
-        "relation": "PARTIALLY_SUPPORTS",
-        "needs_review": True,
-    }
+    decision = _decision(
+        "PARTIALLY_SUPPORTS",
+        probability=0.72,
+        probabilities={
+            "SUPPORTS": 0.08,
+            "PARTIALLY_SUPPORTS": 0.72,
+            "DOES_NOT_SUPPORT": 0.15,
+            "UNCERTAIN": 0.05,
+        },
+        needs_review=True,
+    )
+    assert intervention_needs_review(decision) is False
     result = decide_intervention(decision, context)
     assert result["type"] == "REANCHOR"
 
 
 def test_policy_review_without_anchor():
-    decision = {"relation": "UNCERTAIN", "needs_review": True}
+    decision = _decision("UNCERTAIN", probability=0.55, needs_review=True)
     result = decide_intervention(decision, {"items": []})
     assert result["type"] == "REVIEW"
+    assert "jev_uncertain" in result["reasons"]
+
+
+def test_policy_review_low_probability():
+    decision = _decision(
+        "SUPPORTS",
+        probability=0.55,
+        probabilities={
+            "SUPPORTS": 0.55,
+            "PARTIALLY_SUPPORTS": 0.30,
+            "DOES_NOT_SUPPORT": 0.10,
+            "UNCERTAIN": 0.05,
+        },
+    )
+    assert intervention_needs_review(decision) is True
+    result = decide_intervention(decision, {"items": []})
+    assert result["type"] == "REVIEW"
+    assert "low_probability" in result["reasons"]
+
+
+def test_policy_review_close_top_two():
+    decision = _decision(
+        "SUPPORTS",
+        probability=0.62,
+        probabilities={
+            "SUPPORTS": 0.62,
+            "PARTIALLY_SUPPORTS": 0.50,
+            "DOES_NOT_SUPPORT": 0.05,
+            "UNCERTAIN": 0.03,
+        },
+    )
+    assert intervention_needs_review(decision) is True
+    result = decide_intervention(decision, {"items": []})
+    assert result["type"] == "REVIEW"
+    assert "close_probabilities" in result["reasons"]
+
+
+def test_policy_supports_clear_margin_ignores_diagnostic_needs_review():
+    decision = _decision(
+        "SUPPORTS",
+        probability=0.67,
+        probabilities={
+            "SUPPORTS": 0.67,
+            "PARTIALLY_SUPPORTS": 0.33,
+            "DOES_NOT_SUPPORT": 0.0,
+            "UNCERTAIN": 0.0,
+        },
+        needs_review=True,
+    )
+    assert intervention_needs_review(decision) is False
+    result = decide_intervention(decision, {"items": []})
+    assert result["type"] == "SILENCE"
 
 
 def test_policy_silence_for_clarifies_only_support(graph_service):
@@ -153,7 +259,7 @@ def test_policy_silence_for_clarifies_only_support(graph_service):
         **context,
         "items": [item for item in context["items"] if item["relation"] == "CLARIFIES"],
     }
-    decision = {"relation": "SUPPORTS", "needs_review": False}
+    decision = _decision("SUPPORTS")
     result = decide_intervention(decision, clarifies_only)
     assert result["type"] == "SILENCE"
 
@@ -161,9 +267,66 @@ def test_policy_silence_for_clarifies_only_support(graph_service):
 def test_policy_rejects_support_is_nuance(graph_service):
     context = build_intervention_context(graph_service, DETAIL_4A)
     anchors = [item for item in context["items"] if item["relation"] == "REJECTS"]
-    decision = {"relation": "SUPPORTS", "needs_review": False}
+    decision = _decision("SUPPORTS")
     result = decide_intervention(decision, {**context, "items": anchors})
     assert result["type"] == "NUANCE"
+
+
+def test_reanchor_items_direct_only(graph_service):
+    detail_4a = build_intervention_context(graph_service, DETAIL_4A)
+    detail_2a = build_intervention_context(graph_service, DETAIL_2A)
+    assert reanchor_items(detail_4a)
+    assert not reanchor_items(detail_2a)
+
+
+def test_parent_only_anchor_uncertain_is_review_not_reanchor(graph_service):
+    context = build_intervention_context(graph_service, DETAIL_2A)
+    decision = _decision("UNCERTAIN", probability=0.55, needs_review=True)
+    result = decide_intervention(decision, context)
+    assert result["type"] == "REVIEW"
+
+
+def test_parent_constrains_support_is_silence_for_child_detail(graph_service):
+    context = build_intervention_context(graph_service, DETAIL_2A)
+    decision = _decision("SUPPORTS")
+    result = decide_intervention(decision, context)
+    assert result["type"] == "SILENCE"
+    assert not nuance_items(context)
+
+
+def test_parent_rejects_in_context_but_not_popup_for_stir_detail(graph_service):
+    context = build_intervention_context(graph_service, DETAIL_3B)
+    assert any(
+        item["scope"] == "parent" and item["relation"] == "REJECTS"
+        for item in context["items"]
+    )
+    assert not popup_guidance_items(context)
+    decision = _decision(
+        "SUPPORTS",
+        probability=0.67,
+        probabilities={
+            "SUPPORTS": 0.67,
+            "PARTIALLY_SUPPORTS": 0.21,
+            "DOES_NOT_SUPPORT": 0.11,
+            "UNCERTAIN": 0.01,
+        },
+    )
+    result = decide_intervention(decision, context)
+    assert result["type"] == "SILENCE"
+
+
+def test_response_local_context_includes_containing_sentence(response_record):
+    text = response_record["text"]
+    start_char = text.index("record the starting temperature")
+    end_char = start_char + len("record the starting temperature")
+    local = build_response_local_context_for_span(
+        response_record,
+        start_char=start_char,
+        end_char=end_char,
+    )
+    assert local["containing_segment"]["text"] == "Use a thermometer to record the starting temperature."
+    assert local["containing_sentence"] == "Use a thermometer to record the starting temperature."
+    assert "context only" in local["note"]
 
 
 def test_ai_check_stores_interpretation(client, session, sample_span, tmp_path, response_record):

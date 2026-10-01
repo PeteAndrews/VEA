@@ -16,7 +16,9 @@ DEFAULT_MODEL = "jev-latest"
 
 RELATION_CRITERIA: dict[str, str] = {
     "SUPPORTS": (
-        "The selected evidence satisfies the criterion as written, including accepted equivalents."
+        "The selected evidence satisfies the criterion as written, including accepted equivalents. "
+        "When the criterion lists alternatives (A or B), satisfying any one accepted branch is "
+        "sufficient."
     ),
     "PARTIALLY_SUPPORTS": (
         "The evidence is clearly relevant and provides some required content, but something "
@@ -36,12 +38,17 @@ NEEDS_REVIEW_TOP_TWO_MARGIN = 0.15
 CHOICE_INSTRUCTIONS = """Classify how the SELECTED EVIDENCE relates to the CRITERION.
 
 The selected_evidence text is the only text to classify.
-Any preceding or following response segments are context only — use them to interpret sequence
-and references, but do not treat them as part of the selected evidence.
+The containing sentence/segment and any neighbouring response segments are local context only —
+use them to interpret pronouns, sequence, and references in the selected evidence, but do not
+treat surrounding text as additional coded evidence.
 This is evidence-criterion reasoning for assessment support, not semantic similarity.
 Do not award marks or infer beyond what the selected evidence explicitly states.
 Consider criterion guidance (ACCEPTS, REJECTS, CONSTRAINS, CLARIFIES, REQUIRES) when present.
-Use SUPPORTS only when the selected evidence satisfies the criterion as written.
+When the criterion contains alternatives joined by "or", the selected evidence need only satisfy
+one accepted branch (including accepted equivalents from guidance) to SUPPORT the criterion.
+Do not require evidence for every branch.
+Use SUPPORTS when the selected evidence satisfies the criterion as written, or any one accepted
+alternative branch when alternatives are present.
 Use PARTIALLY_SUPPORTS when relevant but incomplete or ambiguous.
 Use DOES_NOT_SUPPORT when irrelevant, contradictory, or insufficient.
 Use UNCERTAIN when the available evidence and context cannot support a reliable decision.
@@ -188,10 +195,16 @@ def build_jev_state(evidence_text: str, criterion: dict, context: dict) -> dict[
             "note": "This is the only text to classify.",
         },
         "response_context": {
+            "containing_segment": response_context.get("containing_segment"),
+            "containing_sentence": response_context.get("containing_sentence"),
             "preceding_segment": response_context.get("preceding_segment"),
             "following_segment": response_context.get("following_segment"),
-            "note": (
-                "Surrounding response segments are context only, not part of the selected evidence."
+            "note": response_context.get(
+                "note",
+                (
+                    "Containing and surrounding response text is context only. "
+                    "Use it to interpret the selected evidence, not as additional coded evidence."
+                ),
             ),
         },
         "criterion_context": {
@@ -199,6 +212,16 @@ def build_jev_state(evidence_text: str, criterion: dict, context: dict) -> dict[
             "parent_criterion": context.get("parent_criterion"),
             "guidance": context.get("guidance", []),
             "question": context.get("question"),
+            **(
+                {
+                    "alternatives_note": (
+                        "This criterion lists alternative branches. Satisfying any one accepted "
+                        "branch is sufficient for SUPPORTS."
+                    )
+                }
+                if criterion.get("alternatives")
+                else {}
+            ),
         },
         "note": (
             "Classify how the selected evidence relates to the criterion. "

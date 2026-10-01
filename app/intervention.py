@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 import uuid
 from datetime import datetime, timezone
@@ -8,17 +9,22 @@ from pathlib import Path
 from typing import Any
 
 from app.classifier import EvidenceRelationClassifier, RelationDecision
+from app.evidence import build_response_local_context_for_span
 from app.graph_service import GraphService
+from app.views import _split_alternatives
 
 GUIDANCE_RELATIONS = frozenset({"ACCEPTS", "REJECTS", "CONSTRAINS", "CLARIFIES", "REQUIRES"})
 ANCHOR_RELATIONS = frozenset({"REJECTS", "CONSTRAINS", "REQUIRES"})
-ANCHOR_SCOPES = frozenset({"direct", "parent", "rule"})
 DISAGREEMENT_RELATIONS = frozenset({"PARTIALLY_SUPPORTS", "DOES_NOT_SUPPORT"})
+INTERVENTION_REVIEW_PROBABILITY_THRESHOLD = 0.60
+INTERVENTION_REVIEW_TOP_TWO_MARGIN = 0.15
 MAX_CONTEXT_ITEMS = 16
 MAX_NUANCE_ITEMS = 2
 SNIPPET_LENGTH = 160
 QUESTION_TEXT_LIMIT = 500
 USER_STATUSES = frozenset({"dismissed", "explore"})
+
+logger = logging.getLogger(__name__)
 
 
 def _utc_now() -> str:
@@ -33,12 +39,18 @@ def _snippet(text: str, limit: int = SNIPPET_LENGTH) -> str:
 
 
 def _criterion_payload(node: dict[str, Any]) -> dict[str, Any]:
-    return {
+    text = node["text"].strip()
+    primary, alternatives = _split_alternatives(text)
+    payload: dict[str, Any] = {
         "id": node["id"],
         "node_type": node["node_type"],
         "segment_type": node.get("segment_type"),
-        "text": node["text"].strip(),
+        "text": text,
     }
+    if alternatives:
+        payload["primary"] = primary
+        payload["alternatives"] = alternatives
+    return payload
 
 
 def _edge_items(graph_service: GraphService, node_id: str, scope: str) -> list[dict[str, Any]]:
@@ -203,12 +215,40 @@ def build_intervention_context(graph_service: GraphService, criterion_id: str) -
     }
 
 
-def anchor_items(graph_context: dict[str, Any]) -> list[dict[str, Any]]:
+def _criterion_id(graph_context: dict[str, Any]) -> str | None:
+    criterion = graph_context.get("criterion")
+    if not criterion:
+        return None
+    return criterion["id"]
+
+
+def popup_guidance_items(graph_context: dict[str, Any]) -> list[dict[str, Any]]:
+    """Material guidance that may interrupt the examiner (direct or rule on selected criterion)."""
+    criterion_id = _criterion_id(graph_context)
+    if criterion_id is None:
+        return []
+
+    items: list[dict[str, Any]] = []
+    for item in graph_context.get("items", []):
+        if item["relation"] not in ANCHOR_RELATIONS:
+            continue
+        if item["scope"] == "direct" and item["target_id"] == criterion_id:
+            items.append(item)
+        elif item["scope"] == "rule" and item["target_id"] == criterion_id:
+            items.append(item)
+    return items
+
+
+def reanchor_items(graph_context: dict[str, Any]) -> list[dict[str, Any]]:
     return [
         item
-        for item in graph_context.get("items", [])
-        if item["relation"] in ANCHOR_RELATIONS and item["scope"] in ANCHOR_SCOPES
+        for item in popup_guidance_items(graph_context)
+        if item["scope"] == "direct"
     ]
+
+
+def nuance_items(graph_context: dict[str, Any]) -> list[dict[str, Any]]:
+    return popup_guidance_items(graph_context)
 
 
 def _nuance_payload(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -230,36 +270,71 @@ def _criterion_label(graph_context: dict[str, Any]) -> str:
     return _snippet(criterion["text"].lstrip("•o ").strip(), 80)
 
 
+def _top_two_margin(probabilities: dict[str, float]) -> float | None:
+    sorted_probs = sorted(probabilities.values(), reverse=True)
+    if len(sorted_probs) < 2:
+        return None
+    return sorted_probs[0] - sorted_probs[1]
+
+
+def intervention_needs_review(decision: dict[str, Any]) -> bool:
+    """Examiner-facing borderline check. Ignores Jev's diagnostic needs_review flag."""
+    relation = decision["relation"]
+    if relation == "UNCERTAIN":
+        return True
+
+    probability = float(decision.get("probability", 0.0))
+    if probability < INTERVENTION_REVIEW_PROBABILITY_THRESHOLD:
+        return True
+
+    probabilities = dict(decision.get("probabilities") or {})
+    margin = _top_two_margin(probabilities)
+    if margin is not None and margin < INTERVENTION_REVIEW_TOP_TWO_MARGIN:
+        return True
+
+    return False
+
+
+def _intervention_review_reasons(decision: dict[str, Any]) -> list[str]:
+    reasons: list[str] = []
+    if decision["relation"] == "UNCERTAIN":
+        reasons.append("jev_uncertain")
+    probability = float(decision.get("probability", 0.0))
+    if probability < INTERVENTION_REVIEW_PROBABILITY_THRESHOLD:
+        reasons.append("low_probability")
+    probabilities = dict(decision.get("probabilities") or {})
+    margin = _top_two_margin(probabilities)
+    if margin is not None and margin < INTERVENTION_REVIEW_TOP_TWO_MARGIN:
+        reasons.append("close_probabilities")
+    return reasons or ["borderline"]
+
+
 def decide_intervention(decision: dict[str, Any], graph_context: dict[str, Any]) -> dict[str, Any]:
     relation = decision["relation"]
-    needs_review = bool(decision.get("needs_review"))
-    anchors = anchor_items(graph_context)
+    reanchors = reanchor_items(graph_context)
+    nuances = nuance_items(graph_context)
     criterion = _criterion_label(graph_context)
 
-    if relation in DISAGREEMENT_RELATIONS | {"UNCERTAIN"} and anchors:
-        reasons = ["disagreement_with_explicit_guidance"]
-        if needs_review:
-            reasons.append("low_confidence")
-        return {
-            "type": "REANCHOR",
-            "reasons": reasons,
-            "message": (
-                f"Explicit mark-scheme guidance applies to '{criterion}'. "
-                "Check this evidence against it before confirming the link."
-            ),
-            "nuance_items": _nuance_payload(anchors),
-        }
-
-    if relation == "UNCERTAIN" or needs_review:
-        reasons = ["jev_uncertain"] if relation == "UNCERTAIN" else ["close_probabilities"]
+    if intervention_needs_review(decision):
         return {
             "type": "REVIEW",
-            "reasons": reasons,
+            "reasons": _intervention_review_reasons(decision),
             "message": (
                 f"Jev could not reliably decide whether this evidence supports '{criterion}'. "
                 "Worth a second look."
             ),
             "nuance_items": [],
+        }
+
+    if relation in DISAGREEMENT_RELATIONS and reanchors:
+        return {
+            "type": "REANCHOR",
+            "reasons": ["disagreement_with_explicit_guidance"],
+            "message": (
+                f"Explicit mark-scheme guidance applies to '{criterion}'. "
+                "Check this evidence against it before confirming the link."
+            ),
+            "nuance_items": _nuance_payload(reanchors),
         }
 
     if relation in DISAGREEMENT_RELATIONS:
@@ -274,14 +349,14 @@ def decide_intervention(decision: dict[str, Any], graph_context: dict[str, Any])
             "nuance_items": [],
         }
 
-    if anchors:
+    if nuances:
         return {
             "type": "NUANCE",
             "reasons": ["supported_with_material_guidance"],
             "message": (
                 f"Jev agrees this supports '{criterion}', but guidance affects how it is applied."
             ),
-            "nuance_items": _nuance_payload(anchors),
+            "nuance_items": _nuance_payload(nuances),
         }
 
     return {
@@ -370,30 +445,42 @@ def public_interpretation(interpretation: dict[str, Any]) -> dict[str, Any]:
     return {key: value for key, value in interpretation.items() if key != "response_id"}
 
 
-def _response_local_context(record: dict[str, Any], span: dict[str, Any]) -> dict[str, Any]:
-    segments = record.get("segments", [])
-    index = None
-    for position, segment in enumerate(segments):
-        if segment["start_char"] <= span["start_char"] < segment["end_char"]:
-            index = position
-            break
-
-    def summary(segment: dict[str, Any]) -> dict[str, Any]:
-        return {
-            "segment_id": segment["id"],
-            "order": segment["order"],
-            "text": segment["text"],
-            "start_char": segment["start_char"],
-            "end_char": segment["end_char"],
-        }
-
-    preceding = summary(segments[index - 1]) if index is not None and index > 0 else None
-    following = (
-        summary(segments[index + 1])
-        if index is not None and index + 1 < len(segments)
-        else None
+def _log_evidence_check(
+    interpretation: dict[str, Any],
+    *,
+    criterion_text: str,
+    response_context: dict[str, Any],
+) -> None:
+    jev = interpretation.get("jev")
+    intervention = interpretation.get("intervention") or {}
+    containing = response_context.get("containing_sentence") or (
+        (response_context.get("containing_segment") or {}).get("text")
     )
-    return {"preceding_segment": preceding, "following_segment": following}
+    if jev is None:
+        logger.info(
+            "ai-check error coding=%s criterion=%s evidence=%r error=%s",
+            interpretation["coding_id"],
+            interpretation["criterion_id"],
+            interpretation["evidence_text"],
+            interpretation.get("error"),
+        )
+        return
+
+    logger.info(
+        "ai-check coding=%s criterion=%s (%s) evidence=%r context=%r "
+        "jev=%s p=%.2f conf=%.2f jev_needs_review=%s probs=%s intervene=%s",
+        interpretation["coding_id"],
+        interpretation["criterion_id"],
+        _snippet(criterion_text, 60),
+        interpretation["evidence_text"],
+        containing,
+        jev["relation"],
+        jev["probability"],
+        jev["confidence"],
+        jev["needs_review"],
+        jev["probabilities"],
+        intervention.get("type"),
+    )
 
 
 def run_evidence_check(
@@ -452,7 +539,11 @@ def run_evidence_check(
         "parent_criterion": graph_context["parent_criterion"],
         "guidance": graph_context["guidance"],
         "question": graph_context["question"],
-        "response_context": _response_local_context(record, span),
+        "response_context": build_response_local_context_for_span(
+            record,
+            start_char=span["start_char"],
+            end_char=span["end_char"],
+        ),
     }
 
     try:
@@ -466,6 +557,11 @@ def run_evidence_check(
         interpretation["intervention"] = None
         interpretation["status"] = "error"
         interpretation["error"] = str(exc)[:500]
+        _log_evidence_check(
+            interpretation,
+            criterion_text=graph_context["criterion"]["text"],
+            response_context=jev_context["response_context"],
+        )
         return interpretation
 
     jev = decision.to_dict()
@@ -481,6 +577,11 @@ def run_evidence_check(
     intervention = decide_intervention(interpretation["jev"], graph_context)
     interpretation["intervention"] = intervention
     interpretation["status"] = "silent" if intervention["type"] == "SILENCE" else "pending"
+    _log_evidence_check(
+        interpretation,
+        criterion_text=graph_context["criterion"]["text"],
+        response_context=jev_context["response_context"],
+    )
     return interpretation
 
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import os
 from functools import lru_cache
 from pathlib import Path
@@ -52,6 +53,13 @@ AI_INTERPRETATIONS_DIR = Path(
 )
 DEFAULT_ASSESSMENT_ID = os.getenv("VEA_ASSESSMENT_ID", "C-JUN25-8464C1H-02_3")
 _evidence_classifier_instance: EvidenceRelationClassifier | None = None
+
+_app_log = logging.getLogger("app")
+if not _app_log.handlers:
+    _app_log.setLevel(getattr(logging, os.getenv("VEA_LOG_LEVEL", "INFO").upper(), logging.INFO))
+    _handler = logging.StreamHandler()
+    _handler.setFormatter(logging.Formatter("%(levelname)s %(name)s: %(message)s"))
+    _app_log.addHandler(_handler)
 
 app = FastAPI(title="VEA Graph API")
 app.add_middleware(

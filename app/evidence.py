@@ -106,6 +106,89 @@ def _segment_summary(segment: dict) -> dict[str, Any]:
     }
 
 
+def _containing_sentence(
+    segment_text: str,
+    *,
+    span_start: int,
+    span_end: int,
+    segment_start: int,
+) -> str:
+    rel_start = max(0, span_start - segment_start)
+    rel_end = min(len(segment_text), span_end - segment_start)
+
+    sentence_start = 0
+    for index in range(rel_start - 1, -1, -1):
+        if segment_text[index] in ".!?" and (index + 1 >= len(segment_text) or segment_text[index + 1].isspace()):
+            sentence_start = index + 1
+            while sentence_start < len(segment_text) and segment_text[sentence_start].isspace():
+                sentence_start += 1
+            break
+
+    sentence_end = len(segment_text)
+    for index in range(max(rel_end - 1, 0), len(segment_text)):
+        if segment_text[index] in ".!?":
+            sentence_end = index + 1
+            break
+
+    return segment_text[sentence_start:sentence_end].strip()
+
+
+def build_response_local_context_for_span(
+    record: dict,
+    *,
+    start_char: int | None,
+    end_char: int | None,
+    segment_id: str | None = None,
+) -> dict[str, Any]:
+    segments = record.get("segments", [])
+    index = None
+    if segment_id:
+        for position, segment in enumerate(segments):
+            if segment["id"] == segment_id:
+                index = position
+                break
+    elif start_char is not None:
+        for position, segment in enumerate(segments):
+            segment_start = segment["start_char"]
+            segment_end = segment["end_char"]
+            if segment_start <= start_char < segment_end:
+                index = position
+                break
+            if end_char is not None and segment_start < end_char <= segment_end:
+                index = position
+                break
+
+    containing = None
+    containing_sentence = None
+    preceding = None
+    following = None
+    if index is not None:
+        segment = segments[index]
+        containing = _segment_summary(segment)
+        if start_char is not None and end_char is not None:
+            containing_sentence = _containing_sentence(
+                segment["text"],
+                span_start=start_char,
+                span_end=end_char,
+                segment_start=segment["start_char"],
+            )
+        if index > 0:
+            preceding = _segment_summary(segments[index - 1])
+        if index + 1 < len(segments):
+            following = _segment_summary(segments[index + 1])
+
+    return {
+        "containing_segment": containing,
+        "containing_sentence": containing_sentence,
+        "preceding_segment": preceding,
+        "following_segment": following,
+        "note": (
+            "Containing and surrounding response text is context only. "
+            "Use it to interpret the selected evidence, not as additional coded evidence."
+        ),
+    }
+
+
 def _segment_index_for_evidence(segments: list[dict], evidence: EvidenceRef) -> int | None:
     if evidence.segment_id:
         for index, segment in enumerate(segments):
@@ -127,24 +210,12 @@ def _segment_index_for_evidence(segments: list[dict], evidence: EvidenceRef) -> 
 
 
 def build_response_local_context(record: dict, evidence: EvidenceRef) -> dict[str, Any]:
-    segments = record.get("segments", [])
-    index = _segment_index_for_evidence(segments, evidence)
-
-    preceding = None
-    following = None
-    if index is not None:
-        if index > 0:
-            preceding = _segment_summary(segments[index - 1])
-        if index + 1 < len(segments):
-            following = _segment_summary(segments[index + 1])
-
-    return {
-        "preceding_segment": preceding,
-        "following_segment": following,
-        "note": (
-            "Surrounding response segments are context only, not part of the selected evidence."
-        ),
-    }
+    return build_response_local_context_for_span(
+        record,
+        start_char=evidence.start_char,
+        end_char=evidence.end_char,
+        segment_id=evidence.segment_id,
+    )
 
 
 def build_criterion_context(graph_service: GraphService, criterion_id: str) -> dict[str, Any]:

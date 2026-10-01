@@ -129,6 +129,8 @@ def test_build_response_local_context_includes_neighbors():
         segment_id=HIGHER_SEG_4,
     )
     local = build_response_local_context(record, evidence)
+    assert local["containing_segment"]["segment_id"] == HIGHER_SEG_4
+    assert local["containing_sentence"] == record["segments"][3]["text"]
     assert local["preceding_segment"]["segment_id"] == HIGHER_SEG_3
     assert local["following_segment"]["segment_id"] == "JUN25-8464C1H-02_3_response-higher-ambiguity-seg-5"
     assert "context only" in local["note"]
@@ -144,6 +146,8 @@ def test_build_response_local_context_for_span():
         end_char=333,
     )
     local = build_response_local_context(record, evidence)
+    assert local["containing_segment"]["segment_id"] == "JUN25-8464C1H-02_3_response-top-mark-seg-4"
+    assert local["containing_sentence"] == record["segments"][3]["text"]
     assert local["preceding_segment"]["segment_id"] == "JUN25-8464C1H-02_3_response-top-mark-seg-3"
     assert local["following_segment"]["segment_id"] == "JUN25-8464C1H-02_3_response-top-mark-seg-5"
 
