@@ -1,0 +1,57 @@
+{
+  "response_id": "JUN25-8464C1H-02_3_response-top-mark",
+  "assessment_id": "C-JUN25-8464C1H-02_3",
+  "source_file": "data/responses/JUN25-8464C1H-02_3_response-top-mark.txt",
+  "text": "Measure 50 cm\u00b3 of water using a measuring cylinder and pour it into a polystyrene cup. Use a thermometer to record the starting temperature. Weigh 1 g of calcium oxide on a balance, add it to the water and stir. Record the highest temperature reached and subtract the starting temperature from this to calculate the temperature rise.\n\nRepeat using fresh water with 2 g, 3 g, 4 g and 5 g of calcium oxide. Use 50 cm\u00b3 of water each time and make sure it starts at the same temperature. Use the same cup and repeat each mass three times to calculate a mean temperature rise for each mass.\n",
+  "segments": [
+    {
+      "id": "JUN25-8464C1H-02_3_response-top-mark-seg-1",
+      "order": 1,
+      "text": "Measure 50 cm\u00b3 of water using a measuring cylinder and pour it into a polystyrene cup.",
+      "start_char": 0,
+      "end_char": 86
+    },
+    {
+      "id": "JUN25-8464C1H-02_3_response-top-mark-seg-2",
+      "order": 2,
+      "text": "Use a thermometer to record the starting temperature.",
+      "start_char": 87,
+      "end_char": 140
+    },
+    {
+      "id": "JUN25-8464C1H-02_3_response-top-mark-seg-3",
+      "order": 3,
+      "text": "Weigh 1 g of calcium oxide on a balance, add it to the water and stir.",
+      "start_char": 141,
+      "end_char": 211
+    },
+    {
+      "id": "JUN25-8464C1H-02_3_response-top-mark-seg-4",
+      "order": 4,
+      "text": "Record the highest temperature reached and subtract the starting temperature from this to calculate the temperature rise.",
+      "start_char": 212,
+      "end_char": 333
+    },
+    {
+      "id": "JUN25-8464C1H-02_3_response-top-mark-seg-5",
+      "order": 5,
+      "text": "Repeat using fresh water with 2 g, 3 g, 4 g and 5 g of calcium oxide.",
+      "start_char": 335,
+      "end_char": 404
+    },
+    {
+      "id": "JUN25-8464C1H-02_3_response-top-mark-seg-6",
+      "order": 6,
+      "text": "Use 50 cm\u00b3 of water each time and make sure it starts at the same temperature.",
+      "start_char": 405,
+      "end_char": 483
+    },
+    {
+      "id": "JUN25-8464C1H-02_3_response-top-mark-seg-7",
+      "order": 7,
+      "text": "Use the same cup and repeat each mass three times to calculate a mean temperature rise for each mass.",
+      "start_char": 484,
+      "end_char": 585
+    }
+  ]
+}

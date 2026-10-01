@@ -1,0 +1,199 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "C-JUN25-8464C1H-02_3",
+  "question_id": "02_3",
+  "relationships": [
+    {
+      "source_id": "ms_02_3-level-rule-3",
+      "target_id": "ms_02_3-level-3",
+      "relation": "APPLIES_TO",
+      "confidence": 0.99,
+      "rationale": "The rule explicitly states the additional criteria for Level 3.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_02_3-level-rule-3",
+      "target_id": "ms_02_3-point-6",
+      "relation": "REQUIRES",
+      "confidence": 0.99,
+      "rationale": "The Level 3 rule explicitly requires the same volume of water as the control variable.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-4",
+      "target_id": "ms_02_3-level-rule-3",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It identifies the final black bullet as the control variable required for Level 3.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-6",
+      "target_id": "ms_02_3-level-rule-3",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "It identifies the key steps as the first five black bullet points and requires their logical ordering.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-8",
+      "target_id": "ms_02_3-point-5",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It confirms that the experiment is to be repeated using different masses of calcium oxide.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-8",
+      "target_id": "ms_02_3-point-6",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It confirms that the water volume must remain the same or fixed between trials.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-10",
+      "target_id": "ms_02_3-level-3",
+      "relation": "CONSTRAINS",
+      "confidence": 0.98,
+      "rationale": "It specifies the content needed for the six-mark, upper end of Level 3 response.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-10",
+      "target_id": "ms_02_3-detail-4a",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains that determining temperature change involves subtracting the initial and final temperatures.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-12",
+      "target_id": "ms_02_3-level-3",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains that a Level 3 plan must be workable and produce a valid outcome.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-14",
+      "target_id": "ms_02_3-level-3",
+      "relation": "CONSTRAINS",
+      "confidence": 0.99,
+      "rationale": "It specifies the requirements for awarding the higher end of Level 3.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-15",
+      "target_id": "ms_02_3-level-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "It explains that Level 2 applies when missing key steps make the method unworkable without adjustment.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-16",
+      "target_id": "ms_02_3-level-1",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "It specifies the minimum indicative content and invalid outcome characteristic of Level 1.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-17",
+      "target_id": "ms_02_3-point-1",
+      "relation": "ACCEPTS",
+      "confidence": 0.96,
+      "rationale": "It explicitly accepts 'amount' as an alternative to 'volume'.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-17",
+      "target_id": "ms_02_3-point-3",
+      "relation": "ACCEPTS",
+      "confidence": 0.96,
+      "rationale": "It explicitly accepts 'amount' as an alternative to 'mass'.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-18",
+      "target_id": "ms_02_3-point-1",
+      "relation": "ACCEPTS",
+      "confidence": 0.99,
+      "rationale": "It explicitly accepts measuring the mass of water as equivalent to measuring its volume.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-18",
+      "target_id": "ms_02_3-point-3",
+      "relation": "REJECTS",
+      "confidence": 0.99,
+      "rationale": "It explicitly rejects measuring the volume of calcium oxide because calcium oxide is a solid.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-20",
+      "target_id": "ms_02_3-point-3",
+      "relation": "CONSTRAINS",
+      "confidence": 0.97,
+      "rationale": "It requires the calcium oxide mass to be measured accurately rather than estimated by spatula measures.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-21",
+      "target_id": "ms_02_3-detail-4a",
+      "relation": "REJECTS",
+      "confidence": 0.96,
+      "rationale": "It states that merely saying to measure the temperature change is insufficient for credit.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-22",
+      "target_id": "ms_02_3-point-2",
+      "relation": "CONSTRAINS",
+      "confidence": 0.99,
+      "rationale": "Credit requires a clear indication that this temperature is taken before calcium oxide is added.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-22",
+      "target_id": "ms_02_3-point-4",
+      "relation": "CONSTRAINS",
+      "confidence": 0.99,
+      "rationale": "Credit requires a clear indication that this temperature is taken after calcium oxide is added.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-23",
+      "target_id": "ms_02_3-point-4",
+      "relation": "ACCEPTS",
+      "confidence": 1.0,
+      "rationale": "It explicitly accepts 'final temperature' and 'maximum temperature' as equivalents to 'highest temperature'.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-24",
+      "target_id": "ms_02_3-point-1",
+      "relation": "REJECTS",
+      "confidence": 1.0,
+      "rationale": "It explicitly denies credit for this point when a liquid other than water is used.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_02_3-guidance-26",
+      "target_id": "ms_02_3-level-3",
+      "relation": "CONSTRAINS",
+      "confidence": 0.94,
+      "rationale": "In context, it states that using a liquid other than water prevents access to Level 3.",
+      "provenance": "llm"
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-09-24T11:37:49.833373+00:00",
+    "requires_review": false,
+    "warnings": [
+      "The Level 2 descriptor gives a mark range of 5–6, which conflicts with the Level 3 range and is likely an authored typographical error."
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "response_id": "JUN25-8464C1H-02_3_response-higher-ambiguity",
+  "assessment_id": "C-JUN25-8464C1H-02_3",
+  "source_file": "data/responses/JUN25-8464C1H-02_3_response-higher-ambiguity.txt",
+  "text": "Measure 50 cm\u00b3 of water into an insulated cup and record its temperature. Weigh out 1 g of calcium oxide and add it to the water. Stir and record the maximum temperature. Subtract the temperature at the start from the maximum to find the temperature change.\n\nEmpty and rinse the cup, then repeat the same procedure with 2 g, 3 g, 4 g and 5 g of calcium oxide. Keep the starting temperature the same each time and repeat the tests to check the results.\n",
+  "segments": [
+    {
+      "id": "JUN25-8464C1H-02_3_response-higher-ambiguity-seg-1",
+      "order": 1,
+      "text": "Measure 50 cm\u00b3 of water into an insulated cup and record its temperature.",
+      "start_char": 0,
+      "end_char": 73
+    },
+    {
+      "id": "JUN25-8464C1H-02_3_response-higher-ambiguity-seg-2",
+      "order": 2,
+      "text": "Weigh out 1 g of calcium oxide and add it to the water.",
+      "start_char": 74,
+      "end_char": 129
+    },
+    {
+      "id": "JUN25-8464C1H-02_3_response-higher-ambiguity-seg-3",
+      "order": 3,
+      "text": "Stir and record the maximum temperature.",
+      "start_char": 130,
+      "end_char": 170
+    },
+    {
+      "id": "JUN25-8464C1H-02_3_response-higher-ambiguity-seg-4",
+      "order": 4,
+      "text": "Subtract the temperature at the start from the maximum to find the temperature change.",
+      "start_char": 171,
+      "end_char": 257
+    },
+    {
+      "id": "JUN25-8464C1H-02_3_response-higher-ambiguity-seg-5",
+      "order": 5,
+      "text": "Empty and rinse the cup, then repeat the same procedure with 2 g, 3 g, 4 g and 5 g of calcium oxide.",
+      "start_char": 259,
+      "end_char": 359
+    },
+    {
+      "id": "JUN25-8464C1H-02_3_response-higher-ambiguity-seg-6",
+      "order": 6,
+      "text": "Keep the starting temperature the same each time",
+      "start_char": 360,
+      "end_char": 408
+    },
+    {
+      "id": "JUN25-8464C1H-02_3_response-higher-ambiguity-seg-7",
+      "order": 7,
+      "text": "and repeat the tests to check the results.",
+      "start_char": 409,
+      "end_char": 451
+    }
+  ]
+}

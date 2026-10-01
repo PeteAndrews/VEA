@@ -1,0 +1,590 @@
+{
+  "schema_version": 1,
+  "marking_session_id": "ms-3f9994a8",
+  "assessment_id": "C-JUN25-8464C1H-02_3",
+  "response_id": "JUN25-8464C1H-02_3_response-top-mark",
+  "evidence_spans": [
+    {
+      "id": "span-24-51",
+      "response_id": "JUN25-8464C1H-02_3_response-top-mark",
+      "start_char": 24,
+      "end_char": 51,
+      "text": "using a measuring cylinder ",
+      "created_at": "2026-09-30T14:23:53.076702+00:00"
+    },
+    {
+      "id": "span-86-139",
+      "response_id": "JUN25-8464C1H-02_3_response-top-mark",
+      "start_char": 86,
+      "end_char": 139,
+      "text": " Use a thermometer to record the starting temperature",
+      "created_at": "2026-09-30T14:25:37.630224+00:00"
+    },
+    {
+      "id": "span-87-140",
+      "response_id": "JUN25-8464C1H-02_3_response-top-mark",
+      "start_char": 87,
+      "end_char": 140,
+      "text": "Use a thermometer to record the starting temperature.",
+      "created_at": "2026-09-30T14:25:43.218774+00:00"
+    },
+    {
+      "id": "span-140-181",
+      "response_id": "JUN25-8464C1H-02_3_response-top-mark",
+      "start_char": 140,
+      "end_char": 181,
+      "text": " Weigh 1 g of calcium oxide on a balance,",
+      "created_at": "2026-09-30T14:26:19.845663+00:00"
+    },
+    {
+      "id": "span-212-250",
+      "response_id": "JUN25-8464C1H-02_3_response-top-mark",
+      "start_char": 212,
+      "end_char": 250,
+      "text": "Record the highest temperature reached",
+      "created_at": "2026-09-30T14:26:38.289748+00:00"
+    },
+    {
+      "id": "span-255-333",
+      "response_id": "JUN25-8464C1H-02_3_response-top-mark",
+      "start_char": 255,
+      "end_char": 333,
+      "text": "subtract the starting temperature from this to calculate the temperature rise.",
+      "created_at": "2026-09-30T14:26:50.091944+00:00"
+    },
+    {
+      "id": "span-335-403",
+      "response_id": "JUN25-8464C1H-02_3_response-top-mark",
+      "start_char": 335,
+      "end_char": 403,
+      "text": "Repeat using fresh water with 2 g, 3 g, 4 g and 5 g of calcium oxide",
+      "created_at": "2026-09-30T14:27:00.512893+00:00"
+    },
+    {
+      "id": "span-505-533",
+      "response_id": "JUN25-8464C1H-02_3_response-top-mark",
+      "start_char": 505,
+      "end_char": 533,
+      "text": "repeat each mass three times",
+      "created_at": "2026-09-30T14:31:29.130689+00:00"
+    }
+  ],
+  "relations": [
+    {
+      "id": "rel-5478427e",
+      "source": "span-24-51",
+      "target": "ms_02_3-detail-1a",
+      "relation": "SUPPORTS",
+      "origin": "examiner",
+      "examiner_id": "Alex Parker",
+      "created_at": "2026-09-30T14:23:53.076702+00:00",
+      "updated_at": "2026-09-30T14:24:29.310475+00:00"
+    },
+    {
+      "id": "rel-2daff9ab",
+      "source": "span-86-139",
+      "target": "ms_02_3-point-3",
+      "relation": "SUPPORTS",
+      "origin": "examiner",
+      "examiner_id": "Alex Parker",
+      "created_at": "2026-09-30T14:25:37.630224+00:00",
+      "updated_at": "2026-09-30T14:50:56.988960+00:00"
+    },
+    {
+      "id": "rel-702a1468",
+      "source": "span-87-140",
+      "target": "ms_02_3-detail-2a",
+      "relation": "SUPPORTS",
+      "origin": "examiner",
+      "examiner_id": "Alex Parker",
+      "created_at": "2026-09-30T14:25:43.218774+00:00",
+      "updated_at": "2026-09-30T14:25:43.218774+00:00"
+    },
+    {
+      "id": "rel-73065590",
+      "source": "span-140-181",
+      "target": "ms_02_3-point-3",
+      "relation": "SUPPORTS",
+      "origin": "examiner",
+      "examiner_id": "Alex Parker",
+      "created_at": "2026-09-30T14:26:19.845663+00:00",
+      "updated_at": "2026-09-30T14:26:19.845663+00:00"
+    },
+    {
+      "id": "rel-3956c616",
+      "source": "span-212-250",
+      "target": "ms_02_3-point-4",
+      "relation": "SUPPORTS",
+      "origin": "examiner",
+      "examiner_id": "Alex Parker",
+      "created_at": "2026-09-30T14:26:38.289748+00:00",
+      "updated_at": "2026-09-30T14:26:38.289748+00:00"
+    },
+    {
+      "id": "rel-2fda8e19",
+      "source": "span-255-333",
+      "target": "ms_02_3-detail-4a",
+      "relation": "SUPPORTS",
+      "origin": "examiner",
+      "examiner_id": "Alex Parker",
+      "created_at": "2026-09-30T14:26:50.092954+00:00",
+      "updated_at": "2026-09-30T14:26:50.092954+00:00"
+    },
+    {
+      "id": "rel-f116833a",
+      "source": "span-335-403",
+      "target": "ms_02_3-point-5",
+      "relation": "SUPPORTS",
+      "origin": "examiner",
+      "examiner_id": "Alex Parker",
+      "created_at": "2026-09-30T14:27:00.512893+00:00",
+      "updated_at": "2026-09-30T14:27:00.512893+00:00"
+    },
+    {
+      "id": "rel-0c7571d7",
+      "source": "span-505-533",
+      "target": "ms_02_3-point-6",
+      "relation": "SUPPORTS",
+      "origin": "examiner",
+      "examiner_id": "Alex Parker",
+      "created_at": "2026-09-30T14:31:29.130689+00:00",
+      "updated_at": "2026-09-30T15:03:22.987691+00:00"
+    }
+  ],
+  "tentative_level": {
+    "level": 3,
+    "level_node_id": "ms_02_3-level-3",
+    "source": "mark_scheme",
+    "examiner_id": "Alex Parker",
+    "set_at": "2026-09-30T15:03:34.689535+00:00"
+  },
+  "events": [
+    {
+      "seq": 1,
+      "type": "EVIDENCE_CODED",
+      "at": "2026-09-30T14:23:22.769178+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "coding_id": "rel-4b3fc6c8",
+        "span": {
+          "start_char": 0,
+          "end_char": 24,
+          "text": "Measure 50 cm\u00b3 of water "
+        },
+        "criterion_id": "ms_02_3-point-1"
+      }
+    },
+    {
+      "seq": 2,
+      "type": "EVIDENCE_CODED",
+      "at": "2026-09-30T14:23:53.076702+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "coding_id": "rel-5478427e",
+        "span": {
+          "start_char": 24,
+          "end_char": 51,
+          "text": "using a measuring cylinder "
+        },
+        "criterion_id": "ms_02_3-detail-1a"
+      }
+    },
+    {
+      "seq": 3,
+      "type": "CODING_REVISED",
+      "at": "2026-09-30T14:24:15.017069+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "before": {
+          "coding_id": "rel-5478427e",
+          "span_id": "span-24-51",
+          "criterion_id": "ms_02_3-detail-1a"
+        },
+        "after": {
+          "coding_id": "rel-5478427e",
+          "span_id": "span-24-51",
+          "criterion_id": "ms_02_3-detail-1b"
+        }
+      }
+    },
+    {
+      "seq": 4,
+      "type": "CODING_REVISED",
+      "at": "2026-09-30T14:24:23.610953+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "before": {
+          "coding_id": "rel-5478427e",
+          "span_id": "span-24-51",
+          "criterion_id": "ms_02_3-detail-1b"
+        },
+        "after": {
+          "coding_id": "rel-5478427e",
+          "span_id": "span-24-51",
+          "criterion_id": "ms_02_3-point-1"
+        }
+      }
+    },
+    {
+      "seq": 5,
+      "type": "CODING_REVISED",
+      "at": "2026-09-30T14:24:29.310475+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "before": {
+          "coding_id": "rel-5478427e",
+          "span_id": "span-24-51",
+          "criterion_id": "ms_02_3-point-1"
+        },
+        "after": {
+          "coding_id": "rel-5478427e",
+          "span_id": "span-24-51",
+          "criterion_id": "ms_02_3-detail-1a"
+        }
+      }
+    },
+    {
+      "seq": 6,
+      "type": "TENTATIVE_LEVEL_SET",
+      "at": "2026-09-30T14:24:48.970412+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "previous_level": null,
+        "level": 3,
+        "level_node_id": "ms_02_3-level-3"
+      }
+    },
+    {
+      "seq": 7,
+      "type": "TENTATIVE_LEVEL_SET",
+      "at": "2026-09-30T14:24:58.592583+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "previous_level": 3,
+        "level": 2,
+        "level_node_id": "ms_02_3-level-2"
+      }
+    },
+    {
+      "seq": 8,
+      "type": "TENTATIVE_LEVEL_SET",
+      "at": "2026-09-30T14:25:02.591109+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "previous_level": 2,
+        "level": 1,
+        "level_node_id": "ms_02_3-level-1"
+      }
+    },
+    {
+      "seq": 9,
+      "type": "TENTATIVE_LEVEL_SET",
+      "at": "2026-09-30T14:25:05.461407+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "previous_level": 1,
+        "level": 3,
+        "level_node_id": "ms_02_3-level-3"
+      }
+    },
+    {
+      "seq": 10,
+      "type": "EVIDENCE_CODED",
+      "at": "2026-09-30T14:25:37.630224+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "coding_id": "rel-2daff9ab",
+        "span": {
+          "start_char": 86,
+          "end_char": 139,
+          "text": " Use a thermometer to record the starting temperature"
+        },
+        "criterion_id": "ms_02_3-point-2"
+      }
+    },
+    {
+      "seq": 11,
+      "type": "EVIDENCE_CODED",
+      "at": "2026-09-30T14:25:43.218774+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "coding_id": "rel-702a1468",
+        "span": {
+          "start_char": 87,
+          "end_char": 140,
+          "text": "Use a thermometer to record the starting temperature."
+        },
+        "criterion_id": "ms_02_3-detail-2a"
+      }
+    },
+    {
+      "seq": 12,
+      "type": "EVIDENCE_CODED",
+      "at": "2026-09-30T14:26:19.845663+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "coding_id": "rel-73065590",
+        "span": {
+          "start_char": 140,
+          "end_char": 181,
+          "text": " Weigh 1 g of calcium oxide on a balance,"
+        },
+        "criterion_id": "ms_02_3-point-3"
+      }
+    },
+    {
+      "seq": 13,
+      "type": "EVIDENCE_CODED",
+      "at": "2026-09-30T14:26:38.289748+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "coding_id": "rel-3956c616",
+        "span": {
+          "start_char": 212,
+          "end_char": 250,
+          "text": "Record the highest temperature reached"
+        },
+        "criterion_id": "ms_02_3-point-4"
+      }
+    },
+    {
+      "seq": 14,
+      "type": "EVIDENCE_CODED",
+      "at": "2026-09-30T14:26:50.092954+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "coding_id": "rel-2fda8e19",
+        "span": {
+          "start_char": 255,
+          "end_char": 333,
+          "text": "subtract the starting temperature from this to calculate the temperature rise."
+        },
+        "criterion_id": "ms_02_3-detail-4a"
+      }
+    },
+    {
+      "seq": 15,
+      "type": "EVIDENCE_CODED",
+      "at": "2026-09-30T14:27:00.512893+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "coding_id": "rel-f116833a",
+        "span": {
+          "start_char": 335,
+          "end_char": 403,
+          "text": "Repeat using fresh water with 2 g, 3 g, 4 g and 5 g of calcium oxide"
+        },
+        "criterion_id": "ms_02_3-point-5"
+      }
+    },
+    {
+      "seq": 16,
+      "type": "EVIDENCE_CODED",
+      "at": "2026-09-30T14:27:08.020493+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "coding_id": "rel-76eddebb",
+        "span": {
+          "start_char": 405,
+          "end_char": 483,
+          "text": "Use 50 cm\u00b3 of water each time and make sure it starts at the same temperature."
+        },
+        "criterion_id": "ms_02_3-point-6"
+      }
+    },
+    {
+      "seq": 17,
+      "type": "CODING_REMOVED",
+      "at": "2026-09-30T14:27:36.283748+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "coding_id": "rel-4b3fc6c8",
+        "span_id": "span-0-24",
+        "criterion_id": "ms_02_3-point-1"
+      }
+    },
+    {
+      "seq": 18,
+      "type": "EVIDENCE_CODED",
+      "at": "2026-09-30T14:31:29.130689+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "coding_id": "rel-0c7571d7",
+        "span": {
+          "start_char": 505,
+          "end_char": 533,
+          "text": "repeat each mass three times"
+        },
+        "criterion_id": "ms_02_3-point-5"
+      }
+    },
+    {
+      "seq": 19,
+      "type": "CODING_REVISED",
+      "at": "2026-09-30T14:50:15.311159+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "before": {
+          "coding_id": "rel-2daff9ab",
+          "span_id": "span-86-139",
+          "criterion_id": "ms_02_3-point-2"
+        },
+        "after": {
+          "coding_id": "rel-2daff9ab",
+          "span_id": "span-86-139",
+          "criterion_id": "ms_02_3-detail-3a"
+        }
+      }
+    },
+    {
+      "seq": 20,
+      "type": "CODING_REVISED",
+      "at": "2026-09-30T14:50:21.931243+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "before": {
+          "coding_id": "rel-2daff9ab",
+          "span_id": "span-86-139",
+          "criterion_id": "ms_02_3-detail-3a"
+        },
+        "after": {
+          "coding_id": "rel-2daff9ab",
+          "span_id": "span-86-139",
+          "criterion_id": "ms_02_3-point-2"
+        }
+      }
+    },
+    {
+      "seq": 21,
+      "type": "CODING_REVISED",
+      "at": "2026-09-30T14:50:56.988960+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "before": {
+          "coding_id": "rel-2daff9ab",
+          "span_id": "span-86-139",
+          "criterion_id": "ms_02_3-point-2"
+        },
+        "after": {
+          "coding_id": "rel-2daff9ab",
+          "span_id": "span-86-139",
+          "criterion_id": "ms_02_3-point-3"
+        }
+      }
+    },
+    {
+      "seq": 22,
+      "type": "CODING_REMOVED",
+      "at": "2026-09-30T15:02:56.849688+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "coding_id": "rel-76eddebb",
+        "span_id": "span-405-483",
+        "criterion_id": "ms_02_3-point-6"
+      }
+    },
+    {
+      "seq": 23,
+      "type": "CODING_REVISED",
+      "at": "2026-09-30T15:03:06.548172+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "before": {
+          "coding_id": "rel-0c7571d7",
+          "span_id": "span-505-533",
+          "criterion_id": "ms_02_3-point-5"
+        },
+        "after": {
+          "coding_id": "rel-0c7571d7",
+          "span_id": "span-505-533",
+          "criterion_id": "ms_02_3-detail-3a"
+        }
+      }
+    },
+    {
+      "seq": 24,
+      "type": "CODING_REVISED",
+      "at": "2026-09-30T15:03:22.988694+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "before": {
+          "coding_id": "rel-0c7571d7",
+          "span_id": "span-505-533",
+          "criterion_id": "ms_02_3-detail-3a"
+        },
+        "after": {
+          "coding_id": "rel-0c7571d7",
+          "span_id": "span-505-533",
+          "criterion_id": "ms_02_3-point-6"
+        }
+      }
+    },
+    {
+      "seq": 25,
+      "type": "TENTATIVE_LEVEL_SET",
+      "at": "2026-09-30T15:03:27.239295+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "previous_level": 3,
+        "level": 2,
+        "level_node_id": "ms_02_3-level-2"
+      }
+    },
+    {
+      "seq": 26,
+      "type": "TENTATIVE_LEVEL_SET",
+      "at": "2026-09-30T15:03:29.363579+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "previous_level": 2,
+        "level": 3,
+        "level_node_id": "ms_02_3-level-3"
+      }
+    },
+    {
+      "seq": 27,
+      "type": "TENTATIVE_LEVEL_SET",
+      "at": "2026-09-30T15:03:30.785049+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "previous_level": 3,
+        "level": 2,
+        "level_node_id": "ms_02_3-level-2"
+      }
+    },
+    {
+      "seq": 28,
+      "type": "TENTATIVE_LEVEL_SET",
+      "at": "2026-09-30T15:03:31.896248+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "previous_level": 2,
+        "level": 1,
+        "level_node_id": "ms_02_3-level-1"
+      }
+    },
+    {
+      "seq": 29,
+      "type": "TENTATIVE_LEVEL_SET",
+      "at": "2026-09-30T15:03:33.148689+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "previous_level": 1,
+        "level": 0,
+        "level_node_id": null
+      }
+    },
+    {
+      "seq": 30,
+      "type": "TENTATIVE_LEVEL_SET",
+      "at": "2026-09-30T15:03:34.689535+00:00",
+      "examiner_id": "Alex Parker",
+      "payload": {
+        "previous_level": 0,
+        "level": 3,
+        "level_node_id": "ms_02_3-level-3"
+      }
+    }
+  ],
+  "updated_at": "2026-09-30T15:03:34.689535+00:00"
+}

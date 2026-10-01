@@ -1,0 +1,1560 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "C-JUN25-8464C1H-02_3",
+  "question_id": "02_3",
+  "metadata": {
+    "subject": null,
+    "qualification": null,
+    "paper": null,
+    "maximum_mark": 6,
+    "assessment_objective": null,
+    "specification_reference": null,
+    "marking_mode": "level_of_response"
+  },
+  "documents": [
+    {
+      "document_id": "q_02_3",
+      "document_type": "question",
+      "source_file": "C-JUN25-8464C1H-02_3-Q.txt",
+      "segments": [
+        {
+          "id": "q_02_3-stimulus-1",
+          "type": "stimulus",
+          "text": "When solid calcium oxide is added to water, the temperature of the reaction mixture changes.",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "solid",
+              "start": 5,
+              "end": 10
+            },
+            {
+              "type": "domain_term",
+              "text": "calcium oxide",
+              "start": 11,
+              "end": 24
+            },
+            {
+              "type": "domain_term",
+              "text": "water",
+              "start": 37,
+              "end": 42
+            },
+            {
+              "type": "domain_term",
+              "text": "temperature",
+              "start": 48,
+              "end": 59
+            },
+            {
+              "type": "domain_term",
+              "text": "reaction mixture",
+              "start": 67,
+              "end": 83
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_02_3-instruction-1",
+          "type": "question_instruction",
+          "text": "Plan a method to investigate how changing the mass of calcium oxide affects the temperature change of the reaction mixture.",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "Plan",
+              "start": 0,
+              "end": 4
+            },
+            {
+              "type": "domain_term",
+              "text": "mass of calcium oxide",
+              "start": 46,
+              "end": 67
+            },
+            {
+              "type": "domain_term",
+              "text": "temperature change",
+              "start": 80,
+              "end": 98
+            },
+            {
+              "type": "domain_term",
+              "text": "reaction mixture",
+              "start": 106,
+              "end": 122
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-Q.txt",
+            "page": null
+          },
+          "marks": 6,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_02_3-marks-1",
+          "type": "other_question_content",
+          "text": "[6 marks]",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "6",
+              "start": 1,
+              "end": 2
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-Q.txt",
+            "page": null
+          },
+          "marks": 6,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    },
+    {
+      "document_id": "ms_02_3",
+      "document_type": "mark_scheme",
+      "source_file": "C-JUN25-8464C1H-02_3-MS.txt",
+      "segments": [
+        {
+          "id": "ms_02_3-level-3",
+          "type": "level_descriptor",
+          "text": "Level 3: The method would lead to the production of a valid outcome. All key steps are identified and logically sequenced. Mark: 5-6",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": {
+            "min": 5,
+            "max": 6
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_02_3-level-2",
+          "type": "level_descriptor",
+          "text": "Level 2: The method would not necessarily lead to a valid outcome. Most steps are identified, but the method is not fully logically sequenced. Mark: 5-6",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not necessarily",
+              "start": 26,
+              "end": 41
+            },
+            {
+              "type": "qualifier",
+              "text": "Most",
+              "start": 67,
+              "end": 71
+            },
+            {
+              "type": "qualifier",
+              "text": "not fully",
+              "start": 112,
+              "end": 121
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": {
+            "min": 5,
+            "max": 6
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_02_3-level-1",
+          "type": "level_descriptor",
+          "text": "Level 1: The method would not lead to a valid outcome. Some relevant steps are identified, but links are not made clear. Mark: 1-2",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not",
+              "start": 26,
+              "end": 29
+            },
+            {
+              "type": "qualifier",
+              "text": "Some",
+              "start": 55,
+              "end": 59
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": {
+            "min": 1,
+            "max": 2
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_02_3-indicative-content",
+          "type": "indicative_content_group",
+          "text": "Indicative Content:",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_02_3-point-1",
+          "type": "indicative_point",
+          "text": "• measure volume of water",
+          "order": 5,
+          "parent_id": "ms_02_3-indicative-content",
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "measure",
+              "start": 2,
+              "end": 9
+            },
+            {
+              "type": "domain_term",
+              "text": "volume of water",
+              "start": 10,
+              "end": 25
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_02_3-detail-1a",
+          "type": "indicative_point",
+          "text": "o using a measuring cylinder",
+          "order": 6,
+          "parent_id": "ms_02_3-point-1",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "measuring cylinder",
+              "start": 10,
+              "end": 28
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_02_3-detail-1b",
+          "type": "indicative_point",
+          "text": "o pour into a suitable container eg insulated cup",
+          "order": 7,
+          "parent_id": "ms_02_3-point-1",
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "pour",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "type": "domain_term",
+              "text": "suitable container",
+              "start": 14,
+              "end": 32
+            },
+            {
+              "type": "domain_term",
+              "text": "insulated cup",
+              "start": 36,
+              "end": 49
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_02_3-point-2",
+          "type": "indicative_point",
+          "text": "• measure initial temperature of water",
+          "order": 8,
+          "parent_id": "ms_02_3-indicative-content",
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "measure",
+              "start": 2,
+              "end": 9
+            },
+            {
+              "type": "domain_term",
+              "text": "initial temperature of water",
+              "start": 10,
+              "end": 38
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_02_3-detail-2a",
+          "type": "indicative_point",
+          "text": "o using a thermometer",
+          "order": 9,
+          "parent_id": "ms_02_3-point-2",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "thermometer",
+              "start": 10,
+              "end": 21
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_02_3-point-3",
+          "type": "indicative_point",
+          "text": "• add known mass of calcium oxide",
+          "order": 10,
+          "parent_id": "ms_02_3-indicative-content",
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "add",
+              "start": 2,
+              "end": 5
+            },
+            {
+              "type": "qualifier",
+              "text": "known",
+              "start": 6,
+              "end": 11
+            },
+            {
+              "type": "domain_term",
+              "text": "mass of calcium oxide",
+              "start": 12,
+              "end": 33
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_02_3-detail-3a",
+          "type": "indicative_point",
+          "text": "o measured with a balance",
+          "order": 11,
+          "parent_id": "ms_02_3-point-3",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "balance",
+              "start": 18,
+              "end": 25
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_02_3-detail-3b",
+          "type": "indicative_point",
+          "text": "o stir",
+          "order": 12,
+          "parent_id": "ms_02_3-point-3",
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "stir",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "type": "domain_term",
+              "text": "stir",
+              "start": 2,
+              "end": 6
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_02_3-point-4",
+          "type": "indicative_point",
+          "text": "• measure the highest temperature reached by the mixture\n or\nmeasure temperature reached after set time period",
+          "order": 13,
+          "parent_id": "ms_02_3-indicative-content",
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "measure",
+              "start": 2,
+              "end": 9
+            },
+            {
+              "type": "domain_term",
+              "text": "highest temperature",
+              "start": 14,
+              "end": 33
+            },
+            {
+              "type": "domain_term",
+              "text": "mixture",
+              "start": 49,
+              "end": 56
+            },
+            {
+              "type": "command_word",
+              "text": "measure",
+              "start": 61,
+              "end": 68
+            },
+            {
+              "type": "domain_term",
+              "text": "temperature reached after set time period",
+              "start": 69,
+              "end": 110
+            },
+            {
+              "type": "qualifier",
+              "text": "set",
+              "start": 95,
+              "end": 98
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_02_3-detail-4a",
+          "type": "indicative_point",
+          "text": "o determine the temperature change",
+          "order": 14,
+          "parent_id": "ms_02_3-point-4",
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "determine",
+              "start": 2,
+              "end": 11
+            },
+            {
+              "type": "domain_term",
+              "text": "temperature change",
+              "start": 16,
+              "end": 34
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_02_3-point-5",
+          "type": "indicative_point",
+          "text": "• repeat with different masses of calcium oxide\n or\nadd successive masses to the same mixture",
+          "order": 15,
+          "parent_id": "ms_02_3-indicative-content",
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "repeat",
+              "start": 2,
+              "end": 8
+            },
+            {
+              "type": "qualifier",
+              "text": "different",
+              "start": 14,
+              "end": 23
+            },
+            {
+              "type": "domain_term",
+              "text": "different masses of calcium oxide",
+              "start": 14,
+              "end": 47
+            },
+            {
+              "type": "command_word",
+              "text": "add",
+              "start": 52,
+              "end": 55
+            },
+            {
+              "type": "domain_term",
+              "text": "successive masses",
+              "start": 56,
+              "end": 73
+            },
+            {
+              "type": "domain_term",
+              "text": "same mixture",
+              "start": 81,
+              "end": 93
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_02_3-point-6",
+          "type": "indicative_point",
+          "text": "• use the same volume of water",
+          "order": 16,
+          "parent_id": "ms_02_3-indicative-content",
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "use",
+              "start": 2,
+              "end": 5
+            },
+            {
+              "type": "qualifier",
+              "text": "same",
+              "start": 10,
+              "end": 14
+            },
+            {
+              "type": "domain_term",
+              "text": "volume of water",
+              "start": 15,
+              "end": 30
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_02_3-detail-6a",
+          "type": "indicative_point",
+          "text": "o use the same initial temperature of water",
+          "order": 17,
+          "parent_id": "ms_02_3-point-6",
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "use",
+              "start": 2,
+              "end": 5
+            },
+            {
+              "type": "qualifier",
+              "text": "same",
+              "start": 10,
+              "end": 14
+            },
+            {
+              "type": "domain_term",
+              "text": "initial temperature of water",
+              "start": 15,
+              "end": 43
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_02_3-level-rule-3",
+          "type": "level_rule",
+          "text": "for Level 3 all key steps should be described and the control\nvariable the same volume of water must be given",
+          "order": 18,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "all",
+              "start": 12,
+              "end": 15
+            },
+            {
+              "type": "qualifier",
+              "text": "same",
+              "start": 75,
+              "end": 79
+            },
+            {
+              "type": "domain_term",
+              "text": "volume of water",
+              "start": 80,
+              "end": 95
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    },
+    {
+      "document_id": "commentary_02_3",
+      "document_type": "commentary",
+      "source_file": "C-JUN25-8464C1H-02_3-C.txt",
+      "segments": [
+        {
+          "id": "commentary_02_3-heading-1",
+          "type": "commentary_heading",
+          "text": "Q 02.3",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-1",
+          "type": "commentary_guidance",
+          "text": "YOU MUST NOT USE THE TICK ANNOTATION WHEN MARKING THIS QUESTION. You can use the\nhighlighter tool, the underline tool, and/or the asterisk annotation but you do not have to use any\nannotations at all.",
+          "order": 2,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-2",
+          "type": "commentary_guidance",
+          "text": "Please read Section 4 at the start of the mark scheme as a guide to marking extended response\nquestions.",
+          "order": 3,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-3",
+          "type": "commentary_guidance",
+          "text": "The Key Steps are shown as black bullet points on the mark scheme.",
+          "order": 4,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-4",
+          "type": "commentary_guidance",
+          "text": "The last black bullet point is the\ncontrol variable, shown at the bottom of the indicative content which is required to access Level 3 to\nachieve a valid investigation.",
+          "order": 5,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "control variable",
+              "start": 35,
+              "end": 51
+            },
+            {
+              "type": "domain_term",
+              "text": "valid investigation",
+              "start": 148,
+              "end": 167
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-5",
+          "type": "commentary_guidance",
+          "text": "Other parts of the indicative content, shown as white bullet points, are classed as statements.",
+          "order": 6,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-6",
+          "type": "commentary_guidance",
+          "text": "We are looking for students to plan a method with the key steps (the first 5 black bullet points) in a\nlogical order.",
+          "order": 7,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "first 5",
+              "start": 69,
+              "end": 76
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-7",
+          "type": "commentary_guidance",
+          "text": "In their plan they should record the initial temperature of a volume of water and the final\ntemperature after a mass of calcium oxide has been added.",
+          "order": 8,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "initial temperature",
+              "start": 37,
+              "end": 56
+            },
+            {
+              "type": "domain_term",
+              "text": "volume of water",
+              "start": 62,
+              "end": 77
+            },
+            {
+              "type": "domain_term",
+              "text": "mass of calcium oxide",
+              "start": 112,
+              "end": 133
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-8",
+          "type": "commentary_guidance",
+          "text": "The experiment must be repeated with\ndifferent masses of calcium oxide and the same (or fixed) volume of water.",
+          "order": 9,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "experiment",
+              "start": 4,
+              "end": 14
+            },
+            {
+              "type": "domain_term",
+              "text": "different masses of calcium oxide",
+              "start": 37,
+              "end": 70
+            },
+            {
+              "type": "qualifier",
+              "text": "different",
+              "start": 37,
+              "end": 46
+            },
+            {
+              "type": "domain_term",
+              "text": "same (or fixed) volume of water",
+              "start": 79,
+              "end": 110
+            },
+            {
+              "type": "qualifier",
+              "text": "same",
+              "start": 79,
+              "end": 83
+            },
+            {
+              "type": "qualifier",
+              "text": "fixed",
+              "start": 88,
+              "end": 93
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-9",
+          "type": "commentary_guidance",
+          "text": "This control variable is\nrequired to access Level 3 to achieve a valid investigation.",
+          "order": 10,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "control variable",
+              "start": 5,
+              "end": 21
+            },
+            {
+              "type": "domain_term",
+              "text": "valid investigation",
+              "start": 65,
+              "end": 84
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-10",
+          "type": "commentary_guidance",
+          "text": "To be awarded 6 marks the method must\ninclude all 5 key steps with the control variable and should indicate how the temperature change is\ndetermined i.e. by subtracting the final temperature from the initial temperature.",
+          "order": 11,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "6",
+              "start": 14,
+              "end": 15
+            },
+            {
+              "type": "quantifier",
+              "text": "all",
+              "start": 46,
+              "end": 49
+            },
+            {
+              "type": "quantifier",
+              "text": "5",
+              "start": 50,
+              "end": 51
+            },
+            {
+              "type": "domain_term",
+              "text": "control variable",
+              "start": 71,
+              "end": 87
+            },
+            {
+              "type": "domain_term",
+              "text": "temperature change",
+              "start": 116,
+              "end": 134
+            },
+            {
+              "type": "domain_term",
+              "text": "final temperature",
+              "start": 173,
+              "end": 190
+            },
+            {
+              "type": "domain_term",
+              "text": "initial temperature",
+              "start": 200,
+              "end": 219
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": 6,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-11",
+          "type": "commentary_guidance",
+          "text": "The following should be used as a guide to awarding marks.",
+          "order": 12,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-12",
+          "type": "commentary_guidance",
+          "text": "To achieve Level 3 for this question the plan must work and as such, would lead to a valid outcome.",
+          "order": 13,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-13",
+          "type": "commentary_guidance",
+          "text": "We\nexpect to see all 5 black bullet points and the control variable for Level 3.",
+          "order": 14,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "all",
+              "start": 17,
+              "end": 20
+            },
+            {
+              "type": "quantifier",
+              "text": "5",
+              "start": 21,
+              "end": 22
+            },
+            {
+              "type": "domain_term",
+              "text": "control variable",
+              "start": 51,
+              "end": 67
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-14",
+          "type": "commentary_guidance",
+          "text": "For the higher end of Level 3, all 5 black bullet points need to be addressed together with the control\nvariable and an indication of how the temperature change is determined.",
+          "order": 15,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "higher end",
+              "start": 8,
+              "end": 18
+            },
+            {
+              "type": "quantifier",
+              "text": "all",
+              "start": 31,
+              "end": 34
+            },
+            {
+              "type": "quantifier",
+              "text": "5",
+              "start": 35,
+              "end": 36
+            },
+            {
+              "type": "domain_term",
+              "text": "temperature change",
+              "start": 142,
+              "end": 160
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-15",
+          "type": "commentary_guidance",
+          "text": "To achieve Level 2, some of the black bullet points are missing so that the method wouldn’t work but\ncould, if adjustments were made.",
+          "order": 16,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "some",
+              "start": 20,
+              "end": 24
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-16",
+          "type": "commentary_guidance",
+          "text": "A Level 1 answer has at least one black and white bullet point but the plan would not lead to a valid\noutcome.",
+          "order": 17,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "at least one",
+              "start": 21,
+              "end": 33
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-17",
+          "type": "commentary_guidance",
+          "text": "In the indicative content ‘amount’ can be used as alternatives to ‘volume’ or ‘mass’.",
+          "order": 18,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "amount",
+              "start": 27,
+              "end": 33
+            },
+            {
+              "type": "domain_term",
+              "text": "volume",
+              "start": 67,
+              "end": 73
+            },
+            {
+              "type": "domain_term",
+              "text": "mass",
+              "start": 79,
+              "end": 83
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-18",
+          "type": "commentary_guidance",
+          "text": "Measuring the ‘mass\nof water’ is an equivalent to volume as this method would work but students cannot measure the ‘volume\nof calcium oxide’ as this is a solid.",
+          "order": 19,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "solid",
+              "start": 154,
+              "end": 159
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-19",
+          "type": "commentary_guidance",
+          "text": "Some students are adding spatula measures of calcium oxide to water,",
+          "order": 20,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "spatula measures",
+              "start": 25,
+              "end": 41
+            },
+            {
+              "type": "domain_term",
+              "text": "calcium oxide",
+              "start": 45,
+              "end": 58
+            },
+            {
+              "type": "domain_term",
+              "text": "water",
+              "start": 62,
+              "end": 67
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-20",
+          "type": "commentary_guidance",
+          "text": "however as the investigation is\ninto how changing ‘the mass of calcium oxide’ affects the temperature change, the mass needs to be\nmeasured more accurately.",
+          "order": 21,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "mass of calcium oxide",
+              "start": 55,
+              "end": 76
+            },
+            {
+              "type": "domain_term",
+              "text": "temperature change",
+              "start": 90,
+              "end": 108
+            },
+            {
+              "type": "qualifier",
+              "text": "more accurately",
+              "start": 140,
+              "end": 155
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-21",
+          "type": "commentary_guidance",
+          "text": "Measuring the ‘temperature change’ alone is insufficient to gain credit.",
+          "order": 22,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "temperature change",
+              "start": 15,
+              "end": 33
+            },
+            {
+              "type": "qualifier",
+              "text": "alone",
+              "start": 35,
+              "end": 40
+            },
+            {
+              "type": "qualifier",
+              "text": "insufficient",
+              "start": 44,
+              "end": 56
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-22",
+          "type": "commentary_guidance",
+          "text": "There must be a clear indication\nof when the temperature is taken both before and after the addition of calcium oxide to gain black bullet\npoints 2 and 4.",
+          "order": 23,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "temperature",
+              "start": 45,
+              "end": 56
+            },
+            {
+              "type": "domain_term",
+              "text": "addition of calcium oxide",
+              "start": 92,
+              "end": 117
+            },
+            {
+              "type": "quantifier",
+              "text": "2",
+              "start": 146,
+              "end": 147
+            },
+            {
+              "type": "quantifier",
+              "text": "4",
+              "start": 152,
+              "end": 153
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-23",
+          "type": "commentary_guidance",
+          "text": "‘Final temperature’, ‘maximum temperature’ are equivalent responses to ‘highest\ntemperature’ in black bullet point 4.",
+          "order": 24,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Final temperature",
+              "start": 1,
+              "end": 18
+            },
+            {
+              "type": "domain_term",
+              "text": "maximum temperature",
+              "start": 22,
+              "end": 41
+            },
+            {
+              "type": "quantifier",
+              "text": "4",
+              "start": 115,
+              "end": 116
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-24",
+          "type": "commentary_guidance",
+          "text": "Credit for black bullet point 1 cannot be given if the student uses a solution or liquid other than water.",
+          "order": 25,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "1",
+              "start": 30,
+              "end": 31
+            },
+            {
+              "type": "domain_term",
+              "text": "solution",
+              "start": 70,
+              "end": 78
+            },
+            {
+              "type": "domain_term",
+              "text": "liquid",
+              "start": 82,
+              "end": 88
+            },
+            {
+              "type": "domain_term",
+              "text": "water",
+              "start": 100,
+              "end": 105
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-25",
+          "type": "commentary_guidance",
+          "text": "They may however, gain credit for other black bullet points in the remainder of their answer.",
+          "order": 26,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_02_3-guidance-26",
+          "type": "commentary_guidance",
+          "text": "They cannot\nachieve Level 3.",
+          "order": 27,
+          "parent_id": "commentary_02_3-heading-1",
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "cannot",
+              "start": 5,
+              "end": 11
+            }
+          ],
+          "source": {
+            "file": "C-JUN25-8464C1H-02_3-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-09-24T09:43:21.283840+00:00",
+    "requires_review": true,
+    "warnings": [
+      {
+        "document_id": "ms_02_3",
+        "page": null,
+        "message": "The Level 2 descriptor explicitly states “Mark: 5-6”, which overlaps Level 3 and may be a source-text error; it has been preserved without correction."
+      }
+    ]
+  }
+}

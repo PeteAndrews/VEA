@@ -1,0 +1,15 @@
+{
+  "assessment_id": "C-JUN25-8464C1H-02_3",
+  "errata": [
+    {
+      "id": "errata-02_3-001",
+      "node_id": "ms_02_3-level-2",
+      "field": "mark_range",
+      "source_value": {"min": 5, "max": 6},
+      "corrected_value": {"min": 3, "max": 4},
+      "reason": "Stage-1 extraction duplicated the Level 3 range; the published mark scheme gives Level 2 as 3-4 marks.",
+      "verified_by": "examiner review",
+      "verified_on": "2026-09-30"
+    }
+  ]
+}
