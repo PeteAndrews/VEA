@@ -538,6 +538,7 @@ def send_conversation_message(
     record: dict[str, Any] | None = None,
     judgement_state: dict[str, Any] | None = None,
     classifier=None,
+    intent_classifier=None,
     retrieval_service=None,
     assessment_id: str | None = None,
     data_dir: str | None = None,
@@ -573,7 +574,7 @@ def send_conversation_message(
         and message["role"] in {"user", "assistant"}
     ]
 
-    if graph_service and record and judgement_state and classifier:
+    if graph_service and record and judgement_state and classifier and intent_classifier:
         turn = process_assistant_turn(
             content=content,
             active_context=active_context,
@@ -581,6 +582,7 @@ def send_conversation_message(
             record=record,
             judgement_state=judgement_state,
             classifier=classifier,
+            intent_classifier=intent_classifier,
             retrieval_service=retrieval_service,
             llm=llm,
             prompt_loader=prompt_loader,

@@ -11,6 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, model_validator
 
 from app.classifier import EvidenceRelationClassifier, JevEvidenceRelationClassifier
+from app.intent import IntentClassifier, JevIntentClassifier
 from app.conversation import (
     ConversationLLM,
     ConversationStore,
@@ -66,6 +67,7 @@ CONVERSATIONS_DIR = Path(
 )
 DEFAULT_ASSESSMENT_ID = os.getenv("VEA_ASSESSMENT_ID", "C-JUN25-8464C1H-02_3")
 _evidence_classifier_instance: EvidenceRelationClassifier | None = None
+_intent_classifier_instance: IntentClassifier | None = None
 _conversation_llm_instance: ConversationLLM | None = None
 _prompt_loader_instance: PromptLoader | None = None
 
@@ -135,6 +137,13 @@ def _evidence_classifier() -> EvidenceRelationClassifier:
     if _evidence_classifier_instance is None:
         _evidence_classifier_instance = JevEvidenceRelationClassifier()
     return _evidence_classifier_instance
+
+
+def _intent_classifier() -> IntentClassifier:
+    global _intent_classifier_instance
+    if _intent_classifier_instance is None:
+        _intent_classifier_instance = JevIntentClassifier()
+    return _intent_classifier_instance
 
 
 def _require_assessment(assessment_id: str) -> GraphService:
@@ -747,6 +756,7 @@ def post_conversation_message(
             record=record,
             judgement_state=state,
             classifier=_evidence_classifier(),
+            intent_classifier=_intent_classifier(),
             retrieval_service=retrieval_service,
             assessment_id=assessment_id,
             data_dir=str(DATA_DIR),

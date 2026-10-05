@@ -11,19 +11,6 @@ function formatTime(isoString) {
   return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 }
 
-function ActiveContextSummary({ activeContext }) {
-  if (!activeContext) return null;
-  const criterion = activeContext.criterion?.text || activeContext.parent_criterion?.text;
-  const evidence = activeContext.evidence?.text;
-  if (!criterion && !evidence) return null;
-  return (
-    <div className="assistant-context-summary">
-      {criterion ? <p className="assistant-context-criterion">{criterion}</p> : null}
-      {evidence ? <p className="assistant-context-evidence">&ldquo;{evidence}&rdquo;</p> : null}
-    </div>
-  );
-}
-
 function AssistantMessage({ message, onCitationClick }) {
   return (
     <div className={`assistant-message assistant-message-${message.role}`}>
@@ -125,7 +112,6 @@ export default function ExaminerAssistantPanel({ assessmentId, candidateId }) {
 
       {!collapsed ? (
         <>
-          <ActiveContextSummary activeContext={activeContext} />
           <div className="assistant-messages">
             {launchStatus === "loading" ? (
               <p className="status-text">Launching assistant...</p>

@@ -44,6 +44,7 @@ const conversationSlice = createSlice({
     status: "idle",
     launchStatus: "idle",
     sendStatus: "idle",
+    pendingMessageId: null,
     error: null,
     launchError: null,
     sendError: null,
@@ -61,6 +62,7 @@ const conversationSlice = createSlice({
       state.status = "idle";
       state.launchStatus = "idle";
       state.sendStatus = "idle";
+      state.pendingMessageId = null;
       state.error = null;
       state.launchError = null;
       state.sendError = null;
@@ -98,17 +100,37 @@ const conversationSlice = createSlice({
       });
 
     builder
-      .addCase(sendAssistantMessage.pending, (state) => {
+      .addCase(sendAssistantMessage.pending, (state, action) => {
         state.sendStatus = "loading";
         state.sendError = null;
+        const { content } = action.meta.arg;
+        if (!state.conversation) {
+          return;
+        }
+        const pendingId = `pending-${Date.now()}`;
+        state.pendingMessageId = pendingId;
+        state.conversation.messages.push({
+          id: pendingId,
+          role: "user",
+          content,
+          context_id: state.conversation.active_context_id,
+          created_at: new Date().toISOString(),
+        });
       })
       .addCase(sendAssistantMessage.fulfilled, (state, action) => {
         state.sendStatus = "succeeded";
+        state.pendingMessageId = null;
         state.conversation = action.payload;
       })
       .addCase(sendAssistantMessage.rejected, (state, action) => {
         state.sendStatus = "failed";
         state.sendError = action.error.message;
+        if (state.conversation?.messages && state.pendingMessageId) {
+          state.conversation.messages = state.conversation.messages.filter(
+            (message) => message.id !== state.pendingMessageId
+          );
+        }
+        state.pendingMessageId = null;
       });
   },
 });

@@ -2,56 +2,55 @@
 
 from __future__ import annotations
 
-import json
 import re
 import uuid
 from datetime import datetime, timezone
-from typing import Any, Literal
+from typing import Any
 
 from app.assessment import assess_evidence_link
 from app.classifier import EvidenceRelationClassifier
-from app.conversation import compact_context_for_llm
+from app.conversation import _compact_criterion
 from app.graph_service import GraphService
+from app.intent import Intent, IntentClassifier, build_intent_conversation_context
 from app.intervention import build_intervention_context
 from app.judgement import judgement_view
 from app.retrieval import RetrievalService
 from app.stages import resolve_stage
 
-Intent = Literal["DISCUSS", "LOCATE_EVIDENCE", "ASSESS_LINK"]
-
-ASSESS_HINTS = (
-    "enough for",
-    "would that",
-    "does that support",
-    "does this support",
-    "is that sufficient",
-    "is this sufficient",
-    "support the",
-    "count for",
-    "credit for",
-    "meet the criterion",
-    "meet point",
+SPAN_ANAPHORA = (
+    "that sentence",
+    "this sentence",
+    "that span",
+    "this span",
+    "that evidence",
+    "this evidence",
+    "that excerpt",
+    "this excerpt",
 )
-LOCATE_HINTS = (
-    "where does",
-    "where do they",
-    "where is",
-    "find",
-    "mention",
-    "talk about",
-    "refer to",
-    "show me",
-    "which part",
-    "which sentence",
+CRITERION_ANAPHORA = (
+    "this criterion",
+    "that criterion",
+    "this point",
+    "that point",
+    "this link",
+    "that link",
+    "control point",
 )
-DISCUSS_HINTS = (
-    "what does",
-    "what is",
-    "explain",
-    "mean",
-    "tell me about",
-    "how is",
+STALE_CONTEXT_KEYS = (
+    "interpretive_context",
+    "intervention",
+    "interpretation_id",
+    "jev_additional",
+    "suggested_evidence_span",
+    "graph_context",
+    "borderline_link",
+    "borderline_reasons",
 )
+INTENT_CLARIFICATION_MESSAGE = (
+    "I'm not sure whether you're asking about a specific part of the response or whether "
+    "the response contains evidence anywhere for a mark-scheme point. Could you clarify?"
+)
+ASSESSMENT_INTENTS = frozenset({"ASSESS_LINK", "FIND_SUPPORT"})
 
 
 def _utc_now() -> str:
@@ -66,15 +65,47 @@ def _normalize(text: str) -> str:
     return " ".join(text.lower().split())
 
 
-def classify_intent(content: str) -> Intent:
+def _token_set(text: str) -> set[str]:
+    stopwords = {
+        "the",
+        "and",
+        "with",
+        "for",
+        "that",
+        "this",
+        "does",
+        "response",
+        "support",
+        "using",
+        "from",
+        "into",
+        "same",
+    }
+    return {
+        token
+        for token in re.findall(r"[a-z0-9]+", _normalize(text))
+        if len(token) > 2 and token not in stopwords
+    }
+
+
+def _has_span_anaphora(content: str) -> bool:
     lower = _normalize(content)
-    if any(hint in lower for hint in ASSESS_HINTS):
-        return "ASSESS_LINK"
-    if any(hint in lower for hint in LOCATE_HINTS):
-        return "LOCATE_EVIDENCE"
-    if any(hint in lower for hint in DISCUSS_HINTS):
-        return "DISCUSS"
-    return "DISCUSS"
+    return any(token in lower for token in SPAN_ANAPHORA)
+
+
+def _prior_criterion_id(active_context: dict[str, Any]) -> str | None:
+    refs = active_context.get("resolved_references") or {}
+    criterion = refs.get("criterion") or active_context.get("criterion")
+    return criterion.get("id") if criterion else None
+
+
+def _drop_inherited_span(active_context: dict[str, Any]) -> None:
+    refs = active_context.get("resolved_references") or {}
+    refs.pop("response_span", None)
+    active_context["resolved_references"] = refs
+    active_context.pop("evidence", None)
+    active_context.pop("jev", None)
+    active_context.pop("jev_direct", None)
 
 
 def _judgement_summary(
@@ -158,22 +189,13 @@ def build_session_context(
     return context
 
 
-def _find_coding_by_id(judgement_state: dict[str, Any], coding_id: str) -> dict[str, Any] | None:
-    spans = {span["id"]: span for span in judgement_state.get("evidence_spans", [])}
-    for relation in judgement_state.get("relations", []):
-        if relation["id"] != coding_id:
-            continue
-        span = spans.get(relation["source"])
-        if span is None:
-            return None
-        return {
-            "coding_id": relation["id"],
-            "criterion_id": relation["target"],
-            "start_char": span["start_char"],
-            "end_char": span["end_char"],
-            "text": span["text"],
-        }
-    return None
+def _segment_dict(segment: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "segment_id": segment["id"],
+        "text": segment["text"],
+        "start_char": segment["start_char"],
+        "end_char": segment["end_char"],
+    }
 
 
 def _lexical_response_matches(record: dict[str, Any], query: str, limit: int = 5) -> list[dict[str, Any]]:
@@ -183,16 +205,145 @@ def _lexical_response_matches(record: dict[str, Any], query: str, limit: int = 5
     matches: list[dict[str, Any]] = []
     for segment in record.get("segments", []):
         if needle in _normalize(segment["text"]):
-            matches.append(
-                {
-                    "segment_id": segment["id"],
-                    "text": segment["text"],
-                    "start_char": segment["start_char"],
-                    "end_char": segment["end_char"],
-                    "match_type": "lexical",
-                }
-            )
+            matches.append({**_segment_dict(segment), "match_type": "lexical"})
     return matches[:limit]
+
+
+def _score_text_overlap(query: str, target: str) -> float:
+    query_tokens = _token_set(query)
+    target_tokens = _token_set(target)
+    if not query_tokens or not target_tokens:
+        return 0.0
+    shared = len(query_tokens & target_tokens)
+    return max(shared / len(target_tokens), shared / len(query_tokens))
+
+
+def _strip_criterion_prefix(text: str) -> str:
+    return re.sub(r"^[•o\s]+", "", text).strip()
+
+
+def _query_phrases(content: str, criterion: dict[str, Any] | None = None) -> list[str]:
+    phrases: list[str] = []
+    lower = _normalize(content)
+    support_match = re.search(
+        r"(?:support|enough for|sufficient for|hold evidence for|evidence for|meet(?:s)?(?: the)?)\s+(.+?)(?:\?|$)",
+        lower,
+    )
+    if support_match:
+        phrases.append(support_match.group(1).strip(" ."))
+    if criterion:
+        phrases.append(_strip_criterion_prefix(criterion.get("text", "")))
+    phrases.extend(re.findall(r"[a-z0-9]+(?: [a-z0-9]+){1,4}", lower))
+    seen: set[str] = set()
+    ordered: list[str] = []
+    for phrase in phrases:
+        normalized = _normalize(phrase)
+        if len(normalized) >= 5 and normalized not in seen:
+            seen.add(normalized)
+            ordered.append(normalized)
+    return ordered
+
+
+def _resolve_criterion_from_query(
+    content: str,
+    graph_service: GraphService,
+) -> dict[str, Any] | None:
+    best_node = None
+    best_score = 0.0
+    for node in graph_service.graph.nodes.values():
+        if not _is_indicative_criterion(node):
+            continue
+        score = _score_text_overlap(content, node["text"])
+        if score > best_score:
+            best_score = score
+            best_node = node
+    if best_node is not None and best_score >= 0.25:
+        return graph_service.get_node(best_node["id"])
+    return None
+
+
+def _resolve_span_from_query(
+    content: str,
+    record: dict[str, Any],
+    criterion: dict[str, Any] | None,
+    retrieval_service: RetrievalService | None,
+) -> dict[str, Any] | None:
+    keyword_matches = _lexical_response_matches(record, content, limit=5)
+    if keyword_matches:
+        return keyword_matches[0]
+
+    for phrase in _query_phrases(content, criterion):
+        phrase_matches = _lexical_response_matches(record, phrase, limit=1)
+        if phrase_matches:
+            return phrase_matches[0]
+
+    if criterion:
+        best_segment = None
+        best_score = 0.0
+        for segment in record.get("segments", []):
+            score = max(
+                _score_text_overlap(criterion["text"], segment["text"]),
+                _score_text_overlap(content, segment["text"]),
+            )
+            if score > best_score:
+                best_score = score
+                best_segment = segment
+        if best_segment is not None and best_score >= 0.25:
+            return _segment_dict(best_segment)
+
+    if retrieval_service is not None:
+        search = retrieval_service.search_response(record["response_id"], content, top_k=3)
+        if search["matches"]:
+            return search["matches"][0]
+
+    return None
+
+
+def _find_supporting_span(
+    *,
+    criterion: dict[str, Any],
+    record: dict[str, Any],
+    content: str,
+    retrieval_service: RetrievalService | None,
+) -> dict[str, Any] | None:
+    criterion_text = _strip_criterion_prefix(criterion.get("text", ""))
+    candidates: list[dict[str, Any]] = []
+    seen_spans: set[tuple[int, int]] = set()
+
+    def add_candidate(span: dict[str, Any] | None) -> None:
+        if span is None:
+            return
+        key = (int(span["start_char"]), int(span["end_char"]))
+        if key in seen_spans:
+            return
+        seen_spans.add(key)
+        candidates.append(span)
+
+    if retrieval_service is not None:
+        search = retrieval_service.search_response(
+            record["response_id"],
+            criterion_text or content,
+            top_k=5,
+        )
+        if search.get("matches"):
+            return search["matches"][0]
+
+    for phrase in [criterion_text, *_query_phrases(content, criterion)]:
+        for match in _lexical_response_matches(record, phrase, limit=10):
+            add_candidate(match)
+
+    for segment in record.get("segments", []):
+        score = _score_text_overlap(criterion["text"], segment["text"])
+        if score >= 0.25:
+            add_candidate(_segment_dict(segment))
+
+    if not candidates:
+        return None
+
+    return max(
+        candidates,
+        key=lambda span: _score_text_overlap(criterion["text"], span["text"]),
+    )
 
 
 def _resolve_span_reference(
@@ -201,10 +352,10 @@ def _resolve_span_reference(
     active_context: dict[str, Any],
     record: dict[str, Any],
     retrieval_service: RetrievalService | None,
+    criterion: dict[str, Any] | None = None,
 ) -> dict[str, Any] | None:
-    lower = _normalize(content)
-    refs = active_context.get("resolved_references") or {}
-    if any(token in lower for token in ("that sentence", "this sentence", "that span", "this span", "that evidence")):
+    if _has_span_anaphora(content):
+        refs = active_context.get("resolved_references") or {}
         span = refs.get("response_span") or active_context.get("evidence")
         if span:
             return span
@@ -215,14 +366,7 @@ def _resolve_span_reference(
         if matches:
             return matches[0]
 
-    if retrieval_service is not None:
-        search = retrieval_service.search_response(record["response_id"], content, top_k=1)
-        if search["matches"]:
-            return search["matches"][0]
-
-    if active_context.get("evidence"):
-        return active_context["evidence"]
-    return None
+    return _resolve_span_from_query(content, record, criterion, retrieval_service)
 
 
 def _is_indicative_criterion(node: dict[str, Any]) -> bool:
@@ -238,15 +382,14 @@ def _resolve_criterion_reference(
 ) -> dict[str, Any] | None:
     lower = _normalize(content)
     refs = active_context.get("resolved_references") or {}
-    if any(token in lower for token in ("this criterion", "that criterion", "this point", "that point", "control point")):
+    if any(token in lower for token in CRITERION_ANAPHORA):
         criterion = refs.get("criterion") or active_context.get("criterion")
         if criterion:
             return criterion
 
-    if active_context.get("criterion") and any(
-        token in lower for token in ("this", "that", "partially", "why", "how", "enough")
-    ):
-        return active_context["criterion"]
+    criterion = _resolve_criterion_from_query(content, graph_service)
+    if criterion:
+        return criterion
 
     point_match = re.search(r"point\s+(\d+[a-z]?)", lower)
     if point_match:
@@ -264,8 +407,6 @@ def _resolve_criterion_reference(
             if _is_indicative_criterion(node):
                 return node
 
-    if active_context.get("criterion"):
-        return active_context["criterion"]
     return None
 
 
@@ -296,8 +437,140 @@ def _explain_assessment(assessment: dict[str, Any]) -> dict[str, Any]:
         "evidence_text": (assessment.get("evidence") or {}).get("text"),
         "suggested_evidence_span": assessment.get("suggested_evidence_span"),
         "additional_evidence": assessment.get("additional_evidence"),
-        "guidance": (assessment.get("graph_context") or {}).get("guidance", [])[:4],
+        "guidance": (assessment.get("graph_context") or {}).get("guidance", [])[:2],
     }
+
+
+def _clear_stale_turn_context(active_context: dict[str, Any]) -> None:
+    for key in STALE_CONTEXT_KEYS:
+        active_context.pop(key, None)
+
+
+def _apply_turn_resolution(
+    active_context: dict[str, Any],
+    *,
+    resolved_references: dict[str, Any],
+    assessment: dict[str, Any] | None = None,
+) -> None:
+    _clear_stale_turn_context(active_context)
+    if resolved_references.get("response_span"):
+        active_context["evidence"] = resolved_references["response_span"]
+    elif resolved_references.get("criterion"):
+        active_context.pop("evidence", None)
+        active_context.pop("jev", None)
+        active_context.pop("jev_direct", None)
+    if resolved_references.get("criterion"):
+        active_context["criterion"] = resolved_references["criterion"]
+    if assessment:
+        active_context["jev"] = assessment.get("jev")
+        active_context["jev_direct"] = assessment.get("jev_direct")
+        active_context["parent_criterion"] = assessment.get("parent_criterion")
+        active_context["suggested_evidence_span"] = assessment.get("suggested_evidence_span")
+
+
+def _prepare_span_resolution(
+    *,
+    content: str,
+    active_context: dict[str, Any],
+    intent: Intent,
+    new_criterion: dict[str, Any] | None,
+) -> None:
+    prior_criterion_id = _prior_criterion_id(active_context)
+    new_criterion_id = new_criterion["id"] if new_criterion else None
+    criterion_changed = (
+        new_criterion_id is not None
+        and prior_criterion_id is not None
+        and new_criterion_id != prior_criterion_id
+    )
+    if intent == "FIND_SUPPORT" or (criterion_changed and not _has_span_anaphora(content)):
+        _drop_inherited_span(active_context)
+
+
+def _build_turn_llm_context(
+    *,
+    intent: Intent,
+    content: str,
+    resolved_references: dict[str, Any],
+    tool_results: list[dict[str, Any]],
+    citations: list[dict[str, Any]],
+) -> dict[str, Any]:
+    turn_context: dict[str, Any] = {
+        "source": "turn",
+        "intent": intent,
+        "user_message": content,
+        "tool_results": tool_results,
+        "citations": citations,
+    }
+    criterion = resolved_references.get("criterion")
+    span = resolved_references.get("response_span")
+    if criterion:
+        turn_context["criterion"] = _compact_criterion(criterion)
+    if span:
+        turn_context["evidence"] = {
+            "text": span.get("text"),
+            "start_char": span.get("start_char"),
+            "end_char": span.get("end_char"),
+        }
+    for tool_result in tool_results:
+        if tool_result.get("tool") == "assess_evidence_link":
+            turn_context["assessment"] = tool_result.get("result")
+        if tool_result.get("tool") == "get_assessment_context":
+            turn_context["mark_scheme_context"] = {
+                "criterion": _compact_criterion(tool_result.get("criterion")),
+                "parent_criterion": _compact_criterion(tool_result.get("parent_criterion")),
+                "question": tool_result.get("question"),
+                "guidance": tool_result.get("guidance", [])[:2],
+            }
+        if tool_result.get("tool") == "search_response":
+            turn_context["response_matches"] = tool_result.get("matches", [])[:3]
+    return turn_context
+
+
+def _explain_messages(
+    intent: Intent,
+    content: str,
+    history: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    if intent in ASSESSMENT_INTENTS:
+        return [{"role": "user", "content": content}]
+    return list(history)
+
+
+def _run_link_assessment(
+    *,
+    classifier: EvidenceRelationClassifier,
+    graph_service: GraphService,
+    record: dict[str, Any],
+    criterion: dict[str, Any],
+    span: dict[str, Any],
+    tool_results: list[dict[str, Any]],
+    citations: list[dict[str, Any]],
+    resolved_references: dict[str, Any],
+    trace: dict[str, Any],
+) -> dict[str, Any] | None:
+    assessment = assess_evidence_link(
+        classifier=classifier,
+        graph_service=graph_service,
+        record=record,
+        criterion_id=criterion["id"],
+        start_char=int(span["start_char"]),
+        end_char=int(span["end_char"]),
+        text=span["text"],
+        evidence_id=span.get("segment_id") or span.get("evidence_id"),
+        search_additional=False,
+    )
+    assessment_result = _explain_assessment(assessment)
+    tool_results.append({"tool": "assess_evidence_link", "result": assessment_result})
+    trace["jev_relation"] = assessment_result.get("relation")
+    resolved_references["response_span"] = assessment["evidence"]
+    resolved_references["criterion"] = assessment["criterion"]
+    citations.extend(
+        [
+            _citation_from_span(assessment["evidence"]),
+            _citation_from_criterion(assessment["criterion"]),
+        ]
+    )
+    return assessment
 
 
 def process_assistant_turn(
@@ -308,19 +581,29 @@ def process_assistant_turn(
     record: dict[str, Any],
     judgement_state: dict[str, Any],
     classifier: EvidenceRelationClassifier,
+    intent_classifier: IntentClassifier,
     retrieval_service: RetrievalService | None,
     llm,
     prompt_loader,
     history: list[dict[str, Any]],
 ) -> dict[str, Any]:
-    intent = classify_intent(content)
+    intent_decision = intent_classifier.classify(
+        content,
+        build_intent_conversation_context(active_context),
+    )
+    intent = intent_decision.intent
     tool_results: list[dict[str, Any]] = []
     citations: list[dict[str, Any]] = []
-    resolved_references = dict(active_context.get("resolved_references") or {})
-    clarification_needed = False
-    clarification_message = ""
+    resolved_references: dict[str, Any] = {}
+    clarification_needed = intent_decision.needs_clarification
+    clarification_message = INTENT_CLARIFICATION_MESSAGE
+    assessment: dict[str, Any] | None = None
+    trace: dict[str, Any] = {
+        "intent": intent,
+        "intent_decision": intent_decision.to_dict(),
+    }
 
-    if intent == "DISCUSS":
+    if not clarification_needed and intent == "DISCUSS":
         criterion = _resolve_criterion_reference(
             content=content,
             active_context=active_context,
@@ -341,16 +624,24 @@ def process_assistant_turn(
             )
             resolved_references["criterion"] = graph_context["criterion"]
             citations.append(_citation_from_criterion(graph_context["criterion"]))
+            trace["resolved_criterion_id"] = criterion["id"]
         else:
+            overview = graph_service.assessment_overview()
+            question_text = " ".join(
+                item["text"].strip()
+                for item in overview.get("question", [])
+                if item.get("text")
+            )
             tool_results.append(
                 {
                     "tool": "get_judgement_context",
                     "judgement": _judgement_summary(graph_service, judgement_state, "data"),
-                    "assessment_overview": graph_service.assessment_overview(),
+                    "assessment_overview": overview,
+                    "question": question_text or None,
                 }
             )
 
-    elif intent == "LOCATE_EVIDENCE":
+    elif not clarification_needed and intent == "LOCATE_EVIDENCE":
         lexical = _lexical_response_matches(record, content)
         semantic = (
             retrieval_service.search_response(record["response_id"], content, top_k=5)
@@ -362,23 +653,57 @@ def process_assistant_turn(
         if matches:
             resolved_references["response_span"] = matches[0]
             citations.append(_citation_from_span(matches[0]))
+            trace["resolved_span"] = {
+                "start_char": matches[0]["start_char"],
+                "end_char": matches[0]["end_char"],
+            }
         else:
             clarification_needed = True
-            clarification_message = "I couldn't find a clear match in the response. Can you quote a few words from the part you mean?"
+            clarification_message = (
+                "I couldn't find a clear match in the response. "
+                "Can you quote a few words from the part you mean?"
+            )
 
-    elif intent == "ASSESS_LINK":
-        span = _resolve_span_reference(
-            content=content,
-            active_context=active_context,
-            record=record,
-            retrieval_service=retrieval_service,
-        )
+    elif not clarification_needed and intent in {"ASSESS_LINK", "FIND_SUPPORT"}:
         criterion = _resolve_criterion_reference(
             content=content,
             active_context=active_context,
             graph_service=graph_service,
             retrieval_service=retrieval_service,
         )
+        _prepare_span_resolution(
+            content=content,
+            active_context=active_context,
+            intent=intent,
+            new_criterion=criterion,
+        )
+        if intent == "FIND_SUPPORT":
+            span = (
+                _find_supporting_span(
+                    criterion=criterion,
+                    record=record,
+                    content=content,
+                    retrieval_service=retrieval_service,
+                )
+                if criterion
+                else None
+            )
+        else:
+            span = _resolve_span_reference(
+                content=content,
+                active_context=active_context,
+                record=record,
+                retrieval_service=retrieval_service,
+                criterion=criterion,
+            )
+
+        trace["resolved_criterion_id"] = criterion["id"] if criterion else None
+        if span:
+            trace["resolved_span"] = {
+                "start_char": span["start_char"],
+                "end_char": span["end_char"],
+                "text": span["text"],
+            }
         if span is None or criterion is None:
             clarification_needed = True
             missing = []
@@ -391,55 +716,41 @@ def process_assistant_turn(
                 "Can you point me to the exact span and criterion?"
             )
         else:
-            assessment = assess_evidence_link(
+            assessment = _run_link_assessment(
                 classifier=classifier,
                 graph_service=graph_service,
                 record=record,
-                criterion_id=criterion["id"],
-                start_char=int(span["start_char"]),
-                end_char=int(span["end_char"]),
-                text=span["text"],
-                evidence_id=span.get("segment_id") or span.get("evidence_id"),
-                search_additional=True,
+                criterion=criterion,
+                span=span,
+                tool_results=tool_results,
+                citations=citations,
+                resolved_references=resolved_references,
+                trace=trace,
             )
-            tool_results.append({"tool": "assess_evidence_link", "result": _explain_assessment(assessment)})
-            resolved_references["response_span"] = assessment["evidence"]
-            resolved_references["criterion"] = assessment["criterion"]
-            citations.extend(
-                [
-                    _citation_from_span(assessment["evidence"]),
-                    _citation_from_criterion(assessment["criterion"]),
-                ]
-            )
-            active_context["evidence"] = assessment["evidence"]
-            active_context["criterion"] = assessment["criterion"]
-            active_context["parent_criterion"] = assessment.get("parent_criterion")
-            active_context["jev"] = assessment.get("jev")
-            active_context["jev_direct"] = assessment.get("jev_direct")
-            active_context["suggested_evidence_span"] = assessment.get("suggested_evidence_span")
 
     active_context["resolved_references"] = resolved_references
     active_context["last_intent"] = intent
+    active_context["last_trace"] = trace
     active_context["updated_at"] = _utc_now()
+    _apply_turn_resolution(active_context, resolved_references=resolved_references, assessment=assessment)
 
     if clarification_needed:
         assistant_text = clarification_message
     else:
         system_prompt = prompt_loader.load_system()
         explain_prompt = prompt_loader.load("assistant_explain.txt")
-        turn_context = {
-            "source": active_context.get("source", "general"),
-            "intent": intent,
-            "user_message": content,
-            "active_context": compact_context_for_llm(active_context),
-            "tool_results": tool_results,
-            "citations": citations,
-        }
+        turn_context = _build_turn_llm_context(
+            intent=intent,
+            content=content,
+            resolved_references=resolved_references,
+            tool_results=tool_results,
+            citations=citations,
+        )
         assistant_text = llm.respond(
             system_prompt=system_prompt,
             launch_prompt=explain_prompt,
             active_context=turn_context,
-            messages=history,
+            messages=_explain_messages(intent, content, history),
         )
 
     return {
@@ -450,4 +761,5 @@ def process_assistant_turn(
         "resolved_references": resolved_references,
         "clarification_needed": clarification_needed,
         "active_context": active_context,
+        "trace": trace,
     }
