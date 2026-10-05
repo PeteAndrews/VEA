@@ -11,6 +11,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, model_validator
 
 from app.classifier import EvidenceRelationClassifier, JevEvidenceRelationClassifier
+from app.conversation import (
+    ConversationLLM,
+    ConversationStore,
+    PromptLoader,
+    get_conversation_llm,
+    launch_conversation,
+    public_conversation,
+    send_conversation_message,
+    _find_interpretation_for_coding,
+)
 from app.graph_service import EdgeKindFilter, GraphService
 from app.intervention import (
     AIInterpretationStore,
@@ -51,8 +61,13 @@ JUDGEMENTS_DIR = Path(os.getenv("VEA_JUDGEMENTS_DIR", str(Path(DATA_DIR) / "judg
 AI_INTERPRETATIONS_DIR = Path(
     os.getenv("VEA_AI_INTERPRETATIONS_DIR", str(Path(DATA_DIR) / "ai_interpretations"))
 )
+CONVERSATIONS_DIR = Path(
+    os.getenv("VEA_CONVERSATIONS_DIR", str(Path(DATA_DIR) / "conversations"))
+)
 DEFAULT_ASSESSMENT_ID = os.getenv("VEA_ASSESSMENT_ID", "C-JUN25-8464C1H-02_3")
 _evidence_classifier_instance: EvidenceRelationClassifier | None = None
+_conversation_llm_instance: ConversationLLM | None = None
+_prompt_loader_instance: PromptLoader | None = None
 
 _app_log = logging.getLogger("app")
 if not _app_log.handlers:
@@ -95,6 +110,24 @@ def _judgement_store() -> JudgementStore:
 
 def _ai_store() -> AIInterpretationStore:
     return AIInterpretationStore(AI_INTERPRETATIONS_DIR)
+
+
+def _conversation_store() -> ConversationStore:
+    return ConversationStore(CONVERSATIONS_DIR)
+
+
+def _prompt_loader() -> PromptLoader:
+    global _prompt_loader_instance
+    if _prompt_loader_instance is None:
+        _prompt_loader_instance = PromptLoader()
+    return _prompt_loader_instance
+
+
+def _conversation_llm() -> ConversationLLM:
+    global _conversation_llm_instance
+    if _conversation_llm_instance is None:
+        _conversation_llm_instance = get_conversation_llm()
+    return _conversation_llm_instance
 
 
 def _evidence_classifier() -> EvidenceRelationClassifier:
@@ -249,6 +282,18 @@ class AiCheckRequest(BaseModel):
 
 class AiInterpretationStatusRequest(BaseModel):
     status: Literal["dismissed", "explore"]
+
+
+class ConversationLaunchRequest(BaseModel):
+    source: Literal["explore", "verify"]
+    coding_id: str
+    interpretation_id: str | None = None
+    stage: str | None = None
+    last_action: str | None = None
+
+
+class ConversationMessageRequest(BaseModel):
+    content: str = Field(min_length=1, max_length=4000)
 
 
 @app.get("/health")
@@ -557,6 +602,146 @@ def patch_ai_interpretation(
         raise HTTPException(status_code=422, detail=str(exc)) from None
     ai_store.save(payload)
     return public_interpretation(interpretation)
+
+
+@app.get(
+    "/marking-sessions/{marking_session_id}/assessments/{assessment_id}/candidates/{candidate_id}/conversation"
+)
+def get_conversation(
+    marking_session_id: str,
+    assessment_id: str,
+    candidate_id: str,
+) -> dict:
+    _require_session(marking_session_id)
+    _service, record, _state, _store = _load_judgement_context(
+        marking_session_id,
+        assessment_id,
+        candidate_id,
+    )
+    payload = _conversation_store().load(marking_session_id, record["response_id"])
+    payload["assessment_id"] = assessment_id
+    return public_conversation(payload)
+
+
+@app.post(
+    "/marking-sessions/{marking_session_id}/assessments/{assessment_id}/candidates/{candidate_id}/conversation/launch"
+)
+def post_conversation_launch(
+    marking_session_id: str,
+    assessment_id: str,
+    candidate_id: str,
+    body: ConversationLaunchRequest,
+) -> dict:
+    _require_session(marking_session_id)
+    service, record, state, _store = _load_judgement_context(
+        marking_session_id,
+        assessment_id,
+        candidate_id,
+    )
+    ai_store = _ai_store()
+    ai_payload = ai_store.load(marking_session_id, record["response_id"])
+
+    if body.interpretation_id:
+        interpretation = next(
+            (
+                item
+                for item in ai_payload.get("interpretations", [])
+                if item.get("id") == body.interpretation_id
+            ),
+            None,
+        )
+        if interpretation is None:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Interpretation not found: {body.interpretation_id}",
+            )
+    else:
+        interpretation = _find_interpretation_for_coding(ai_payload, body.coding_id)
+
+    if interpretation is None:
+        raise HTTPException(
+            status_code=422,
+            detail="No AI interpretation available for this coding. Run the evidence check first.",
+        )
+    if interpretation.get("coding_id") != body.coding_id:
+        raise HTTPException(status_code=422, detail="Interpretation does not match coding.")
+    if interpretation.get("status") == "error" or interpretation.get("jev") is None:
+        raise HTTPException(
+            status_code=422,
+            detail="AI interpretation is unavailable for conversation.",
+        )
+
+    if body.source == "explore":
+        try:
+            interpretation = update_interpretation_status(
+                ai_payload,
+                interpretation["id"],
+                "explore",
+                state,
+            )
+            ai_store.save(ai_payload)
+        except KeyError:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Interpretation not found: {interpretation['id']}",
+            ) from None
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from None
+
+    stage, stage_source = resolve_stage(state, body.stage, body.last_action)
+    try:
+        return launch_conversation(
+            conversation_store=_conversation_store(),
+            llm=_conversation_llm(),
+            prompt_loader=_prompt_loader(),
+            graph_service=service,
+            record=record,
+            judgement_state=state,
+            assessment_id=assessment_id,
+            source=body.source,
+            coding_id=body.coding_id,
+            interpretation=interpretation,
+            stage=stage,
+            stage_source=stage_source,
+        )
+    except KeyError:
+        raise HTTPException(status_code=404, detail=f"Coding not found: {body.coding_id}") from None
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from None
+    except RuntimeError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from None
+
+
+@app.post(
+    "/marking-sessions/{marking_session_id}/assessments/{assessment_id}/candidates/{candidate_id}/conversation/messages"
+)
+def post_conversation_message(
+    marking_session_id: str,
+    assessment_id: str,
+    candidate_id: str,
+    body: ConversationMessageRequest,
+) -> dict:
+    _require_session(marking_session_id)
+    _service, record, _state, _store = _load_judgement_context(
+        marking_session_id,
+        assessment_id,
+        candidate_id,
+    )
+    try:
+        return send_conversation_message(
+            conversation_store=_conversation_store(),
+            llm=_conversation_llm(),
+            prompt_loader=_prompt_loader(),
+            marking_session_id=marking_session_id,
+            response_id=record["response_id"],
+            content=body.content.strip(),
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from None
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from None
+    except RuntimeError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from None
 
 
 @app.get("/assessments/{assessment_id}/levels/{level}/context")

@@ -4,11 +4,22 @@ import {
   runAiCheck,
   updateAiInterpretation,
 } from "./api";
+import { launchAssistant } from "./conversationSlice";
 import { selectInteractionStage } from "./stage";
+
+export function isContextSupportNoticeActive(interpretation) {
+  return (
+    interpretation?.intervention?.type === "SUPPORTED_WITH_ADDITIONAL_EVIDENCE" &&
+    (interpretation.status === "pending" || interpretation.status === "explore")
+  );
+}
 
 function applyInterpretation(state, interpretation) {
   state.byCodingId[interpretation.coding_id] = interpretation;
-  if (interpretation.status === "pending") {
+  if (
+    interpretation.status === "pending" &&
+    interpretation.intervention?.type !== "SUPPORTED_WITH_ADDITIONAL_EVIDENCE"
+  ) {
     state.activeCardId = interpretation.id;
   }
 }
@@ -105,6 +116,17 @@ const aiSlice = createSlice({
       if (action.payload.status === "dismissed") {
         state.activeCardId = null;
       }
+    });
+
+    builder.addCase(launchAssistant.fulfilled, (state, action) => {
+      const context = action.payload.active_context;
+      if (context?.source === "explore" && context.coding_id) {
+        const existing = state.byCodingId[context.coding_id];
+        if (existing) {
+          state.byCodingId[context.coding_id] = { ...existing, status: "explore" };
+        }
+      }
+      state.activeCardId = null;
     });
   },
 });

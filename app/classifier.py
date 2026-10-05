@@ -188,25 +188,28 @@ def _parse_choice_answer(
 
 
 def build_jev_state(evidence_text: str, criterion: dict, context: dict) -> dict[str, Any]:
+    check_mode = context.get("check_mode", "interpretive")
     response_context = context.get("response_context") or {}
+    response_context_payload = {
+        "containing_segment": response_context.get("containing_segment"),
+        "containing_sentence": response_context.get("containing_sentence"),
+        "preceding_segment": response_context.get("preceding_segment"),
+        "following_segment": response_context.get("following_segment"),
+        "note": response_context.get(
+            "note",
+            (
+                "Containing and surrounding response text is interpretive context only. "
+                "Use it to interpret the selected evidence, not as additional coded evidence."
+            ),
+        ),
+    }
     return {
         "selected_evidence": {
             "text": evidence_text,
             "note": "This is the only text to classify.",
         },
-        "response_context": {
-            "containing_segment": response_context.get("containing_segment"),
-            "containing_sentence": response_context.get("containing_sentence"),
-            "preceding_segment": response_context.get("preceding_segment"),
-            "following_segment": response_context.get("following_segment"),
-            "note": response_context.get(
-                "note",
-                (
-                    "Containing and surrounding response text is context only. "
-                    "Use it to interpret the selected evidence, not as additional coded evidence."
-                ),
-            ),
-        },
+        "response_context": response_context_payload,
+        "check_mode": check_mode,
         "criterion_context": {
             "criterion": criterion,
             "parent_criterion": context.get("parent_criterion"),

@@ -9,13 +9,17 @@ from pathlib import Path
 from typing import Any
 
 from app.classifier import EvidenceRelationClassifier, RelationDecision
-from app.evidence import build_response_local_context_for_span
+from app.evidence import build_response_local_context_for_span, containing_sentence_span
 from app.graph_service import GraphService
 from app.views import _split_alternatives
 
 GUIDANCE_RELATIONS = frozenset({"ACCEPTS", "REJECTS", "CONSTRAINS", "CLARIFIES", "REQUIRES"})
 ANCHOR_RELATIONS = frozenset({"REJECTS", "CONSTRAINS", "REQUIRES"})
 DISAGREEMENT_RELATIONS = frozenset({"PARTIALLY_SUPPORTS", "DOES_NOT_SUPPORT"})
+WEAK_RELATIONS = frozenset({"PARTIALLY_SUPPORTS", "DOES_NOT_SUPPORT", "UNCERTAIN"})
+SUPPORTED_WITH_ADDITIONAL_EVIDENCE_MESSAGE = (
+    "More evidence is needed for this link. The nearby response contains the missing evidence."
+)
 INTERVENTION_REVIEW_PROBABILITY_THRESHOLD = 0.60
 INTERVENTION_REVIEW_TOP_TWO_MARGIN = 0.15
 MAX_CONTEXT_ITEMS = 16
@@ -309,6 +313,131 @@ def _intervention_review_reasons(decision: dict[str, Any]) -> list[str]:
     return reasons or ["borderline"]
 
 
+def _jev_payload(decision: RelationDecision) -> dict[str, Any]:
+    jev = decision.to_dict()
+    return {
+        "relation": jev["relation"],
+        "probabilities": jev["probabilities"],
+        "probability": jev["probability"],
+        "confidence": jev["confidence"],
+        "needs_review": jev["needs_review"],
+        "classifier": jev["classifier"],
+        "model": jev["model"],
+    }
+
+
+def _relation_supports(relation: str) -> bool:
+    return relation == "SUPPORTS"
+
+
+def _relation_weak(relation: str) -> bool:
+    return relation in WEAK_RELATIONS
+
+
+def _should_search_additional_evidence(direct_jev: dict[str, Any]) -> bool:
+    if _relation_weak(direct_jev["relation"]):
+        return True
+    return direct_jev["relation"] == "SUPPORTS" and intervention_needs_review(direct_jev)
+
+
+def _expansion_candidates(
+    record: dict[str, Any],
+    *,
+    start_char: int,
+    end_char: int,
+    interpretive_context: dict[str, Any],
+) -> list[dict[str, Any]]:
+    """Build minimal contiguous expansions within the sentence and neighbour segments."""
+    text = record["text"]
+    preceding = interpretive_context.get("preceding_segment")
+    following = interpretive_context.get("following_segment")
+    candidates: list[dict[str, Any]] = []
+
+    sentence_candidate = containing_sentence_span(
+        record,
+        start_char=start_char,
+        end_char=end_char,
+    )
+    if sentence_candidate:
+        candidates.append(sentence_candidate)
+
+    if following:
+        candidates.append(
+            {
+                "start_char": start_char,
+                "end_char": int(following["end_char"]),
+                "text": text[start_char : int(following["end_char"])],
+                "expansion": "following",
+            }
+        )
+    if preceding:
+        candidates.append(
+            {
+                "start_char": int(preceding["start_char"]),
+                "end_char": end_char,
+                "text": text[int(preceding["start_char"]) : end_char],
+                "expansion": "preceding",
+            }
+        )
+    if preceding and following:
+        candidates.append(
+            {
+                "start_char": int(preceding["start_char"]),
+                "end_char": int(following["end_char"]),
+                "text": text[int(preceding["start_char"]) : int(following["end_char"])],
+                "expansion": "both",
+            }
+        )
+
+    candidates.sort(key=lambda item: item["end_char"] - item["start_char"])
+    return candidates
+
+
+def _search_additional_evidence(
+    classifier: EvidenceRelationClassifier,
+    *,
+    record: dict[str, Any],
+    criterion: dict[str, Any],
+    jev_context_base: dict[str, Any],
+    start_char: int,
+    end_char: int,
+    interpretive_context: dict[str, Any],
+) -> tuple[dict[str, Any] | None, dict[str, Any] | None]:
+    """Find the smallest expanded span that Jev classifies as SUPPORTS."""
+    for candidate in _expansion_candidates(
+        record,
+        start_char=start_char,
+        end_char=end_char,
+        interpretive_context=interpretive_context,
+    ):
+        expanded_interpretive = build_response_local_context_for_span(
+            record,
+            start_char=candidate["start_char"],
+            end_char=candidate["end_char"],
+        )
+        decision = classifier.classify(
+            candidate["text"],
+            criterion,
+            {
+                **jev_context_base,
+                "start_char": candidate["start_char"],
+                "end_char": candidate["end_char"],
+                "check_mode": "interpretive",
+                "response_context": expanded_interpretive,
+            },
+        )
+        jev = _jev_payload(decision)
+        if _relation_supports(jev["relation"]):
+            suggested = {
+                "start_char": candidate["start_char"],
+                "end_char": candidate["end_char"],
+                "text": candidate["text"],
+                "expansion": candidate["expansion"],
+            }
+            return suggested, jev
+    return None, None
+
+
 def decide_intervention(decision: dict[str, Any], graph_context: dict[str, Any]) -> dict[str, Any]:
     relation = decision["relation"]
     reanchors = reanchor_items(graph_context)
@@ -451,12 +580,14 @@ def _log_evidence_check(
     criterion_text: str,
     response_context: dict[str, Any],
 ) -> None:
-    jev = interpretation.get("jev")
+    jev_direct = interpretation.get("jev_direct")
+    jev_additional = interpretation.get("jev_additional")
     intervention = interpretation.get("intervention") or {}
+    additional = interpretation.get("additional_evidence") or {}
     containing = response_context.get("containing_sentence") or (
         (response_context.get("containing_segment") or {}).get("text")
     )
-    if jev is None:
+    if jev_direct is None:
         logger.info(
             "ai-check error coding=%s criterion=%s evidence=%r error=%s",
             interpretation["coding_id"],
@@ -468,18 +599,17 @@ def _log_evidence_check(
 
     logger.info(
         "ai-check coding=%s criterion=%s (%s) evidence=%r context=%r "
-        "jev=%s p=%.2f conf=%.2f jev_needs_review=%s probs=%s intervene=%s",
+        "jev_direct=%s jev_additional=%s intervene=%s additional_found=%s expansion=%s",
         interpretation["coding_id"],
         interpretation["criterion_id"],
         _snippet(criterion_text, 60),
         interpretation["evidence_text"],
         containing,
-        jev["relation"],
-        jev["probability"],
-        jev["confidence"],
-        jev["needs_review"],
-        jev["probabilities"],
+        jev_direct["relation"],
+        jev_additional["relation"] if jev_additional else None,
         intervention.get("type"),
+        additional.get("found"),
+        additional.get("expansion"),
     )
 
 
@@ -531,7 +661,13 @@ def run_evidence_check(
         "updated_at": now,
     }
 
-    jev_context = {
+    interpretive_context = build_response_local_context_for_span(
+        record,
+        start_char=span["start_char"],
+        end_char=span["end_char"],
+    )
+    interpretation["interpretive_context"] = interpretive_context
+    jev_context_base = {
         "evidence_id": span["id"],
         "start_char": span["start_char"],
         "end_char": span["end_char"],
@@ -539,48 +675,95 @@ def run_evidence_check(
         "parent_criterion": graph_context["parent_criterion"],
         "guidance": graph_context["guidance"],
         "question": graph_context["question"],
-        "response_context": build_response_local_context_for_span(
-            record,
-            start_char=span["start_char"],
-            end_char=span["end_char"],
-        ),
     }
 
     try:
-        decision: RelationDecision = classifier.classify(
+        direct_decision: RelationDecision = classifier.classify(
             span["text"],
             graph_context["criterion"],
-            jev_context,
+            {
+                **jev_context_base,
+                "check_mode": "interpretive",
+                "response_context": interpretive_context,
+            },
         )
     except Exception as exc:  # noqa: BLE001
         interpretation["jev"] = None
+        interpretation["jev_direct"] = None
+        interpretation["jev_additional"] = None
+        interpretation["additional_evidence"] = None
+        interpretation["suggested_evidence_span"] = None
         interpretation["intervention"] = None
         interpretation["status"] = "error"
         interpretation["error"] = str(exc)[:500]
         _log_evidence_check(
             interpretation,
             criterion_text=graph_context["criterion"]["text"],
-            response_context=jev_context["response_context"],
+            response_context=interpretive_context,
         )
         return interpretation
 
-    jev = decision.to_dict()
-    interpretation["jev"] = {
-        "relation": jev["relation"],
-        "probabilities": jev["probabilities"],
-        "probability": jev["probability"],
-        "confidence": jev["confidence"],
-        "needs_review": jev["needs_review"],
-        "classifier": jev["classifier"],
-        "model": jev["model"],
-    }
-    intervention = decide_intervention(interpretation["jev"], graph_context)
+    direct_jev = _jev_payload(direct_decision)
+    interpretation["jev_direct"] = direct_jev
+    interpretation["jev"] = direct_jev
+    interpretation["jev_additional"] = None
+    interpretation["suggested_evidence_span"] = None
+
+    intervention: dict[str, Any]
+    additional_evidence: dict[str, Any] = {"searched": False, "found": False, "expansion": None}
+
+    if _should_search_additional_evidence(direct_jev):
+        additional_evidence["searched"] = True
+        try:
+            suggested_span, additional_jev = _search_additional_evidence(
+                classifier,
+                record=record,
+                criterion=graph_context["criterion"],
+                jev_context_base=jev_context_base,
+                start_char=span["start_char"],
+                end_char=span["end_char"],
+                interpretive_context=interpretive_context,
+            )
+        except Exception as exc:  # noqa: BLE001
+            interpretation["additional_evidence"] = {
+                "searched": True,
+                "found": False,
+                "expansion": None,
+                "error": str(exc)[:500],
+            }
+            interpretation["intervention"] = None
+            interpretation["status"] = "error"
+            interpretation["error"] = str(exc)[:500]
+            _log_evidence_check(
+                interpretation,
+                criterion_text=graph_context["criterion"]["text"],
+                response_context=interpretive_context,
+            )
+            return interpretation
+
+        if suggested_span and additional_jev:
+            additional_evidence["found"] = True
+            additional_evidence["expansion"] = suggested_span["expansion"]
+            interpretation["jev_additional"] = additional_jev
+            interpretation["suggested_evidence_span"] = suggested_span
+            intervention = {
+                "type": "SUPPORTED_WITH_ADDITIONAL_EVIDENCE",
+                "reasons": ["additional_evidence_available"],
+                "message": SUPPORTED_WITH_ADDITIONAL_EVIDENCE_MESSAGE,
+                "nuance_items": [],
+            }
+        else:
+            intervention = decide_intervention(direct_jev, graph_context)
+    else:
+        intervention = decide_intervention(direct_jev, graph_context)
+
+    interpretation["additional_evidence"] = additional_evidence
     interpretation["intervention"] = intervention
     interpretation["status"] = "silent" if intervention["type"] == "SILENCE" else "pending"
     _log_evidence_check(
         interpretation,
         criterion_text=graph_context["criterion"]["text"],
-        response_context=jev_context["response_context"],
+        response_context=interpretive_context,
     )
     return interpretation
 
@@ -599,6 +782,11 @@ def build_explore_context(
         "criterion_id": interpretation["criterion_id"],
         "examiner_relation": interpretation["examiner_relation"],
         "jev": interpretation.get("jev"),
+        "interpretive_context": interpretation.get("interpretive_context"),
+        "jev_direct": interpretation.get("jev_direct"),
+        "jev_additional": interpretation.get("jev_additional"),
+        "suggested_evidence_span": interpretation.get("suggested_evidence_span"),
+        "additional_evidence": interpretation.get("additional_evidence"),
         "intervention": interpretation.get("intervention"),
         "graph_context": interpretation["graph_context"],
         "stage": interpretation["stage"],

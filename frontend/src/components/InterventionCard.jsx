@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setInterventionStatus } from "../aiSlice";
+import { clearActiveCard, setInterventionStatus } from "../aiSlice";
+import { launchAssistant } from "../conversationSlice";
 
 const TYPE_LABELS = {
   NUANCE: "Nuance",
@@ -36,13 +37,15 @@ export default function InterventionCard({
   }
 
   function handleExplore() {
+    dispatch(clearActiveCard());
     dispatch(
-      setInterventionStatus({
+      launchAssistant({
         markingSessionId,
         assessmentId,
         candidateId,
-        aiId: interpretation.id,
-        status: "explore",
+        source: "explore",
+        codingId: interpretation.coding_id,
+        interpretationId: interpretation.id,
       })
     );
   }

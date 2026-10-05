@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { loadAiInterpretations, resetAi } from "../aiSlice";
 import AppShell from "../components/AppShell";
+import ExaminerAssistantPanel from "../components/ExaminerAssistantPanel";
 import CandidateInfoPanel from "../components/CandidateInfoPanel";
 import IndicativeContentPanel from "../components/IndicativeContentPanel";
 import LevelContextPanel from "../components/LevelContextPanel";
 import LevelDescriptorPanel from "../components/LevelDescriptorPanel";
 import QuestionPanel from "../components/QuestionPanel";
 import StudentResponsePanel from "../components/StudentResponsePanel";
+import { loadConversation, resetConversation } from "../conversationSlice";
 import { loadJudgement, resetJudgement } from "../judgementSlice";
 import { loadMarkingScreen } from "../markingSlice";
 
@@ -20,12 +22,14 @@ export default function MarkingPage() {
     useSelector((state) => state.marking);
   const { levelContext, saving, error: judgementError } = useSelector((state) => state.judgement);
   const { error: aiError } = useSelector((state) => state.ai);
+  const { error: conversationError } = useSelector((state) => state.conversation);
 
   useEffect(() => {
     dispatch(loadMarkingScreen({ assessmentId, candidateId }));
     return () => {
       dispatch(resetJudgement());
       dispatch(resetAi());
+      dispatch(resetConversation());
     };
   }, [dispatch, assessmentId, candidateId]);
 
@@ -33,6 +37,7 @@ export default function MarkingPage() {
     if (!markingSessionId || status !== "succeeded") return;
     dispatch(loadJudgement({ markingSessionId, assessmentId, candidateId }));
     dispatch(loadAiInterpretations({ markingSessionId, assessmentId, candidateId }));
+    dispatch(loadConversation({ markingSessionId, assessmentId, candidateId }));
   }, [dispatch, markingSessionId, assessmentId, candidateId, status]);
 
   const breadcrumb = `Marking > ${question?.question_label || "Question"} > ${
@@ -45,6 +50,7 @@ export default function MarkingPage() {
       {error ? <p className="error">{error}</p> : null}
       {judgementError ? <p className="error">{judgementError}</p> : null}
       {aiError ? <p className="error">{aiError}</p> : null}
+      {conversationError ? <p className="error">{conversationError}</p> : null}
       {saving ? <p className="status-text">Saving judgement...</p> : null}
       {status === "succeeded" ? (
         <div className="marking-layout">
@@ -66,6 +72,7 @@ export default function MarkingPage() {
             />
             <LevelContextPanel levelContext={levelContext} />
           </div>
+          <ExaminerAssistantPanel assessmentId={assessmentId} candidateId={candidateId} />
         </div>
       ) : null}
     </AppShell>

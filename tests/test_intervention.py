@@ -11,6 +11,8 @@ from app.classifier import RELATIONS, EvidenceRelationClassifier, RelationDecisi
 from app.graph_service import GraphService
 from app.evidence import build_response_local_context_for_span
 from app.intervention import (
+    _expansion_candidates,
+    _search_additional_evidence,
     build_intervention_context,
     decide_intervention,
     intervention_needs_review,
@@ -26,6 +28,7 @@ from app.views import resolve_response_id
 
 ASSESSMENT_ID = "C-JUN25-8464C1H-02_3"
 CANDIDATE_ID = "A"
+DETAIL_1A = "ms_02_3-detail-1a"
 DETAIL_2A = "ms_02_3-detail-2a"
 DETAIL_3B = "ms_02_3-detail-3b"
 DETAIL_4A = "ms_02_3-detail-4a"
@@ -37,21 +40,40 @@ POINT_6 = "ms_02_3-point-6"
 class FakeClassifier(EvidenceRelationClassifier):
     name = "fake"
 
-    def __init__(self, relation: str = "SUPPORTS", needs_review: bool = False) -> None:
+    def __init__(
+        self,
+        relation: str = "SUPPORTS",
+        *,
+        needs_review: bool = False,
+    ) -> None:
         self.relation = relation
         self.needs_review = needs_review
 
     def classify(self, evidence_text: str, criterion: dict, context: dict) -> RelationDecision:
+        if "Repeat using fresh water" in evidence_text:
+            relation = "SUPPORTS"
+            probability = 0.9
+        elif self.needs_review and "using a measuring cylinder" in evidence_text:
+            relation = "SUPPORTS"
+            probability = 0.9
+        elif self.needs_review and evidence_text.strip().startswith("cylinder and pour"):
+            relation = "SUPPORTS"
+            probability = 0.55
+        else:
+            relation = self.relation
+            probability = 0.55 if self.needs_review else 0.9
         probabilities = {item: 0.0 for item in RELATIONS}
-        probabilities[self.relation] = 0.55 if self.needs_review else 0.9
-        if self.relation != "UNCERTAIN":
-            probabilities["UNCERTAIN"] = 0.1
+        probabilities[relation] = probability
+        if relation == "SUPPORTS" and self.needs_review and probability < 0.6:
+            probabilities["PARTIALLY_SUPPORTS"] = 0.39
+        if relation != "UNCERTAIN":
+            probabilities["UNCERTAIN"] = 0.01
         return RelationDecision(
             evidence_id=context.get("evidence_id", "evidence"),
             criterion_id=criterion["id"],
-            relation=self.relation,
-            probability=probabilities[self.relation],
-            confidence=probabilities[self.relation],
+            relation=relation,
+            probability=probabilities[relation],
+            confidence=probabilities[relation],
             probabilities=probabilities,
             classifier=self.name,
             model="fake",
@@ -92,7 +114,10 @@ def client(tmp_path):
     api._evidence_pipeline.cache_clear()
     api.JUDGEMENTS_DIR = tmp_path / "judgements"
     api.AI_INTERPRETATIONS_DIR = tmp_path / "ai_interpretations"
+    api.CONVERSATIONS_DIR = tmp_path / "conversations"
     api._evidence_classifier_instance = None
+    api._conversation_llm_instance = None
+    api._prompt_loader_instance = None
     return TestClient(api.app)
 
 
@@ -415,6 +440,133 @@ def test_dismiss_and_explore(client, session, sample_span):
     assert explored.status_code == 200
     assert explored.json()["status"] == "explore"
     assert explored.json()["explore_context"]["criterion_id"] == DETAIL_4A
+
+
+def test_expansion_candidates_include_containing_sentence(response_record):
+    text = response_record["text"]
+    interpretive = build_response_local_context_for_span(
+        response_record,
+        start_char=42,
+        end_char=86,
+    )
+    candidates = _expansion_candidates(
+        response_record,
+        start_char=42,
+        end_char=86,
+        interpretive_context=interpretive,
+    )
+    assert candidates
+    assert candidates[0]["expansion"] == "containing_sentence"
+    assert candidates[0]["start_char"] < 42
+    assert "measuring cylinder" in candidates[0]["text"]
+    assert text[42:86] in candidates[0]["text"]
+
+
+def test_expansion_candidates_prefers_following_first(response_record):
+    interpretive = build_response_local_context_for_span(
+        response_record,
+        start_char=212,
+        end_char=333,
+    )
+    candidates = _expansion_candidates(
+        response_record,
+        start_char=212,
+        end_char=333,
+        interpretive_context=interpretive,
+    )
+    assert candidates
+    assert candidates[0]["expansion"] == "following"
+    assert "Repeat using fresh water" in candidates[0]["text"]
+
+
+def test_search_additional_evidence_finds_minimal_following_span(
+    graph_service, response_record
+):
+    interpretive = build_response_local_context_for_span(
+        response_record,
+        start_char=212,
+        end_char=333,
+    )
+    graph_context = build_intervention_context(graph_service, POINT_5)
+    suggested, jev = _search_additional_evidence(
+        FakeClassifier("DOES_NOT_SUPPORT"),
+        record=response_record,
+        criterion=graph_context["criterion"],
+        jev_context_base={
+            "evidence_id": "span-212-333",
+            "start_char": 212,
+            "end_char": 333,
+            "context_node_ids": graph_context["context_node_ids"],
+            "parent_criterion": graph_context["parent_criterion"],
+            "guidance": graph_context["guidance"],
+            "question": graph_context["question"],
+        },
+        start_char=212,
+        end_char=333,
+        interpretive_context=interpretive,
+    )
+    assert suggested is not None
+    assert suggested["expansion"] == "following"
+    assert jev["relation"] == "SUPPORTS"
+    assert "Repeat using fresh water" in suggested["text"]
+    assert "Record the highest temperature" in suggested["text"]
+
+
+def test_ai_check_supported_with_additional_evidence(client, session, response_record):
+    text = response_record["text"]
+    span = {
+        "start_char": 212,
+        "end_char": 333,
+        "text": text[212:333],
+    }
+    coding = _create_coding(client, session, span, criterion_id=POINT_5)
+    api._evidence_classifier_instance = FakeClassifier("DOES_NOT_SUPPORT")
+    payload = client.post(
+        f"{_prefix(session['marking_session_id'])}/judgement/codings/{coding['id']}/ai-check",
+        json={"last_action": "link_evidence"},
+    ).json()
+    assert payload["jev_direct"]["relation"] == "DOES_NOT_SUPPORT"
+    assert payload["jev_additional"]["relation"] == "SUPPORTS"
+    assert payload["additional_evidence"]["searched"] is True
+    assert payload["additional_evidence"]["found"] is True
+    assert payload["additional_evidence"]["expansion"] == "following"
+    assert payload["interpretive_context"]["following_segment"]["text"].startswith("Repeat using")
+    assert payload["suggested_evidence_span"]["expansion"] == "following"
+    assert payload["intervention"]["type"] == "SUPPORTED_WITH_ADDITIONAL_EVIDENCE"
+
+
+def test_ai_check_borderline_supports_finds_containing_sentence(client, session, response_record):
+    text = response_record["text"]
+    span = {
+        "start_char": 42,
+        "end_char": 86,
+        "text": text[42:86],
+    }
+    coding = _create_coding(client, session, span, criterion_id=DETAIL_1A)
+    api._evidence_classifier_instance = FakeClassifier("SUPPORTS", needs_review=True)
+    payload = client.post(
+        f"{_prefix(session['marking_session_id'])}/judgement/codings/{coding['id']}/ai-check",
+        json={"last_action": "link_evidence"},
+    ).json()
+    assert payload["jev_direct"]["relation"] == "SUPPORTS"
+    assert payload["additional_evidence"]["searched"] is True
+    assert payload["additional_evidence"]["found"] is True
+    assert payload["additional_evidence"]["expansion"] == "containing_sentence"
+    assert "measuring cylinder" in payload["suggested_evidence_span"]["text"]
+    assert payload["intervention"]["type"] == "SUPPORTED_WITH_ADDITIONAL_EVIDENCE"
+
+
+def test_ai_check_strong_direct_skips_additional_search(client, session, sample_span):
+    coding = _create_coding(client, session, sample_span, criterion_id=POINT_5)
+    api._evidence_classifier_instance = FakeClassifier("SUPPORTS")
+    payload = client.post(
+        f"{_prefix(session['marking_session_id'])}/judgement/codings/{coding['id']}/ai-check",
+        json={"last_action": "link_evidence"},
+    ).json()
+    assert payload["jev_direct"]["relation"] == "SUPPORTS"
+    assert payload["additional_evidence"]["searched"] is False
+    assert payload["jev_additional"] is None
+    assert payload["status"] == "silent"
 
 
 def test_span_recheck_supersedes_previous(client, session, sample_span, response_record):

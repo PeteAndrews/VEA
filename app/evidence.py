@@ -106,13 +106,13 @@ def _segment_summary(segment: dict) -> dict[str, Any]:
     }
 
 
-def _containing_sentence(
+def _sentence_bounds_in_segment(
     segment_text: str,
     *,
     span_start: int,
     span_end: int,
     segment_start: int,
-) -> str:
+) -> tuple[int, int]:
     rel_start = max(0, span_start - segment_start)
     rel_end = min(len(segment_text), span_end - segment_start)
 
@@ -130,7 +130,55 @@ def _containing_sentence(
             sentence_end = index + 1
             break
 
+    return sentence_start, sentence_end
+
+
+def _containing_sentence(
+    segment_text: str,
+    *,
+    span_start: int,
+    span_end: int,
+    segment_start: int,
+) -> str:
+    sentence_start, sentence_end = _sentence_bounds_in_segment(
+        segment_text,
+        span_start=span_start,
+        span_end=span_end,
+        segment_start=segment_start,
+    )
     return segment_text[sentence_start:sentence_end].strip()
+
+
+def containing_sentence_span(
+    record: dict,
+    *,
+    start_char: int,
+    end_char: int,
+) -> dict[str, Any] | None:
+    """Smallest same-sentence expansion that strictly contains the selected span."""
+    text = record.get("text", "")
+    for segment in record.get("segments", []):
+        segment_start = int(segment["start_char"])
+        segment_end = int(segment["end_char"])
+        if not (segment_start <= start_char < segment_end or segment_start < end_char <= segment_end):
+            continue
+        sentence_start, sentence_end = _sentence_bounds_in_segment(
+            segment["text"],
+            span_start=start_char,
+            span_end=end_char,
+            segment_start=segment_start,
+        )
+        abs_start = segment_start + sentence_start
+        abs_end = segment_start + sentence_end
+        if abs_start >= start_char and abs_end <= end_char:
+            return None
+        return {
+            "start_char": abs_start,
+            "end_char": abs_end,
+            "text": text[abs_start:abs_end],
+            "expansion": "containing_sentence",
+        }
+    return None
 
 
 def build_response_local_context_for_span(

@@ -6,6 +6,7 @@ import {
 import aiReducer, { runEvidenceCheck } from "./aiSlice";
 import authReducer from "./authSlice";
 import assessmentsReducer from "./assessmentsSlice";
+import conversationReducer from "./conversationSlice";
 import judgementReducer, {
   createCoding,
   updateCodingCriterion,
@@ -55,6 +56,7 @@ export const store = configureStore({
     marking: markingReducer,
     judgement: judgementReducer,
     ai: aiReducer,
+    conversation: conversationReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().prepend(listenerMiddleware.middleware),

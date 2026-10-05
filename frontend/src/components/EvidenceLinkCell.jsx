@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { showInterventionCard } from "../aiSlice";
+import { isContextSupportNoticeActive, showInterventionCard } from "../aiSlice";
+import { launchAssistant } from "../conversationSlice";
 import { snippet } from "../responseUtils";
 import {
   cancelRevise,
@@ -8,6 +9,7 @@ import {
   removeCoding,
   startRevise,
 } from "../judgementSlice";
+import ContextSupportNotice from "./ContextSupportNotice";
 import InterventionCard from "./InterventionCard";
 
 export default function EvidenceLinkCell({
@@ -23,6 +25,7 @@ export default function EvidenceLinkCell({
   const { markingSessionId } = useSelector((state) => state.auth);
   const { focusedCodingId, reviseCodingId, saving } = useSelector((state) => state.judgement);
   const { byCodingId, checkingCodingIds, activeCardId } = useSelector((state) => state.ai);
+  const { launchStatus } = useSelector((state) => state.conversation);
 
   useEffect(() => {
     if (!expanded) return undefined;
@@ -42,8 +45,18 @@ export default function EvidenceLinkCell({
   const interpretations = links
     .map((coding) => byCodingId[coding.id])
     .filter(Boolean);
-  const pendingInterpretation = interpretations.find((item) => item.status === "pending");
-  const badgeInterpretation = interpretations.find((item) => item.status === "pending");
+  const pendingInterpretation = interpretations.find(
+    (item) =>
+      item.status === "pending" && item.intervention?.type !== "SUPPORTED_WITH_ADDITIONAL_EVIDENCE"
+  );
+  const contextSupportInterpretation = interpretations.find(isContextSupportNoticeActive);
+  const contextSupportCoding = links.find(
+    (coding) => coding.id === contextSupportInterpretation?.coding_id
+  );
+  const badgeInterpretation = interpretations.find(
+    (item) =>
+      item.status === "pending" && item.intervention?.type !== "SUPPORTED_WITH_ADDITIONAL_EVIDENCE"
+  );
   const showCard =
     pendingInterpretation &&
     activeCardId === pendingInterpretation.id &&
@@ -63,6 +76,29 @@ export default function EvidenceLinkCell({
   function handleChangeCriterion(codingId) {
     dispatch(startRevise(codingId));
     onToggle(false);
+  }
+
+  function handleVerify(codingId) {
+    const interpretation = byCodingId[codingId];
+    dispatch(
+      launchAssistant({
+        markingSessionId,
+        assessmentId,
+        candidateId,
+        source: "verify",
+        codingId,
+        interpretationId: interpretation?.id,
+      })
+    );
+    onToggle(false);
+  }
+
+  function canVerify(codingId) {
+    const interpretation = byCodingId[codingId];
+    if (checkingCodingIds.includes(codingId)) return false;
+    if (!interpretation) return false;
+    if (interpretation.status === "error" || !interpretation.jev) return false;
+    return true;
   }
 
   function handleUnlink(codingId) {
@@ -108,6 +144,14 @@ export default function EvidenceLinkCell({
           </button>
         ) : null}
       </button>
+      {contextSupportInterpretation && contextSupportCoding ? (
+        <ContextSupportNotice
+          assessmentId={assessmentId}
+          candidateId={candidateId}
+          interpretation={contextSupportInterpretation}
+          coding={contextSupportCoding}
+        />
+      ) : null}
       {showCard ? (
         <InterventionCard
           assessmentId={assessmentId}
@@ -132,6 +176,14 @@ export default function EvidenceLinkCell({
                 &ldquo;{snippet(coding.text, 80)}&rdquo;
               </button>
               <div className="evidence-popover-actions">
+                <button
+                  type="button"
+                  className="button-secondary"
+                  disabled={!canVerify(coding.id) || launchStatus === "loading"}
+                  onClick={() => handleVerify(coding.id)}
+                >
+                  Verify
+                </button>
                 <button
                   type="button"
                   className="button-secondary"

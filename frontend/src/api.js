@@ -109,3 +109,25 @@ export function updateAiInterpretation(markingSessionId, assessmentId, candidate
     { status }
   );
 }
+
+export function getConversation(markingSessionId, assessmentId, candidateId) {
+  return fetchJson(
+    `/api/marking-sessions/${markingSessionId}/assessments/${assessmentId}/candidates/${candidateId}/conversation`
+  );
+}
+
+export function launchConversation(markingSessionId, assessmentId, candidateId, payload) {
+  return sendJson(
+    "POST",
+    `/api/marking-sessions/${markingSessionId}/assessments/${assessmentId}/candidates/${candidateId}/conversation/launch`,
+    payload
+  );
+}
+
+export function sendConversationMessage(markingSessionId, assessmentId, candidateId, content) {
+  return sendJson(
+    "POST",
+    `/api/marking-sessions/${markingSessionId}/assessments/${assessmentId}/candidates/${candidateId}/conversation/messages`,
+    { content }
+  );
+}
