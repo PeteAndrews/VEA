@@ -390,6 +390,9 @@ class EvidencePipeline:
         self._retrieval_by_response: dict[str, RetrievalService] = {}
         self._shared_model = None
 
+    def retrieval_for_response(self, response_id: str) -> RetrievalService:
+        return self._retrieval_for_response(response_id)
+
     def _retrieval_for_response(self, response_id: str) -> RetrievalService:
         if response_id not in self._retrieval_by_response:
             self._retrieval_by_response[response_id] = RetrievalService.from_data_dir(

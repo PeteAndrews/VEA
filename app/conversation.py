@@ -15,7 +15,7 @@ from app.evidence import build_response_local_context_for_span
 from app.intervention import build_intervention_context
 from app.stages import resolve_stage
 
-CONVERSATION_SOURCES = frozenset({"explore", "verify"})
+CONVERSATION_SOURCES = frozenset({"explore", "verify", "general"})
 MESSAGE_ROLES = frozenset({"user", "assistant", "system"})
 DEFAULT_PROMPTS_DIR = Path(os.getenv("VEA_PROMPTS_DIR", "prompts"))
 DEFAULT_LLM_PROVIDER = "openai"
@@ -49,6 +49,8 @@ class PromptLoader:
             return self.load("explore_intervention.txt")
         if source == "verify":
             return self.load("verify_evidence.txt")
+        if source == "general":
+            return self.load("general_launch.txt")
         raise ValueError(f"Unsupported conversation source: {source}")
 
 
@@ -286,6 +288,7 @@ def _append_message(
     role: str,
     content: str,
     context_id: str | None = None,
+    metadata: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     if role not in MESSAGE_ROLES:
         raise ValueError(f"Unsupported message role: {role}")
@@ -296,6 +299,8 @@ def _append_message(
         "context_id": context_id,
         "created_at": _utc_now(),
     }
+    if metadata:
+        message.update(metadata)
     payload.setdefault("messages", []).append(message)
     return message
 
@@ -442,7 +447,8 @@ class FakeConversationLLM(ConversationLLM):
             }
         )
         if not messages:
-            return f"{self.response} [{active_context['source']}]"
+            source = active_context.get("source") or active_context.get("intent") or "turn"
+            return f"{self.response} [{source}]"
         return self.response
 
 
@@ -464,26 +470,41 @@ def launch_conversation(
     judgement_state: dict[str, Any],
     assessment_id: str,
     source: str,
-    coding_id: str,
-    interpretation: dict[str, Any] | None,
+    coding_id: str | None = None,
+    interpretation: dict[str, Any] | None = None,
     stage: str | None = None,
     stage_source: str | None = None,
+    data_dir: str = "data",
 ) -> dict[str, Any]:
+    from app.assistant import build_session_context
+
     payload = conversation_store.load(
         judgement_state["marking_session_id"],
         record["response_id"],
     )
     payload["assessment_id"] = assessment_id
-    active_context = build_conversation_context(
-        graph_service=graph_service,
-        record=record,
-        judgement_state=judgement_state,
-        coding_id=coding_id,
-        source=source,
-        interpretation=interpretation,
-        stage=stage,
-        stage_source=stage_source,
-    )
+    if source == "general" or coding_id is None:
+        active_context = build_session_context(
+            graph_service=graph_service,
+            record=record,
+            judgement_state=judgement_state,
+            assessment_id=assessment_id,
+            data_dir=data_dir,
+            source="general",
+            stage=stage,
+            stage_source=stage_source,
+        )
+    else:
+        active_context = build_conversation_context(
+            graph_service=graph_service,
+            record=record,
+            judgement_state=judgement_state,
+            coding_id=coding_id,
+            source=source,
+            interpretation=interpretation,
+            stage=stage,
+            stage_source=stage_source,
+        )
     payload.setdefault("contexts", []).append(active_context)
     payload["active_context_id"] = active_context["context_id"]
 
@@ -513,11 +534,31 @@ def send_conversation_message(
     marking_session_id: str,
     response_id: str,
     content: str,
+    graph_service=None,
+    record: dict[str, Any] | None = None,
+    judgement_state: dict[str, Any] | None = None,
+    classifier=None,
+    retrieval_service=None,
+    assessment_id: str | None = None,
+    data_dir: str | None = None,
 ) -> dict[str, Any]:
+    from app.assistant import build_session_context, process_assistant_turn
+
     payload = conversation_store.load(marking_session_id, response_id)
     active_context = _active_context(payload)
     if active_context is None:
-        raise ValueError("No active conversation context.")
+        if not all([graph_service, record, judgement_state, assessment_id, data_dir]):
+            raise ValueError("No active conversation context.")
+        active_context = build_session_context(
+            graph_service=graph_service,
+            record=record,
+            judgement_state=judgement_state,
+            assessment_id=assessment_id,
+            data_dir=data_dir,
+            source="general",
+        )
+        payload.setdefault("contexts", []).append(active_context)
+        payload["active_context_id"] = active_context["context_id"]
 
     _append_message(
         payload,
@@ -529,20 +570,52 @@ def send_conversation_message(
         message
         for message in payload.get("messages", [])
         if message.get("context_id") == active_context["context_id"]
+        and message["role"] in {"user", "assistant"}
     ]
-    system_prompt = prompt_loader.load_system()
-    launch_prompt = prompt_loader.load_launch(active_context["source"])
-    assistant_text = llm.respond(
-        system_prompt=system_prompt,
-        launch_prompt=launch_prompt,
-        active_context=active_context,
-        messages=context_messages,
-    )
-    _append_message(
-        payload,
-        role="assistant",
-        content=assistant_text,
-        context_id=active_context["context_id"],
-    )
+
+    if graph_service and record and judgement_state and classifier:
+        turn = process_assistant_turn(
+            content=content,
+            active_context=active_context,
+            graph_service=graph_service,
+            record=record,
+            judgement_state=judgement_state,
+            classifier=classifier,
+            retrieval_service=retrieval_service,
+            llm=llm,
+            prompt_loader=prompt_loader,
+            history=context_messages[:-1],
+        )
+        for index, context in enumerate(payload.get("contexts", [])):
+            if context["context_id"] == active_context["context_id"]:
+                payload["contexts"][index] = turn["active_context"]
+                break
+        _append_message(
+            payload,
+            role="assistant",
+            content=turn["content"],
+            context_id=active_context["context_id"],
+            metadata={
+                "intent": turn["intent"],
+                "citations": turn["citations"],
+                "tool_results": turn["tool_results"],
+                "clarification_needed": turn["clarification_needed"],
+            },
+        )
+    else:
+        system_prompt = prompt_loader.load_system()
+        launch_prompt = prompt_loader.load_launch(active_context["source"])
+        assistant_text = llm.respond(
+            system_prompt=system_prompt,
+            launch_prompt=launch_prompt,
+            active_context=active_context,
+            messages=context_messages,
+        )
+        _append_message(
+            payload,
+            role="assistant",
+            content=assistant_text,
+            context_id=active_context["context_id"],
+        )
     conversation_store.save(payload)
     return public_conversation(payload)

@@ -285,8 +285,8 @@ class AiInterpretationStatusRequest(BaseModel):
 
 
 class ConversationLaunchRequest(BaseModel):
-    source: Literal["explore", "verify"]
-    coding_id: str
+    source: Literal["explore", "verify", "general"]
+    coding_id: str | None = None
     interpretation_id: str | None = None
     stage: str | None = None
     last_action: str | None = None
@@ -638,38 +638,42 @@ def post_conversation_launch(
         assessment_id,
         candidate_id,
     )
-    ai_store = _ai_store()
-    ai_payload = ai_store.load(marking_session_id, record["response_id"])
+    interpretation = None
+    if body.source != "general":
+        if not body.coding_id:
+            raise HTTPException(status_code=422, detail="coding_id is required for explore/verify launch.")
+        ai_store = _ai_store()
+        ai_payload = ai_store.load(marking_session_id, record["response_id"])
 
-    if body.interpretation_id:
-        interpretation = next(
-            (
-                item
-                for item in ai_payload.get("interpretations", [])
-                if item.get("id") == body.interpretation_id
-            ),
-            None,
-        )
+        if body.interpretation_id:
+            interpretation = next(
+                (
+                    item
+                    for item in ai_payload.get("interpretations", [])
+                    if item.get("id") == body.interpretation_id
+                ),
+                None,
+            )
+            if interpretation is None:
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"Interpretation not found: {body.interpretation_id}",
+                )
+        else:
+            interpretation = _find_interpretation_for_coding(ai_payload, body.coding_id)
+
         if interpretation is None:
             raise HTTPException(
-                status_code=404,
-                detail=f"Interpretation not found: {body.interpretation_id}",
+                status_code=422,
+                detail="No AI interpretation available for this coding. Run the evidence check first.",
             )
-    else:
-        interpretation = _find_interpretation_for_coding(ai_payload, body.coding_id)
-
-    if interpretation is None:
-        raise HTTPException(
-            status_code=422,
-            detail="No AI interpretation available for this coding. Run the evidence check first.",
-        )
-    if interpretation.get("coding_id") != body.coding_id:
-        raise HTTPException(status_code=422, detail="Interpretation does not match coding.")
-    if interpretation.get("status") == "error" or interpretation.get("jev") is None:
-        raise HTTPException(
-            status_code=422,
-            detail="AI interpretation is unavailable for conversation.",
-        )
+        if interpretation.get("coding_id") != body.coding_id:
+            raise HTTPException(status_code=422, detail="Interpretation does not match coding.")
+        if interpretation.get("status") == "error" or interpretation.get("jev") is None:
+            raise HTTPException(
+                status_code=422,
+                detail="AI interpretation is unavailable for conversation.",
+            )
 
     if body.source == "explore":
         try:
@@ -703,9 +707,11 @@ def post_conversation_launch(
             interpretation=interpretation,
             stage=stage,
             stage_source=stage_source,
+            data_dir=str(DATA_DIR),
         )
     except KeyError:
-        raise HTTPException(status_code=404, detail=f"Coding not found: {body.coding_id}") from None
+        detail = f"Coding not found: {body.coding_id}" if body.coding_id else "Conversation launch failed."
+        raise HTTPException(status_code=404, detail=detail) from None
     except FileNotFoundError as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from None
     except RuntimeError as exc:
@@ -722,11 +728,13 @@ def post_conversation_message(
     body: ConversationMessageRequest,
 ) -> dict:
     _require_session(marking_session_id)
-    _service, record, _state, _store = _load_judgement_context(
+    service, record, state, _store = _load_judgement_context(
         marking_session_id,
         assessment_id,
         candidate_id,
     )
+    pipeline = _evidence_pipeline(assessment_id)
+    retrieval_service = pipeline.retrieval_for_response(record["response_id"])
     try:
         return send_conversation_message(
             conversation_store=_conversation_store(),
@@ -735,6 +743,13 @@ def post_conversation_message(
             marking_session_id=marking_session_id,
             response_id=record["response_id"],
             content=body.content.strip(),
+            graph_service=service,
+            record=record,
+            judgement_state=state,
+            classifier=_evidence_classifier(),
+            retrieval_service=retrieval_service,
+            assessment_id=assessment_id,
+            data_dir=str(DATA_DIR),
         )
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from None

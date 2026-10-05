@@ -314,7 +314,7 @@ def test_send_message_appends_assistant_reply(client, session, sample_span):
         f"{_prefix(session['marking_session_id'])}/conversation/messages",
         json={"content": "Why does this partially support?"},
     )
-    assert sent.status_code == 200
+    assert sent.status_code == 200, sent.text
     payload = sent.json()
     assert len(payload["messages"]) == 3
     assert payload["messages"][-2]["role"] == "user"
@@ -340,6 +340,17 @@ def test_explore_launch_marks_interpretation_explored(client, session, sample_sp
     listed = client.get(f"{_prefix(session['marking_session_id'])}/ai-interpretations").json()
     updated = next(item for item in listed["interpretations"] if item["id"] == interpretation["id"])
     assert updated["status"] == "explore"
+
+
+def test_general_launch_without_coding(client, session):
+    launched = client.post(
+        f"{_prefix(session['marking_session_id'])}/conversation/launch",
+        json={"source": "general"},
+    )
+    assert launched.status_code == 200
+    payload = launched.json()
+    assert payload["active_context"]["source"] == "general"
+    assert payload["active_context"]["assessment_overview"]
 
 
 def test_verify_available_for_silent_interpretation(client, session, sample_span):

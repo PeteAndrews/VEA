@@ -124,6 +124,58 @@ class RetrievalService:
             "matches": matches,
         }
 
+    def search_response(
+        self,
+        response_id: str,
+        query: str,
+        top_k: int = 5,
+    ) -> dict:
+        """Semantic search across all segments in a candidate response."""
+        response = load_response(response_id, responses_dir=self.data_dir / "responses")
+        path = self.data_dir / "responses" / f"{response_id}.pt"
+        if not path.exists():
+            self._embed_and_save_response(response)
+
+        payload = torch.load(path, map_location="cpu", weights_only=True)
+        segment_ids: list[str] = payload["segment_ids"]
+        embeddings = payload["embeddings"].float()
+        if embeddings.numel() == 0:
+            return {"query": query, "response_id": response_id, "matches": []}
+
+        model = self._get_model()
+        query_embedding = model.encode(
+            f"{QUERY_PREFIX}{query}",
+            convert_to_tensor=True,
+            normalize_embeddings=True,
+            show_progress_bar=False,
+        ).float().cpu()
+        scores = query_embedding @ embeddings.T
+        k = min(top_k, scores.size(0))
+        values, indices = torch.topk(scores, k=k)
+
+        segment_lookup = {segment["id"]: segment for segment in response["segments"]}
+        matches: list[dict] = []
+        for score, index in zip(values.tolist(), indices.tolist()):
+            segment_id = segment_ids[index]
+            segment = segment_lookup.get(segment_id)
+            if segment is None:
+                continue
+            matches.append(
+                {
+                    "segment_id": segment_id,
+                    "text": segment["text"],
+                    "start_char": segment["start_char"],
+                    "end_char": segment["end_char"],
+                    "cosine_similarity": round(float(score), 6),
+                    "retrieval": "response_segment",
+                }
+            )
+        return {
+            "query": query,
+            "response_id": response_id,
+            "matches": matches,
+        }
+
     def similar_text(
         self,
         text: str,

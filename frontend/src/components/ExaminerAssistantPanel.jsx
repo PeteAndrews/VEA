@@ -1,12 +1,51 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { collapseAssistantPanel, expandAssistantPanel, sendAssistantMessage } from "../conversationSlice";
+import { focusEvidenceSpan } from "../evidenceNavigation";
+import { focusCoding } from "../judgementSlice";
 
 function formatTime(isoString) {
   if (!isoString) return "";
   const date = new Date(isoString);
   if (Number.isNaN(date.getTime())) return "";
   return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+}
+
+function ActiveContextSummary({ activeContext }) {
+  if (!activeContext) return null;
+  const criterion = activeContext.criterion?.text || activeContext.parent_criterion?.text;
+  const evidence = activeContext.evidence?.text;
+  if (!criterion && !evidence) return null;
+  return (
+    <div className="assistant-context-summary">
+      {criterion ? <p className="assistant-context-criterion">{criterion}</p> : null}
+      {evidence ? <p className="assistant-context-evidence">&ldquo;{evidence}&rdquo;</p> : null}
+    </div>
+  );
+}
+
+function AssistantMessage({ message, onCitationClick }) {
+  return (
+    <div className={`assistant-message assistant-message-${message.role}`}>
+      <div className="assistant-message-bubble">
+        <p>{message.content}</p>
+        {message.citations?.length ? (
+          <ul className="assistant-citations">
+            {message.citations.map((citation, index) => (
+              <li key={`${citation.type}-${index}`}>
+                <button type="button" className="assistant-citation" onClick={() => onCitationClick(citation)}>
+                  {citation.type === "response_span"
+                    ? `Response: "${citation.text?.slice(0, 60) || "span"}"`
+                    : `Criterion: ${citation.text || citation.criterion_id}`}
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+      </div>
+      <span className="assistant-message-time">{formatTime(message.created_at)}</span>
+    </div>
+  );
 }
 
 export default function ExaminerAssistantPanel({ assessmentId, candidateId }) {
@@ -23,6 +62,7 @@ export default function ExaminerAssistantPanel({ assessmentId, candidateId }) {
   const messages = (conversation?.messages || []).filter(
     (message) => !activeContextId || message.context_id === activeContextId
   );
+  const canSend = Boolean(markingSessionId && draft.trim() && sendStatus !== "loading" && launchStatus !== "loading");
 
   useEffect(() => {
     if (!collapsed) {
@@ -38,10 +78,20 @@ export default function ExaminerAssistantPanel({ assessmentId, candidateId }) {
     }
   }
 
+  function handleCitationClick(citation) {
+    if (citation.type !== "response_span") return;
+    focusEvidenceSpan({
+      startChar: citation.start_char,
+      endChar: citation.end_char,
+      dispatch,
+      focusCoding,
+    });
+  }
+
   function handleSend(event) {
     event.preventDefault();
     const content = draft.trim();
-    if (!content || sendStatus === "loading" || launchStatus === "loading") return;
+    if (!canSend) return;
     setDraft("");
     dispatch(
       sendAssistantMessage({
@@ -75,25 +125,22 @@ export default function ExaminerAssistantPanel({ assessmentId, candidateId }) {
 
       {!collapsed ? (
         <>
+          <ActiveContextSummary activeContext={activeContext} />
           <div className="assistant-messages">
             {launchStatus === "loading" ? (
               <p className="status-text">Launching assistant...</p>
             ) : null}
+            {sendStatus === "loading" ? <p className="status-text">Thinking...</p> : null}
             {launchError ? <p className="error">{launchError}</p> : null}
-            {!activeContext && messages.length === 0 && launchStatus !== "loading" ? (
+            {messages.length === 0 && launchStatus !== "loading" && sendStatus !== "loading" ? (
               <p className="assistant-empty">
-                Use <strong>Explore</strong> on an intervention or <strong>Verify</strong> on a linked
-                evidence span to start.
+                Ask about the response, mark scheme, current links, or use <strong>Explore</strong> /{" "}
+                <strong>Verify</strong> on a coded span.
               </p>
             ) : null}
             {messages.map((message) => (
               <div key={message.id} className="assistant-message-row">
-                <div className={`assistant-message assistant-message-${message.role}`}>
-                  <div className="assistant-message-bubble">
-                    <p>{message.content}</p>
-                  </div>
-                  <span className="assistant-message-time">{formatTime(message.created_at)}</span>
-                </div>
+                <AssistantMessage message={message} onCitationClick={handleCitationClick} />
               </div>
             ))}
             <div ref={messagesEndRef} />
@@ -105,20 +152,15 @@ export default function ExaminerAssistantPanel({ assessmentId, candidateId }) {
               <textarea
                 rows={2}
                 value={draft}
-                placeholder="Ask a question..."
-                disabled={!activeContext || sendStatus === "loading" || launchStatus === "loading"}
+                placeholder="Ask about the response, mark scheme, or a link..."
+                disabled={!markingSessionId || sendStatus === "loading" || launchStatus === "loading"}
                 onChange={(event) => setDraft(event.target.value)}
               />
               <button
                 type="submit"
                 className="assistant-send-button"
                 aria-label="Send message"
-                disabled={
-                  !draft.trim() ||
-                  !activeContext ||
-                  sendStatus === "loading" ||
-                  launchStatus === "loading"
-                }
+                disabled={!canSend}
               >
                 ➤
               </button>
