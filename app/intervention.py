@@ -17,6 +17,11 @@ from app.assessment import (
 )
 from app.evidence import build_response_local_context_for_span
 from app.graph_service import GraphService
+from app.interpretation_store import (
+    AIInterpretationStore,
+    active_interpretations,
+    public_interpretation,
+)
 from app.views import _split_alternatives
 
 GUIDANCE_RELATIONS = frozenset({"ACCEPTS", "REJECTS", "CONSTRAINS", "CLARIFIES", "REQUIRES"})
@@ -388,84 +393,6 @@ def decide_intervention(decision: dict[str, Any], graph_context: dict[str, Any])
         "message": "",
         "nuance_items": [],
     }
-
-
-class AIInterpretationStore:
-    def __init__(self, base_dir: Path) -> None:
-        self.base_dir = base_dir
-
-    def _path(self, marking_session_id: str, response_id: str) -> Path:
-        return self.base_dir / marking_session_id / f"{response_id}.json"
-
-    def load(self, marking_session_id: str, response_id: str) -> dict[str, Any]:
-        path = self._path(marking_session_id, response_id)
-        if not path.is_file():
-            return {
-                "schema_version": 1,
-                "marking_session_id": marking_session_id,
-                "response_id": response_id,
-                "interpretations": [],
-            }
-        with path.open(encoding="utf-8") as handle:
-            return json.load(handle)
-
-    def save(self, payload: dict[str, Any]) -> None:
-        path = self._path(payload["marking_session_id"], payload["response_id"])
-        path.parent.mkdir(parents=True, exist_ok=True)
-        payload["updated_at"] = _utc_now()
-        tmp_path = path.with_suffix(path.suffix + ".tmp")
-        with tmp_path.open("w", encoding="utf-8") as handle:
-            json.dump(payload, handle, indent=2)
-            handle.write("\n")
-        os.replace(tmp_path, path)
-
-    def add(self, payload: dict[str, Any], interpretation: dict[str, Any]) -> dict[str, Any]:
-        now = _utc_now()
-        for existing in payload["interpretations"]:
-            if existing["coding_id"] == interpretation["coding_id"] and existing["status"] != "superseded":
-                existing["status"] = "superseded"
-                existing["superseded_by"] = interpretation["id"]
-                existing["updated_at"] = now
-        payload["interpretations"].append(interpretation)
-        return interpretation
-
-    def find(self, payload: dict[str, Any], ai_id: str) -> dict[str, Any]:
-        for interpretation in payload["interpretations"]:
-            if interpretation["id"] == ai_id:
-                return interpretation
-        raise KeyError(ai_id)
-
-
-def _coding_matches(interpretation: dict[str, Any], relation: dict[str, Any], span: dict[str, Any]) -> bool:
-    return (
-        interpretation["criterion_id"] == relation["target"]
-        and interpretation["start_char"] == span["start_char"]
-        and interpretation["end_char"] == span["end_char"]
-    )
-
-
-def active_interpretations(
-    payload: dict[str, Any],
-    judgement_state: dict[str, Any],
-) -> list[dict[str, Any]]:
-    spans = {span["id"]: span for span in judgement_state.get("evidence_spans", [])}
-    relations = {relation["id"]: relation for relation in judgement_state.get("relations", [])}
-    active: list[dict[str, Any]] = []
-    for interpretation in payload["interpretations"]:
-        if interpretation["status"] == "superseded":
-            continue
-        relation = relations.get(interpretation["coding_id"])
-        if relation is None:
-            continue
-        span = spans.get(relation["source"])
-        if span is None or not _coding_matches(interpretation, relation, span):
-            continue
-        active.append(interpretation)
-    return active
-
-
-def public_interpretation(interpretation: dict[str, Any]) -> dict[str, Any]:
-    return {key: value for key, value in interpretation.items() if key != "response_id"}
 
 
 def _log_evidence_check(

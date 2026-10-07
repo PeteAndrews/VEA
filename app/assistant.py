@@ -587,6 +587,22 @@ def process_assistant_turn(
     prompt_loader,
     history: list[dict[str, Any]],
 ) -> dict[str, Any]:
+    from app.level_conversation import is_level_conversation_context, process_level_conversation_turn
+
+    if is_level_conversation_context(active_context):
+        context_id = active_context.get("context_id", "")
+        history_messages = [
+            *history,
+            {"role": "user", "content": content, "context_id": context_id},
+        ]
+        return process_level_conversation_turn(
+            active_context=active_context,
+            llm=llm,
+            prompt_loader=prompt_loader,
+            messages=history_messages,
+            context_id=context_id,
+        )
+
     intent_decision = intent_classifier.classify(
         content,
         build_intent_conversation_context(active_context),

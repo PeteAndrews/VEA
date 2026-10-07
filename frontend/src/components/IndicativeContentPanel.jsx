@@ -1,11 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createCoding,
-  focusCoding,
-  setPendingCriterion,
-  updateCodingCriterion,
-} from "../judgementSlice";
+import { createCoding, focusCoding, updateCodingCriterion } from "../judgementSlice";
 import EvidenceLinkCell from "./EvidenceLinkCell";
 
 function evidenceLinksForCriterion(codings, criterionId) {
@@ -88,7 +83,6 @@ export default function IndicativeContentPanel({ assessmentId, candidateId, indi
         >
           {contentCell}
         </td>
-        <td className="muted-center">—</td>
         <td>
           <EvidenceLinkCell
             assessmentId={assessmentId}
@@ -99,7 +93,6 @@ export default function IndicativeContentPanel({ assessmentId, candidateId, indi
             onToggle={(open) => setExpandedCriterionId(open ? criterionId : null)}
           />
         </td>
-        <td className="muted-center">—</td>
         <td className="muted-center">—</td>
       </tr>
     );
@@ -120,10 +113,8 @@ export default function IndicativeContentPanel({ assessmentId, candidateId, indi
           <thead>
             <tr>
               <th>Indicative content</th>
-              <th>Present</th>
               <th>Evidence Link</th>
               <th>Confidence</th>
-              <th>Notes</th>
             </tr>
           </thead>
           <tbody>

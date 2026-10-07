@@ -23,13 +23,20 @@ from app.conversation import (
     _find_interpretation_for_coding,
 )
 from app.graph_service import EdgeKindFilter, GraphService
-from app.intervention import (
+from app.interpretation_store import (
     AIInterpretationStore,
     active_interpretations,
+    active_level_interpretation,
     public_interpretation,
-    run_evidence_check,
-    update_interpretation_status,
 )
+from app.intervention import run_evidence_check, update_interpretation_status
+from app.classifier import load_env_file
+from app.level_classifier import (
+    FakeLevelJudgementClassifier,
+    LLMLevelJudgementClassifier,
+    LevelJudgementClassifier,
+)
+from app.level_judgement import run_level_check, update_level_interpretation_status
 from app.judgement import (
     JudgementStore,
     create_coding,
@@ -67,6 +74,7 @@ CONVERSATIONS_DIR = Path(
 )
 DEFAULT_ASSESSMENT_ID = os.getenv("VEA_ASSESSMENT_ID", "C-JUN25-8464C1H-02_3")
 _evidence_classifier_instance: EvidenceRelationClassifier | None = None
+_level_classifier_instance: LevelJudgementClassifier | None = None
 _intent_classifier_instance: IntentClassifier | None = None
 _conversation_llm_instance: ConversationLLM | None = None
 _prompt_loader_instance: PromptLoader | None = None
@@ -137,6 +145,22 @@ def _evidence_classifier() -> EvidenceRelationClassifier:
     if _evidence_classifier_instance is None:
         _evidence_classifier_instance = JevEvidenceRelationClassifier()
     return _evidence_classifier_instance
+
+
+def _level_classifier() -> LevelJudgementClassifier:
+    global _level_classifier_instance
+    if _level_classifier_instance is None:
+        load_env_file()
+        provider = (os.environ.get("LEVEL_JUDGEMENT_CLASSIFIER") or "llm").strip().lower()
+        if provider == "fake":
+            _level_classifier_instance = FakeLevelJudgementClassifier("ALIGNS")
+        elif provider == "jev":
+            from app.level_classifier import JevLevelJudgementClassifier
+
+            _level_classifier_instance = JevLevelJudgementClassifier()
+        else:
+            _level_classifier_instance = LLMLevelJudgementClassifier()
+    return _level_classifier_instance
 
 
 def _intent_classifier() -> IntentClassifier:
@@ -294,7 +318,7 @@ class AiInterpretationStatusRequest(BaseModel):
 
 
 class ConversationLaunchRequest(BaseModel):
-    source: Literal["explore", "verify", "general"]
+    source: Literal["explore", "verify", "general", "explore_level", "verify_level"]
     coding_id: str | None = None
     interpretation_id: str | None = None
     stage: str | None = None
@@ -534,10 +558,14 @@ def list_ai_interpretations(
         public_interpretation(item)
         for item in active_interpretations(payload, state)
     ]
+    level_interpretation = active_level_interpretation(payload, state)
     return {
         "marking_session_id": marking_session_id,
         "assessment_id": assessment_id,
         "interpretations": interpretations,
+        "level_interpretation": (
+            public_interpretation(level_interpretation) if level_interpretation else None
+        ),
     }
 
 
@@ -580,6 +608,49 @@ def post_ai_check(
     return public_interpretation(interpretation)
 
 
+@app.post(
+    "/marking-sessions/{marking_session_id}/assessments/{assessment_id}/candidates/{candidate_id}/judgement/tentative-level/ai-check"
+)
+def post_level_ai_check(
+    marking_session_id: str,
+    assessment_id: str,
+    candidate_id: str,
+    body: AiCheckRequest,
+) -> dict:
+    _require_session(marking_session_id)
+    service, record, state, _store = _load_judgement_context(
+        marking_session_id,
+        assessment_id,
+        candidate_id,
+    )
+    if state.get("tentative_level") is None:
+        raise HTTPException(status_code=422, detail="Tentative level must be set before level check.")
+    stage, stage_source = resolve_stage(state, body.stage, body.last_action)
+    ai_store = _ai_store()
+    payload = ai_store.load(marking_session_id, record["response_id"])
+    try:
+        interpretation = run_level_check(
+            classifier=_level_classifier(),
+            evidence_classifier=_evidence_classifier(),
+            graph_service=service,
+            record=record,
+            judgement_state=state,
+            ai_payload=payload,
+            data_dir=str(DATA_DIR),
+            stage=stage,
+            stage_source=stage_source,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from None
+
+    if interpretation.get("status") != "error":
+        ai_store.add_level(payload, interpretation)
+    else:
+        payload.setdefault("level_interpretations", []).append(interpretation)
+    ai_store.save(payload)
+    return public_interpretation(interpretation)
+
+
 @app.patch(
     "/marking-sessions/{marking_session_id}/assessments/{assessment_id}/candidates/{candidate_id}/ai-interpretations/{ai_id}"
 )
@@ -606,7 +677,17 @@ def patch_ai_interpretation(
             state,
         )
     except KeyError:
-        raise HTTPException(status_code=404, detail=f"Interpretation not found: {ai_id}") from None
+        try:
+            interpretation = update_level_interpretation_status(
+                payload,
+                ai_id,
+                body.status,
+                state,
+            )
+        except KeyError:
+            raise HTTPException(status_code=404, detail=f"Interpretation not found: {ai_id}") from None
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from None
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from None
     ai_store.save(payload)
@@ -648,7 +729,33 @@ def post_conversation_launch(
         candidate_id,
     )
     interpretation = None
-    if body.source != "general":
+    ai_store = None
+    ai_payload = None
+    if body.source in {"explore_level", "verify_level"}:
+        ai_store = _ai_store()
+        ai_payload = ai_store.load(marking_session_id, record["response_id"])
+        if body.interpretation_id:
+            interpretation = next(
+                (
+                    item
+                    for item in ai_payload.get("level_interpretations", [])
+                    if item.get("id") == body.interpretation_id
+                ),
+                None,
+            )
+        else:
+            interpretation = active_level_interpretation(ai_payload, state)
+        if interpretation is None:
+            raise HTTPException(
+                status_code=422,
+                detail="No level AI interpretation available. Run the level check first.",
+            )
+        if interpretation.get("status") == "error" or interpretation.get("verdict") is None:
+            raise HTTPException(
+                status_code=422,
+                detail="Level AI interpretation is unavailable for conversation.",
+            )
+    elif body.source != "general":
         if not body.coding_id:
             raise HTTPException(status_code=422, detail="coding_id is required for explore/verify launch.")
         ai_store = _ai_store()
@@ -687,6 +794,22 @@ def post_conversation_launch(
     if body.source == "explore":
         try:
             interpretation = update_interpretation_status(
+                ai_payload,
+                interpretation["id"],
+                "explore",
+                state,
+            )
+            ai_store.save(ai_payload)
+        except KeyError:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Interpretation not found: {interpretation['id']}",
+            ) from None
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from None
+    elif body.source == "explore_level":
+        try:
+            interpretation = update_level_interpretation_status(
                 ai_payload,
                 interpretation["id"],
                 "explore",

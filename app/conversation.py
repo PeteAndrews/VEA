@@ -15,7 +15,7 @@ from app.evidence import build_response_local_context_for_span
 from app.intervention import build_intervention_context
 from app.stages import resolve_stage
 
-CONVERSATION_SOURCES = frozenset({"explore", "verify", "general"})
+CONVERSATION_SOURCES = frozenset({"explore", "verify", "general", "explore_level", "verify_level"})
 MESSAGE_ROLES = frozenset({"user", "assistant", "system"})
 DEFAULT_PROMPTS_DIR = Path(os.getenv("VEA_PROMPTS_DIR", "prompts"))
 DEFAULT_LLM_PROVIDER = "openai"
@@ -49,9 +49,16 @@ class PromptLoader:
             return self.load("explore_intervention.txt")
         if source == "verify":
             return self.load("verify_evidence.txt")
+        if source == "explore_level":
+            return self.load("level_explore.txt")
+        if source == "verify_level":
+            return self.load("level_verify.txt")
         if source == "general":
             return self.load("general_launch.txt")
         raise ValueError(f"Unsupported conversation source: {source}")
+
+    def load_level_conversation(self) -> str:
+        return self.load("level_conversation.txt")
 
 
 class ConversationStore:
@@ -139,6 +146,36 @@ def _find_interpretation_for_coding(
         return None
     matches.sort(key=lambda item: item.get("updated_at") or item.get("created_at") or "")
     return matches[-1]
+
+
+def build_level_conversation_context(
+    *,
+    judgement_state: dict[str, Any],
+    source: str,
+    interpretation: dict[str, Any] | None,
+    stage: str | None = None,
+    stage_source: str | None = None,
+) -> dict[str, Any]:
+    if source not in {"explore_level", "verify_level"}:
+        raise ValueError(f"Unsupported level conversation source: {source}")
+
+    resolved_stage, resolved_stage_source = resolve_stage(judgement_state, stage, None)
+    return {
+        "context_id": _new_id("ctx"),
+        "source": source,
+        "stage": resolved_stage,
+        "stage_source": stage_source or resolved_stage_source,
+        "kind": "level",
+        "level": interpretation.get("level") if interpretation else None,
+        "verdict": interpretation.get("verdict") if interpretation else None,
+        "intervention": interpretation.get("intervention") if interpretation else None,
+        "summary": interpretation.get("summary") if interpretation else None,
+        "context": interpretation.get("context") if interpretation else None,
+        "uncoded_candidates": interpretation.get("uncoded_candidates") if interpretation else None,
+        "interpretation_id": interpretation.get("id") if interpretation else None,
+        "tentative_level": judgement_state.get("tentative_level"),
+        "prepared_at": _utc_now(),
+    }
 
 
 def build_conversation_context(
@@ -483,7 +520,15 @@ def launch_conversation(
         record["response_id"],
     )
     payload["assessment_id"] = assessment_id
-    if source == "general" or coding_id is None:
+    if source in {"explore_level", "verify_level"}:
+        active_context = build_level_conversation_context(
+            judgement_state=judgement_state,
+            source=source,
+            interpretation=interpretation,
+            stage=stage,
+            stage_source=stage_source,
+        )
+    elif source == "general" or coding_id is None:
         active_context = build_session_context(
             graph_service=graph_service,
             record=record,
@@ -574,7 +619,17 @@ def send_conversation_message(
         and message["role"] in {"user", "assistant"}
     ]
 
-    if graph_service and record and judgement_state and classifier and intent_classifier:
+    from app.level_conversation import is_level_conversation_context, process_level_conversation_turn
+
+    if is_level_conversation_context(active_context):
+        turn = process_level_conversation_turn(
+            active_context=active_context,
+            llm=llm,
+            prompt_loader=prompt_loader,
+            messages=context_messages,
+            context_id=active_context["context_id"],
+        )
+    elif graph_service and record and judgement_state and classifier and intent_classifier:
         turn = process_assistant_turn(
             content=content,
             active_context=active_context,
@@ -588,6 +643,10 @@ def send_conversation_message(
             prompt_loader=prompt_loader,
             history=context_messages[:-1],
         )
+    else:
+        turn = None
+
+    if turn is not None:
         for index, context in enumerate(payload.get("contexts", [])):
             if context["context_id"] == active_context["context_id"]:
                 payload["contexts"][index] = turn["active_context"]
@@ -604,7 +663,7 @@ def send_conversation_message(
                 "clarification_needed": turn["clarification_needed"],
             },
         )
-    else:
+    elif turn is None:
         system_prompt = prompt_loader.load_system()
         launch_prompt = prompt_loader.load_launch(active_context["source"])
         assistant_text = llm.respond(

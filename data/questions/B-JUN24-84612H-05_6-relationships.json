@@ -1,0 +1,157 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "B-JUN24-84612H-05_6",
+  "question_id": "05_6",
+  "relationships": [
+    {
+      "source_id": "ms_05_6-level-3-rule",
+      "target_id": "ms_05_6-contraception-group",
+      "relation": "REQUIRES",
+      "confidence": 0.98,
+      "rationale": "The Level 3 rule explicitly requires details about contraception.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_05_6-level-3-rule",
+      "target_id": "ms_05_6-infertility-group",
+      "relation": "REQUIRES",
+      "confidence": 0.98,
+      "rationale": "The Level 3 rule explicitly requires details about infertility treatment.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-level-3-entry",
+      "target_id": "ms_05_6-level-3-rule",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "It specifies that the required detail for both areas must link a hormone, its role, and its consequence.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-level-2-entry",
+      "target_id": "ms_05_6-level-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "It defines one precise route to the Level 2 entry mark: a full linked statement for either topic.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-level-2-alternative",
+      "target_id": "commentary_05_6-level-2-entry",
+      "relation": "EXTENDS",
+      "confidence": 0.99,
+      "rationale": "It provides an additional route into Level 2 using partial links across both topics.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-level-1-entry",
+      "target_id": "ms_05_6-level-1",
+      "relation": "CLARIFIES",
+      "confidence": 0.97,
+      "rationale": "It defines relevant content sufficient for Level 1 and explains the one-mark entry threshold.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-level-1-entry",
+      "target_id": "ms_05_6-contraceptive-methods",
+      "relation": "CONSTRAINS",
+      "confidence": 0.98,
+      "rationale": "It limits method-only content to one mark and excludes non-hormonal contraceptive methods from credit.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-higher-mark-guidance",
+      "target_id": "ms_05_6-level-1",
+      "relation": "APPLIES_TO",
+      "confidence": 0.95,
+      "rationale": "The within-level rule explains how a Level 1 response moves from 1 to 2 marks.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-higher-mark-guidance",
+      "target_id": "ms_05_6-level-2",
+      "relation": "APPLIES_TO",
+      "confidence": 0.95,
+      "rationale": "The within-level rule explains how a Level 2 response moves from 3 to 4 marks.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-higher-mark-guidance",
+      "target_id": "ms_05_6-level-3",
+      "relation": "APPLIES_TO",
+      "confidence": 0.95,
+      "rationale": "The within-level rule explains how a Level 3 response moves from 5 to 6 marks.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-respectively-guidance",
+      "target_id": "commentary_05_6-level-3-entry",
+      "relation": "CONSTRAINS",
+      "confidence": 0.96,
+      "rationale": "It restricts when ordered lists of hormones, roles, and consequences count as clearly linked for Level 3 entry.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-respectively-guidance",
+      "target_id": "commentary_05_6-level-2-entry",
+      "relation": "CONSTRAINS",
+      "confidence": 0.94,
+      "rationale": "It restricts when ordered hormone-role-consequence statements can receive credit as linked Level 2 content.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-respectively-example",
+      "target_id": "commentary_05_6-respectively-guidance",
+      "relation": "EXEMPLIFIES",
+      "confidence": 0.99,
+      "rationale": "The example uses “respectively” to establish the required unambiguous links.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-insufficient-link-example",
+      "target_id": "commentary_05_6-respectively-guidance",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "The contrasting example shows that the same ordered claims without “respectively” are not sufficiently linked.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-contraception-credit-guidance",
+      "target_id": "ms_05_6-fsh-inhibition",
+      "relation": "CONSTRAINS",
+      "confidence": 0.99,
+      "rationale": "It specifies that contraception credit must concern the consequence of lacking FSH, not FSH's normal action.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-contraception-credit-guidance",
+      "target_id": "ms_05_6-lh-inhibition",
+      "relation": "CONSTRAINS",
+      "confidence": 0.99,
+      "rationale": "It specifies that contraception credit must concern the consequence of lacking LH, not LH's normal action.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-egg-growth-guidance",
+      "target_id": "ms_05_6-fsh-inhibition",
+      "relation": "CONSTRAINS",
+      "confidence": 0.99,
+      "rationale": "It states that “preventing egg growth” is too vague to satisfy the required egg development or maturation detail.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-other-hormone-use-example",
+      "target_id": "ms_05_6-contraception-group",
+      "relation": "EXTENDS",
+      "confidence": 0.97,
+      "rationale": "It adds another creditworthy hormonal contraception mechanism involving progesterone and cervical mucus.",
+      "provenance": "llm"
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-10-07T10:53:04.424386+00:00",
+    "requires_review": false,
+    "warnings": []
+  }
+}

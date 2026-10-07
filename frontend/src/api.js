@@ -102,6 +102,14 @@ export function runAiCheck(markingSessionId, assessmentId, candidateId, codingId
   );
 }
 
+export function runLevelAiCheck(markingSessionId, assessmentId, candidateId, payload) {
+  return sendJson(
+    "POST",
+    `/api/marking-sessions/${markingSessionId}/assessments/${assessmentId}/candidates/${candidateId}/judgement/tentative-level/ai-check`,
+    payload
+  );
+}
+
 export function updateAiInterpretation(markingSessionId, assessmentId, candidateId, aiId, status) {
   return sendJson(
     "PATCH",
