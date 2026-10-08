@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { launchAssistant } from "../conversationSlice";
-import LevelInterventionCard from "./LevelInterventionCard";
-
 export default function LevelReviewPanel({ assessmentId, candidateId, levelContext }) {
   const dispatch = useDispatch();
   const { markingSessionId } = useSelector((state) => state.auth);
-  const { interpretation, checking, activeCard } = useSelector((state) => state.levelAi);
+  const { interpretation, checking } = useSelector((state) => state.levelAi);
   const [showMappedEvidence, setShowMappedEvidence] = useState(false);
 
   if (!levelContext) return null;
@@ -120,13 +118,6 @@ export default function LevelReviewPanel({ assessmentId, candidateId, levelConte
           ) : null}
         </div>
 
-        {activeCard && interpretation ? (
-          <LevelInterventionCard
-            assessmentId={assessmentId}
-            candidateId={candidateId}
-            interpretation={interpretation}
-          />
-        ) : null}
       </div>
     </section>
   );

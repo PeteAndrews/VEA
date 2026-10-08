@@ -14,6 +14,13 @@ export default function QuestionPanel({ question }) {
         {question.instructions.map((text) => (
           <p key={text}>{text}</p>
         ))}
+        {question.subparts?.length ? (
+          <ul className="question-subparts">
+            {question.subparts.map((text) => (
+              <li key={text}>{text.replace(/^[•\-]\s*/, "")}</li>
+            ))}
+          </ul>
+        ) : null}
       </div>
       <footer className="panel-footer">{question.marks_text}</footer>
     </section>

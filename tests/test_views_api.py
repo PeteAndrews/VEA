@@ -37,6 +37,15 @@ def test_question_view(client):
     assert any("calcium oxide" in text for text in payload["instructions"])
 
 
+def test_question_view_biology_includes_subparts(client):
+    response = client.get(f"/assessments/{BIOLOGY_ASSESSMENT_ID}/question")
+    assert response.status_code == 200
+    payload = response.json()
+    assert any("human reproduction" in text for text in payload["stimulus"])
+    assert any("Explain the use of hormones in:" in text for text in payload["instructions"])
+    assert payload["subparts"] == ["• contraception", "• the treatment of infertility."]
+
+
 def test_levels_view_errata_and_fallback(client):
     response = client.get(f"/assessments/{ASSESSMENT_ID}/levels")
     assert response.status_code == 200
@@ -90,10 +99,10 @@ def test_indicative_content_view_biology_includes_answer_details(client):
 
     details = [detail for step in key_steps for detail in step["details"]]
     assert len(details) == 5
-    assert any(detail["id"] == "ms_05_6-contraception-detail-fsh" for detail in details)
+    assert any(detail["id"] == "ms_05_6-contraception-fsh" for detail in details)
     assert any("inhibition of FSH" in detail["text"] for detail in details)
 
-    hormones = next(step for step in key_steps if step["id"] == "ms_05_6-contraception-point-1")
+    hormones = next(step for step in key_steps if step["id"] == "ms_05_6-contraception-hormones")
     assert len(hormones["details"]) == 2
 
 

@@ -19,6 +19,7 @@ export default function MarkingPage({
   assessmentId: assessmentIdProp,
   candidateId: candidateIdProp,
   markingSessionId: markingSessionIdProp,
+  finalMarkPanel = null,
 } = {}) {
   const params = useParams();
   const assessmentId = assessmentIdProp || params.assessmentId;
@@ -64,34 +65,37 @@ export default function MarkingPage({
       {aiError ? <p className="error">{aiError}</p> : null}
       {levelAiError ? <p className="error">{levelAiError}</p> : null}
       {conversationError ? <p className="error">{conversationError}</p> : null}
-      {saving ? <p className="status-text">Saving judgement...</p> : null}
       {status === "succeeded" ? (
-        <div className="marking-layout">
-          <div className="marking-left">
-            <QuestionPanel question={question} />
-            <StudentResponsePanel response={selectedResponse} />
-            <CandidateInfoPanel response={selectedResponse} />
+        <div className="marking-page">
+          {saving ? <p className="marking-banner status-text">Saving judgement...</p> : null}
+          <div className="marking-layout">
+            <div className="marking-column marking-column-left">
+              <QuestionPanel question={question} />
+              <StudentResponsePanel response={selectedResponse} />
+              <CandidateInfoPanel response={selectedResponse} />
+              {finalMarkPanel}
+            </div>
+            <div className="marking-column marking-column-center">
+              <IndicativeContentPanel
+                assessmentId={assessmentId}
+                candidateId={candidateId}
+                indicativeContent={indicativeContent}
+              />
+              <LevelDescriptorPanel
+                assessmentId={assessmentId}
+                candidateId={candidateId}
+                levels={levelDescriptors}
+              />
+              <LevelReviewPanel
+                assessmentId={assessmentId}
+                candidateId={candidateId}
+                levelContext={levelContext}
+              />
+            </div>
+            <div className="marking-column marking-column-right">
+              <ExaminerAssistantPanel assessmentId={assessmentId} candidateId={candidateId} />
+            </div>
           </div>
-          <div className="marking-center">
-            <IndicativeContentPanel
-              assessmentId={assessmentId}
-              candidateId={candidateId}
-              indicativeContent={indicativeContent}
-            />
-            <LevelDescriptorPanel
-              assessmentId={assessmentId}
-              candidateId={candidateId}
-              levels={levelDescriptors}
-            />
-          </div>
-          <div className="marking-level-review">
-            <LevelReviewPanel
-              assessmentId={assessmentId}
-              candidateId={candidateId}
-              levelContext={levelContext}
-            />
-          </div>
-          <ExaminerAssistantPanel assessmentId={assessmentId} candidateId={candidateId} />
         </div>
       ) : null}
     </AppShell>

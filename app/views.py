@@ -193,18 +193,22 @@ def question_view(graph_service: GraphService, data_dir: str | Path) -> dict[str
     metadata = stage1.get("metadata", {})
     question_id = stage1.get("question_id", "")
 
-    stimulus: list[str] = []
-    instructions: list[str] = []
+    stimulus: list[tuple[int, str]] = []
+    instructions: list[tuple[int, str]] = []
+    subparts: list[tuple[int, str]] = []
     marks_text = None
 
     for node in graph_service.graph.nodes.values():
         if node["document_type"] != "question" or node["structural_only"]:
             continue
         text = node["text"].strip()
-        if node["segment_type"] == "stimulus":
-            stimulus.append(text)
+        order = node.get("order") or 0
+        if node["segment_type"] in {"stimulus", "question_text"}:
+            stimulus.append((order, text))
         elif node["segment_type"] == "question_instruction":
-            instructions.append(text)
+            instructions.append((order, text))
+        elif node["segment_type"] == "subquestion":
+            subparts.append((order, text))
         elif node["segment_type"] == "other_question_content":
             marks_text = text
 
@@ -215,8 +219,9 @@ def question_view(graph_service: GraphService, data_dir: str | Path) -> dict[str
         "assessment_id": graph_service.graph.assessment_id,
         "question_label": question_label_from_id(question_id),
         "max_mark": metadata.get("maximum_mark"),
-        "stimulus": stimulus,
-        "instructions": instructions,
+        "stimulus": [text for _, text in sorted(stimulus)],
+        "instructions": [text for _, text in sorted(instructions)],
+        "subparts": [text for _, text in sorted(subparts)],
         "marks_text": marks_text,
     }
 

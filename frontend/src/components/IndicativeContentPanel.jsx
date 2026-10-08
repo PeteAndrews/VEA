@@ -73,17 +73,19 @@ export default function IndicativeContentPanel({ assessmentId, candidateId, indi
   function renderRow(criterionId, contentCell, rowClassName = "") {
     const links = evidenceLinksForCriterion(codings, criterionId);
     return (
-      <tr
+      <div
         id={`criterion-row-${criterionId}`}
-        className={`${rowClassName} ${rowClass(criterionId)}`.trim()}
+        className={`indicative-matrix-row ${rowClassName} ${rowClass(criterionId)}`.trim()}
       >
-        <td
-          className={canCode || links.length ? "criterion-target" : undefined}
+        <div
+          className={`indicative-matrix-cell content-cell${
+            canCode || links.length ? " criterion-target" : ""
+          }`}
           onClick={() => handleCriterionClick(criterionId)}
         >
           {contentCell}
-        </td>
-        <td>
+        </div>
+        <div className="indicative-matrix-cell evidence-cell">
           <EvidenceLinkCell
             assessmentId={assessmentId}
             candidateId={candidateId}
@@ -92,47 +94,45 @@ export default function IndicativeContentPanel({ assessmentId, candidateId, indi
             expanded={expandedCriterionId === criterionId}
             onToggle={(open) => setExpandedCriterionId(open ? criterionId : null)}
           />
-        </td>
-        <td className="muted-center">—</td>
-      </tr>
+        </div>
+        <div className="indicative-matrix-cell confidence-cell">
+          <span className="matrix-pill">—</span>
+        </div>
+      </div>
     );
   }
 
   return (
-    <section className="panel panel-wide">
-      <header className="panel-header">
-        <h2>Indicative Content Matrix</h2>
-        {canCode ? (
+    <section className="panel panel-wide indicative-content-panel">
+      {canCode ? (
+        <header className="panel-header indicative-content-hint">
           <span className="muted">
             {reviseCodingId ? "Click a criterion to reassign" : "Click a criterion to link evidence"}
           </span>
-        ) : null}
-      </header>
-      <div className="panel-body table-wrap">
-        <table className="matrix-table">
-          <thead>
-            <tr>
-              <th>Indicative content</th>
-              <th>Evidence Link</th>
-              <th>Confidence</th>
-            </tr>
-          </thead>
-          <tbody>
-            {displayGroups.map((group) => (
-              <Fragment key={group.id}>
-                {group.text ? (
-                  <tr className="group-header-row">
-                    <td colSpan={3}>
-                      <strong>{group.text.replace(/:$/, "")}</strong>
-                    </td>
-                  </tr>
-                ) : null}
-                {group.key_steps.map((step) => (
-                  <Fragment key={step.id}>
-                    {renderRow(
-                      step.id,
-                      <>
-                        <strong>{step.text}</strong>
+        </header>
+      ) : null}
+      <div className="panel-body">
+        <div className="indicative-matrix">
+          <div className="indicative-matrix-columns">
+            <div>Indicative content</div>
+            <div>Evidence Link</div>
+            <div>Confidence</div>
+          </div>
+          {displayGroups.map((group, groupIndex) => (
+            <Fragment key={group.id}>
+              {group.text ? (
+                <div className={`indicative-group-header group-header-tone-${groupIndex % 4}`}>
+                  {group.text.replace(/:$/, "")}
+                </div>
+              ) : null}
+              {group.key_steps.map((step) => (
+                <Fragment key={step.id}>
+                  {renderRow(
+                    step.id,
+                    <div className="indicative-point">
+                      <span className="indicative-bullet indicative-bullet-filled" aria-hidden="true" />
+                      <div className="indicative-point-body">
+                        <span>{step.text}</span>
                         {step.is_control_variable ? (
                           <span className="tag tag-control">Control variable</span>
                         ) : null}
@@ -141,18 +141,25 @@ export default function IndicativeContentPanel({ assessmentId, candidateId, indi
                             or {alt}
                           </div>
                         ))}
-                      </>,
-                      "key-step-row"
-                    )}
-                    {step.details.map((detail) =>
-                      renderRow(detail.id, detail.text, "detail-row")
-                    )}
-                  </Fragment>
-                ))}
-              </Fragment>
-            ))}
-          </tbody>
-        </table>
+                      </div>
+                    </div>,
+                    "key-step-row"
+                  )}
+                  {step.details.map((detail) =>
+                    renderRow(
+                      detail.id,
+                      <div className="indicative-point indicative-point-detail">
+                        <span className="indicative-bullet indicative-bullet-hollow" aria-hidden="true" />
+                        <span className="indicative-point-body">{detail.text}</span>
+                      </div>,
+                      "detail-row"
+                    )
+                  )}
+                </Fragment>
+              ))}
+            </Fragment>
+          ))}
+        </div>
       </div>
     </section>
   );

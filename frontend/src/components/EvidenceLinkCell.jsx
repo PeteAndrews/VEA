@@ -39,7 +39,7 @@ export default function EvidenceLinkCell({
   }, [expanded, onToggle]);
 
   if (!links.length) {
-    return <span className="muted-center">—</span>;
+    return <span className="matrix-pill">—</span>;
   }
 
   const interpretations = links
@@ -126,7 +126,7 @@ export default function EvidenceLinkCell({
           }
         }}
       >
-        <span className="badge">[{links.length} linked]</span>
+        <span className="badge matrix-pill linked">[{links.length} linked]</span>
         <span className="evidence-snippet">&ldquo;{snippet(links[0].text, 40)}&rdquo;</span>
         {isChecking ? <span className="ai-checking-dot" title="Checking evidence" /> : null}
         {badgeInterpretation?.intervention?.type &&

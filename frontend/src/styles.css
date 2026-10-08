@@ -190,36 +190,152 @@ button,
   border-top: 1px solid var(--border);
 }
 
+html:has(.marking-page),
+body:has(.marking-page) {
+  height: 100%;
+  overflow: hidden;
+}
+
+#root:has(.marking-page) {
+  height: 100%;
+  overflow: hidden;
+}
+
+.app-shell:has(.marking-page) {
+  height: 100vh;
+  max-height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.app-shell:has(.marking-page) .main-area {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.page-content:has(.marking-page) {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0.85rem 1.25rem 1rem;
+}
+
+.marking-page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  gap: 0.5rem;
+}
+
+.marking-banner {
+  margin: 0;
+  flex: 0 0 auto;
+}
+
 .marking-layout {
   display: grid;
-  grid-template-columns: 360px minmax(0, 1fr) min(300px, 20vw) min(380px, 24vw);
+  grid-template-columns: 360px minmax(0, 1fr) min(425px, 30vw);
   gap: 1rem;
   align-items: stretch;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
-.marking-left,
-.marking-center,
-.marking-level-review {
-  display: grid;
-  gap: 1rem;
-  align-content: start;
+.marking-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
 }
 
-.marking-level-review {
-  position: sticky;
-  top: 1rem;
-  align-self: start;
-  max-height: calc(100vh - 2rem);
-  overflow: auto;
+.marking-column.marking-column-center {
+  height: 100%;
+  overflow: hidden auto;
+  overscroll-behavior: contain;
+}
+
+.marking-column-center > .panel {
+  overflow: visible;
+}
+
+.marking-column .panel-header,
+.marking-column .panel-footer,
+.marking-column .indicative-content-hint,
+.marking-column .draft-hint {
+  flex-shrink: 0;
+}
+
+.marking-column-left > .panel:first-child {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-height: min(32vh, 320px);
+}
+
+.marking-column-left > .panel:first-child .question-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.marking-column-left > .panel:has(.response-body) {
+  flex: 1 1 0;
+  min-height: 8rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.marking-column-left .response-body {
+  flex: 1;
+  min-height: 0;
+  max-height: none;
+  overflow-y: auto;
+}
+
+.marking-column-left > .panel:has(.candidate-grid),
+.marking-column-left > .final-mark-panel {
+  flex: 0 0 auto;
+}
+
+.marking-column-center .indicative-content-panel,
+.marking-column-center .level-descriptor-panel,
+.marking-column-center .level-review-panel {
+  flex: 0 0 auto;
+  min-height: auto;
+  overflow: visible;
+}
+
+.marking-column-center .indicative-content-panel .panel-body,
+.marking-column-center .level-descriptor-panel .panel-body,
+.marking-column-center .level-review-panel .panel-body {
+  flex: none;
+  overflow: visible;
+}
+
+.marking-column-right .assistant-panel {
+  flex: 1 1 0;
+  min-height: 0;
+  max-height: none;
+}
+
+.app-shell:has(.marking-page) .level-card {
+  min-height: 0;
 }
 
 .assistant-panel {
-  position: sticky;
-  top: 1rem;
-  height: calc(100vh - 2rem);
-  min-height: 420px;
+  position: static;
+  height: auto;
+  min-height: 14rem;
+  max-height: min(42vh, 480px);
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto minmax(0, 1fr) auto;
   overflow: hidden;
   background: #f8fafc;
 }
@@ -228,6 +344,13 @@ button,
   grid-template-rows: auto;
   height: auto;
   min-height: 0;
+}
+
+.app-shell:has(.marking-page) .marking-column-right .assistant-panel {
+  flex: 1 1 0;
+  min-height: 0;
+  max-height: none;
+  height: 100%;
 }
 
 .assistant-panel-header {
@@ -482,6 +605,17 @@ button,
   padding: 1rem;
 }
 
+.question-subparts {
+  margin: 0.35rem 0 0;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.question-subparts li {
+  margin: 0.2rem 0;
+  line-height: 1.45;
+}
+
 .question-body p {
   margin: 0 0 0.75rem;
 }
@@ -517,6 +651,19 @@ button,
   width: 100%;
   border-collapse: collapse;
   font-size: 0.92rem;
+  table-layout: fixed;
+}
+
+.indicative-content-panel .matrix-table col:nth-child(1) {
+  width: 54%;
+}
+
+.indicative-content-panel .matrix-table col:nth-child(2) {
+  width: 28%;
+}
+
+.indicative-content-panel .matrix-table col:nth-child(3) {
+  width: 18%;
 }
 
 .matrix-table th,
@@ -542,12 +689,149 @@ button,
   color: #374151;
 }
 
-.group-header-row td {
+.indicative-content-panel .panel-body {
+  padding: 0.85rem;
   background: #f8fafc;
-  font-size: 0.85rem;
-  text-transform: none;
-  letter-spacing: 0.01em;
-  padding-top: 0.85rem;
+}
+
+.indicative-content-hint {
+  justify-content: flex-end;
+  padding-top: 0.65rem;
+  padding-bottom: 0.65rem;
+}
+
+.indicative-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.indicative-matrix-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr) minmax(0, 0.65fr);
+  gap: 0.75rem;
+  padding: 0 0.15rem 0.25rem;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.indicative-matrix-columns > :nth-child(2),
+.indicative-matrix-columns > :nth-child(3) {
+  text-align: center;
+}
+
+.indicative-group-header {
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-top: 0.15rem;
+}
+
+.group-header-tone-0 {
+  background: #e6f0ff;
+  color: #0056d2;
+}
+
+.group-header-tone-1 {
+  background: #e6f9f0;
+  color: #008547;
+}
+
+.group-header-tone-2 {
+  background: #fff4e6;
+  color: #c2410c;
+}
+
+.group-header-tone-3 {
+  background: #fdf2f8;
+  color: #be185d;
+}
+
+.indicative-matrix-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr) minmax(0, 0.65fr);
+  gap: 0.75rem;
+  align-items: start;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.92rem;
+}
+
+.indicative-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+}
+
+.indicative-point-detail {
+  padding-left: 0.65rem;
+}
+
+.indicative-bullet {
+  flex: 0 0 auto;
+  margin-top: 0.45em;
+  border-radius: 50%;
+}
+
+.indicative-bullet-filled {
+  width: 0.42rem;
+  height: 0.42rem;
+  background: #0f172a;
+}
+
+.indicative-bullet-hollow {
+  width: 0.48rem;
+  height: 0.48rem;
+  background: transparent;
+  border: 1.5px solid #64748b;
+}
+
+.indicative-point-body {
+  flex: 1;
+  min-width: 0;
+  font-weight: 400;
+  color: #0f172a;
+  line-height: 1.45;
+}
+
+.indicative-matrix-row.detail-row .indicative-point-body {
+  color: #4b5563;
+}
+
+.indicative-matrix-cell.evidence-cell {
+  display: flex;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.indicative-matrix-cell.confidence-cell {
+  display: flex;
+  justify-content: center;
+}
+
+.matrix-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  background: #f0f2f5;
+  color: #64748b;
+  font-size: 0.82rem;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.badge.matrix-pill,
+.matrix-pill.linked {
+  background: #eff6ff;
+  color: #2563eb;
+  font-weight: 600;
 }
 
 .alt-line {
@@ -745,8 +1029,22 @@ button,
   cursor: pointer;
 }
 
+.indicative-matrix-row.clickable-row {
+  cursor: pointer;
+}
+
+.indicative-matrix-row.clickable-row:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.indicative-matrix-row.linked-row {
+  background: #f8fbff;
+  border-color: #bfdbfe;
+}
+
 .clickable-row .criterion-target:hover {
-  background: #f8fafc;
+  background: transparent;
 }
 
 .evidence-link-cell {
@@ -933,8 +1231,9 @@ button,
 }
 
 .evidence-snippet {
-  font-size: 0.85rem;
-  color: #374151;
+  font-size: 0.82rem;
+  color: #94a3b8;
+  font-style: italic;
 }
 
 .level-card {
@@ -943,6 +1242,8 @@ button,
 }
 
 .level-card.selected {
+  position: relative;
+  z-index: 1;
   box-shadow: 0 0 0 2px var(--accent);
 }
 
@@ -1068,7 +1369,14 @@ button,
 }
 
 .level-intervention-card {
-  margin-top: 1rem;
+  margin-top: 0.65rem;
+}
+
+.intervention-card-inline {
+  position: static;
+  width: 100%;
+  margin-top: 0.65rem;
+  box-shadow: none;
 }
 
 .ai-checking-dot {
@@ -1215,28 +1523,44 @@ button,
 }
 
 @media (max-width: 1100px) {
+  .app-shell:has(.marking-page) {
+    height: auto;
+    max-height: none;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .app-shell:has(.marking-page) .main-area,
+  .page-content:has(.marking-page),
+  .marking-page,
+  .marking-layout,
+  .marking-column {
+    overflow: visible;
+    min-height: auto;
+  }
+
   .marking-layout {
     grid-template-columns: 1fr;
   }
 
-  .marking-level-review {
-    position: static;
+  html:has(.marking-page),
+  body:has(.marking-page),
+  #root:has(.marking-page) {
+    height: auto;
+    overflow: auto;
+  }
+
+  .marking-column-left > .panel:first-child,
+  .marking-column-center .indicative-content-panel,
+  .marking-column-center .level-descriptor-panel,
+  .marking-column-center .level-review-panel,
+  .marking-column-right .assistant-panel {
+    flex: none;
     max-height: none;
   }
 
   .assistant-panel {
-    position: fixed;
-    inset: auto 0 0 0;
-    z-index: 30;
-    width: 100%;
-    height: auto;
-    max-height: 55vh;
-    min-height: 0;
-    border-top: 1px solid var(--border);
-    box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.12);
-  }
-
-  .assistant-panel.collapsed {
+    min-height: 320px;
     max-height: none;
   }
 
@@ -1246,31 +1570,45 @@ button,
 }
 
 .final-mark-panel {
-  position: fixed;
-  right: 1.25rem;
-  bottom: 1.25rem;
-  z-index: 40;
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 1rem 1.1rem;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
-  min-width: 260px;
+  padding: 0.85rem 1rem;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+  min-width: 0;
+  width: 100%;
+}
+
+.control-placeholder .final-mark-panel {
+  margin-top: 1.5rem;
+  max-width: 420px;
 }
 
 .final-mark-panel.submitted {
   border-color: #86efac;
 }
 
+.final-mark-panel label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
 .final-mark-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   gap: 0.75rem;
   align-items: center;
   margin-top: 0.5rem;
 }
 
 .final-mark-row input {
-  width: 5rem;
+  width: 100%;
+  max-width: 5rem;
+}
+
+.final-mark-row button {
+  white-space: nowrap;
 }
 
 .study-complete-banner {

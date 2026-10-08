@@ -14,6 +14,7 @@ export default function LevelInterventionCard({
   candidateId,
   interpretation,
   onDismiss,
+  inline = false,
 }) {
   const dispatch = useDispatch();
   const { markingSessionId } = useSelector((state) => state.auth);
@@ -50,7 +51,12 @@ export default function LevelInterventionCard({
   }
 
   return (
-    <div className="intervention-card level-intervention-card">
+    <div
+      className={`intervention-card level-intervention-card${
+        inline ? " intervention-card-inline" : ""
+      }`}
+      onClick={(event) => event.stopPropagation()}
+    >
       <div className="intervention-card-header">
         <span className={`intervention-tag intervention-${intervention.type.toLowerCase()}`}>
           {TYPE_LABELS[intervention.type] || intervention.type}

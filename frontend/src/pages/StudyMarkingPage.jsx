@@ -39,18 +39,18 @@ export default function StudyMarkingPage() {
   }
 
   return (
-    <>
-      <MarkingPage
-        assessmentId={currentTrial.assessment_id}
-        candidateId={currentTrial.candidate_id}
-        markingSessionId={currentTrial.marking_session_id}
-      />
-      <FinalMarkPanel
-        trialId={currentTrial.trial_id}
-        maximumMark={currentTrial.maximum_mark}
-        submitted={currentTrial.submitted}
-        finalMark={currentTrial.final_mark}
-      />
-    </>
+    <MarkingPage
+      assessmentId={currentTrial.assessment_id}
+      candidateId={currentTrial.candidate_id}
+      markingSessionId={currentTrial.marking_session_id}
+      finalMarkPanel={
+        <FinalMarkPanel
+          trialId={currentTrial.trial_id}
+          maximumMark={currentTrial.maximum_mark}
+          submitted={currentTrial.submitted}
+          finalMark={currentTrial.final_mark}
+        />
+      }
+    />
   );
 }
