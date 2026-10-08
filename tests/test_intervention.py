@@ -27,7 +27,9 @@ from app.stages import derive_stage
 from app.views import resolve_response_id
 
 ASSESSMENT_ID = "C-JUN25-8464C1H-02_3"
+BIOLOGY_ASSESSMENT_ID = "B-JUN24-84612H-05_6"
 CANDIDATE_ID = "A"
+BIOLOGY_ANSWER_DETAIL_ID = "ms_05_6-contraception-detail-fsh"
 DETAIL_1A = "ms_02_3-detail-1a"
 DETAIL_2A = "ms_02_3-detail-2a"
 DETAIL_3B = "ms_02_3-detail-3b"
@@ -149,6 +151,14 @@ def test_derive_stage_evidence_mapping():
 
 def test_derive_stage_level_judgement():
     assert derive_stage({"relations": [], "tentative_level": {"level": 2}}) == "LEVEL_JUDGEMENT"
+
+
+def test_biology_answer_detail_context_includes_parent_key_step():
+    graph_service = GraphService.from_data_dir(data_dir="data", assessment_id=BIOLOGY_ASSESSMENT_ID)
+    context = build_intervention_context(graph_service, BIOLOGY_ANSWER_DETAIL_ID)
+    assert context["criterion"]["id"] == BIOLOGY_ANSWER_DETAIL_ID
+    assert context["criterion"]["segment_type"] == "answer_detail"
+    assert context["parent_criterion"]["id"] == "ms_05_6-contraception-point-1"
 
 
 def test_detail_4a_context_includes_rejects(graph_service):

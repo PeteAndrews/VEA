@@ -16,14 +16,20 @@ from app.retrieval import EMBED_DIM, RetrievalService, is_retrieval_eligible, sc
 
 pytest.importorskip("sentence_transformers")
 
-RESPONSE_TXT = Path("data/responses/JUN25-8464C1H-02_3_response-higher-ambiguity.txt")
+RESPONSE_TXT = Path(
+    "data/responses/C-JUN25-8464C1H-02_3/JUN25-8464C1H-02_3_response-higher-ambiguity.txt"
+)
 RESPONSE_ID = "JUN25-8464C1H-02_3_response-higher-ambiguity"
 
 
 @pytest.fixture
 def ingested_response(tmp_path):
     responses_dir = tmp_path / "responses"
-    record = ingest_response_file(RESPONSE_TXT, responses_dir=responses_dir)
+    record = ingest_response_file(
+        RESPONSE_TXT,
+        assessment_id="C-JUN25-8464C1H-02_3",
+        data_dir=tmp_path,
+    )
     return record, tmp_path
 
 
@@ -85,7 +91,7 @@ def test_embeddings_cache_scopes_and_retrieval(monkeypatch):
     responses_dir.mkdir(parents=True, exist_ok=True)
     cache_dir.mkdir(parents=True, exist_ok=True)
 
-    record = ingest_response_file(RESPONSE_TXT, responses_dir=responses_dir)
+    record = ingest_response_file(RESPONSE_TXT, data_dir=data_dir)
 
     retrieval = RetrievalService.from_data_dir(data_dir=data_dir)
     assert retrieval._retrieval_embeddings is not None

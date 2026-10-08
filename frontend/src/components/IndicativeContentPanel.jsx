@@ -26,7 +26,7 @@ export default function IndicativeContentPanel({ assessmentId, candidateId, indi
 
   if (!indicativeContent) return null;
 
-  const keySteps = indicativeContent.groups.flatMap((group) => group.key_steps);
+  const displayGroups = indicativeContent.groups.filter((group) => group.key_steps.length > 0);
   const canCode = Boolean(draft) || Boolean(reviseCodingId);
 
   function handleCriterionClick(criterionId) {
@@ -118,26 +118,37 @@ export default function IndicativeContentPanel({ assessmentId, candidateId, indi
             </tr>
           </thead>
           <tbody>
-            {keySteps.map((step) => (
-              <Fragment key={step.id}>
-                {renderRow(
-                  step.id,
-                  <>
-                    <strong>{step.text}</strong>
-                    {step.is_control_variable ? (
-                      <span className="tag tag-control">Control variable</span>
-                    ) : null}
-                    {step.alternatives.map((alt) => (
-                      <div key={alt} className="alt-line">
-                        or {alt}
-                      </div>
-                    ))}
-                  </>,
-                  "key-step-row"
-                )}
-                {step.details.map((detail) =>
-                  renderRow(detail.id, detail.text, "detail-row")
-                )}
+            {displayGroups.map((group) => (
+              <Fragment key={group.id}>
+                {group.text ? (
+                  <tr className="group-header-row">
+                    <td colSpan={3}>
+                      <strong>{group.text.replace(/:$/, "")}</strong>
+                    </td>
+                  </tr>
+                ) : null}
+                {group.key_steps.map((step) => (
+                  <Fragment key={step.id}>
+                    {renderRow(
+                      step.id,
+                      <>
+                        <strong>{step.text}</strong>
+                        {step.is_control_variable ? (
+                          <span className="tag tag-control">Control variable</span>
+                        ) : null}
+                        {step.alternatives.map((alt) => (
+                          <div key={alt} className="alt-line">
+                            or {alt}
+                          </div>
+                        ))}
+                      </>,
+                      "key-step-row"
+                    )}
+                    {step.details.map((detail) =>
+                      renderRow(detail.id, detail.text, "detail-row")
+                    )}
+                  </Fragment>
+                ))}
               </Fragment>
             ))}
           </tbody>

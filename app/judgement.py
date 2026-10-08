@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from app.graph import is_codable_criterion
 from app.graph_service import GraphService
 from app.views import _strip_display_text, levels_view
 
@@ -138,8 +139,8 @@ def _require_criterion(graph_service: GraphService, criterion_id: str) -> dict[s
         node = graph_service.get_node(criterion_id)
     except KeyError as exc:
         raise KeyError(criterion_id) from exc
-    if node.get("segment_type") != "indicative_point":
-        raise ValueError(f"Node is not an indicative_point criterion: {criterion_id}")
+    if not is_codable_criterion(node.get("segment_type")):
+        raise ValueError(f"Node is not a codable criterion: {criterion_id}")
     return node
 
 

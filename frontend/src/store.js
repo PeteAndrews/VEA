@@ -19,6 +19,7 @@ import levelAiReducer, {
   runLevelCheck,
 } from "./levelAiSlice";
 import markingReducer from "./markingSlice";
+import studyReducer from "./studySlice";
 
 const listenerMiddleware = createListenerMiddleware();
 
@@ -117,6 +118,7 @@ export const store = configureStore({
     ai: aiReducer,
     levelAi: levelAiReducer,
     conversation: conversationReducer,
+    study: studyReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().prepend(listenerMiddleware.middleware),

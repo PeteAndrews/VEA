@@ -52,6 +52,22 @@ def build_parser() -> argparse.ArgumentParser:
 
     sub = parser.add_subparsers(dest="command", required=True)
 
+    ingest = sub.add_parser("ingest-assessment")
+    ingest.add_argument("assessment_id", nargs="?")
+    ingest.add_argument("--all", action="store_true")
+    ingest.add_argument("--rebuild", action="store_true")
+
+    provision = sub.add_parser("provision-participant")
+    provision.add_argument("--study-id", required=True)
+    provision.add_argument("--participant-id", required=True)
+    provision.add_argument("--token")
+    provision.add_argument("--condition", required=True)
+    provision.add_argument("--subject", required=True)
+    provision.add_argument("--assessment-id", action="append", dest="assessment_ids")
+
+    import_participants = sub.add_parser("import-participants")
+    import_participants.add_argument("--study-id", required=True)
+
     sub.add_parser("summary")
 
     node = sub.add_parser("node")
@@ -152,6 +168,40 @@ def main(argv: list[str] | None = None) -> int:
                 _print(retrieval.similar(args.response_segment_id, top_k=args.top_k, scope=args.scope))
             else:
                 _print(retrieval.response_context(args.response_segment_id, top_k=args.top_k, scope=args.scope))
+            return 0
+
+        if args.command == "ingest-assessment":
+            from app.assessment_ingestion import ingest_all, ingest_assessment
+
+            if args.all:
+                _print({"results": ingest_all(args.data_dir, rebuild=args.rebuild)})
+            elif args.assessment_id:
+                _print(ingest_assessment(args.data_dir, args.assessment_id, rebuild=args.rebuild))
+            else:
+                raise ValueError("Provide assessment_id or --all")
+            return 0
+
+        if args.command == "provision-participant":
+            from app.dependencies import study_service
+            from app.study.store import StudyStore
+
+            token = args.token or StudyStore.generate_token()
+            result = study_service().provision_participant(
+                study_id=args.study_id,
+                participant_id=args.participant_id,
+                token=token,
+                condition=args.condition,
+                subject=args.subject,
+                assessment_ids=args.assessment_ids,
+            )
+            result["token"] = token
+            _print(result)
+            return 0
+
+        if args.command == "import-participants":
+            from app.dependencies import study_service
+
+            _print(study_service().import_participants_file(args.study_id))
             return 0
 
         if args.command == "prepare":

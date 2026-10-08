@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import pickle
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
@@ -39,6 +40,8 @@ MARK_POINT_TYPES = {
     "mark_point",
     "answer_detail",
 }
+
+CODABLE_CRITERION_SEGMENT_TYPES = frozenset({"indicative_point", "answer_detail"})
 EXTRA_INFO_TYPES = {
     "extra_information",
     "general_guidance",
@@ -69,6 +72,10 @@ STRUCTURAL_ONLY_SEGMENT_TYPES = {
 
 def is_structural_only(segment_type: str) -> bool:
     return segment_type in STRUCTURAL_ONLY_SEGMENT_TYPES
+
+
+def is_codable_criterion(segment_type: str | None) -> bool:
+    return segment_type in CODABLE_CRITERION_SEGMENT_TYPES
 
 
 def segment_to_node_type(segment_type: str, document_type: str) -> str:
@@ -124,15 +131,13 @@ def _questions_dir(data_dir: Path) -> Path:
     return sub if sub.is_dir() else data_dir
 
 
-def load_graph(
-    data_dir: str | Path = "data",
-    assessment_id: str = "C-JUN25-8464C1H-02_3",
+def load_graph_from_sources(
+    *,
+    assessment_id: str,
+    stage1: dict,
+    stage2: dict,
+    jev: dict,
 ) -> AssessmentGraph:
-    data_dir = Path(data_dir)
-    questions_dir = _questions_dir(data_dir)
-    stage1 = _load_json(questions_dir / f"{assessment_id}.json")
-    stage2 = _load_json(questions_dir / f"{assessment_id}-relationships.json")
-    jev = _load_json(questions_dir / f"{assessment_id}-jev-verification.json")
 
     jev_lookup = {
         (v["source_id"], v["target_id"], v["llm_relation"]): v
@@ -303,3 +308,39 @@ def load_graph(
         jev_labels=JEV_LABELS,
         edge_count=len(edge_records),
     )
+
+
+def load_graph(
+    data_dir: str | Path = "data",
+    assessment_id: str = "C-JUN25-8464C1H-02_3",
+) -> AssessmentGraph:
+    from app.assessment_paths import (
+        source_assessment_path,
+        source_jev_verification_path,
+        source_relationships_path,
+    )
+
+    data_dir = Path(data_dir)
+    stage1 = _load_json(source_assessment_path(data_dir, assessment_id))
+    stage2 = _load_json(source_relationships_path(data_dir, assessment_id))
+    jev = _load_json(source_jev_verification_path(data_dir, assessment_id))
+    return load_graph_from_sources(
+        assessment_id=assessment_id,
+        stage1=stage1,
+        stage2=stage2,
+        jev=jev,
+    )
+
+
+def save_graph_artifact(graph: AssessmentGraph, path: str | Path) -> None:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp_path = path.with_suffix(path.suffix + ".tmp")
+    with tmp_path.open("wb") as handle:
+        pickle.dump(graph, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    tmp_path.replace(path)
+
+
+def load_graph_artifact(path: str | Path) -> AssessmentGraph:
+    with Path(path).open("rb") as handle:
+        return pickle.load(handle)

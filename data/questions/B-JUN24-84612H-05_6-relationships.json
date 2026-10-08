@@ -4,153 +4,201 @@
   "question_id": "05_6",
   "relationships": [
     {
-      "source_id": "ms_05_6-level-3-rule",
-      "target_id": "ms_05_6-contraception-group",
+      "source_id": "ms_05_6-level-3",
+      "target_id": "ms_05_6-level-3-rule",
       "relation": "REQUIRES",
       "confidence": 0.98,
+      "rationale": "Awarding Level 3 is subject to the explicit supplemental rule requiring coverage of both areas.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_05_6-level-3-rule",
+      "target_id": "ms_05_6-group-contraception",
+      "relation": "REQUIRES",
+      "confidence": 0.99,
       "rationale": "The Level 3 rule explicitly requires details about contraception.",
       "provenance": "llm"
     },
     {
       "source_id": "ms_05_6-level-3-rule",
-      "target_id": "ms_05_6-infertility-group",
+      "target_id": "ms_05_6-group-infertility",
       "relation": "REQUIRES",
-      "confidence": 0.98,
+      "confidence": 0.99,
       "rationale": "The Level 3 rule explicitly requires details about infertility treatment.",
       "provenance": "llm"
     },
     {
-      "source_id": "commentary_05_6-level-3-entry",
-      "target_id": "ms_05_6-level-3-rule",
+      "source_id": "ms_05_6-contraception-fsh",
+      "target_id": "ms_05_6-contraception-hormones",
       "relation": "CLARIFIES",
-      "confidence": 0.98,
-      "rationale": "It specifies that the required detail for both areas must link a hormone, its role, and its consequence.",
+      "confidence": 0.96,
+      "rationale": "It explains the causal contraceptive effect of hormonal inhibition of FSH.",
       "provenance": "llm"
     },
     {
-      "source_id": "commentary_05_6-level-2-entry",
+      "source_id": "ms_05_6-contraception-lh",
+      "target_id": "ms_05_6-contraception-hormones",
+      "relation": "CLARIFIES",
+      "confidence": 0.96,
+      "rationale": "It explains the causal contraceptive effect of hormonal inhibition of LH.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_05_6-infertility-fsh-detail",
+      "target_id": "ms_05_6-infertility-fsh",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains how FSH assists infertility treatment by stimulating maturation of eggs or follicles.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_05_6-infertility-lh-detail",
+      "target_id": "ms_05_6-infertility-lh",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains how LH supports ovulation, egg collection and subsequent IVF treatment.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_05_6-infertility-progesterone-detail",
+      "target_id": "ms_05_6-infertility-progesterone",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains that progesterone maintains the uterine lining and increases the chance of implantation.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-level-3-guidance",
+      "target_id": "ms_05_6-level-3-rule",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It specifies that both required areas need a linked hormone–role–consequence statement to enter Level 3.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-level-2-guidance",
       "target_id": "ms_05_6-level-2",
       "relation": "CLARIFIES",
       "confidence": 0.98,
-      "rationale": "It defines one precise route to the Level 2 entry mark: a full linked statement for either topic.",
+      "rationale": "It defines one route into Level 2: a complete linked statement for either contraception or infertility.",
       "provenance": "llm"
     },
     {
       "source_id": "commentary_05_6-level-2-alternative",
-      "target_id": "commentary_05_6-level-2-entry",
-      "relation": "EXTENDS",
-      "confidence": 0.99,
-      "rationale": "It provides an additional route into Level 2 using partial links across both topics.",
-      "provenance": "llm"
-    },
-    {
-      "source_id": "commentary_05_6-level-1-entry",
-      "target_id": "ms_05_6-level-1",
+      "target_id": "ms_05_6-level-2",
       "relation": "CLARIFIES",
-      "confidence": 0.97,
-      "rationale": "It defines relevant content sufficient for Level 1 and explains the one-mark entry threshold.",
-      "provenance": "llm"
-    },
-    {
-      "source_id": "commentary_05_6-level-1-entry",
-      "target_id": "ms_05_6-contraceptive-methods",
-      "relation": "CONSTRAINS",
       "confidence": 0.98,
-      "rationale": "It limits method-only content to one mark and excludes non-hormonal contraceptive methods from credit.",
+      "rationale": "It defines an alternative route into Level 2 using partial links across both subject areas.",
       "provenance": "llm"
     },
     {
-      "source_id": "commentary_05_6-higher-mark-guidance",
+      "source_id": "commentary_05_6-level-1-guidance",
+      "target_id": "ms_05_6-level-1",
+      "relation": "CONSTRAINS",
+      "confidence": 0.99,
+      "rationale": "It sets the Level 1 entry threshold, caps method-only responses at one mark and excludes non-hormonal methods.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-additional-content-rule",
       "target_id": "ms_05_6-level-1",
       "relation": "APPLIES_TO",
-      "confidence": 0.95,
-      "rationale": "The within-level rule explains how a Level 1 response moves from 1 to 2 marks.",
+      "confidence": 0.97,
+      "rationale": "The rule explains how additional content raises a Level 1 response from one to two marks.",
       "provenance": "llm"
     },
     {
-      "source_id": "commentary_05_6-higher-mark-guidance",
+      "source_id": "commentary_05_6-additional-content-rule",
       "target_id": "ms_05_6-level-2",
       "relation": "APPLIES_TO",
-      "confidence": 0.95,
-      "rationale": "The within-level rule explains how a Level 2 response moves from 3 to 4 marks.",
+      "confidence": 0.97,
+      "rationale": "The rule explains how additional content raises a Level 2 response from three to four marks.",
       "provenance": "llm"
     },
     {
-      "source_id": "commentary_05_6-higher-mark-guidance",
+      "source_id": "commentary_05_6-additional-content-rule",
       "target_id": "ms_05_6-level-3",
       "relation": "APPLIES_TO",
-      "confidence": 0.95,
-      "rationale": "The within-level rule explains how a Level 3 response moves from 5 to 6 marks.",
+      "confidence": 0.97,
+      "rationale": "The rule explains how additional content raises a Level 3 response from five to six marks.",
       "provenance": "llm"
     },
     {
-      "source_id": "commentary_05_6-respectively-guidance",
-      "target_id": "commentary_05_6-level-3-entry",
-      "relation": "CONSTRAINS",
-      "confidence": 0.96,
-      "rationale": "It restricts when ordered lists of hormones, roles, and consequences count as clearly linked for Level 3 entry.",
+      "source_id": "commentary_05_6-additional-content-example",
+      "target_id": "commentary_05_6-additional-content-rule",
+      "relation": "EXEMPLIFIES",
+      "confidence": 0.99,
+      "rationale": "It gives a contraceptive method as an example of extra content that earns the higher mark within a level.",
       "provenance": "llm"
     },
     {
-      "source_id": "commentary_05_6-respectively-guidance",
-      "target_id": "commentary_05_6-level-2-entry",
+      "source_id": "commentary_05_6-respectively-rule",
+      "target_id": "ms_05_6-level-2",
       "relation": "CONSTRAINS",
       "confidence": 0.94,
-      "rationale": "It restricts when ordered hormone-role-consequence statements can receive credit as linked Level 2 content.",
+      "rationale": "It restricts when ordered lists of hormones, roles and consequences can count as the logical linking needed at Level 2.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_05_6-respectively-rule",
+      "target_id": "ms_05_6-level-3",
+      "relation": "CONSTRAINS",
+      "confidence": 0.96,
+      "rationale": "It restricts when ordered lists can count as the clear logical linking required at Level 3.",
       "provenance": "llm"
     },
     {
       "source_id": "commentary_05_6-respectively-example",
-      "target_id": "commentary_05_6-respectively-guidance",
+      "target_id": "commentary_05_6-respectively-rule",
       "relation": "EXEMPLIFIES",
       "confidence": 0.99,
-      "rationale": "The example uses “respectively” to establish the required unambiguous links.",
+      "rationale": "The example uses “respectively” to link each consequence unambiguously to the ordered hormones.",
       "provenance": "llm"
     },
     {
-      "source_id": "commentary_05_6-insufficient-link-example",
-      "target_id": "commentary_05_6-respectively-guidance",
+      "source_id": "commentary_05_6-insufficient-example",
+      "target_id": "commentary_05_6-respectively-rule",
       "relation": "CLARIFIES",
       "confidence": 0.98,
-      "rationale": "The contrasting example shows that the same ordered claims without “respectively” are not sufficiently linked.",
+      "rationale": "The contrasting example shows that omitting “respectively” leaves the consequences insufficiently linked.",
       "provenance": "llm"
     },
     {
-      "source_id": "commentary_05_6-contraception-credit-guidance",
-      "target_id": "ms_05_6-fsh-inhibition",
+      "source_id": "commentary_05_6-fsh-lh-guidance",
+      "target_id": "ms_05_6-contraception-fsh",
       "relation": "CONSTRAINS",
       "confidence": 0.99,
-      "rationale": "It specifies that contraception credit must concern the consequence of lacking FSH, not FSH's normal action.",
+      "rationale": "It specifies that credit must concern the consequence of lacking FSH, not merely FSH's normal function.",
       "provenance": "llm"
     },
     {
-      "source_id": "commentary_05_6-contraception-credit-guidance",
-      "target_id": "ms_05_6-lh-inhibition",
+      "source_id": "commentary_05_6-fsh-lh-guidance",
+      "target_id": "ms_05_6-contraception-lh",
       "relation": "CONSTRAINS",
       "confidence": 0.99,
-      "rationale": "It specifies that contraception credit must concern the consequence of lacking LH, not LH's normal action.",
+      "rationale": "It specifies that credit must concern the consequence of lacking LH, not merely LH's normal function.",
       "provenance": "llm"
     },
     {
       "source_id": "commentary_05_6-egg-growth-guidance",
-      "target_id": "ms_05_6-fsh-inhibition",
-      "relation": "CONSTRAINS",
+      "target_id": "ms_05_6-contraception-fsh",
+      "relation": "REJECTS",
       "confidence": 0.99,
-      "rationale": "It states that “preventing egg growth” is too vague to satisfy the required egg development or maturation detail.",
+      "rationale": "It explicitly identifies “preventing egg growth” as too vague to satisfy the egg development or maturation detail.",
       "provenance": "llm"
     },
     {
       "source_id": "commentary_05_6-other-hormone-use-example",
-      "target_id": "ms_05_6-contraception-group",
-      "relation": "EXTENDS",
-      "confidence": 0.97,
-      "rationale": "It adds another creditworthy hormonal contraception mechanism involving progesterone and cervical mucus.",
+      "target_id": "ms_05_6-contraception-hormones",
+      "relation": "ACCEPTS",
+      "confidence": 0.98,
+      "rationale": "It explicitly credits an alternative hormonal contraceptive mechanism involving thickened cervical mucus.",
       "provenance": "llm"
     }
   ],
   "extraction": {
     "model": "gpt-5.6",
-    "timestamp": "2026-10-07T10:53:04.424386+00:00",
+    "timestamp": "2026-10-08T12:40:12.426313+00:00",
     "requires_review": false,
     "warnings": []
   }

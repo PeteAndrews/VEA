@@ -104,6 +104,12 @@ const authSlice = createSlice({
 
     },
 
+    setTrialMarkingSession(state, action) {
+
+      state.markingSessionId = action.payload;
+
+    },
+
   },
 
   extraReducers: (builder) => {
@@ -144,7 +150,7 @@ const authSlice = createSlice({
 
 
 
-export const { logout } = authSlice.actions;
+export const { logout, setTrialMarkingSession } = authSlice.actions;
 
 export default authSlice.reducer;
 

@@ -11,9 +11,11 @@ from app.responses import load_response
 from app.views import dev_responses_list, load_stage1, resolve_response_id
 
 ASSESSMENT_ID = "C-JUN25-8464C1H-02_3"
+BIOLOGY_ASSESSMENT_ID = "B-JUN24-84612H-05_6"
 CANDIDATE_ID = "A"
 CRITERION_ID = "ms_02_3-point-4"
 DETAIL_ID = "ms_02_3-detail-4a"
+BIOLOGY_ANSWER_DETAIL_ID = "ms_05_6-contraception-detail-fsh"
 BAD_CRITERION_ID = "ms_02_3-level-2"
 
 
@@ -54,8 +56,8 @@ def _judgement_path(tmp_path: Path, session_id: str, response_id: str) -> Path:
     return tmp_path / "judgements" / session_id / f"{response_id}.json"
 
 
-def _judgement_prefix(session_id: str) -> str:
-    return f"/marking-sessions/{session_id}/assessments/{ASSESSMENT_ID}/candidates/{CANDIDATE_ID}/judgement"
+def _judgement_prefix(session_id: str, assessment_id: str = ASSESSMENT_ID) -> str:
+    return f"/marking-sessions/{session_id}/assessments/{assessment_id}/candidates/{CANDIDATE_ID}/judgement"
 
 
 def test_create_marking_session(client):
@@ -64,6 +66,22 @@ def test_create_marking_session(client):
     payload = response.json()
     assert payload["marking_session_id"].startswith("ms-")
     assert payload["examiner_id"] == "Alex Parker"
+
+
+def test_create_coding_accepts_biology_answer_detail(client, session):
+    sid = session["marking_session_id"]
+    span_text = "Oestrogen and progesterone are used in the contraceptive pill."
+    response = client.post(
+        f"{_judgement_prefix(sid, BIOLOGY_ASSESSMENT_ID)}/codings",
+        json={
+            "start_char": 0,
+            "end_char": len(span_text),
+            "text": span_text,
+            "criterion_id": BIOLOGY_ANSWER_DETAIL_ID,
+        },
+    )
+    assert response.status_code == 200
+    assert response.json()["codings"][0]["criterion_id"] == BIOLOGY_ANSWER_DETAIL_ID
 
 
 def test_create_coding_persists_offsets(client, session, sample_span, tmp_path, response_record):

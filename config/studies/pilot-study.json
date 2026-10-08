@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "study_id": "pilot-study",
+  "label": "VEA pilot study",
+  "condition_profiles": {
+    "vea": "vea_marking",
+    "control": "control_placeholder"
+  },
+  "subjects": {
+    "chemistry": {
+      "assessment_order": ["C-JUN25-8464C1H-02_3"]
+    },
+    "biology": {
+      "assessment_order": ["B-JUN24-84612H-05_6"]
+    }
+  }
+}

@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from app.classifier import EvidenceRelationClassifier, RelationDecision
+from app.graph import CODABLE_CRITERION_SEGMENT_TYPES, is_codable_criterion
 from app.assessment import (
     assess_evidence_link,
     expansion_candidates as _expansion_candidates,
@@ -117,7 +118,8 @@ def _indicative_children(graph_service: GraphService, node_id: str) -> list[dict
     children = [
         child
         for child in graph_service.graph.nodes.values()
-        if child.get("parent_id") == node_id and child.get("segment_type") == "indicative_point"
+        if child.get("parent_id") == node_id
+        and child.get("segment_type") in CODABLE_CRITERION_SEGMENT_TYPES
     ]
     children.sort(key=lambda child: child["order"])
     return children
@@ -179,8 +181,8 @@ def _question_text(graph_service: GraphService) -> str | None:
 
 def build_intervention_context(graph_service: GraphService, criterion_id: str) -> dict[str, Any]:
     node = graph_service.get_node(criterion_id)
-    if node.get("segment_type") != "indicative_point":
-        raise ValueError(f"Node is not an indicative_point criterion: {criterion_id}")
+    if not is_codable_criterion(node.get("segment_type")):
+        raise ValueError(f"Node is not a codable criterion: {criterion_id}")
 
     parent = _indicative_parent(graph_service, node)
     items: list[dict[str, Any]] = []

@@ -70,6 +70,7 @@ class RetrievalService:
         self.model = model
         self._retrieval_node_ids: list[str] = []
         self._retrieval_embeddings: torch.Tensor | None = None
+        self._artifact_version: str | None = None
         self._ensure_assessment_embeddings()
 
     @classmethod
@@ -79,14 +80,33 @@ class RetrievalService:
         assessment_id: str = "C-JUN25-8464C1H-02_3",
         response_id: str | None = None,
         model: SentenceTransformer | None = None,
+        *,
+        artifact_version: str | None = None,
     ) -> RetrievalService:
+        from app.assessment_runtime import get_graph_service, get_version_record, use_registry
         from app.graph import load_graph
 
-        graph = load_graph(data_dir=data_dir, assessment_id=assessment_id)
+        if use_registry(data_dir, assessment_id):
+            version = get_version_record(data_dir, assessment_id, artifact_version)
+            graph_service = get_graph_service(str(data_dir), assessment_id, version["artifact_version"])
+            graph = graph_service.graph
+            artifact_version = version["artifact_version"]
+        else:
+            graph = load_graph(data_dir=data_dir, assessment_id=assessment_id)
+            graph_service = GraphService(graph)
+            artifact_version = None
+
         if response_id:
-            response = load_response(response_id, responses_dir=Path(data_dir) / "responses")
+            response = load_response(
+                response_id,
+                responses_dir=Path(data_dir) / "responses",
+                assessment_id=assessment_id,
+                artifact_version=artifact_version,
+            )
             attach_response_to_graph(graph, response)
-        return cls(GraphService(graph), data_dir=data_dir, model=model)
+        service = cls(graph_service, data_dir=data_dir, model=model)
+        service._artifact_version = artifact_version
+        return service
 
     def ingest_response(self, txt_path: str | Path, assessment_id: str | None = None) -> dict:
         from app.responses import ingest_response_file
@@ -95,7 +115,7 @@ class RetrievalService:
         record = ingest_response_file(
             txt_path,
             assessment_id=assessment_id,
-            responses_dir=self.data_dir / "responses",
+            data_dir=self.data_dir,
         )
         self._embed_and_save_response(record)
         return record
@@ -131,12 +151,24 @@ class RetrievalService:
         top_k: int = 5,
     ) -> dict:
         """Semantic search across all segments in a candidate response."""
-        response = load_response(response_id, responses_dir=self.data_dir / "responses")
-        path = self.data_dir / "responses" / f"{response_id}.pt"
-        if not path.exists():
-            self._embed_and_save_response(response)
+        from app.assessment_paths import resolve_response_paths
+        from app.assessment_runtime import load_registered_response_embeddings, use_registry
 
-        payload = torch.load(path, map_location="cpu", weights_only=True)
+        response = load_response(
+            response_id,
+            responses_dir=self.data_dir / "responses",
+            assessment_id=self.graph.assessment_id,
+            artifact_version=self._artifact_version,
+        )
+        if use_registry(self.data_dir, self.graph.assessment_id) and self._artifact_version:
+            payload = load_registered_response_embeddings(
+                self.data_dir, self.graph.assessment_id, self._artifact_version, response_id
+            )
+        else:
+            paths = resolve_response_paths(self.data_dir, self.graph.assessment_id, response_id)
+            if not paths.pt.exists():
+                self._embed_and_save_response(response)
+            payload = torch.load(paths.pt, map_location="cpu", weights_only=True)
         segment_ids: list[str] = payload["segment_ids"]
         embeddings = payload["embeddings"].float()
         if embeddings.numel() == 0:
@@ -270,6 +302,24 @@ class RetrievalService:
         return node_ids, self._retrieval_embeddings[indices]
 
     def _ensure_assessment_embeddings(self) -> None:
+        from app.assessment_paths import artifact_embeddings_meta_path, artifact_embeddings_path
+        from app.assessment_runtime import use_registry
+
+        if use_registry(self.data_dir, self.graph.assessment_id) and self._artifact_version:
+            meta_path = artifact_embeddings_meta_path(
+                self.data_dir, self.graph.assessment_id, self._artifact_version
+            )
+            emb_path = artifact_embeddings_path(
+                self.data_dir, self.graph.assessment_id, self._artifact_version
+            )
+            if meta_path.is_file() and emb_path.is_file():
+                with meta_path.open(encoding="utf-8") as f:
+                    meta = json.load(f)
+                payload = torch.load(emb_path, map_location="cpu", weights_only=True)
+                self._retrieval_node_ids = meta["node_ids"]
+                self._retrieval_embeddings = payload["embeddings"].float()
+                return
+
         eligible_ids = [
             node_id
             for node_id, node in self.graph.nodes.items()
@@ -356,14 +406,37 @@ class RetrievalService:
             show_progress_bar=False,
         ).float().cpu()
 
-        out_path = self.data_dir / "responses" / f"{response['response_id']}.pt"
-        torch.save({"segment_ids": segment_ids, "embeddings": embeddings}, out_path)
+        from app.assessment_paths import legacy_responses_dir, resolve_response_paths
+
+        paths = resolve_response_paths(self.data_dir, response["assessment_id"], response["response_id"])
+        torch.save({"segment_ids": segment_ids, "embeddings": embeddings}, paths.pt)
 
     def _load_response_segment_embedding(self, response_id: str, segment_id: str) -> torch.Tensor:
-        path = self.data_dir / "responses" / f"{response_id}.pt"
-        if not path.exists():
-            response = load_response(response_id, responses_dir=self.data_dir / "responses")
+        from app.assessment_paths import resolve_response_paths
+        from app.assessment_runtime import load_registered_response_embeddings, use_registry
+
+        assessment_id = self.graph.assessment_id
+        if use_registry(self.data_dir, assessment_id) and self._artifact_version:
+            payload = load_registered_response_embeddings(
+                self.data_dir, assessment_id, self._artifact_version, response_id
+            )
+            segment_ids = payload["segment_ids"]
+            embeddings = payload["embeddings"].float()
+            try:
+                index = segment_ids.index(segment_id)
+            except ValueError as exc:
+                raise KeyError(segment_id) from exc
+            return embeddings[index]
+
+        paths = resolve_response_paths(self.data_dir, assessment_id, response_id)
+        if not paths.pt.exists():
+            response = load_response(
+                response_id,
+                responses_dir=self.data_dir / "responses",
+                assessment_id=assessment_id,
+            )
             self._embed_and_save_response(response)
+        path = paths.pt
 
         payload = torch.load(path, map_location="cpu", weights_only=True)
         segment_ids = payload["segment_ids"]

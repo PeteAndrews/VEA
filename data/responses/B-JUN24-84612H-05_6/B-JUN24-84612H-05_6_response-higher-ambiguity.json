@@ -1,0 +1,29 @@
+{
+  "response_id": "B-JUN24-84612H-05_6_response-higher-ambiguity",
+  "assessment_id": "B-JUN24-84612H-05_6",
+  "source_file": "data/responses/B-JUN24-84612H-05_6/B-JUN24-84612H-05_6_response-higher-ambiguity.txt",
+  "text": "The contraceptive pill contains progesterone, which inhibits the release of FSH and LH, preventing egg maturation and ovulation.\n\nFor infertility, FSH is given to make eggs mature in the ovaries, so there are more mature eggs available to be fertilised. Progesterone can also maintain the uterus lining so an embryo is more likely to implant.",
+  "segments": [
+    {
+      "id": "B-JUN24-84612H-05_6_response-higher-ambiguity-seg-1",
+      "order": 1,
+      "text": "The contraceptive pill contains progesterone, which inhibits the release of FSH and LH, preventing egg maturation and ovulation.",
+      "start_char": 0,
+      "end_char": 128
+    },
+    {
+      "id": "B-JUN24-84612H-05_6_response-higher-ambiguity-seg-2",
+      "order": 2,
+      "text": "For infertility, FSH is given to make eggs mature in the ovaries, so there are more mature eggs available to be fertilised.",
+      "start_char": 130,
+      "end_char": 253
+    },
+    {
+      "id": "B-JUN24-84612H-05_6_response-higher-ambiguity-seg-3",
+      "order": 3,
+      "text": "Progesterone can also maintain the uterus lining so an embryo is more likely to implant.",
+      "start_char": 254,
+      "end_char": 342
+    }
+  ]
+}

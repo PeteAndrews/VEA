@@ -3,7 +3,7 @@
   "assessment_id": "B-JUN24-84612H-05_6",
   "question_id": "05_6",
   "metadata": {
-    "subject": "biology",
+    "subject": null,
     "qualification": null,
     "paper": null,
     "maximum_mark": 6,
@@ -18,7 +18,7 @@
       "source_file": "B-JUN24-84612H-05_6-Q.txt",
       "segments": [
         {
-          "id": "q_05_6-reference",
+          "id": "q_05_6-label",
           "type": "other_question_content",
           "text": "Q. 05.6",
           "order": 1,
@@ -35,7 +35,7 @@
           "specification_reference": null
         },
         {
-          "id": "q_05_6-stem",
+          "id": "q_05_6-context",
           "type": "question_text",
           "text": "Hormones can be used for controlling human reproduction.",
           "order": 2,
@@ -95,7 +95,7 @@
           "specification_reference": null
         },
         {
-          "id": "q_05_6-topic-contraception",
+          "id": "q_05_6-subpart-contraception",
           "type": "subquestion",
           "text": "• contraception",
           "order": 4,
@@ -119,7 +119,7 @@
           "specification_reference": null
         },
         {
-          "id": "q_05_6-topic-infertility",
+          "id": "q_05_6-subpart-infertility",
           "type": "subquestion",
           "text": "• the treatment of infertility.",
           "order": 5,
@@ -151,9 +151,9 @@
           "annotations": [
             {
               "type": "quantifier",
-              "text": "6",
+              "text": "6 Marks",
               "start": 1,
-              "end": 2
+              "end": 8
             }
           ],
           "source": {
@@ -174,7 +174,7 @@
       "source_file": "B-JUN24-84612H-05_6-MS.txt",
       "segments": [
         {
-          "id": "ms_05_6-reference",
+          "id": "ms_05_6-label",
           "type": "other_mark_scheme_content",
           "text": "Q. 05.6",
           "order": 1,
@@ -196,7 +196,20 @@
           "text": "Level 3: Relevant points (reasons / causes) are identified, given in \ndetail and logically linked to form a clear account. Mark: 5-6",
           "order": 2,
           "parent_id": null,
-          "annotations": [],
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "Relevant",
+              "start": 9,
+              "end": 17
+            },
+            {
+              "type": "quantifier",
+              "text": "5-6",
+              "start": 129,
+              "end": 132
+            }
+          ],
           "source": {
             "file": "B-JUN24-84612H-05_6-MS.txt",
             "page": null
@@ -216,7 +229,26 @@
           "text": "Level 2: Relevant points (reasons / causes) are identified, and \nthere are attempts at logical linking.  The resulting account is not \nfully clear. Mark:3–4",
           "order": 3,
           "parent_id": null,
-          "annotations": [],
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "Relevant",
+              "start": 9,
+              "end": 17
+            },
+            {
+              "type": "qualifier",
+              "text": "not \nfully clear",
+              "start": 130,
+              "end": 146
+            },
+            {
+              "type": "quantifier",
+              "text": "3–4",
+              "start": 153,
+              "end": 156
+            }
+          ],
           "source": {
             "file": "B-JUN24-84612H-05_6-MS.txt",
             "page": null
@@ -236,7 +268,26 @@
           "text": "Level 1: Points are identified and stated simply, but their relevance \nis not clear and there is no attempt at logical linking. Mark:1–2",
           "order": 4,
           "parent_id": null,
-          "annotations": [],
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not clear",
+              "start": 74,
+              "end": 83
+            },
+            {
+              "type": "qualifier",
+              "text": "no attempt",
+              "start": 97,
+              "end": 107
+            },
+            {
+              "type": "quantifier",
+              "text": "1–2",
+              "start": 133,
+              "end": 136
+            }
+          ],
           "source": {
             "file": "B-JUN24-84612H-05_6-MS.txt",
             "page": null
@@ -251,19 +302,35 @@
           "specification_reference": null
         },
         {
-          "id": "ms_05_6-zero-mark-rule",
-          "type": "level_rule",
+          "id": "ms_05_6-level-0",
+          "type": "level_descriptor",
           "text": "No relevant content. Mark: 0",
           "order": 5,
           "parent_id": null,
-          "annotations": [],
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "No relevant content",
+              "start": 0,
+              "end": 19
+            },
+            {
+              "type": "quantifier",
+              "text": "0",
+              "start": 27,
+              "end": 28
+            }
+          ],
           "source": {
             "file": "B-JUN24-84612H-05_6-MS.txt",
             "page": null
           },
           "marks": 0,
-          "level": null,
-          "mark_range": null,
+          "level": 0,
+          "mark_range": {
+            "min": 0,
+            "max": 0
+          },
           "assessment_objective": null,
           "specification_reference": null
         },
@@ -285,7 +352,7 @@
           "specification_reference": null
         },
         {
-          "id": "ms_05_6-contraception-group",
+          "id": "ms_05_6-group-contraception",
           "type": "indicative_content_group",
           "text": "contraception:",
           "order": 7,
@@ -313,7 +380,7 @@
           "type": "indicative_point",
           "text": "• use of hormones oestrogen and progesterone or progesterone \n(only)",
           "order": 8,
-          "parent_id": "ms_05_6-contraception-group",
+          "parent_id": "ms_05_6-group-contraception",
           "annotations": [
             {
               "type": "domain_term",
@@ -329,9 +396,9 @@
             },
             {
               "type": "qualifier",
-              "text": "only",
-              "start": 63,
-              "end": 67
+              "text": "(only)",
+              "start": 62,
+              "end": 68
             }
           ],
           "source": {
@@ -345,7 +412,7 @@
           "specification_reference": null
         },
         {
-          "id": "ms_05_6-fsh-inhibition",
+          "id": "ms_05_6-contraception-fsh",
           "type": "answer_detail",
           "text": "o inhibition of FSH (production / release) - lack of FSH prevents follicle / egg development / maturation - therefore there is no egg to fertilise",
           "order": 9,
@@ -371,26 +438,14 @@
             },
             {
               "type": "domain_term",
-              "text": "follicle",
+              "text": "follicle / egg development / maturation",
               "start": 66,
-              "end": 74
-            },
-            {
-              "type": "domain_term",
-              "text": "egg development",
-              "start": 77,
-              "end": 92
-            },
-            {
-              "type": "domain_term",
-              "text": "maturation",
-              "start": 95,
               "end": 105
             },
             {
               "type": "domain_term",
-              "text": "fertilise",
-              "start": 137,
+              "text": "no egg to fertilise",
+              "start": 127,
               "end": 146
             }
           ],
@@ -405,7 +460,7 @@
           "specification_reference": null
         },
         {
-          "id": "ms_05_6-lh-inhibition",
+          "id": "ms_05_6-contraception-lh",
           "type": "answer_detail",
           "text": "o inhibition of LH (production / release) - lack of LH prevents ovulation - therefore there is no egg to fertilise",
           "order": 10,
@@ -437,14 +492,8 @@
             },
             {
               "type": "domain_term",
-              "text": "egg",
-              "start": 98,
-              "end": 101
-            },
-            {
-              "type": "domain_term",
-              "text": "fertilise",
-              "start": 105,
+              "text": "no egg to fertilise",
+              "start": 95,
               "end": 114
             }
           ],
@@ -463,7 +512,7 @@
           "type": "indicative_point",
           "text": "• contraceptive methods include oral contraceptive pill, injection, \nimplant, skin patch, IUD / IUS with hormones",
           "order": 11,
-          "parent_id": "ms_05_6-contraception-group",
+          "parent_id": "ms_05_6-group-contraception",
           "annotations": [
             {
               "type": "domain_term",
@@ -497,14 +546,8 @@
             },
             {
               "type": "domain_term",
-              "text": "IUD",
+              "text": "IUD / IUS",
               "start": 90,
-              "end": 93
-            },
-            {
-              "type": "domain_term",
-              "text": "IUS",
-              "start": 96,
               "end": 99
             },
             {
@@ -525,7 +568,7 @@
           "specification_reference": null
         },
         {
-          "id": "ms_05_6-infertility-group",
+          "id": "ms_05_6-group-infertility",
           "type": "indicative_content_group",
           "text": "treatment of infertility:",
           "order": 12,
@@ -549,11 +592,11 @@
           "specification_reference": null
         },
         {
-          "id": "ms_05_6-use-fsh",
+          "id": "ms_05_6-infertility-fsh",
           "type": "indicative_point",
           "text": "• use of FSH",
           "order": 13,
-          "parent_id": "ms_05_6-infertility-group",
+          "parent_id": "ms_05_6-group-infertility",
           "annotations": [
             {
               "type": "domain_term",
@@ -573,40 +616,34 @@
           "specification_reference": null
         },
         {
-          "id": "ms_05_6-fsh-role",
+          "id": "ms_05_6-infertility-fsh-detail",
           "type": "answer_detail",
           "text": "o (FSH) stimulates maturation of (several) egg(s) / follicle(s) - (FSH) increases number of eggs matured",
           "order": 14,
-          "parent_id": "ms_05_6-use-fsh",
+          "parent_id": "ms_05_6-infertility-fsh",
           "annotations": [
             {
               "type": "domain_term",
-              "text": "maturation",
-              "start": 19,
+              "text": "(FSH) stimulates maturation",
+              "start": 2,
               "end": 29
             },
             {
-              "type": "quantifier",
-              "text": "several",
-              "start": 34,
-              "end": 41
+              "type": "qualifier",
+              "text": "(several)",
+              "start": 33,
+              "end": 42
             },
             {
               "type": "domain_term",
-              "text": "egg(s)",
+              "text": "egg(s) / follicle(s)",
               "start": 43,
-              "end": 49
-            },
-            {
-              "type": "domain_term",
-              "text": "follicle(s)",
-              "start": 52,
               "end": 63
             },
             {
               "type": "domain_term",
-              "text": "number of eggs matured",
-              "start": 82,
+              "text": "(FSH) increases number of eggs matured",
+              "start": 66,
               "end": 104
             }
           ],
@@ -621,11 +658,11 @@
           "specification_reference": null
         },
         {
-          "id": "ms_05_6-use-lh",
+          "id": "ms_05_6-infertility-lh",
           "type": "indicative_point",
           "text": "• use of LH",
           "order": 15,
-          "parent_id": "ms_05_6-infertility-group",
+          "parent_id": "ms_05_6-group-infertility",
           "annotations": [
             {
               "type": "domain_term",
@@ -645,40 +682,34 @@
           "specification_reference": null
         },
         {
-          "id": "ms_05_6-lh-role",
+          "id": "ms_05_6-infertility-lh-detail",
           "type": "answer_detail",
           "text": "o (LH) stimulates ovulation - (LH) allows eggs / follicles to be collected (from ovary) \n - (so) increased chance of fertilising an egg - IVF and insertion of embryo(s) into uterus",
           "order": 16,
-          "parent_id": "ms_05_6-use-lh",
+          "parent_id": "ms_05_6-infertility-lh",
           "annotations": [
             {
               "type": "domain_term",
-              "text": "ovulation",
-              "start": 18,
+              "text": "(LH) stimulates ovulation",
+              "start": 2,
               "end": 27
             },
             {
               "type": "domain_term",
-              "text": "eggs",
+              "text": "eggs / follicles",
               "start": 42,
-              "end": 46
-            },
-            {
-              "type": "domain_term",
-              "text": "follicles",
-              "start": 49,
               "end": 58
             },
             {
               "type": "domain_term",
-              "text": "ovary",
-              "start": 81,
-              "end": 86
+              "text": "collected (from ovary)",
+              "start": 65,
+              "end": 87
             },
             {
               "type": "domain_term",
-              "text": "fertilising an egg",
-              "start": 117,
+              "text": "increased chance of fertilising an egg",
+              "start": 97,
               "end": 135
             },
             {
@@ -689,14 +720,8 @@
             },
             {
               "type": "domain_term",
-              "text": "insertion of embryo(s)",
+              "text": "insertion of embryo(s) into uterus",
               "start": 146,
-              "end": 168
-            },
-            {
-              "type": "domain_term",
-              "text": "uterus",
-              "start": 174,
               "end": 180
             }
           ],
@@ -711,11 +736,11 @@
           "specification_reference": null
         },
         {
-          "id": "ms_05_6-use-progesterone",
+          "id": "ms_05_6-infertility-progesterone",
           "type": "indicative_point",
           "text": "• use of progesterone",
           "order": 17,
-          "parent_id": "ms_05_6-infertility-group",
+          "parent_id": "ms_05_6-group-infertility",
           "annotations": [
             {
               "type": "domain_term",
@@ -735,11 +760,11 @@
           "specification_reference": null
         },
         {
-          "id": "ms_05_6-progesterone-role",
+          "id": "ms_05_6-infertility-progesterone-detail",
           "type": "answer_detail",
           "text": "o (to) maintain uterus lining - increased chance of implantation",
           "order": 18,
-          "parent_id": "ms_05_6-use-progesterone",
+          "parent_id": "ms_05_6-infertility-progesterone",
           "annotations": [
             {
               "type": "domain_term",
@@ -749,8 +774,8 @@
             },
             {
               "type": "domain_term",
-              "text": "implantation",
-              "start": 52,
+              "text": "increased chance of implantation",
+              "start": 32,
               "end": 64
             }
           ],
@@ -788,6 +813,12 @@
               "text": "infertility treatment",
               "start": 47,
               "end": 68
+            },
+            {
+              "type": "qualifier",
+              "text": "required",
+              "start": 74,
+              "end": 82
             }
           ],
           "source": {
@@ -808,8 +839,8 @@
       "source_file": "B-JUN24-84612H-05_6-C.txt",
       "segments": [
         {
-          "id": "commentary_05_6-reference",
-          "type": "other_commentary_content",
+          "id": "commentary_05_6-heading",
+          "type": "commentary_heading",
           "text": "Q. 05.6",
           "order": 1,
           "parent_id": null,
@@ -826,7 +857,7 @@
         },
         {
           "id": "commentary_05_6-introduction",
-          "type": "commentary_text",
+          "type": "commentary_guidance",
           "text": "This is an Extended Response question. Please read the information in the introduction to \nthis commentary document regarding how to annotate students' responses.",
           "order": 2,
           "parent_id": null,
@@ -842,12 +873,31 @@
           "specification_reference": null
         },
         {
-          "id": "commentary_05_6-infographic-guidance",
-          "type": "commentary_guidance",
+          "id": "commentary_05_6-infographic",
+          "type": "commentary_text",
           "text": "You may find it helpful to download the infographic (star-chart) from the additional supporting \ninformation in OLS. This shows what details are required to gain access (i.e. achieve the \nlower mark) for each Level in a visual format",
           "order": 3,
           "parent_id": null,
-          "annotations": [],
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "required",
+              "start": 145,
+              "end": 153
+            },
+            {
+              "type": "qualifier",
+              "text": "lower mark",
+              "start": 188,
+              "end": 198
+            },
+            {
+              "type": "quantifier",
+              "text": "each Level",
+              "start": 204,
+              "end": 214
+            }
+          ],
           "source": {
             "file": "B-JUN24-84612H-05_6-C.txt",
             "page": null
@@ -859,12 +909,18 @@
           "specification_reference": null
         },
         {
-          "id": "commentary_05_6-level-3-entry",
+          "id": "commentary_05_6-level-3-guidance",
           "type": "commentary_guidance",
           "text": "To enter Level 3 (5 marks), the student must have a linked statement between a hormone, \nits role and its consequence for BOTH contraception and fertility.",
           "order": 4,
           "parent_id": null,
           "annotations": [
+            {
+              "type": "quantifier",
+              "text": "5 marks",
+              "start": 18,
+              "end": 25
+            },
             {
               "type": "domain_term",
               "text": "hormone",
@@ -901,7 +957,7 @@
           "specification_reference": null
         },
         {
-          "id": "commentary_05_6-level-2-entry",
+          "id": "commentary_05_6-level-2-guidance",
           "type": "commentary_guidance",
           "text": "To enter Level 2 (3 marks), there are several ways the student can do this. They can have a \nfull linked statement including hormone, role and consequence for EITHER contraception \nor infertility.",
           "order": 5,
@@ -909,9 +965,9 @@
           "annotations": [
             {
               "type": "quantifier",
-              "text": "several",
-              "start": 38,
-              "end": 45
+              "text": "3 marks",
+              "start": 18,
+              "end": 25
             },
             {
               "type": "domain_term",
@@ -969,21 +1025,15 @@
             },
             {
               "type": "domain_term",
-              "text": "hormone and role",
-              "start": 145,
-              "end": 161
+              "text": "fertility",
+              "start": 96,
+              "end": 105
             },
             {
               "type": "qualifier",
               "text": "AND",
               "start": 180,
               "end": 183
-            },
-            {
-              "type": "domain_term",
-              "text": "hormone and consequence",
-              "start": 187,
-              "end": 210
             }
           ],
           "source": {
@@ -997,7 +1047,7 @@
           "specification_reference": null
         },
         {
-          "id": "commentary_05_6-level-1-entry",
+          "id": "commentary_05_6-level-1-guidance",
           "type": "commentary_guidance",
           "text": "To enter Level 1 (1 mark), We need reference to any relevant content, but note there is a \nmaximum of 1 mark for contraceptive method(s) only.  We are ignoring references to non\nhormonal methods of contraception.",
           "order": 7,
@@ -1005,12 +1055,12 @@
           "annotations": [
             {
               "type": "quantifier",
-              "text": "any",
-              "start": 48,
-              "end": 51
+              "text": "1 mark",
+              "start": 18,
+              "end": 24
             },
             {
-              "type": "quantifier",
+              "type": "qualifier",
               "text": "maximum of 1 mark",
               "start": 91,
               "end": 108
@@ -1026,12 +1076,6 @@
               "text": "only",
               "start": 137,
               "end": 141
-            },
-            {
-              "type": "qualifier",
-              "text": "non",
-              "start": 174,
-              "end": 177
             },
             {
               "type": "domain_term",
@@ -1051,29 +1095,29 @@
           "specification_reference": null
         },
         {
-          "id": "commentary_05_6-higher-mark-guidance",
+          "id": "commentary_05_6-additional-content-rule",
           "type": "commentary_guidance",
-          "text": "Any additional content, beyond the minimum required for entry to the level, (but short of the \nlevel above it) will increase the mark to the higher mark in the level (2, 4 or 6).  For example, \nthe reference to a contraceptive method would enable the student to access the higher mark \nwithin a Level.",
+          "text": "Any additional content, beyond the minimum required for entry to the level, (but short of the \nlevel above it) will increase the mark to the higher mark in the level (2, 4 or 6).",
           "order": 8,
           "parent_id": null,
           "annotations": [
             {
-              "type": "quantifier",
-              "text": "Any",
-              "start": 0,
-              "end": 3
+              "type": "qualifier",
+              "text": "minimum required",
+              "start": 35,
+              "end": 51
             },
             {
               "type": "qualifier",
-              "text": "minimum",
-              "start": 35,
-              "end": 42
+              "text": "higher mark",
+              "start": 141,
+              "end": 152
             },
             {
-              "type": "domain_term",
-              "text": "contraceptive method",
-              "start": 213,
-              "end": 233
+              "type": "quantifier",
+              "text": "2, 4 or 6",
+              "start": 167,
+              "end": 176
             }
           ],
           "source": {
@@ -1087,10 +1131,40 @@
           "specification_reference": null
         },
         {
-          "id": "commentary_05_6-respectively-guidance",
+          "id": "commentary_05_6-additional-content-example",
+          "type": "commentary_example",
+          "text": "For example, \nthe reference to a contraceptive method would enable the student to access the higher mark \nwithin a Level.",
+          "order": 9,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "contraceptive method",
+              "start": 33,
+              "end": 53
+            },
+            {
+              "type": "qualifier",
+              "text": "higher mark",
+              "start": 93,
+              "end": 104
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-05_6-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_05_6-respectively-rule",
           "type": "commentary_guidance",
           "text": "If students mention relevant hormones and then give their roles and/or consequences in the \ncorrect respective order, we can give this credit only if they write ‘respectively’.",
-          "order": 9,
+          "order": 10,
           "parent_id": null,
           "annotations": [
             {
@@ -1098,6 +1172,24 @@
               "text": "hormones",
               "start": 29,
               "end": 37
+            },
+            {
+              "type": "qualifier",
+              "text": "correct respective order",
+              "start": 92,
+              "end": 116
+            },
+            {
+              "type": "qualifier",
+              "text": "only",
+              "start": 142,
+              "end": 146
+            },
+            {
+              "type": "qualifier",
+              "text": "‘respectively’",
+              "start": 161,
+              "end": 175
             }
           ],
           "source": {
@@ -1114,7 +1206,7 @@
           "id": "commentary_05_6-respectively-example",
           "type": "commentary_example",
           "text": "E.g. An answer such as ‘Progesterone inhibits the release of FSH and LH which prevent the \nmaturation and ovulation respectively.’  - consequences are clearly linked to hormones.",
-          "order": 10,
+          "order": 11,
           "parent_id": null,
           "annotations": [
             {
@@ -1142,6 +1234,12 @@
               "end": 115
             },
             {
+              "type": "qualifier",
+              "text": "respectively",
+              "start": 116,
+              "end": 128
+            },
+            {
               "type": "domain_term",
               "text": "hormones",
               "start": 169,
@@ -1159,10 +1257,10 @@
           "specification_reference": null
         },
         {
-          "id": "commentary_05_6-insufficient-link-example",
+          "id": "commentary_05_6-insufficient-example",
           "type": "commentary_example",
           "text": "Whereas ‘Progesterone inhibits the release of FSH and LH which prevent the maturation \nand ovulation’ would not be sufficient for a clearly linked consequence.",
-          "order": 11,
+          "order": 12,
           "parent_id": null,
           "annotations": [
             {
@@ -1188,6 +1286,18 @@
               "text": "ovulation",
               "start": 91,
               "end": 100
+            },
+            {
+              "type": "qualifier",
+              "text": "not be sufficient",
+              "start": 108,
+              "end": 125
+            },
+            {
+              "type": "qualifier",
+              "text": "clearly linked consequence",
+              "start": 132,
+              "end": 158
             }
           ],
           "source": {
@@ -1201,10 +1311,10 @@
           "specification_reference": null
         },
         {
-          "id": "commentary_05_6-contraception-credit-guidance",
+          "id": "commentary_05_6-fsh-lh-guidance",
           "type": "commentary_guidance",
           "text": "In the contraception section we cannot give credit for saying what FSH and LH normally do, \nthe indicative content focuses on the consequence of a lack of these hormones.",
-          "order": 12,
+          "order": 13,
           "parent_id": null,
           "annotations": [
             {
@@ -1240,7 +1350,7 @@
           "id": "commentary_05_6-egg-growth-guidance",
           "type": "commentary_guidance",
           "text": "Preventing egg growth is too vague in terms of egg development/maturation.",
-          "order": 13,
+          "order": 14,
           "parent_id": null,
           "annotations": [
             {
@@ -1276,7 +1386,7 @@
           "id": "commentary_05_6-other-hormone-use-example",
           "type": "commentary_example",
           "text": "Other uses of hormones in contraception are creditworthy e.g. ‘Progesterone thickens \ncervical mucus which hinders/prevents passage of sperm.’",
-          "order": 14,
+          "order": 15,
           "parent_id": null,
           "annotations": [
             {
@@ -1305,6 +1415,12 @@
             },
             {
               "type": "domain_term",
+              "text": "hinders/prevents",
+              "start": 107,
+              "end": 123
+            },
+            {
+              "type": "domain_term",
               "text": "passage of sperm",
               "start": 124,
               "end": 140
@@ -1325,7 +1441,7 @@
   ],
   "extraction": {
     "model": "gpt-5.6",
-    "timestamp": "2026-10-07T10:51:03.908572+00:00",
+    "timestamp": "2026-10-08T12:37:46.629892+00:00",
     "requires_review": false,
     "warnings": []
   }

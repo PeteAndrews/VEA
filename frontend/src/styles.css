@@ -542,6 +542,14 @@ button,
   color: #374151;
 }
 
+.group-header-row td {
+  background: #f8fafc;
+  font-size: 0.85rem;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  padding-top: 0.85rem;
+}
+
 .alt-line {
   font-weight: 400;
   color: var(--muted);
@@ -1235,4 +1243,60 @@ button,
   .level-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+.final-mark-panel {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 40;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+  min-width: 260px;
+}
+
+.final-mark-panel.submitted {
+  border-color: #86efac;
+}
+
+.final-mark-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.final-mark-row input {
+  width: 5rem;
+}
+
+.study-complete-banner {
+  background: #ecfdf5;
+  border: 1px solid #86efac;
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.control-placeholder {
+  max-width: 720px;
+}
+
+.response-status {
+  font-size: 0.85rem;
+}
+
+.response-status-submitted {
+  color: #15803d;
+}
+
+.response-status-in_progress {
+  color: #b45309;
+}
+
+.response-status-pending {
+  color: var(--muted);
 }

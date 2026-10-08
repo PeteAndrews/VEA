@@ -1,5 +1,5 @@
 async function fetchJson(path, options = {}) {
-  const response = await fetch(path, options);
+  const response = await fetch(path, { credentials: "include", ...options });
   if (!response.ok) {
     const detail = await response.text();
     throw new Error(detail || `Request failed: ${response.status}`);
@@ -138,4 +138,28 @@ export function sendConversationMessage(markingSessionId, assessmentId, candidat
     `/api/marking-sessions/${markingSessionId}/assessments/${assessmentId}/candidates/${candidateId}/conversation/messages`,
     { content }
   );
+}
+
+export function startStudySession(token) {
+  return sendJson("POST", "/api/study/session", { token });
+}
+
+export function fetchStudySession() {
+  return fetchJson("/api/study/session");
+}
+
+export function fetchStudyQuestions() {
+  return fetchJson("/api/study/questions");
+}
+
+export function startQuestionTrial(assessmentId) {
+  return sendJson("POST", `/api/study/questions/${assessmentId}/next-trial`);
+}
+
+export function fetchTrial(trialId) {
+  return fetchJson(`/api/study/trials/${trialId}`);
+}
+
+export function submitTrialMark(trialId, finalMark) {
+  return sendJson("POST", `/api/study/trials/${trialId}/submit`, { final_mark: finalMark });
 }

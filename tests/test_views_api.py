@@ -11,6 +11,7 @@ from app.responses import load_response
 from app.views import dev_responses_list, load_stage1
 
 ASSESSMENT_ID = "C-JUN25-8464C1H-02_3"
+BIOLOGY_ASSESSMENT_ID = "B-JUN24-84612H-05_6"
 FORBIDDEN_LABELS = ("top-mark", "low-mark", "higher-ambiguity", "JUN25-8464C1H-02_3_response")
 
 
@@ -73,6 +74,27 @@ def test_indicative_content_view(client):
     point4 = next(step for step in key_steps if step["id"] == "ms_02_3-point-4")
     assert point4["alternatives"]
     assert any(detail["id"] == "ms_02_3-detail-4a" for detail in point4["details"])
+
+
+def test_indicative_content_view_biology_includes_answer_details(client):
+    response = client.get(f"/assessments/{BIOLOGY_ASSESSMENT_ID}/indicative-content")
+    assert response.status_code == 200
+    groups = response.json()["groups"]
+
+    populated = [group for group in groups if group["key_steps"]]
+    assert len(populated) == 2
+    assert {group["text"] for group in populated} == {"contraception:", "treatment of infertility:"}
+
+    key_steps = [step for group in populated for step in group["key_steps"]]
+    assert len(key_steps) == 5
+
+    details = [detail for step in key_steps for detail in step["details"]]
+    assert len(details) == 5
+    assert any(detail["id"] == "ms_05_6-contraception-detail-fsh" for detail in details)
+    assert any("inhibition of FSH" in detail["text"] for detail in details)
+
+    hormones = next(step for step in key_steps if step["id"] == "ms_05_6-contraception-point-1")
+    assert len(hormones["details"]) == 2
 
 
 def test_candidates_neutral_labels(client):

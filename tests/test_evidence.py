@@ -356,10 +356,10 @@ def test_fake_classify_support(fake_pipeline):
 def api_client(monkeypatch):
     api._evidence_pipeline.cache_clear()
 
-    def pipeline_factory():
+    def pipeline_factory(assessment_id=ASSESSMENT_ID):
         return EvidencePipeline(
             data_dir="data",
-            assessment_id=ASSESSMENT_ID,
+            assessment_id=assessment_id,
             classifier=FakeEvidenceRelationClassifier(),
         )
 
@@ -379,7 +379,7 @@ def test_api_get_response(api_client):
     response = api_client.get(f"/responses/{HIGHER_RESPONSE}")
     assert response.status_code == 200
     payload = response.json()
-    assert payload["response_id"] == HIGHER_RESPONSE
+    assert payload["dev"]["response_id"] == HIGHER_RESPONSE
     assert len(payload["segments"]) >= 1
 
 

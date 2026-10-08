@@ -1,19 +1,29 @@
+import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { restoreStudySession } from "./studySlice";
+import ControlPlaceholderPage from "./pages/ControlPlaceholderPage";
 import LoginPage from "./pages/LoginPage";
 import MarkingPage from "./pages/MarkingPage";
 import QuestionsPage from "./pages/QuestionsPage";
+import StudyMarkingPage from "./pages/StudyMarkingPage";
 
-function RequireLogin({ children }) {
-  const { user, markingSessionId } = useSelector((state) => state.auth);
-  if (!user || !markingSessionId) {
+function RequireStudyLogin({ children }) {
+  const participant = useSelector((state) => state.study.participant);
+  if (!participant) {
     return <Navigate to="/login" replace />;
   }
   return children;
 }
 
 export default function App() {
-  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+  const participant = useSelector((state) => state.study.participant);
+
+  useEffect(() => {
+    dispatch(restoreStudySession());
+  }, [dispatch]);
 
   return (
     <Routes>
@@ -21,20 +31,36 @@ export default function App() {
       <Route
         path="/questions"
         element={
-          <RequireLogin>
+          <RequireStudyLogin>
             <QuestionsPage />
-          </RequireLogin>
+          </RequireStudyLogin>
+        }
+      />
+      <Route
+        path="/study/trials/:trialId/mark"
+        element={
+          <RequireStudyLogin>
+            <StudyMarkingPage />
+          </RequireStudyLogin>
+        }
+      />
+      <Route
+        path="/study/trials/:trialId/control"
+        element={
+          <RequireStudyLogin>
+            <ControlPlaceholderPage />
+          </RequireStudyLogin>
         }
       />
       <Route
         path="/mark/:assessmentId/:candidateId"
         element={
-          <RequireLogin>
+          <RequireStudyLogin>
             <MarkingPage />
-          </RequireLogin>
+          </RequireStudyLogin>
         }
       />
-      <Route path="/" element={<Navigate to={user ? "/questions" : "/login"} replace />} />
+      <Route path="/" element={<Navigate to={participant ? "/questions" : "/login"} replace />} />
     </Routes>
   );
 }

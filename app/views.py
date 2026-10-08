@@ -285,48 +285,61 @@ def levels_view(
     return {"levels": levels, "errata_warnings": warnings}
 
 
+_DETAIL_SEGMENT_TYPES = {"indicative_point", "answer_detail"}
+
+
+def _detail_rows(graph_service: GraphService, point_id: str) -> list[dict[str, Any]]:
+    details: list[dict[str, Any]] = []
+    for detail in _children(graph_service, point_id):
+        if detail["segment_type"] not in _DETAIL_SEGMENT_TYPES:
+            continue
+        details.append(
+            {
+                "id": detail["id"],
+                "text": _strip_display_text(detail["text"]),
+            }
+        )
+    return details
+
+
+def _key_steps_for_group(graph_service: GraphService, group_id: str, control_steps: set[str]) -> list[dict[str, Any]]:
+    key_steps: list[dict[str, Any]] = []
+    for child in _children(graph_service, group_id):
+        if child["segment_type"] != "indicative_point":
+            continue
+        if child.get("parent_id") != group_id:
+            continue
+
+        primary, alternatives = _split_alternatives(child["text"])
+        key_steps.append(
+            {
+                "id": child["id"],
+                "text": primary,
+                "alternatives": alternatives,
+                "is_control_variable": child["id"] in control_steps,
+                "details": _detail_rows(graph_service, child["id"]),
+            }
+        )
+    return key_steps
+
+
 def indicative_content_view(graph_service: GraphService) -> dict[str, Any]:
     control_steps = _control_variable_steps(graph_service)
     groups: list[dict[str, Any]] = []
 
-    for node_id, node in graph_service.graph.nodes.items():
-        if node["segment_type"] != "indicative_content_group":
-            continue
+    group_nodes = [
+        (node_id, node)
+        for node_id, node in graph_service.graph.nodes.items()
+        if node["segment_type"] == "indicative_content_group"
+    ]
+    group_nodes.sort(key=lambda item: item[1]["order"])
 
-        key_steps: list[dict[str, Any]] = []
-        for child in _children(graph_service, node_id):
-            if child["segment_type"] != "indicative_point":
-                continue
-            if child.get("parent_id") != node_id:
-                continue
-
-            primary, alternatives = _split_alternatives(child["text"])
-            details = []
-            for detail in _children(graph_service, child["id"]):
-                if detail["segment_type"] != "indicative_point":
-                    continue
-                details.append(
-                    {
-                        "id": detail["id"],
-                        "text": _strip_display_text(detail["text"]),
-                    }
-                )
-
-            key_steps.append(
-                {
-                    "id": child["id"],
-                    "text": primary,
-                    "alternatives": alternatives,
-                    "is_control_variable": child["id"] in control_steps,
-                    "details": details,
-                }
-            )
-
+    for node_id, node in group_nodes:
         groups.append(
             {
                 "id": node_id,
                 "text": node["text"].strip(),
-                "key_steps": key_steps,
+                "key_steps": _key_steps_for_group(graph_service, node_id, control_steps),
             }
         )
 
@@ -380,6 +393,18 @@ def candidate_view(
 
 
 def _list_response_ids_for_assessment(responses_dir: Path, assessment_id: str) -> list[str]:
+    from app.assessment_paths import legacy_responses_dir
+    from app.assessment_runtime import get_version_record, use_registry
+
+    data_dir = responses_dir.parent
+    if use_registry(data_dir, assessment_id):
+        version = get_version_record(data_dir, assessment_id)
+        return [item["response_id"] for item in version.get("responses", [])]
+
+    nested_dir = legacy_responses_dir(data_dir, assessment_id)
+    if nested_dir.is_dir():
+        return sorted(path.stem for path in nested_dir.glob("*.json"))
+
     if not responses_dir.is_dir():
         return []
     ids: list[str] = []
@@ -391,13 +416,34 @@ def _list_response_ids_for_assessment(responses_dir: Path, assessment_id: str) -
     return ids
 
 
+def _candidate_aliases_for_assessment(data_dir: str | Path, assessment_id: str, response_ids: list[str]) -> dict[str, str]:
+    from app.assessment_runtime import get_version_record, use_registry
+
+    if use_registry():
+        try:
+            version = get_version_record(data_dir, assessment_id)
+            return {
+                item["response_id"]: item["candidate_id"]
+                for item in version.get("responses", [])
+            }
+        except KeyError:
+            pass
+    return candidate_aliases(response_ids)
+
+
 def candidates_list_view(data_dir: str | Path, assessment_id: str) -> list[dict[str, Any]]:
     responses_dir = Path(data_dir) / "responses"
     response_ids = _list_response_ids_for_assessment(responses_dir, assessment_id)
-    aliases = candidate_aliases(response_ids)
+    aliases = _candidate_aliases_for_assessment(data_dir, assessment_id, response_ids)
     items: list[dict[str, Any]] = []
+    artifact_version = _artifact_version_for_assessment(data_dir, assessment_id)
     for response_id in response_ids:
-        record = load_response(response_id, responses_dir=responses_dir)
+        record = load_response(
+            response_id,
+            responses_dir=responses_dir,
+            assessment_id=assessment_id,
+            artifact_version=artifact_version,
+        )
         candidate_id = aliases[response_id]
         items.append(
             {
@@ -419,12 +465,26 @@ def candidate_detail_view(
 ) -> dict[str, Any]:
     responses_dir = Path(data_dir) / "responses"
     response_ids = _list_response_ids_for_assessment(responses_dir, assessment_id)
-    aliases = candidate_aliases(response_ids)
+    aliases = _candidate_aliases_for_assessment(data_dir, assessment_id, response_ids)
     reverse = reverse_aliases(aliases)
     if candidate_id not in reverse:
         raise KeyError(candidate_id)
-    record = load_response(reverse[candidate_id], responses_dir=responses_dir)
+    artifact_version = _artifact_version_for_assessment(data_dir, assessment_id)
+    record = load_response(
+        reverse[candidate_id],
+        responses_dir=responses_dir,
+        assessment_id=assessment_id,
+        artifact_version=artifact_version,
+    )
     return candidate_view(record, candidate_id, include_dev=include_dev)
+
+
+def _artifact_version_for_assessment(data_dir: str | Path, assessment_id: str) -> str | None:
+    from app.assessment_runtime import get_version_record, use_registry
+
+    if not use_registry(data_dir, assessment_id):
+        return None
+    return get_version_record(data_dir, assessment_id)["artifact_version"]
 
 
 def resolve_response_id(
@@ -434,7 +494,7 @@ def resolve_response_id(
 ) -> str:
     responses_dir = Path(data_dir) / "responses"
     response_ids = _list_response_ids_for_assessment(responses_dir, assessment_id)
-    aliases = candidate_aliases(response_ids)
+    aliases = _candidate_aliases_for_assessment(data_dir, assessment_id, response_ids)
     reverse = reverse_aliases(aliases)
     if candidate_id not in reverse:
         raise KeyError(candidate_id)
@@ -444,7 +504,7 @@ def resolve_response_id(
 def dev_responses_list(data_dir: str | Path, assessment_id: str) -> list[dict[str, Any]]:
     responses_dir = Path(data_dir) / "responses"
     response_ids = _list_response_ids_for_assessment(responses_dir, assessment_id)
-    aliases = candidate_aliases(response_ids)
+    aliases = _candidate_aliases_for_assessment(data_dir, assessment_id, response_ids)
     return [
         {
             "response_id": response_id,

@@ -13,12 +13,19 @@ import QuestionPanel from "../components/QuestionPanel";
 import StudentResponsePanel from "../components/StudentResponsePanel";
 import { loadConversation, resetConversation } from "../conversationSlice";
 import { loadJudgement, resetJudgement } from "../judgementSlice";
-import { loadMarkingScreen } from "../markingSlice";
+import { clearMarking, loadMarkingScreen } from "../markingSlice";
 
-export default function MarkingPage() {
-  const { assessmentId, candidateId } = useParams();
+export default function MarkingPage({
+  assessmentId: assessmentIdProp,
+  candidateId: candidateIdProp,
+  markingSessionId: markingSessionIdProp,
+} = {}) {
+  const params = useParams();
+  const assessmentId = assessmentIdProp || params.assessmentId;
+  const candidateId = candidateIdProp || params.candidateId;
   const dispatch = useDispatch();
-  const { markingSessionId } = useSelector((state) => state.auth);
+  const authMarkingSessionId = useSelector((state) => state.auth.markingSessionId);
+  const markingSessionId = markingSessionIdProp || authMarkingSessionId;
   const { question, levelDescriptors, indicativeContent, selectedResponse, status, error } =
     useSelector((state) => state.marking);
   const { levelContext, saving, error: judgementError } = useSelector((state) => state.judgement);
@@ -33,6 +40,7 @@ export default function MarkingPage() {
       dispatch(resetAi());
       dispatch(resetLevelAi());
       dispatch(resetConversation());
+      dispatch(clearMarking());
     };
   }, [dispatch, assessmentId, candidateId]);
 

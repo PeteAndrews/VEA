@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "study_id": "pilot-study",
+  "participants": [
+    {
+      "participant_id": "CHEM-VEA-001",
+      "token": "chem-vea-token-replace-me",
+      "condition": "vea",
+      "subject": "chemistry"
+    },
+    {
+      "participant_id": "CHEM-CTL-001",
+      "token": "chem-control-token-replace-me",
+      "condition": "control",
+      "subject": "chemistry"
+    },
+    {
+      "participant_id": "BIO-VEA-001",
+      "token": "bio-vea-token-replace-me",
+      "condition": "vea",
+      "subject": "biology"
+    },
+    {
+      "participant_id": "BIO-CTL-001",
+      "token": "bio-control-token-replace-me",
+      "condition": "control",
+      "subject": "biology"
+    }
+  ]
+}

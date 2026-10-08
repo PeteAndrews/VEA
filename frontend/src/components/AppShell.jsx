@@ -2,15 +2,15 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function AppShell({ breadcrumb, children }) {
+  const participant = useSelector((state) => state.study.participant);
   const user = useSelector((state) => state.auth.user);
-  const initials = user?.name
-    ? user.name
-        .split(/\s+/)
-        .map((part) => part[0])
-        .join("")
-        .slice(0, 2)
-        .toUpperCase()
-    : "EX";
+  const label = participant?.participant_id || user?.name || "Study";
+  const initials = label
+    .split(/\s+/)
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 
   return (
     <div className="app-shell">

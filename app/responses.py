@@ -104,8 +104,10 @@ def segment_response_text(text: str) -> list[dict]:
 def ingest_response_file(
     txt_path: str | Path,
     assessment_id: str = "C-JUN25-8464C1H-02_3",
-    responses_dir: str | Path = "data/responses",
+    data_dir: str | Path = "data",
 ) -> dict:
+    from app.assessment_paths import legacy_responses_dir
+
     txt_path = Path(txt_path)
     response_id = response_id_from_path(txt_path)
     text = txt_path.read_text(encoding="utf-8")
@@ -127,7 +129,7 @@ def ingest_response_file(
         "segments": segments,
     }
 
-    out_dir = Path(responses_dir)
+    out_dir = legacy_responses_dir(data_dir, assessment_id)
     out_dir.mkdir(parents=True, exist_ok=True)
     json_path = out_dir / f"{response_id}.json"
     with json_path.open("w", encoding="utf-8") as f:
@@ -137,12 +139,35 @@ def ingest_response_file(
     return record
 
 
-def load_response(response_id: str, responses_dir: str | Path = "data/responses") -> dict:
-    path = Path(responses_dir) / f"{response_id}.json"
-    if not path.exists():
+def load_response(
+    response_id: str,
+    responses_dir: str | Path = "data/responses",
+    *,
+    assessment_id: str | None = None,
+    artifact_version: str | None = None,
+) -> dict:
+    from app.assessment_paths import resolve_response_paths
+    from app.assessment_runtime import load_registered_response, use_registry
+
+    data_dir = Path(responses_dir).parent if Path(responses_dir).name == "responses" else Path(responses_dir)
+    if use_registry(data_dir, assessment_id) and assessment_id and artifact_version:
+        return load_registered_response(data_dir, assessment_id, artifact_version, response_id)
+
+    paths = resolve_response_paths(data_dir, assessment_id or _infer_assessment_id(response_id, data_dir), response_id)
+    if not paths.json.is_file():
         raise KeyError(response_id)
-    with path.open(encoding="utf-8") as f:
+    with paths.json.open(encoding="utf-8") as f:
         return json.load(f)
+
+
+def _infer_assessment_id(response_id: str, data_dir: Path) -> str:
+    from app.assessment_paths import data_root, legacy_responses_dir
+
+    root = data_root(data_dir)
+    for assessment_dir in (root / "responses").glob("*"):
+        if assessment_dir.is_dir() and (assessment_dir / f"{response_id}.json").is_file():
+            return assessment_dir.name
+    raise KeyError(response_id)
 
 
 def response_id_from_segment(segment_id_value: str) -> str:

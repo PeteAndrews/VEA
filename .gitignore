@@ -32,6 +32,9 @@ Thumbs.db
 # Runtime AI interpretation session data (local only)
 data/ai_interpretations/
 data/conversations/
+data/study.db
+data/registry.json
+data/artifacts/
 
 # Cursor local plans (optional)
 .cursor/

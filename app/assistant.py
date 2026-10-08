@@ -10,6 +10,7 @@ from typing import Any
 from app.assessment import assess_evidence_link
 from app.classifier import EvidenceRelationClassifier
 from app.conversation import _compact_criterion
+from app.graph import is_codable_criterion
 from app.graph_service import GraphService
 from app.intent import Intent, IntentClassifier, build_intent_conversation_context
 from app.intervention import build_intervention_context
@@ -370,7 +371,7 @@ def _resolve_span_reference(
 
 
 def _is_indicative_criterion(node: dict[str, Any]) -> bool:
-    return node.get("node_type") == "mark_point" and node.get("segment_type") == "indicative_point"
+    return node.get("node_type") == "mark_point" and is_codable_criterion(node.get("segment_type"))
 
 
 def _resolve_criterion_reference(
@@ -395,7 +396,7 @@ def _resolve_criterion_reference(
     if point_match:
         token = point_match.group(1)
         for node_id, node in graph_service.graph.nodes.items():
-            if node.get("segment_type") != "indicative_point":
+            if not is_codable_criterion(node.get("segment_type")):
                 continue
             if token in _normalize(node_id) or token in _normalize(node.get("text", "")):
                 return graph_service.get_node(node_id)

@@ -86,7 +86,10 @@ if not _app_log.handlers:
     _handler.setFormatter(logging.Formatter("%(levelname)s %(name)s: %(message)s"))
     _app_log.addHandler(_handler)
 
+from app.routes.study import router as study_router
+
 app = FastAPI(title="VEA Graph API")
+app.include_router(study_router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -97,6 +100,7 @@ app.add_middleware(
     ],
     allow_methods=["*"],
     allow_headers=["*"],
+    allow_credentials=True,
 )
 
 
@@ -203,7 +207,11 @@ def _load_judgement_context(
     except KeyError:
         raise HTTPException(status_code=404, detail=f"Candidate not found: {candidate_id}") from None
     try:
-        record = load_response(response_id, responses_dir=RESPONSES_DIR)
+        record = load_response(
+            response_id,
+            responses_dir=RESPONSES_DIR,
+            assessment_id=assessment_id,
+        )
     except KeyError:
         raise HTTPException(status_code=404, detail=f"Response not found: {response_id}") from None
     store = _judgement_store()
