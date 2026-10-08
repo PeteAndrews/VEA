@@ -680,3 +680,85 @@ def send_conversation_message(
         )
     conversation_store.save(payload)
     return public_conversation(payload)
+
+
+def activate_conversation_context(
+    *,
+    conversation_store: ConversationStore,
+    marking_session_id: str,
+    response_id: str,
+    context_id: str,
+    assessment_id: str | None = None,
+) -> dict[str, Any]:
+    payload = conversation_store.load(marking_session_id, response_id)
+    if assessment_id:
+        payload["assessment_id"] = assessment_id
+    if not any(context["context_id"] == context_id for context in payload.get("contexts", [])):
+        raise KeyError(f"Context not found: {context_id}")
+    payload["active_context_id"] = context_id
+    conversation_store.save(payload)
+    return public_conversation(payload)
+
+
+def open_general_conversation_context(
+    *,
+    conversation_store: ConversationStore,
+    graph_service,
+    record: dict[str, Any],
+    judgement_state: dict[str, Any],
+    assessment_id: str,
+    stage: str | None = None,
+    stage_source: str | None = None,
+    data_dir: str = "data",
+) -> dict[str, Any]:
+    from app.assistant import build_session_context
+
+    payload = conversation_store.load(
+        judgement_state["marking_session_id"],
+        record["response_id"],
+    )
+    payload["assessment_id"] = assessment_id
+    active_context = build_session_context(
+        graph_service=graph_service,
+        record=record,
+        judgement_state=judgement_state,
+        assessment_id=assessment_id,
+        data_dir=data_dir,
+        source="general",
+        stage=stage,
+        stage_source=stage_source,
+    )
+    payload.setdefault("contexts", []).append(active_context)
+    payload["active_context_id"] = active_context["context_id"]
+    conversation_store.save(payload)
+    return public_conversation(payload)
+
+
+def delete_conversation_context(
+    *,
+    conversation_store: ConversationStore,
+    marking_session_id: str,
+    response_id: str,
+    context_id: str,
+    assessment_id: str | None = None,
+) -> dict[str, Any]:
+    payload = conversation_store.load(marking_session_id, response_id)
+    if assessment_id:
+        payload["assessment_id"] = assessment_id
+    contexts = payload.get("contexts", [])
+    if not any(context["context_id"] == context_id for context in contexts):
+        raise KeyError(f"Context not found: {context_id}")
+
+    payload["contexts"] = [context for context in contexts if context["context_id"] != context_id]
+    payload["messages"] = [
+        message
+        for message in payload.get("messages", [])
+        if message.get("context_id") != context_id
+    ]
+
+    if payload.get("active_context_id") == context_id:
+        remaining = payload["contexts"]
+        payload["active_context_id"] = remaining[-1]["context_id"] if remaining else None
+
+    conversation_store.save(payload)
+    return public_conversation(payload)

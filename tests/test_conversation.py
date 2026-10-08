@@ -16,9 +16,12 @@ from app.conversation import (
     OpenAIConversationLLM,
     PromptLoader,
     _conversation_history_for_llm,
+    activate_conversation_context,
     build_conversation_context,
     compact_context_for_llm,
+    delete_conversation_context,
     launch_conversation,
+    open_general_conversation_context,
     send_conversation_message,
 )
 from app.graph_service import GraphService
@@ -511,3 +514,238 @@ def test_follow_up_uses_only_active_context_history(
     history = llm.calls[-1]["messages"]
     assert all("Old explore" not in item["content"] for item in history)
     assert history[-1]["content"] == "Does this hold up?"
+
+
+def test_activate_context_switches_without_new_message(client, session, sample_span):
+    coding = _create_coding(client, session, sample_span)
+    interpretation = _run_ai_check(client, session, coding["id"])
+    prefix = _prefix(session["marking_session_id"])
+
+    explore = client.post(
+        f"{prefix}/conversation/launch",
+        json={
+            "source": "explore",
+            "coding_id": coding["id"],
+            "interpretation_id": interpretation["id"],
+        },
+    )
+    assert explore.status_code == 200
+    explore_payload = explore.json()
+    explore_context_id = explore_payload["active_context_id"]
+
+    verify = client.post(
+        f"{prefix}/conversation/launch",
+        json={"source": "verify", "coding_id": coding["id"]},
+    )
+    assert verify.status_code == 200
+    verify_payload = verify.json()
+    assert len(verify_payload["messages"]) == 2
+    assert verify_payload["active_context_id"] != explore_context_id
+
+    activated = client.post(
+        f"{prefix}/conversation/active",
+        json={"context_id": explore_context_id},
+    )
+    assert activated.status_code == 200
+    activated_payload = activated.json()
+    assert activated_payload["active_context_id"] == explore_context_id
+    assert len(activated_payload["messages"]) == 2
+    explore_messages = [
+        message
+        for message in activated_payload["messages"]
+        if message["context_id"] == explore_context_id
+    ]
+    assert len(explore_messages) == 1
+
+
+def test_open_general_context_starts_blank(client, session):
+    prefix = _prefix(session["marking_session_id"])
+    llm = api._conversation_llm_instance
+    calls_before = len(llm.calls)
+
+    opened = client.post(f"{prefix}/conversation/contexts")
+    assert opened.status_code == 200
+    payload = opened.json()
+    assert payload["active_context"]["source"] == "general"
+    context_id = payload["active_context_id"]
+    scoped = [message for message in payload["messages"] if message["context_id"] == context_id]
+    assert scoped == []
+    assert len(llm.calls) == calls_before
+
+
+def test_activate_unknown_context_returns_404(client, session):
+    prefix = _prefix(session["marking_session_id"])
+    response = client.post(
+        f"{prefix}/conversation/active",
+        json={"context_id": "ctx-does-not-exist"},
+    )
+    assert response.status_code == 404
+
+
+def test_activate_then_follow_up_uses_switched_context_history(
+    tmp_path, graph_service, response_record, client, session, sample_span
+):
+    coding_a = _create_coding(client, session, sample_span, criterion_id=POINT_4)
+    text = response_record["text"]
+    coding_b = _create_coding(
+        client,
+        session,
+        {"start_char": 212, "end_char": 333, "text": text[212:333]},
+        criterion_id=POINT_5,
+    )
+    interpretation_a = _run_ai_check(client, session, coding_a["id"])
+    interpretation_b = _run_ai_check(client, session, coding_b["id"])
+
+    store = ConversationStore(tmp_path / "conversations")
+    llm = FakeConversationLLM("Scoped follow-up.")
+    loader = PromptLoader(prompts_dir=Path("prompts"))
+    judgement = client.get(f"{_prefix(session['marking_session_id'])}/judgement").json()
+
+    explore_payload = launch_conversation(
+        conversation_store=store,
+        llm=llm,
+        prompt_loader=loader,
+        graph_service=graph_service,
+        record=response_record,
+        judgement_state=judgement,
+        assessment_id=ASSESSMENT_ID,
+        source="explore",
+        coding_id=coding_a["id"],
+        interpretation=interpretation_a,
+    )
+    explore_context_id = explore_payload["active_context_id"]
+
+    launch_conversation(
+        conversation_store=store,
+        llm=llm,
+        prompt_loader=loader,
+        graph_service=graph_service,
+        record=response_record,
+        judgement_state=judgement,
+        assessment_id=ASSESSMENT_ID,
+        source="verify",
+        coding_id=coding_b["id"],
+        interpretation=interpretation_b,
+    )
+    send_conversation_message(
+        conversation_store=store,
+        llm=llm,
+        prompt_loader=loader,
+        marking_session_id=session["marking_session_id"],
+        response_id=response_record["response_id"],
+        content="Verify follow-up.",
+    )
+
+    activate_conversation_context(
+        conversation_store=store,
+        marking_session_id=session["marking_session_id"],
+        response_id=response_record["response_id"],
+        context_id=explore_context_id,
+        assessment_id=ASSESSMENT_ID,
+    )
+    send_conversation_message(
+        conversation_store=store,
+        llm=llm,
+        prompt_loader=loader,
+        marking_session_id=session["marking_session_id"],
+        response_id=response_record["response_id"],
+        content="Explore follow-up.",
+    )
+
+    history = llm.calls[-1]["messages"]
+    assert history[-1]["content"] == "Explore follow-up."
+    assert all("Verify follow-up" not in item["content"] for item in history)
+
+
+def test_open_general_conversation_context_unit(tmp_path, graph_service, response_record, client, session):
+    judgement = client.get(f"{_prefix(session['marking_session_id'])}/judgement").json()
+    store = ConversationStore(tmp_path / "conversations")
+
+    payload = open_general_conversation_context(
+        conversation_store=store,
+        graph_service=graph_service,
+        record=response_record,
+        judgement_state=judgement,
+        assessment_id=ASSESSMENT_ID,
+        data_dir="data",
+    )
+
+    assert payload["active_context"]["source"] == "general"
+    context_id = payload["active_context_id"]
+    assert len(payload["contexts"]) == 1
+    assert [message for message in payload["messages"] if message["context_id"] == context_id] == []
+
+
+def test_delete_context_removes_messages_and_switches_active(client, session, sample_span):
+    coding = _create_coding(client, session, sample_span)
+    interpretation = _run_ai_check(client, session, coding["id"])
+    prefix = _prefix(session["marking_session_id"])
+
+    explore = client.post(
+        f"{prefix}/conversation/launch",
+        json={
+            "source": "explore",
+            "coding_id": coding["id"],
+            "interpretation_id": interpretation["id"],
+        },
+    )
+    explore_context_id = explore.json()["active_context_id"]
+
+    verify = client.post(
+        f"{prefix}/conversation/launch",
+        json={"source": "verify", "coding_id": coding["id"]},
+    )
+    verify_context_id = verify.json()["active_context_id"]
+
+    deleted = client.delete(f"{prefix}/conversation/contexts/{verify_context_id}")
+    assert deleted.status_code == 200
+    payload = deleted.json()
+    assert len(payload["contexts"]) == 1
+    assert payload["active_context_id"] == explore_context_id
+    assert all(message["context_id"] != verify_context_id for message in payload["messages"])
+
+
+def test_delete_active_context_selects_remaining(client, session, sample_span):
+    coding = _create_coding(client, session, sample_span)
+    interpretation = _run_ai_check(client, session, coding["id"])
+    prefix = _prefix(session["marking_session_id"])
+
+    explore = client.post(
+        f"{prefix}/conversation/launch",
+        json={
+            "source": "explore",
+            "coding_id": coding["id"],
+            "interpretation_id": interpretation["id"],
+        },
+    )
+    explore_context_id = explore.json()["active_context_id"]
+
+    verify = client.post(
+        f"{prefix}/conversation/launch",
+        json={"source": "verify", "coding_id": coding["id"]},
+    )
+    verify_context_id = verify.json()["active_context_id"]
+    assert verify.json()["active_context_id"] == verify_context_id
+
+    deleted = client.delete(f"{prefix}/conversation/contexts/{verify_context_id}")
+    assert deleted.status_code == 200
+    assert deleted.json()["active_context_id"] == explore_context_id
+
+
+def test_delete_last_context_clears_active(client, session):
+    prefix = _prefix(session["marking_session_id"])
+    opened = client.post(f"{prefix}/conversation/contexts")
+    context_id = opened.json()["active_context_id"]
+
+    deleted = client.delete(f"{prefix}/conversation/contexts/{context_id}")
+    assert deleted.status_code == 200
+    payload = deleted.json()
+    assert payload["contexts"] == []
+    assert payload["active_context_id"] is None
+    assert payload["messages"] == []
+
+
+def test_delete_unknown_context_returns_404(client, session):
+    prefix = _prefix(session["marking_session_id"])
+    response = client.delete(f"{prefix}/conversation/contexts/ctx-missing")
+    assert response.status_code == 404

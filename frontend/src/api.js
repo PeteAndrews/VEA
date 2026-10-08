@@ -140,6 +140,28 @@ export function sendConversationMessage(markingSessionId, assessmentId, candidat
   );
 }
 
+export function activateConversationContext(markingSessionId, assessmentId, candidateId, contextId) {
+  return sendJson(
+    "POST",
+    `/api/marking-sessions/${markingSessionId}/assessments/${assessmentId}/candidates/${candidateId}/conversation/active`,
+    { context_id: contextId }
+  );
+}
+
+export function openGeneralConversationContext(markingSessionId, assessmentId, candidateId) {
+  return sendJson(
+    "POST",
+    `/api/marking-sessions/${markingSessionId}/assessments/${assessmentId}/candidates/${candidateId}/conversation/contexts`
+  );
+}
+
+export function deleteConversationContext(markingSessionId, assessmentId, candidateId, contextId) {
+  return fetchJson(
+    `/api/marking-sessions/${markingSessionId}/assessments/${assessmentId}/candidates/${candidateId}/conversation/contexts/${encodeURIComponent(contextId)}`,
+    { method: "DELETE" }
+  );
+}
+
 export function startStudySession(token) {
   return sendJson("POST", "/api/study/session", { token });
 }

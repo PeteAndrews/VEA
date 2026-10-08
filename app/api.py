@@ -16,8 +16,11 @@ from app.conversation import (
     ConversationLLM,
     ConversationStore,
     PromptLoader,
+    activate_conversation_context,
+    delete_conversation_context,
     get_conversation_llm,
     launch_conversation,
+    open_general_conversation_context,
     public_conversation,
     send_conversation_message,
     _find_interpretation_for_coding,
@@ -335,6 +338,10 @@ class ConversationLaunchRequest(BaseModel):
 
 class ConversationMessageRequest(BaseModel):
     content: str = Field(min_length=1, max_length=4000)
+
+
+class ConversationActivateRequest(BaseModel):
+    context_id: str = Field(min_length=1)
 
 
 @app.get("/health")
@@ -856,6 +863,96 @@ def post_conversation_launch(
         raise HTTPException(status_code=500, detail=str(exc)) from None
     except RuntimeError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from None
+
+
+@app.post(
+    "/marking-sessions/{marking_session_id}/assessments/{assessment_id}/candidates/{candidate_id}/conversation/active"
+)
+def post_conversation_active(
+    marking_session_id: str,
+    assessment_id: str,
+    candidate_id: str,
+    body: ConversationActivateRequest,
+) -> dict:
+    _require_session(marking_session_id)
+    _service, record, _state, _store = _load_judgement_context(
+        marking_session_id,
+        assessment_id,
+        candidate_id,
+    )
+    try:
+        return activate_conversation_context(
+            conversation_store=_conversation_store(),
+            marking_session_id=marking_session_id,
+            response_id=record["response_id"],
+            context_id=body.context_id,
+            assessment_id=assessment_id,
+        )
+    except KeyError:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Context not found: {body.context_id}",
+        ) from None
+
+
+@app.post(
+    "/marking-sessions/{marking_session_id}/assessments/{assessment_id}/candidates/{candidate_id}/conversation/contexts"
+)
+def post_conversation_context(
+    marking_session_id: str,
+    assessment_id: str,
+    candidate_id: str,
+) -> dict:
+    _require_session(marking_session_id)
+    service, record, state, _store = _load_judgement_context(
+        marking_session_id,
+        assessment_id,
+        candidate_id,
+    )
+    stage, stage_source = resolve_stage(state, None, None)
+    try:
+        return open_general_conversation_context(
+            conversation_store=_conversation_store(),
+            graph_service=service,
+            record=record,
+            judgement_state=state,
+            assessment_id=assessment_id,
+            stage=stage,
+            stage_source=stage_source,
+            data_dir=str(DATA_DIR),
+        )
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from None
+
+
+@app.delete(
+    "/marking-sessions/{marking_session_id}/assessments/{assessment_id}/candidates/{candidate_id}/conversation/contexts/{context_id}"
+)
+def delete_conversation_context_route(
+    marking_session_id: str,
+    assessment_id: str,
+    candidate_id: str,
+    context_id: str,
+) -> dict:
+    _require_session(marking_session_id)
+    _service, record, _state, _store = _load_judgement_context(
+        marking_session_id,
+        assessment_id,
+        candidate_id,
+    )
+    try:
+        return delete_conversation_context(
+            conversation_store=_conversation_store(),
+            marking_session_id=marking_session_id,
+            response_id=record["response_id"],
+            context_id=context_id,
+            assessment_id=assessment_id,
+        )
+    except KeyError:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Context not found: {context_id}",
+        ) from None
 
 
 @app.post(

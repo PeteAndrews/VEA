@@ -1,7 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  activateConversationContext,
+  deleteConversationContext,
   getConversation,
   launchConversation,
+  openGeneralConversationContext,
   sendConversationMessage,
 } from "./api";
 import { selectInteractionStage } from "./stage";
@@ -30,6 +33,24 @@ export const launchAssistant = createAsyncThunk(
   }
 );
 
+export const activateConversationTab = createAsyncThunk(
+  "conversation/activate",
+  async ({ markingSessionId, assessmentId, candidateId, contextId }) =>
+    activateConversationContext(markingSessionId, assessmentId, candidateId, contextId)
+);
+
+export const openGeneralChat = createAsyncThunk(
+  "conversation/openGeneral",
+  async ({ markingSessionId, assessmentId, candidateId }) =>
+    openGeneralConversationContext(markingSessionId, assessmentId, candidateId)
+);
+
+export const deleteConversationTab = createAsyncThunk(
+  "conversation/delete",
+  async ({ markingSessionId, assessmentId, candidateId, contextId }) =>
+    deleteConversationContext(markingSessionId, assessmentId, candidateId, contextId)
+);
+
 export const sendAssistantMessage = createAsyncThunk(
   "conversation/send",
   async ({ markingSessionId, assessmentId, candidateId, content }) =>
@@ -44,10 +65,14 @@ const conversationSlice = createSlice({
     status: "idle",
     launchStatus: "idle",
     sendStatus: "idle",
+    activateStatus: "idle",
+    openGeneralStatus: "idle",
     pendingMessageId: null,
     error: null,
     launchError: null,
     sendError: null,
+    activateError: null,
+    openGeneralError: null,
   },
   reducers: {
     expandAssistantPanel(state) {
@@ -62,10 +87,16 @@ const conversationSlice = createSlice({
       state.status = "idle";
       state.launchStatus = "idle";
       state.sendStatus = "idle";
+      state.activateStatus = "idle";
+      state.openGeneralStatus = "idle";
+      state.deleteStatus = "idle";
       state.pendingMessageId = null;
       state.error = null;
       state.launchError = null;
       state.sendError = null;
+      state.activateError = null;
+      state.openGeneralError = null;
+      state.deleteError = null;
     },
   },
   extraReducers: (builder) => {
@@ -97,6 +128,51 @@ const conversationSlice = createSlice({
       .addCase(launchAssistant.rejected, (state, action) => {
         state.launchStatus = "failed";
         state.launchError = action.error.message;
+      });
+
+    builder
+      .addCase(activateConversationTab.pending, (state) => {
+        state.activateStatus = "loading";
+        state.activateError = null;
+      })
+      .addCase(activateConversationTab.fulfilled, (state, action) => {
+        state.activateStatus = "succeeded";
+        state.conversation = action.payload;
+        state.collapsed = false;
+      })
+      .addCase(activateConversationTab.rejected, (state, action) => {
+        state.activateStatus = "failed";
+        state.activateError = action.error.message;
+      });
+
+    builder
+      .addCase(openGeneralChat.pending, (state) => {
+        state.openGeneralStatus = "loading";
+        state.openGeneralError = null;
+        state.collapsed = false;
+      })
+      .addCase(openGeneralChat.fulfilled, (state, action) => {
+        state.openGeneralStatus = "succeeded";
+        state.conversation = action.payload;
+        state.collapsed = false;
+      })
+      .addCase(openGeneralChat.rejected, (state, action) => {
+        state.openGeneralStatus = "failed";
+        state.openGeneralError = action.error.message;
+      });
+
+    builder
+      .addCase(deleteConversationTab.pending, (state) => {
+        state.deleteStatus = "loading";
+        state.deleteError = null;
+      })
+      .addCase(deleteConversationTab.fulfilled, (state, action) => {
+        state.deleteStatus = "succeeded";
+        state.conversation = action.payload;
+      })
+      .addCase(deleteConversationTab.rejected, (state, action) => {
+        state.deleteStatus = "failed";
+        state.deleteError = action.error.message;
       });
 
     builder
