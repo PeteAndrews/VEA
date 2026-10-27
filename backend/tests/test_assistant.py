@@ -6,7 +6,7 @@ from app.assistant import process_assistant_turn
 from app.classifier import RELATIONS, EvidenceRelationClassifier, RelationDecision
 from app.conversation import FakeConversationLLM, PromptLoader
 from app.graph_service import GraphService
-from app.intent import FakeIntentClassifier, IntentClassifier
+from app.intent import FakeIntentClassifier, IntentClassifier, IntentDecision
 from app.responses import load_response
 from app.views import resolve_response_id
 
@@ -75,6 +75,29 @@ class FakeRetrievalService:
         return {"matches": []}
 
 
+class AmbiguousYesIntentClassifier(FakeIntentClassifier):
+    """Mimics borderline Jev intent on short affirmations."""
+
+    def classify(self, content: str, conversation_context: dict) -> IntentDecision:
+        normalized = " ".join(content.lower().split()).rstrip(".!?")
+        if normalized in {"yes", "yes please"}:
+            return IntentDecision(
+                intent="FIND_SUPPORT",
+                probability=0.39,
+                confidence=0.19,
+                probabilities={
+                    "DISCUSS": 0.35,
+                    "LOCATE_EVIDENCE": 0.02,
+                    "ASSESS_LINK": 0.24,
+                    "FIND_SUPPORT": 0.39,
+                },
+                classifier="test",
+                model="test",
+                needs_clarification=True,
+            )
+        return super().classify(content, conversation_context)
+
+
 class RecordingLLM(FakeConversationLLM):
     def __init__(self, response: str = "Turn explanation.") -> None:
         super().__init__(response)
@@ -101,6 +124,7 @@ def _run_turn(
     llm,
     retrieval_service=None,
     history=None,
+    intent_classifier: IntentClassifier | None = None,
 ):
     return process_assistant_turn(
         content=content,
@@ -109,7 +133,7 @@ def _run_turn(
         record=response_record,
         judgement_state={"relations": [], "evidence_spans": [], "events": []},
         classifier=FakeClassifier(),
-        intent_classifier=FakeIntentClassifier(),
+        intent_classifier=intent_classifier or FakeIntentClassifier(),
         retrieval_service=retrieval_service,
         llm=llm,
         prompt_loader=PromptLoader(prompts_dir=Path("prompts")),
@@ -140,6 +164,69 @@ def test_intent_classifier_routes_assessment_locate_and_find_support():
         ).intent
         == "FIND_SUPPORT"
     )
+
+
+def test_affirmative_follow_up_to_explore_offer_searches_response():
+    graph_service = GraphService.from_data_dir(data_dir="data", assessment_id=ASSESSMENT_ID)
+    response_record = {
+        "response_id": "test-response",
+        "text": "The pill inhibits LH. Later they explain ovulation stops.",
+        "segments": [
+            {
+                "id": "test-response-seg-1",
+                "text": "The pill inhibits LH.",
+                "start_char": 0,
+                "end_char": 22,
+                "order": 1,
+            },
+            {
+                "id": "test-response-seg-2",
+                "text": "Later they explain ovulation stops.",
+                "start_char": 23,
+                "end_char": 58,
+                "order": 2,
+            },
+        ],
+    }
+    llm = RecordingLLM("Found another mention of ovulation.")
+    active_context = {
+        "context_id": "ctx-explore",
+        "source": "explore",
+        "criterion": {
+            "id": POINT_5,
+            "text": "inhibition of LH prevents ovulation",
+        },
+        "evidence": {
+            "text": "The pill inhibits LH.",
+            "start_char": 0,
+            "end_char": 22,
+        },
+        "resolved_references": {},
+    }
+    history = [
+        {
+            "role": "assistant",
+            "content": (
+                "Would you want to check if the candidate elsewhere clarifies "
+                "the link to ovulation directly?"
+            ),
+        }
+    ]
+    turn = _run_turn(
+        content="yes please",
+        active_context=active_context,
+        response_record=response_record,
+        graph_service=graph_service,
+        llm=llm,
+        history=history,
+        intent_classifier=AmbiguousYesIntentClassifier(),
+    )
+    assert turn["clarification_needed"] is False
+    assert turn["intent"] == "LOCATE_EVIDENCE"
+    assert turn["trace"]["intent_override"] == "affirmation_follow_up"
+    assert "ovulation" in turn["trace"]["search_query"]
+    assert any(item.get("tool") == "search_response" for item in turn["tool_results"])
+    assert llm.last_turn_context["response_matches"]
 
 
 def test_ambiguous_intent_asks_for_clarification():

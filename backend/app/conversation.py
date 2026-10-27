@@ -17,7 +17,9 @@ from app.stages import resolve_stage
 
 CONVERSATION_SOURCES = frozenset({"explore", "verify", "general", "explore_level", "verify_level"})
 MESSAGE_ROLES = frozenset({"user", "assistant", "system"})
-DEFAULT_PROMPTS_DIR = Path(os.getenv("VEA_PROMPTS_DIR", "prompts"))
+from app.paths import PROMPTS_DIR
+
+DEFAULT_PROMPTS_DIR = PROMPTS_DIR
 DEFAULT_LLM_PROVIDER = "openai"
 DEFAULT_LLM_MODEL = "gpt-4.1-mini"
 OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses"

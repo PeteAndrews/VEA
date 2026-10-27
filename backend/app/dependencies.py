@@ -13,7 +13,10 @@ from app.study.store import StudyStore
 
 STUDY_SESSION_COOKIE = "vea_study_session"
 
-DATA_DIR = os.getenv("VEA_DATA_DIR", "data")
+from app.paths import DATA_DIR as _DATA_DIR_PATH
+from app.paths import PROJECT_ROOT
+
+DATA_DIR = str(_DATA_DIR_PATH)
 JUDGEMENTS_DIR = Path(os.getenv("VEA_JUDGEMENTS_DIR", str(Path(DATA_DIR) / "judgements")))
 STUDY_DB_PATH = os.getenv("VEA_STUDY_DB", str(Path(DATA_DIR) / "study.db"))
 
@@ -33,6 +36,7 @@ def study_service() -> StudyService:
         store=study_store(),
         judgement_store=judgement_store(),
         data_dir=DATA_DIR,
+        project_root=str(PROJECT_ROOT),
     )
 
 

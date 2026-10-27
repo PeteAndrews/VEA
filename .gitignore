@@ -2,6 +2,7 @@
 .env
 .env.local
 .env.*.local
+backend/.env
 
 # Python
 __pycache__/
@@ -30,12 +31,13 @@ frontend/dist/
 Thumbs.db
 
 # Runtime AI interpretation session data (local only)
-data/ai_interpretations/
-data/conversations/
-data/study.db
-data/registry.json
-data/artifacts/
-data/debug/
+backend/data/ai_interpretations/
+backend/data/conversations/
+backend/data/study.db
+backend/data/registry.json
+backend/data/artifacts/
+backend/data/debug/
+backend/.env
 
 # Cursor local plans (optional)
 .cursor/

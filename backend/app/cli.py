@@ -47,7 +47,9 @@ def _resolve_evidence_args(args: argparse.Namespace):
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m app.cli")
-    parser.add_argument("--data-dir", default="data")
+    from app.paths import DATA_DIR
+
+    parser.add_argument("--data-dir", default=str(DATA_DIR))
     parser.add_argument("--assessment-id", default="C-JUN25-8464C1H-02_3")
 
     sub = parser.add_subparsers(dest="command", required=True)

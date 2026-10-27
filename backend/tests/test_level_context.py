@@ -12,8 +12,11 @@ from app.responses import load_response
 from app.views import levels_view, resolve_response_id
 
 ASSESSMENT_ID = "C-JUN25-8464C1H-02_3"
+BIOLOGY_ASSESSMENT_ID = "B-JUN24-84612H-05_6"
 CANDIDATE_ID = "A"
 POINT_6 = "ms_02_3-point-6"
+BIO_GROUP_CONTRACEPTION = "ms_05_6-group-contraception"
+BIO_CONTRACEPTION_CHILD = "ms_05_6-contraception-hormones"
 
 
 @pytest.fixture
@@ -49,6 +52,37 @@ def test_rule_coverage_marks_point_6_unsatisfied_for_level_3(graph_service):
     point_6 = next(item for item in coverage if item["criterion_id"] == POINT_6)
     assert point_6["satisfied"] is False
     assert point_6["rule_text"]
+
+
+def test_rule_coverage_counts_child_codings_for_group_requirement():
+    graph_service = GraphService.from_data_dir(data_dir="data", assessment_id=BIOLOGY_ASSESSMENT_ID)
+    response_id = resolve_response_id("data", BIOLOGY_ASSESSMENT_ID, CANDIDATE_ID)
+    if response_id is None:
+        response_id = f"{BIOLOGY_ASSESSMENT_ID}_response-higher-ambiguity"
+    response_record = load_response(response_id, responses_dir=Path("data/responses"))
+    levels = levels_view(graph_service, "data")["levels"]
+    state = _empty_state(response_record)
+    set_tentative_level(state, levels, 3, examiner_id="examiner")
+    create_coding(
+        state,
+        response_record,
+        graph_service,
+        start_char=0,
+        end_char=min(40, len(response_record["text"])),
+        text=response_record["text"][0:40],
+        criterion_id=BIO_CONTRACEPTION_CHILD,
+        examiner_id="examiner",
+    )
+    from app.judgement import level_context_view
+
+    level_context = level_context_view(graph_service, "data", 3, state=state)
+    group_entry = next(
+        item for item in level_context["required_criteria"] if item["criterion_id"] == BIO_GROUP_CONTRACEPTION
+    )
+    assert group_entry["coding_ids"]
+    coverage = build_rule_coverage(level_context)
+    group_coverage = next(item for item in coverage if item["criterion_id"] == BIO_GROUP_CONTRACEPTION)
+    assert group_coverage["satisfied"] is True
 
 
 def test_build_level_context_excludes_uncoded_candidates(graph_service, response_record):

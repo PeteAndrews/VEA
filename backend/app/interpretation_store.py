@@ -172,5 +172,78 @@ def judgement_fingerprint(judgement_state: dict[str, Any]) -> str:
     return json.dumps(payload, sort_keys=True)
 
 
+_CLIENT_HIDDEN_KEYS = frozenset(
+    {
+        "response_id",
+        "jev",
+        "jev_direct",
+        "jev_additional",
+    }
+)
+
+_PUBLIC_RELATION_CHECK_KEYS = (
+    "relation",
+    "probability",
+    "confidence",
+    "probabilities",
+    "needs_review",
+    "status",
+)
+
+
+def _public_relation_check(interpretation: dict[str, Any]) -> dict[str, Any] | None:
+    check = interpretation.get("jev_direct") or interpretation.get("jev")
+    if not check:
+        return None
+    return {key: check[key] for key in _PUBLIC_RELATION_CHECK_KEYS if key in check}
+
+
+def _sanitize_intervention_message(message: str) -> str:
+    if not message:
+        return message
+    replacements = (
+        (
+            "Jev could not reliably decide whether this evidence supports",
+            "The evidence check could not reliably decide whether this supports",
+        ),
+        ("Jev reads this evidence as", "This evidence reads as"),
+        ("Jev agrees this supports", "This evidence appears to support"),
+    )
+    updated = message
+    for old, new in replacements:
+        updated = updated.replace(old, new)
+    return updated
+
+
+def _public_intervention(intervention: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not intervention:
+        return intervention
+    payload = dict(intervention)
+    message = payload.get("message")
+    if isinstance(message, str):
+        payload["message"] = _sanitize_intervention_message(message)
+    reasons = payload.get("reasons")
+    if isinstance(reasons, list):
+        payload["reasons"] = [
+            "classifier_disagrees" if reason == "jev_disagrees" else reason
+            for reason in reasons
+        ]
+        payload["reasons"] = [
+            "uncertain_relation" if reason == "jev_uncertain" else reason
+            for reason in payload["reasons"]
+        ]
+    return payload
+
+
 def public_interpretation(interpretation: dict[str, Any]) -> dict[str, Any]:
-    return {key: value for key, value in interpretation.items() if key != "response_id"}
+    payload = {
+        key: value
+        for key, value in interpretation.items()
+        if key not in _CLIENT_HIDDEN_KEYS
+    }
+    relation_check = _public_relation_check(interpretation)
+    if relation_check is not None:
+        payload["relation_check"] = relation_check
+    if "intervention" in payload:
+        payload["intervention"] = _public_intervention(payload.get("intervention"))
+    return payload

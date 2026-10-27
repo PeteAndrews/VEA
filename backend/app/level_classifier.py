@@ -21,7 +21,9 @@ from app.classifier import (
 )
 
 LEVEL_OUTCOMES = ("ALIGNS", "PARTIALLY_ALIGNS", "DOES_NOT_ALIGN", "UNCERTAIN")
-DEFAULT_PROMPTS_DIR = Path(os.getenv("VEA_PROMPTS_DIR", "prompts"))
+from app.paths import PROMPTS_DIR
+
+DEFAULT_PROMPTS_DIR = PROMPTS_DIR
 OPENAI_CHAT_URL = "https://api.openai.com/v1/chat/completions"
 
 LEVEL_CRITERIA = {

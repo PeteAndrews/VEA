@@ -52,6 +52,35 @@ INTENT_CLARIFICATION_MESSAGE = (
     "the response contains evidence anywhere for a mark-scheme point. Could you clarify?"
 )
 ASSESSMENT_INTENTS = frozenset({"ASSESS_LINK", "FIND_SUPPORT"})
+PINNED_LINK_SOURCES = frozenset({"explore", "verify"})
+AFFIRMATIONS = frozenset(
+    {
+        "yes",
+        "yes please",
+        "yeah",
+        "yep",
+        "sure",
+        "please",
+        "ok",
+        "okay",
+        "go ahead",
+        "do it",
+        "yes do that",
+        "that would help",
+    }
+)
+ASSISTANT_SEARCH_OFFER_MARKERS = (
+    "check if",
+    "want to check",
+    "would you want",
+    "would you like",
+    "elsewhere in the response",
+    "elsewhere clarif",
+    "look elsewhere",
+    "search the response",
+    "anywhere else",
+    "other part of the response",
+)
 
 
 def _utc_now() -> str:
@@ -92,6 +121,109 @@ def _token_set(text: str) -> set[str]:
 def _has_span_anaphora(content: str) -> bool:
     lower = _normalize(content)
     return any(token in lower for token in SPAN_ANAPHORA)
+
+
+def _is_affirmation(content: str) -> bool:
+    normalized = _normalize(content).rstrip(".!?")
+    return normalized in AFFIRMATIONS
+
+
+def _pinned_link_context(active_context: dict[str, Any]) -> bool:
+    if active_context.get("source") not in PINNED_LINK_SOURCES:
+        return False
+    return bool(active_context.get("criterion"))
+
+
+def _last_assistant_message(history: list[dict[str, Any]]) -> str | None:
+    for message in reversed(history):
+        if message.get("role") == "assistant":
+            content = message.get("content")
+            if isinstance(content, str) and content.strip():
+                return content
+    return None
+
+
+def _assistant_offered_response_search(assistant_message: str) -> bool:
+    lower = assistant_message.lower()
+    return any(marker in lower for marker in ASSISTANT_SEARCH_OFFER_MARKERS)
+
+
+def _search_query_from_assistant_offer(
+    assistant_message: str,
+    criterion: dict[str, Any] | None,
+) -> str:
+    lower = assistant_message.lower()
+    for pattern in (
+        r"link to ([^.?\n]+)",
+        r"clarifies ([^.?\n]+)",
+        r"mention(?:s)? ([^.?\n]+)",
+        r"check if ([^.?\n]+)",
+    ):
+        match = re.search(pattern, lower)
+        if match:
+            query = match.group(1).strip(" .'\"")
+            for suffix in (" directly", " elsewhere", " in the response", " in their answer"):
+                if query.endswith(suffix):
+                    query = query[: -len(suffix)].strip()
+            if len(query) >= 4:
+                return query
+    for term in ("ovulation", "fertilise", "fertilize", "egg to fertilise", "no egg"):
+        if term in lower:
+            return term
+    if criterion:
+        text = _strip_criterion_prefix(criterion.get("text", ""))
+        if text:
+            return text[:120]
+    return assistant_message
+
+
+def _resolve_explore_follow_up(
+    *,
+    content: str,
+    history: list[dict[str, Any]],
+    active_context: dict[str, Any],
+) -> dict[str, Any] | None:
+    last_assistant = _last_assistant_message(history)
+    if not _is_affirmation(content) or not last_assistant:
+        return None
+    if not _assistant_offered_response_search(last_assistant):
+        return None
+    return {
+        "intent": "LOCATE_EVIDENCE",
+        "search_query": _search_query_from_assistant_offer(
+            last_assistant,
+            active_context.get("criterion"),
+        ),
+    }
+
+
+def _apply_pinned_link_intent_fallback(
+    *,
+    intent: Intent,
+    clarification_needed: bool,
+    active_context: dict[str, Any],
+) -> tuple[Intent, bool]:
+    if not clarification_needed or not _pinned_link_context(active_context):
+        return intent, clarification_needed
+    last_intent = active_context.get("last_intent")
+    if last_intent in ASSESSMENT_INTENTS or last_intent == "LOCATE_EVIDENCE":
+        return last_intent, False  # type: ignore[return-value]
+    if intent == "DISCUSS":
+        return "LOCATE_EVIDENCE", False
+    return intent, False
+
+
+def _criterion_from_active_context(active_context: dict[str, Any]) -> dict[str, Any] | None:
+    refs = active_context.get("resolved_references") or {}
+    criterion = refs.get("criterion") or active_context.get("criterion")
+    if not criterion:
+        return None
+    if criterion.get("id"):
+        return criterion
+    criterion_id = criterion.get("criterion_id")
+    if criterion_id:
+        return {**criterion, "id": criterion_id}
+    return criterion
 
 
 def _prior_criterion_id(active_context: dict[str, Any]) -> str | None:
@@ -604,6 +736,12 @@ def process_assistant_turn(
             context_id=context_id,
         )
 
+    follow_up = _resolve_explore_follow_up(
+        content=content,
+        history=history,
+        active_context=active_context,
+    )
+    locate_query = content
     intent_decision = intent_classifier.classify(
         content,
         build_intent_conversation_context(active_context),
@@ -619,6 +757,23 @@ def process_assistant_turn(
         "intent": intent,
         "intent_decision": intent_decision.to_dict(),
     }
+
+    if follow_up is not None:
+        intent = follow_up["intent"]  # type: ignore[assignment]
+        clarification_needed = False
+        locate_query = follow_up["search_query"]
+        trace["intent"] = intent
+        trace["intent_override"] = "affirmation_follow_up"
+        trace["search_query"] = locate_query
+    else:
+        intent, clarification_needed = _apply_pinned_link_intent_fallback(
+            intent=intent,
+            clarification_needed=clarification_needed,
+            active_context=active_context,
+        )
+        trace["intent"] = intent
+        if clarification_needed is False and intent_decision.needs_clarification:
+            trace["intent_override"] = "pinned_link_context"
 
     if not clarification_needed and intent == "DISCUSS":
         criterion = _resolve_criterion_reference(
@@ -659,9 +814,9 @@ def process_assistant_turn(
             )
 
     elif not clarification_needed and intent == "LOCATE_EVIDENCE":
-        lexical = _lexical_response_matches(record, content)
+        lexical = _lexical_response_matches(record, locate_query)
         semantic = (
-            retrieval_service.search_response(record["response_id"], content, top_k=5)
+            retrieval_service.search_response(record["response_id"], locate_query, top_k=5)
             if retrieval_service is not None
             else {"matches": []}
         )
@@ -688,6 +843,8 @@ def process_assistant_turn(
             graph_service=graph_service,
             retrieval_service=retrieval_service,
         )
+        if criterion is None:
+            criterion = _criterion_from_active_context(active_context)
         _prepare_span_resolution(
             content=content,
             active_context=active_context,

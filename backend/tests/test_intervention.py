@@ -234,7 +234,7 @@ def test_policy_review_without_anchor():
     decision = _decision("UNCERTAIN", probability=0.55, needs_review=True)
     result = decide_intervention(decision, {"items": []})
     assert result["type"] == "REVIEW"
-    assert "jev_uncertain" in result["reasons"]
+    assert "uncertain_relation" in result["reasons"]
 
 
 def test_policy_review_low_probability():

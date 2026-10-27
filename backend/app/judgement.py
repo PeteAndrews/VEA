@@ -21,6 +21,8 @@ EVENT_TYPES = frozenset(
     }
 )
 
+EXAMINER_RELATIONS = frozenset({"SUPPORTS", "PARTIALLY_SUPPORTS"})
+
 
 def _utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -180,11 +182,18 @@ def _find_relation(state: dict[str, Any], span_id: str, criterion_id: str) -> di
         if (
             relation["source"] == span_id
             and relation["target"] == criterion_id
-            and relation["relation"] == "SUPPORTS"
             and relation.get("origin") == "examiner"
+            and relation.get("relation") in EXAMINER_RELATIONS
         ):
             return relation
     return None
+
+
+def _validate_examiner_relation(relation: str) -> str:
+    normalized = relation.strip().upper()
+    if normalized not in EXAMINER_RELATIONS:
+        raise ValueError(f"Unsupported examiner relation: {relation}")
+    return normalized
 
 
 def _find_relation_by_id(state: dict[str, Any], coding_id: str) -> dict[str, Any] | None:
@@ -229,8 +238,10 @@ def create_coding(
     text: str,
     criterion_id: str,
     examiner_id: str,
+    relation: str = "SUPPORTS",
 ) -> dict[str, Any]:
     _require_criterion(graph_service, criterion_id)
+    relation_type = _validate_examiner_relation(relation)
     span = _ensure_span(state, record, start_char, end_char, text)
     existing = _find_relation(state, span["id"], criterion_id)
     if existing is not None:
@@ -241,7 +252,7 @@ def create_coding(
         "id": _new_relation_id(),
         "source": span["id"],
         "target": criterion_id,
-        "relation": "SUPPORTS",
+        "relation": relation_type,
         "origin": "examiner",
         "examiner_id": examiner_id,
         "created_at": now,
@@ -276,42 +287,48 @@ def update_coding(
     end_char: int | None = None,
     text: str | None = None,
     examiner_id: str,
+    relation: str | None = None,
 ) -> dict[str, Any]:
-    relation = _find_relation_by_id(state, coding_id)
-    if relation is None:
+    relation_row = _find_relation_by_id(state, coding_id)
+    if relation_row is None:
         raise KeyError(coding_id)
 
     before = {
-        "coding_id": relation["id"],
-        "span_id": relation["source"],
-        "criterion_id": relation["target"],
+        "coding_id": relation_row["id"],
+        "span_id": relation_row["source"],
+        "criterion_id": relation_row["target"],
+        "relation": relation_row.get("relation"),
     }
-    old_span_id = relation["source"]
+    old_span_id = relation_row["source"]
 
     if criterion_id is not None:
         _require_criterion(graph_service, criterion_id)
-        duplicate = _find_relation(state, relation["source"], criterion_id)
+        duplicate = _find_relation(state, relation_row["source"], criterion_id)
         if duplicate is not None and duplicate["id"] != coding_id:
             raise ValueError("Coding already exists for this span and criterion")
-        relation["target"] = criterion_id
+        relation_row["target"] = criterion_id
 
     if start_char is not None or end_char is not None or text is not None:
         if start_char is None or end_char is None or text is None:
             raise ValueError("Provide start_char, end_char, and text together")
         span = _ensure_span(state, record, start_char, end_char, text)
-        duplicate = _find_relation(state, span["id"], relation["target"])
+        duplicate = _find_relation(state, span["id"], relation_row["target"])
         if duplicate is not None and duplicate["id"] != coding_id:
             raise ValueError("Coding already exists for this span and criterion")
-        relation["source"] = span["id"]
+        relation_row["source"] = span["id"]
 
-    relation["updated_at"] = _utc_now()
-    relation["examiner_id"] = examiner_id
+    if relation is not None:
+        relation_row["relation"] = _validate_examiner_relation(relation)
+
+    relation_row["updated_at"] = _utc_now()
+    relation_row["examiner_id"] = examiner_id
     _cleanup_orphan_span(state, old_span_id)
 
     after = {
-        "coding_id": relation["id"],
-        "span_id": relation["source"],
-        "criterion_id": relation["target"],
+        "coding_id": relation_row["id"],
+        "span_id": relation_row["source"],
+        "criterion_id": relation_row["target"],
+        "relation": relation_row.get("relation"),
     }
     if before != after:
         _append_event(
@@ -320,7 +337,7 @@ def update_coding(
             examiner_id,
             {"before": before, "after": after},
         )
-    return relation
+    return relation_row
 
 
 def remove_coding(
@@ -465,7 +482,6 @@ def level_context_view(
 
     coding_ids_by_criterion: dict[str, list[str]] = {}
     if state is not None:
-        spans_by_id = _span_by_id(state)
         for relation in state.get("relations", []):
             coding_ids_by_criterion.setdefault(relation["target"], []).append(relation["id"])
 
@@ -481,13 +497,21 @@ def level_context_view(
                 target = graph_service.get_node(target_id)
             except KeyError:
                 continue
+            subtree_ids = graph_service.part_of_subtree_ids(target_id)
+            linked_coding_ids: list[str] = []
+            seen_coding_ids: set[str] = set()
+            for criterion_id in subtree_ids:
+                for coding_id in coding_ids_by_criterion.get(criterion_id, []):
+                    if coding_id not in seen_coding_ids:
+                        seen_coding_ids.add(coding_id)
+                        linked_coding_ids.append(coding_id)
             required_criteria.append(
                 {
                     "criterion_id": target_id,
                     "criterion_text": _strip_display_text(target["text"]),
                     "rule_id": node_id,
                     "rule_text": node["text"].strip(),
-                    "coding_ids": coding_ids_by_criterion.get(target_id, []),
+                    "coding_ids": linked_coding_ids,
                 }
             )
 

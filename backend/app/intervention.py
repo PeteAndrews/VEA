@@ -315,7 +315,7 @@ def intervention_needs_review(decision: dict[str, Any]) -> bool:
 def _intervention_review_reasons(decision: dict[str, Any]) -> list[str]:
     reasons: list[str] = []
     if decision["relation"] == "UNCERTAIN":
-        reasons.append("jev_uncertain")
+        reasons.append("uncertain_relation")
     probability = float(decision.get("probability", 0.0))
     if probability < INTERVENTION_REVIEW_PROBABILITY_THRESHOLD:
         reasons.append("low_probability")
@@ -350,7 +350,7 @@ def decide_intervention(decision: dict[str, Any], graph_context: dict[str, Any])
             "type": "REVIEW",
             "reasons": _intervention_review_reasons(decision),
             "message": (
-                f"Jev could not reliably decide whether this evidence supports '{criterion}'. "
+                f"The evidence check could not reliably decide whether this supports '{criterion}'. "
                 "Worth a second look."
             ),
             "nuance_items": [],
@@ -371,9 +371,9 @@ def decide_intervention(decision: dict[str, Any], graph_context: dict[str, Any])
         reading = "partially supporting" if relation == "PARTIALLY_SUPPORTS" else "not supporting"
         return {
             "type": "CHALLENGE",
-            "reasons": ["jev_disagrees"],
+            "reasons": ["classifier_disagrees"],
             "message": (
-                f"Jev reads this evidence as {reading} '{criterion}'. "
+                f"This evidence reads as {reading} '{criterion}'. "
                 "Check the full step is evidenced."
             ),
             "nuance_items": [],
@@ -384,7 +384,7 @@ def decide_intervention(decision: dict[str, Any], graph_context: dict[str, Any])
             "type": "NUANCE",
             "reasons": ["supported_with_material_guidance"],
             "message": (
-                f"Jev agrees this supports '{criterion}', but guidance affects how it is applied."
+                f"This evidence appears to support '{criterion}', but guidance affects how it is applied."
             ),
             "nuance_items": _nuance_payload(nuances),
         }

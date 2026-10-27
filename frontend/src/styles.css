@@ -1270,6 +1270,7 @@ body:has(.marking-page) {
   padding: 0.75rem 1rem;
   cursor: pointer;
   font: inherit;
+  color: var(--text);
 }
 
 .all-evidence-item:hover {

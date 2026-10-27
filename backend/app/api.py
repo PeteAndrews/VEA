@@ -66,7 +66,9 @@ from app.views import (
     _list_response_ids_for_assessment,
 )
 
-DATA_DIR = os.getenv("VEA_DATA_DIR", "data")
+from app.paths import DATA_DIR as _DATA_DIR_PATH
+
+DATA_DIR = str(_DATA_DIR_PATH)
 RESPONSES_DIR = Path(DATA_DIR) / "responses"
 JUDGEMENTS_DIR = Path(os.getenv("VEA_JUDGEMENTS_DIR", str(Path(DATA_DIR) / "judgements")))
 AI_INTERPRETATIONS_DIR = Path(
@@ -295,6 +297,7 @@ class CreateCodingRequest(BaseModel):
     end_char: int = Field(ge=1)
     text: str
     criterion_id: str
+    relation: Literal["SUPPORTS", "PARTIALLY_SUPPORTS"] = "SUPPORTS"
 
 
 class UpdateCodingRequest(BaseModel):
@@ -302,6 +305,7 @@ class UpdateCodingRequest(BaseModel):
     start_char: int | None = Field(default=None, ge=0)
     end_char: int | None = Field(default=None, ge=1)
     text: str | None = None
+    relation: Literal["SUPPORTS", "PARTIALLY_SUPPORTS"] | None = None
 
     @model_validator(mode="after")
     def validate_update(self) -> UpdateCodingRequest:
@@ -310,7 +314,11 @@ class UpdateCodingRequest(BaseModel):
             value is not None for value in span_fields
         ):
             raise ValueError("Provide start_char, end_char, and text together")
-        if self.criterion_id is None and not all(value is not None for value in span_fields):
+        if (
+            self.criterion_id is None
+            and self.relation is None
+            and not all(value is not None for value in span_fields)
+        ):
             raise ValueError("Provide criterion_id and/or a complete span update")
         return self
 
@@ -461,6 +469,7 @@ def post_judgement_coding(
             text=body.text,
             criterion_id=body.criterion_id,
             examiner_id=session["examiner_id"],
+            relation=body.relation,
         )
     except KeyError as exc:
         raise HTTPException(status_code=404, detail=f"Criterion not found: {exc}") from None
@@ -496,6 +505,7 @@ def patch_judgement_coding(
             end_char=body.end_char,
             text=body.text,
             examiner_id=session["examiner_id"],
+            relation=body.relation,
         )
     except KeyError:
         raise HTTPException(status_code=404, detail=f"Coding not found: {coding_id}") from None

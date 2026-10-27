@@ -247,6 +247,21 @@ class GraphService:
         children.sort(key=lambda child: child["order"])
         return children
 
+    def part_of_subtree_ids(self, node_id: str) -> frozenset[str]:
+        """Criterion node id plus all descendants linked via PART_OF (child → parent)."""
+        if node_id not in self.graph.nodes:
+            return frozenset()
+        seen: set[str] = {node_id}
+        queue: deque[str] = deque([node_id])
+        while queue:
+            current = queue.popleft()
+            for child in self._direct_children(current):
+                child_id = child["id"]
+                if child_id not in seen:
+                    seen.add(child_id)
+                    queue.append(child_id)
+        return frozenset(seen)
+
     def _filter_edges(
         self,
         edges: list[dict],

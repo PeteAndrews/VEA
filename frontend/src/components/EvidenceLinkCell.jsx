@@ -97,7 +97,7 @@ export default function EvidenceLinkCell({
     const interpretation = byCodingId[codingId];
     if (checkingCodingIds.includes(codingId)) return false;
     if (!interpretation) return false;
-    if (interpretation.status === "error" || !interpretation.jev) return false;
+    if (interpretation.status === "error" || !interpretation.relation_check) return false;
     return true;
   }
 

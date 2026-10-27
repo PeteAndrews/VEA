@@ -22,10 +22,12 @@ def _debug_enabled() -> bool:
 
 
 def _debug_dir() -> Path:
+    from app.paths import DATA_DIR
+
     raw = os.getenv("VEA_DEBUG_LEVEL_JUDGEMENT_DIR", "").strip()
     if raw:
         return Path(raw)
-    return Path(os.getenv("VEA_DATA_DIR", "data")) / "debug" / "levels"
+    return DATA_DIR / "debug" / "levels"
 
 
 def _safe_part(value: str, *, fallback: str = "unknown") -> str:
