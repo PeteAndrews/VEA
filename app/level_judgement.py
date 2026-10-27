@@ -13,6 +13,7 @@ from app.level_context import (
     discover_uncoded_candidates,
     summarize_coded_evidence,
 )
+from app.level_debug import maybe_save_level_judgement_prompt_debug
 from app.level_intervention import decide_level_intervention
 
 USER_STATUSES = frozenset({"dismissed", "explore"})
@@ -124,8 +125,19 @@ def run_level_check(
         stage=stage,
         stage_source=stage_source,
     )
-    now = _utc_now()
     tentative = judgement_state["tentative_level"]
+    maybe_save_level_judgement_prompt_debug(
+        context,
+        meta={
+            "response_id": record["response_id"],
+            "marking_session_id": judgement_state.get("marking_session_id"),
+            "assessment_id": judgement_state.get("assessment_id"),
+            "tentative_level": tentative.get("level"),
+            "stage": stage,
+            "stage_source": stage_source,
+        },
+    )
+    now = _utc_now()
     interpretation: dict[str, Any] = {
         "id": f"ai-{uuid.uuid4().hex[:8]}",
         "kind": "level",

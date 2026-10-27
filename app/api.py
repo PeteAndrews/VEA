@@ -766,9 +766,10 @@ def post_conversation_launch(
                 detail="No level AI interpretation available. Run the level check first.",
             )
         if interpretation.get("status") == "error" or interpretation.get("verdict") is None:
+            reason = interpretation.get("error") or "The level check did not complete successfully."
             raise HTTPException(
                 status_code=422,
-                detail="Level AI interpretation is unavailable for conversation.",
+                detail=f"Level AI interpretation is unavailable for conversation. {reason}",
             )
     elif body.source != "general":
         if not body.coding_id:

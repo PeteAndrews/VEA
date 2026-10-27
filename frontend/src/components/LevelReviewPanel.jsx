@@ -11,9 +11,10 @@ export default function LevelReviewPanel({ assessmentId, candidateId, levelConte
 
   const summary = interpretation?.summary;
   const level = levelContext.level;
+  const canVerify = Boolean(interpretation?.id && interpretation?.verdict);
 
   function handleVerify() {
-    if (!interpretation?.id) return;
+    if (!canVerify) return;
     dispatch(
       launchAssistant({
         markingSessionId,
@@ -45,6 +46,10 @@ export default function LevelReviewPanel({ assessmentId, candidateId, levelConte
           </p>
         ) : checking ? (
           <p className="muted">Running level check…</p>
+        ) : interpretation?.status === "error" ? (
+          <p className="error">
+            Level check failed: {interpretation.error || "Could not run the level AI check."}
+          </p>
         ) : null}
 
         {summary?.evidence_mapped?.length ? (
@@ -111,7 +116,7 @@ export default function LevelReviewPanel({ assessmentId, candidateId, levelConte
               {showMappedEvidence ? "Hide mapped evidence" : "View mapped evidence"}
             </button>
           ) : null}
-          {interpretation?.id ? (
+          {canVerify ? (
             <button type="button" className="button-secondary" onClick={handleVerify}>
               Verify with AI
             </button>

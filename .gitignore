@@ -35,6 +35,7 @@ data/conversations/
 data/study.db
 data/registry.json
 data/artifacts/
+data/debug/
 
 # Cursor local plans (optional)
 .cursor/

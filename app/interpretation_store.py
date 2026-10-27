@@ -132,7 +132,7 @@ def active_level_interpretation(
     fingerprint = judgement_fingerprint(judgement_state)
     matches: list[dict[str, Any]] = []
     for interpretation in payload.get("level_interpretations", []):
-        if interpretation.get("status") == "superseded":
+        if interpretation.get("status") in {"superseded", "error"}:
             continue
         if interpretation.get("level") != tentative.get("level"):
             continue

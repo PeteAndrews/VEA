@@ -1,8 +1,24 @@
+function formatApiError(status, body) {
+  const trimmed = (body || "").trim();
+  if (!trimmed) {
+    return `Request failed: ${status}`;
+  }
+  try {
+    const parsed = JSON.parse(trimmed);
+    if (typeof parsed.detail === "string") {
+      return parsed.detail;
+    }
+  } catch {
+    // keep raw body
+  }
+  return trimmed;
+}
+
 async function fetchJson(path, options = {}) {
   const response = await fetch(path, { credentials: "include", ...options });
   if (!response.ok) {
     const detail = await response.text();
-    throw new Error(detail || `Request failed: ${response.status}`);
+    throw new Error(formatApiError(response.status, detail));
   }
   return response.json();
 }

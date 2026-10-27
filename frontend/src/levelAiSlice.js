@@ -85,6 +85,11 @@ const levelAiSlice = createSlice({
       .addCase(runLevelCheck.fulfilled, (state, action) => {
         state.checking = false;
         state.interpretation = action.payload;
+        if (action.payload.status === "error") {
+          state.error = action.payload.error || "Level check failed.";
+          return;
+        }
+        state.error = null;
         if (action.payload.status === "pending") {
           state.activeCard = true;
         }

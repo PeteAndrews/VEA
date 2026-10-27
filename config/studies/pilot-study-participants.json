@@ -16,7 +16,7 @@
     },
     {
       "participant_id": "BIO-VEA-001",
-      "token": "bio-vea-token-replace-me",
+      "token": "bio-vea-001",
       "condition": "vea",
       "subject": "biology"
     },
