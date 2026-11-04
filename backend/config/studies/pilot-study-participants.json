@@ -25,6 +25,12 @@
       "token": "bio-control-token-replace-me",
       "condition": "control",
       "subject": "biology"
+    },
+    {
+      "participant_id": "BIO-VEA-002",
+      "token": "bio-vea-002",
+      "condition": "vea",
+      "subject": "biology"
     }
   ]
 }

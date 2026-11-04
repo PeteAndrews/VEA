@@ -41,3 +41,11 @@ backend/.env
 
 # Cursor local plans (optional)
 .cursor/
+
+# Local test suite (not published)
+backend/tests/
+tests/
+
+# Local marking sessions (sample ms-3f9994a8 remains tracked for fixtures)
+backend/data/judgements/ms-*/
+!backend/data/judgements/ms-3f9994a8/
