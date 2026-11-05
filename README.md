@@ -53,6 +53,14 @@ From `backend/`:
 pytest
 ```
 
+## Recording walkthrough interactions
+
+Set `VEA_RECORD_INTERACTIONS=1` in `backend/.env` (see `.env.example`). Each evidence check, level check, assistant launch, and assistant message is written to `backend/data/recordings/recording_001.json`, `recording_002.json`, and so on. Clear that directory before a capture run, then use the marking UI as usual and edit the JSON by hand.
+
+A recording stores the request and the AI fields the UI renders: intervention type and message, nuance items, suggested evidence, level-review summary, and the new chat messages with their citations. It does not store graph context, earlier conversation history, or tool traces.
+
+These files are git-ignored. Copy any you want to keep into a tracked location before building the walkthrough. One walkthrough step may produce several recordings, or none.
+
 ## Paths
 
 Defaults assume you run commands from `backend/`:

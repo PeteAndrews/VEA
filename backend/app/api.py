@@ -31,6 +31,11 @@ from app.interpretation_store import (
     active_level_interpretation,
     public_interpretation,
 )
+from app.interaction_recorder import (
+    message_delta,
+    record_interaction,
+    recording_enabled,
+)
 from app.intervention import run_evidence_check, update_interpretation_status
 from app.classifier import load_env_file
 from app.level_classifier import (
@@ -213,6 +218,100 @@ def _load_judgement_context(
     store = _judgement_store()
     state = store.load(marking_session_id, assessment_id, response_id)
     return service, record, state, store
+
+
+def _recording_on() -> bool:
+    load_env_file()
+    return recording_enabled()
+
+
+def _candidate_endpoint(
+    method: str,
+    marking_session_id: str,
+    assessment_id: str,
+    candidate_id: str,
+    suffix: str,
+) -> str:
+    return (
+        f"{method} /marking-sessions/{marking_session_id}/assessments/{assessment_id}"
+        f"/candidates/{candidate_id}/{suffix}"
+    )
+
+
+def _record_call(
+    kind: str,
+    *,
+    endpoint: str,
+    request: dict,
+    response: dict,
+    marking_session_id: str,
+    assessment_id: str,
+    candidate_id: str,
+    response_id: str,
+    stage: str | None,
+    state: dict,
+    coding_id: str | None = None,
+    new_message_ids: list[str] | None = None,
+) -> None:
+    if not _recording_on():
+        return
+    record_interaction(
+        kind,
+        endpoint=endpoint,
+        request=request,
+        response=response,
+        context={
+            "marking_session_id": marking_session_id,
+            "assessment_id": assessment_id,
+            "candidate_id": candidate_id,
+            "response_id": response_id,
+            "coding_id": coding_id,
+            "stage": stage,
+            "tentative_level": state.get("tentative_level"),
+        },
+        new_message_ids=new_message_ids,
+    )
+
+
+def _prior_messages(marking_session_id: str, response_id: str) -> list | None:
+    if not _recording_on():
+        return None
+    messages = _conversation_store().load(marking_session_id, response_id).get("messages", [])
+    return messages if isinstance(messages, list) else []
+
+
+def _record_conversation_turn(
+    kind: str,
+    *,
+    endpoint: str,
+    request: dict,
+    response: dict,
+    prior_messages: list | None,
+    marking_session_id: str,
+    assessment_id: str,
+    candidate_id: str,
+    response_id: str,
+    stage: str | None,
+    state: dict,
+    coding_id: str | None = None,
+) -> None:
+    if prior_messages is None:
+        return
+    new_ids, _citations = message_delta(prior_messages, response)
+    _record_call(
+        kind,
+        endpoint=endpoint,
+        request=request,
+        response=response,
+        marking_session_id=marking_session_id,
+        assessment_id=assessment_id,
+        candidate_id=candidate_id,
+        response_id=response_id,
+        stage=stage,
+        state=state,
+        coding_id=coding_id,
+        new_message_ids=new_ids,
+    )
 
 
 def _save_and_view(
@@ -625,7 +724,31 @@ def post_ai_check(
         return interpretation
 
     ai_store.update(marking_session_id, record["response_id"], _add)
-    return public_interpretation(interpretation)
+    result = public_interpretation(interpretation)
+    _record_call(
+        "evidence_check",
+        endpoint=_candidate_endpoint(
+            "POST",
+            marking_session_id,
+            assessment_id,
+            candidate_id,
+            f"judgement/codings/{coding_id}/ai-check",
+        ),
+        request={
+            "coding_id": coding_id,
+            "stage": body.stage,
+            "last_action": body.last_action,
+        },
+        response=result,
+        marking_session_id=marking_session_id,
+        assessment_id=assessment_id,
+        candidate_id=candidate_id,
+        response_id=record["response_id"],
+        stage=stage,
+        state=state,
+        coding_id=coding_id,
+    )
+    return result
 
 
 @app.post(
@@ -671,7 +794,26 @@ def post_level_ai_check(
         return interpretation
 
     ai_store.update(marking_session_id, record["response_id"], _add_level)
-    return public_interpretation(interpretation)
+    result = public_interpretation(interpretation)
+    _record_call(
+        "level_check",
+        endpoint=_candidate_endpoint(
+            "POST",
+            marking_session_id,
+            assessment_id,
+            candidate_id,
+            "judgement/tentative-level/ai-check",
+        ),
+        request={"stage": body.stage, "last_action": body.last_action},
+        response=result,
+        marking_session_id=marking_session_id,
+        assessment_id=assessment_id,
+        candidate_id=candidate_id,
+        response_id=record["response_id"],
+        stage=stage,
+        state=state,
+    )
+    return result
 
 
 @app.patch(
@@ -855,8 +997,9 @@ def post_conversation_launch(
     stage, stage_source = resolve_stage(state, body.stage, body.last_action)
     pipeline = _evidence_pipeline(assessment_id)
     retrieval_service = pipeline.retrieval_for_response(record["response_id"])
+    prior_messages = _prior_messages(marking_session_id, record["response_id"])
     try:
-        return launch_conversation(
+        result = launch_conversation(
             conversation_store=_conversation_store(),
             llm=_conversation_llm(),
             prompt_loader=_prompt_loader(),
@@ -880,6 +1023,27 @@ def post_conversation_launch(
         raise HTTPException(status_code=500, detail=str(exc)) from None
     except RuntimeError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from None
+    _record_conversation_turn(
+        "conversation_launch",
+        endpoint=_candidate_endpoint(
+            "POST",
+            marking_session_id,
+            assessment_id,
+            candidate_id,
+            "conversation/launch",
+        ),
+        request=body.model_dump(),
+        response=result,
+        prior_messages=prior_messages,
+        marking_session_id=marking_session_id,
+        assessment_id=assessment_id,
+        candidate_id=candidate_id,
+        response_id=record["response_id"],
+        stage=stage,
+        state=state,
+        coding_id=body.coding_id,
+    )
+    return result
 
 
 @app.post(
@@ -989,8 +1153,9 @@ def post_conversation_message(
     )
     pipeline = _evidence_pipeline(assessment_id)
     retrieval_service = pipeline.retrieval_for_response(record["response_id"])
+    prior_messages = _prior_messages(marking_session_id, record["response_id"])
     try:
-        return send_conversation_message(
+        result = send_conversation_message(
             conversation_store=_conversation_store(),
             llm=_conversation_llm(),
             prompt_loader=_prompt_loader(),
@@ -1011,6 +1176,29 @@ def post_conversation_message(
         raise HTTPException(status_code=500, detail=str(exc)) from None
     except RuntimeError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from None
+    message_stage = None
+    if prior_messages is not None:
+        message_stage, _stage_source = resolve_stage(state, None, None)
+    _record_conversation_turn(
+        "conversation_message",
+        endpoint=_candidate_endpoint(
+            "POST",
+            marking_session_id,
+            assessment_id,
+            candidate_id,
+            "conversation/messages",
+        ),
+        request={"content": body.content.strip()},
+        response=result,
+        prior_messages=prior_messages,
+        marking_session_id=marking_session_id,
+        assessment_id=assessment_id,
+        candidate_id=candidate_id,
+        response_id=record["response_id"],
+        stage=message_stage,
+        state=state,
+    )
+    return result
 
 
 @app.get("/assessments/{assessment_id}/levels/{level}/context")

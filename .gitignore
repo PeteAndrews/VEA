@@ -37,6 +37,7 @@ backend/data/study.db
 backend/data/registry.json
 backend/data/artifacts/
 backend/data/debug/
+backend/data/recordings/
 backend/.env
 
 # Cursor local plans (optional)
