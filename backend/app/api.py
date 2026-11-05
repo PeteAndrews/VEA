@@ -11,7 +11,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, model_validator
 
 from app.classifier import EvidenceRelationClassifier, JevEvidenceRelationClassifier
-from app.intent import IntentClassifier, JevIntentClassifier
 from app.conversation import (
     ConversationLLM,
     ConversationStore,
@@ -80,7 +79,6 @@ CONVERSATIONS_DIR = Path(
 DEFAULT_ASSESSMENT_ID = os.getenv("VEA_ASSESSMENT_ID", "C-JUN25-8464C1H-02_3")
 _evidence_classifier_instance: EvidenceRelationClassifier | None = None
 _level_classifier_instance: LevelJudgementClassifier | None = None
-_intent_classifier_instance: IntentClassifier | None = None
 _conversation_llm_instance: ConversationLLM | None = None
 _prompt_loader_instance: PromptLoader | None = None
 
@@ -170,13 +168,6 @@ def _level_classifier() -> LevelJudgementClassifier:
         else:
             _level_classifier_instance = LLMLevelJudgementClassifier()
     return _level_classifier_instance
-
-
-def _intent_classifier() -> IntentClassifier:
-    global _intent_classifier_instance
-    if _intent_classifier_instance is None:
-        _intent_classifier_instance = JevIntentClassifier()
-    return _intent_classifier_instance
 
 
 def _require_assessment(assessment_id: str) -> GraphService:
@@ -334,6 +325,7 @@ class AiCheckRequest(BaseModel):
 
 class AiInterpretationStatusRequest(BaseModel):
     status: Literal["dismissed", "explore"]
+    coding_id: str | None = None
 
 
 class ConversationLaunchRequest(BaseModel):
@@ -627,9 +619,12 @@ def post_ai_check(
         raise HTTPException(status_code=422, detail=str(exc)) from None
 
     ai_store = _ai_store()
-    payload = ai_store.load(marking_session_id, record["response_id"])
-    ai_store.add(payload, interpretation)
-    ai_store.save(payload)
+
+    def _add(payload: dict) -> dict:
+        ai_store.add(payload, interpretation)
+        return interpretation
+
+    ai_store.update(marking_session_id, record["response_id"], _add)
     return public_interpretation(interpretation)
 
 
@@ -668,11 +663,14 @@ def post_level_ai_check(
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from None
 
-    if interpretation.get("status") != "error":
-        ai_store.add_level(payload, interpretation)
-    else:
-        payload.setdefault("level_interpretations", []).append(interpretation)
-    ai_store.save(payload)
+    def _add_level(stored: dict) -> dict:
+        if interpretation.get("status") != "error":
+            ai_store.add_level(stored, interpretation)
+        else:
+            stored.setdefault("level_interpretations", []).append(interpretation)
+        return interpretation
+
+    ai_store.update(marking_session_id, record["response_id"], _add_level)
     return public_interpretation(interpretation)
 
 
@@ -693,29 +691,30 @@ def patch_ai_interpretation(
         candidate_id,
     )
     ai_store = _ai_store()
-    payload = ai_store.load(marking_session_id, record["response_id"])
-    try:
-        interpretation = update_interpretation_status(
-            payload,
-            ai_id,
-            body.status,
-            state,
-        )
-    except KeyError:
+
+    def _set_status(payload: dict) -> dict:
         try:
-            interpretation = update_level_interpretation_status(
+            return update_interpretation_status(
+                payload,
+                ai_id,
+                body.status,
+                state,
+                coding_id=body.coding_id,
+            )
+        except KeyError:
+            return update_level_interpretation_status(
                 payload,
                 ai_id,
                 body.status,
                 state,
             )
-        except KeyError:
-            raise HTTPException(status_code=404, detail=f"Interpretation not found: {ai_id}") from None
-        except ValueError as exc:
-            raise HTTPException(status_code=422, detail=str(exc)) from None
+
+    try:
+        interpretation = ai_store.update(marking_session_id, record["response_id"], _set_status)
+    except KeyError:
+        raise HTTPException(status_code=404, detail=f"Interpretation not found: {ai_id}") from None
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from None
-    ai_store.save(payload)
     return public_interpretation(interpretation)
 
 
@@ -784,25 +783,19 @@ def post_conversation_launch(
     elif body.source != "general":
         if not body.coding_id:
             raise HTTPException(status_code=422, detail="coding_id is required for explore/verify launch.")
+        from app.interpretation_store import resolve_evidence_interpretation
+
         ai_store = _ai_store()
         ai_payload = ai_store.load(marking_session_id, record["response_id"])
 
-        if body.interpretation_id:
-            interpretation = next(
-                (
-                    item
-                    for item in ai_payload.get("interpretations", [])
-                    if item.get("id") == body.interpretation_id
-                ),
-                None,
+        try:
+            interpretation = resolve_evidence_interpretation(
+                ai_payload,
+                ai_id=body.interpretation_id,
+                coding_id=body.coding_id,
             )
-            if interpretation is None:
-                raise HTTPException(
-                    status_code=404,
-                    detail=f"Interpretation not found: {body.interpretation_id}",
-                )
-        else:
-            interpretation = _find_interpretation_for_coding(ai_payload, body.coding_id)
+        except KeyError:
+            interpretation = None
 
         if interpretation is None:
             raise HTTPException(
@@ -818,18 +811,27 @@ def post_conversation_launch(
             )
 
     if body.source == "explore":
-        try:
-            interpretation = update_interpretation_status(
-                ai_payload,
-                interpretation["id"],
+        requested_id = interpretation["id"]
+
+        def _mark_explore(payload: dict) -> dict:
+            return update_interpretation_status(
+                payload,
+                requested_id,
                 "explore",
                 state,
+                coding_id=body.coding_id,
             )
-            ai_store.save(ai_payload)
+
+        try:
+            interpretation = ai_store.update(
+                marking_session_id,
+                record["response_id"],
+                _mark_explore,
+            )
         except KeyError:
             raise HTTPException(
                 status_code=404,
-                detail=f"Interpretation not found: {interpretation['id']}",
+                detail=f"Interpretation not found: {requested_id}",
             ) from None
         except ValueError as exc:
             raise HTTPException(status_code=422, detail=str(exc)) from None
@@ -851,6 +853,8 @@ def post_conversation_launch(
             raise HTTPException(status_code=422, detail=str(exc)) from None
 
     stage, stage_source = resolve_stage(state, body.stage, body.last_action)
+    pipeline = _evidence_pipeline(assessment_id)
+    retrieval_service = pipeline.retrieval_for_response(record["response_id"])
     try:
         return launch_conversation(
             conversation_store=_conversation_store(),
@@ -866,6 +870,8 @@ def post_conversation_launch(
             stage=stage,
             stage_source=stage_source,
             data_dir=str(DATA_DIR),
+            classifier=_evidence_classifier(),
+            retrieval_service=retrieval_service,
         )
     except KeyError:
         detail = f"Coding not found: {body.coding_id}" if body.coding_id else "Conversation launch failed."
@@ -995,7 +1001,6 @@ def post_conversation_message(
             record=record,
             judgement_state=state,
             classifier=_evidence_classifier(),
-            intent_classifier=_intent_classifier(),
             retrieval_service=retrieval_service,
             assessment_id=assessment_id,
             data_dir=str(DATA_DIR),

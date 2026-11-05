@@ -38,9 +38,8 @@ Paraphrase guidance and criterion requirements in plain marking language instead
 
 Rules:
 
-- Scope every reply to the linked criterion in active_context (and its parent criterion if present).
-  Do not judge the evidence against the whole question stem or other method steps unless the
-  examiner explicitly asks about the wider response.
+- Anchor on the linked criterion in active_context (and its parent criterion if present), but follow
+  the examiner into related criteria or wider response checks when they ask.
 
 - The examiner's coded evidence is evidence.text only. Treat interpretive_context as neighbouring
   response text for interpretation — never quote or rely on it as if it were the linked span.

@@ -7,7 +7,7 @@ import AllEvidenceModal from "./AllEvidenceModal";
 export default function StudentResponsePanel({ response }) {
   const dispatch = useDispatch();
   const containerRef = useRef(null);
-  const { draft, spans, codings, focusedCodingId, pendingCriterionId } = useSelector(
+  const { draft, spans, codings, focusedCodingId, pendingCriterionId, quotedSpan } = useSelector(
     (state) => state.judgement
   );
   const [showAllEvidence, setShowAllEvidence] = useState(false);
@@ -22,6 +22,20 @@ export default function StudentResponsePanel({ response }) {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!quotedSpan || quotedSpan.start_char == null || quotedSpan.end_char == null) return;
+    const nodes = containerRef.current?.querySelectorAll("[data-start]");
+    if (!nodes) return;
+    for (const node of nodes) {
+      const start = Number(node.dataset.start);
+      const end = Number(node.dataset.end);
+      if (start < quotedSpan.end_char && end > quotedSpan.start_char) {
+        node.scrollIntoView({ block: "center", behavior: "smooth" });
+        break;
+      }
+    }
+  }, [quotedSpan]);
 
   useEffect(() => {
     if (!focusedCodingId) return;
@@ -40,7 +54,9 @@ export default function StudentResponsePanel({ response }) {
     spans,
     codings,
     draft,
-    focusedCodingId
+    focusedCodingId,
+    pendingCriterionId,
+    quotedSpan
   );
 
   function handleMouseUp() {
@@ -100,6 +116,7 @@ export default function StudentResponsePanel({ response }) {
           if (piece.isDraftPending) classNames.push("draft-pending");
           if (piece.codingIds.length) classNames.push("coded");
           if (piece.isFocused) classNames.push("focused");
+          if (piece.isQuoted) classNames.push("quoted");
 
           return (
             <span

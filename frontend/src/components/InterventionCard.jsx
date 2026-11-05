@@ -23,20 +23,24 @@ export default function InterventionCard({
     return null;
   }
 
-  function handleDismiss() {
+  function handleDismiss(event) {
+    event.stopPropagation();
+    dispatch(clearActiveCard());
     dispatch(
       setInterventionStatus({
         markingSessionId,
         assessmentId,
         candidateId,
         aiId: interpretation.id,
+        codingId: interpretation.coding_id,
         status: "dismissed",
       })
     );
     onDismiss?.();
   }
 
-  function handleExplore() {
+  function handleExplore(event) {
+    event.stopPropagation();
     dispatch(clearActiveCard());
     dispatch(
       launchAssistant({

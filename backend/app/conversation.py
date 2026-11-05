@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import threading
 import uuid
 from abc import ABC, abstractmethod
 from datetime import datetime, timezone
@@ -23,6 +24,16 @@ DEFAULT_PROMPTS_DIR = PROMPTS_DIR
 DEFAULT_LLM_PROVIDER = "openai"
 DEFAULT_LLM_MODEL = "gpt-4.1-mini"
 OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses"
+_FILE_LOCKS: dict[str, threading.Lock] = {}
+
+
+def _conversation_file_lock(path: Path) -> threading.Lock:
+    key = str(path.resolve())
+    lock = _FILE_LOCKS.get(key)
+    if lock is None:
+        lock = threading.Lock()
+        _FILE_LOCKS[key] = lock
+    return lock
 
 
 def _utc_now() -> str:
@@ -96,6 +107,19 @@ class ConversationStore:
             json.dump(payload, handle, indent=2)
             handle.write("\n")
         os.replace(tmp_path, path)
+
+    def merge_and_save(
+        self,
+        marking_session_id: str,
+        response_id: str,
+        mutator: Any,
+    ) -> dict[str, Any]:
+        path = self._path(marking_session_id, response_id)
+        with _conversation_file_lock(path):
+            payload = self.load(marking_session_id, response_id)
+            mutator(payload)
+            self.save(payload)
+            return payload
 
 
 def _find_coding(state: dict[str, Any], coding_id: str) -> tuple[dict[str, Any], dict[str, Any]]:
@@ -191,6 +215,8 @@ def build_conversation_context(
     stage: str | None = None,
     stage_source: str | None = None,
 ) -> dict[str, Any]:
+    from app.assistant_context import finalize_new_context
+
     if source not in CONVERSATION_SOURCES:
         raise ValueError(f"Unsupported conversation source: {source}")
 
@@ -226,6 +252,7 @@ def build_conversation_context(
             "origin": relation.get("origin"),
             "examiner_id": relation.get("examiner_id"),
         },
+        "kind": "link",
         "jev": interpretation.get("jev") if interpretation else None,
         "jev_direct": interpretation.get("jev_direct") if interpretation else None,
         "jev_additional": interpretation.get("jev_additional") if interpretation else None,
@@ -243,7 +270,7 @@ def build_conversation_context(
         "tentative_level": judgement_state.get("tentative_level"),
         "prepared_at": _utc_now(),
     }
-    return context
+    return finalize_new_context(context)
 
 
 def public_conversation(payload: dict[str, Any]) -> dict[str, Any]:
@@ -295,6 +322,10 @@ def _compact_interpretive_context(context: dict[str, Any]) -> dict[str, Any] | N
 
 def compact_context_for_llm(context: dict[str, Any]) -> dict[str, Any]:
     """Strip quoted guidance and boilerplate before sending context to the LLM."""
+    if context.get("anchor"):
+        from app.assistant_context import compact_layers_for_llm, ensure_layers
+
+        return compact_layers_for_llm(ensure_layers(context))
     compact = dict(context)
     graph = dict(compact.get("graph_context") or {})
     graph["guidance"] = [
@@ -356,6 +387,16 @@ class ConversationLLM(ABC):
         active_context: dict[str, Any],
         messages: list[dict[str, Any]],
     ) -> str:
+        ...
+
+    @abstractmethod
+    def respond_with_tools(
+        self,
+        *,
+        instructions: str,
+        input_items: list[dict[str, Any]],
+        tools: list[dict[str, Any]],
+    ) -> dict[str, Any]:
         ...
 
 
@@ -448,6 +489,88 @@ class OpenAIConversationLLM(ConversationLLM):
             raise RuntimeError("OpenAI API returned no assistant text.")
         return text
 
+    def respond_with_tools(
+        self,
+        *,
+        instructions: str,
+        input_items: list[dict[str, Any]],
+        tools: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        payload: dict[str, Any] = {
+            "model": self.model,
+            "instructions": instructions,
+            "input": input_items,
+        }
+        if tools:
+            payload["tools"] = tools
+            payload["tool_choice"] = "auto"
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json",
+        }
+        if self._client is not None:
+            response = self._client.post(OPENAI_RESPONSES_URL, headers=headers, json=payload)
+        else:
+            with httpx.Client(timeout=self.timeout) as client:
+                response = client.post(OPENAI_RESPONSES_URL, headers=headers, json=payload)
+        if response.status_code >= 400:
+            raise RuntimeError(
+                f"OpenAI API error {response.status_code}: {response.text[:500]}"
+            )
+        return _parse_openai_tool_response(response.json())
+
+
+def _function_call_input_item(item: dict[str, Any]) -> dict[str, Any]:
+    """Build a Responses API input item that pairs with function_call_output."""
+    raw_args = item.get("arguments") or "{}"
+    if not isinstance(raw_args, str):
+        raw_args = json.dumps(raw_args)
+    payload: dict[str, Any] = {
+        "type": "function_call",
+        "call_id": item.get("call_id") or item.get("id"),
+        "name": item.get("name"),
+        "arguments": raw_args,
+    }
+    if item.get("id"):
+        payload["id"] = item["id"]
+    return payload
+
+
+def _parse_openai_tool_response(data: dict[str, Any]) -> dict[str, Any]:
+    calls: list[dict[str, Any]] = []
+    for item in data.get("output", []):
+        item_type = item.get("type")
+        if item_type == "function_call":
+            raw_args = item.get("arguments") or "{}"
+            if isinstance(raw_args, str):
+                try:
+                    arguments = json.loads(raw_args)
+                except json.JSONDecodeError:
+                    arguments = {}
+            else:
+                arguments = dict(raw_args)
+            call_id = item.get("call_id") or item.get("id")
+            calls.append(
+                {
+                    "name": item.get("name"),
+                    "arguments": arguments,
+                    "call_id": call_id,
+                    "input_call": _function_call_input_item(item),
+                }
+            )
+        elif item_type == "message":
+            for content in item.get("content", []):
+                if content.get("type") in {"output_text", "text"} and content.get("text"):
+                    text = str(content["text"]).strip()
+                    if text:
+                        return {"type": "text", "text": text}
+    if calls:
+        return {"type": "tool_calls", "calls": calls}
+    text = _extract_openai_text(data)
+    if text:
+        return {"type": "text", "text": text}
+    return {"type": "text", "text": ""}
+
 
 def _extract_openai_text(data: dict[str, Any]) -> str:
     if isinstance(data.get("output_text"), str) and data["output_text"].strip():
@@ -490,6 +613,74 @@ class FakeConversationLLM(ConversationLLM):
             return f"{self.response} [{source}]"
         return self.response
 
+    def respond_with_tools(
+        self,
+        *,
+        instructions: str,
+        input_items: list[dict[str, Any]],
+        tools: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        self.calls.append(
+            {
+                "respond_with_tools": True,
+                "instructions": instructions,
+                "input_items": list(input_items),
+                "tools": list(tools),
+            }
+        )
+        return {"type": "text", "text": self.response}
+
+
+class ScriptedToolLLM(FakeConversationLLM):
+    """Test double that returns queued tool-call rounds then text."""
+
+    def __init__(self, script: list[dict[str, Any]], final_text: str = "Done.") -> None:
+        super().__init__(final_text)
+        self.script = list(script)
+        self.tool_calls: list[dict[str, Any]] = []
+
+    def respond_with_tools(
+        self,
+        *,
+        instructions: str,
+        input_items: list[dict[str, Any]],
+        tools: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        self.tool_calls.append({"instructions": instructions, "tools": tools})
+        if self.script:
+            step = self.script.pop(0)
+            if step.get("calls"):
+                calls = []
+                for raw in step["calls"]:
+                    call_id = raw.get("call_id") or "call-test"
+                    name = raw.get("name", "")
+                    args = raw.get("arguments") or {}
+                    if isinstance(args, str):
+                        arg_str = args
+                        try:
+                            parsed_args = json.loads(args)
+                        except json.JSONDecodeError:
+                            parsed_args = {}
+                    else:
+                        parsed_args = dict(args)
+                        arg_str = json.dumps(args)
+                    calls.append(
+                        {
+                            "name": name,
+                            "arguments": parsed_args,
+                            "call_id": call_id,
+                            "input_call": {
+                                "type": "function_call",
+                                "call_id": call_id,
+                                "name": name,
+                                "arguments": arg_str,
+                            },
+                        }
+                    )
+                return {"type": "tool_calls", "calls": calls}
+            return {"type": "text", "text": step.get("text") or self.response}
+        return {"type": "text", "text": self.response}
+
 
 def get_conversation_llm() -> ConversationLLM:
     load_env_file()
@@ -514,14 +705,11 @@ def launch_conversation(
     stage: str | None = None,
     stage_source: str | None = None,
     data_dir: str = "data",
+    classifier=None,
+    retrieval_service=None,
 ) -> dict[str, Any]:
     from app.assistant import build_session_context
 
-    payload = conversation_store.load(
-        judgement_state["marking_session_id"],
-        record["response_id"],
-    )
-    payload["assessment_id"] = assessment_id
     if source in {"explore_level", "verify_level"}:
         active_context = build_level_conversation_context(
             judgement_state=judgement_state,
@@ -552,24 +740,58 @@ def launch_conversation(
             stage=stage,
             stage_source=stage_source,
         )
-    payload.setdefault("contexts", []).append(active_context)
-    payload["active_context_id"] = active_context["context_id"]
+    context_id = active_context["context_id"]
 
-    system_prompt = prompt_loader.load_system()
-    launch_prompt = prompt_loader.load_launch(source)
-    assistant_text = llm.respond(
-        system_prompt=system_prompt,
-        launch_prompt=launch_prompt,
-        active_context=active_context,
-        messages=[],
+    def _mutate(stored: dict[str, Any]) -> None:
+        stored.setdefault("contexts", []).append(active_context)
+        stored["active_context_id"] = context_id
+        stored["assessment_id"] = assessment_id
+        if source in {"explore_level", "verify_level"}:
+            system_prompt = prompt_loader.load_system()
+            launch_prompt = prompt_loader.load_launch(source)
+            assistant_text = llm.respond(
+                system_prompt=system_prompt,
+                launch_prompt=launch_prompt,
+                active_context=active_context,
+                messages=[],
+            )
+            turn = {"content": assistant_text, "trace": {}}
+        else:
+            from app.assistant_tool_loop import run_assistant_turn
+
+            if classifier is None:
+                raise ValueError("classifier is required for link/general launch.")
+            turn = run_assistant_turn(
+                content=None,
+                active_context=active_context,
+                graph_service=graph_service,
+                record=record,
+                judgement_state=judgement_state,
+                classifier=classifier,
+                retrieval_service=retrieval_service,
+                llm=llm,
+                prompt_loader=prompt_loader,
+                history=[],
+                data_dir=data_dir,
+                launch=True,
+            )
+            for index, ctx in enumerate(stored.get("contexts", [])):
+                if ctx.get("context_id") == context_id:
+                    stored["contexts"][index] = turn["active_context"]
+                    break
+        _append_message(
+            stored,
+            role="assistant",
+            content=turn["content"],
+            context_id=context_id,
+            metadata={"trace": turn.get("trace"), "citations": turn.get("citations", [])},
+        )
+
+    payload = conversation_store.merge_and_save(
+        judgement_state["marking_session_id"],
+        record["response_id"],
+        _mutate,
     )
-    _append_message(
-        payload,
-        role="assistant",
-        content=assistant_text,
-        context_id=active_context["context_id"],
-    )
-    conversation_store.save(payload)
     return public_conversation(payload)
 
 
@@ -591,96 +813,104 @@ def send_conversation_message(
     data_dir: str | None = None,
 ) -> dict[str, Any]:
     from app.assistant import build_session_context, process_assistant_turn
+    from app.assistant_context import ensure_layers
 
-    payload = conversation_store.load(marking_session_id, response_id)
-    active_context = _active_context(payload)
-    if active_context is None:
-        if not all([graph_service, record, judgement_state, assessment_id, data_dir]):
-            raise ValueError("No active conversation context.")
-        active_context = build_session_context(
-            graph_service=graph_service,
-            record=record,
-            judgement_state=judgement_state,
-            assessment_id=assessment_id,
-            data_dir=data_dir,
-            source="general",
-        )
-        payload.setdefault("contexts", []).append(active_context)
-        payload["active_context_id"] = active_context["context_id"]
+    context_id_holder: dict[str, str] = {}
 
-    _append_message(
-        payload,
-        role="user",
-        content=content,
-        context_id=active_context["context_id"],
-    )
-    context_messages = [
-        message
-        for message in payload.get("messages", [])
-        if message.get("context_id") == active_context["context_id"]
-        and message["role"] in {"user", "assistant"}
-    ]
+    def _mutate(payload: dict[str, Any]) -> None:
+        active_context = _active_context(payload)
+        if active_context is None:
+            if not all([graph_service, record, judgement_state, assessment_id, data_dir]):
+                raise ValueError("No active conversation context.")
+            active_context = build_session_context(
+                graph_service=graph_service,
+                record=record,
+                judgement_state=judgement_state,
+                assessment_id=assessment_id,
+                data_dir=data_dir,
+                source="general",
+            )
+            payload.setdefault("contexts", []).append(active_context)
+            payload["active_context_id"] = active_context["context_id"]
+        ensure_layers(active_context)
+        context_id = active_context["context_id"]
+        context_id_holder["id"] = context_id
 
-    from app.level_conversation import is_level_conversation_context, process_level_conversation_turn
-
-    if is_level_conversation_context(active_context):
-        turn = process_level_conversation_turn(
-            active_context=active_context,
-            llm=llm,
-            prompt_loader=prompt_loader,
-            messages=context_messages,
-            context_id=active_context["context_id"],
-        )
-    elif graph_service and record and judgement_state and classifier and intent_classifier:
-        turn = process_assistant_turn(
+        _append_message(
+            payload,
+            role="user",
             content=content,
-            active_context=active_context,
-            graph_service=graph_service,
-            record=record,
-            judgement_state=judgement_state,
-            classifier=classifier,
-            intent_classifier=intent_classifier,
-            retrieval_service=retrieval_service,
-            llm=llm,
-            prompt_loader=prompt_loader,
-            history=context_messages[:-1],
+            context_id=context_id,
         )
-    else:
-        turn = None
+        context_messages = [
+            message
+            for message in payload.get("messages", [])
+            if message.get("context_id") == context_id
+            and message["role"] in {"user", "assistant"}
+        ]
 
-    if turn is not None:
-        for index, context in enumerate(payload.get("contexts", [])):
-            if context["context_id"] == active_context["context_id"]:
-                payload["contexts"][index] = turn["active_context"]
-                break
-        _append_message(
-            payload,
-            role="assistant",
-            content=turn["content"],
-            context_id=active_context["context_id"],
-            metadata={
-                "intent": turn["intent"],
-                "citations": turn["citations"],
-                "tool_results": turn["tool_results"],
-                "clarification_needed": turn["clarification_needed"],
-            },
-        )
-    elif turn is None:
-        system_prompt = prompt_loader.load_system()
-        launch_prompt = prompt_loader.load_launch(active_context["source"])
-        assistant_text = llm.respond(
-            system_prompt=system_prompt,
-            launch_prompt=launch_prompt,
-            active_context=active_context,
-            messages=context_messages,
-        )
-        _append_message(
-            payload,
-            role="assistant",
-            content=assistant_text,
-            context_id=active_context["context_id"],
-        )
-    conversation_store.save(payload)
+        from app.level_conversation import is_level_conversation_context, process_level_conversation_turn
+
+        if is_level_conversation_context(active_context):
+            turn = process_level_conversation_turn(
+                active_context=active_context,
+                llm=llm,
+                prompt_loader=prompt_loader,
+                messages=context_messages,
+                context_id=context_id,
+            )
+        elif graph_service and record and judgement_state and classifier:
+            turn = process_assistant_turn(
+                content=content,
+                active_context=active_context,
+                graph_service=graph_service,
+                record=record,
+                judgement_state=judgement_state,
+                classifier=classifier,
+                retrieval_service=retrieval_service,
+                llm=llm,
+                prompt_loader=prompt_loader,
+                history=context_messages[:-1],
+                data_dir=data_dir or "data",
+            )
+        else:
+            turn = None
+
+        if turn is not None:
+            for index, ctx in enumerate(payload.get("contexts", [])):
+                if ctx["context_id"] == context_id:
+                    payload["contexts"][index] = turn["active_context"]
+                    break
+            _append_message(
+                payload,
+                role="assistant",
+                content=turn["content"],
+                context_id=context_id,
+                metadata={
+                    "intent": turn.get("intent"),
+                    "citations": turn.get("citations"),
+                    "tool_results": turn.get("tool_results"),
+                    "clarification_needed": turn.get("clarification_needed"),
+                    "trace": turn.get("trace"),
+                },
+            )
+        elif turn is None:
+            system_prompt = prompt_loader.load_system()
+            launch_prompt = prompt_loader.load_launch(active_context["source"])
+            assistant_text = llm.respond(
+                system_prompt=system_prompt,
+                launch_prompt=launch_prompt,
+                active_context=active_context,
+                messages=context_messages,
+            )
+            _append_message(
+                payload,
+                role="assistant",
+                content=assistant_text,
+                context_id=context_id,
+            )
+
+    payload = conversation_store.merge_and_save(marking_session_id, response_id, _mutate)
     return public_conversation(payload)
 
 

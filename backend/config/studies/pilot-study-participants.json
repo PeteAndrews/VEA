@@ -31,6 +31,12 @@
       "token": "bio-vea-002",
       "condition": "vea",
       "subject": "biology"
+    },
+    {
+      "participant_id": "BIO-VEA-003",
+      "token": "bio-vea-003",
+      "condition": "vea",
+      "subject": "biology"
     }
   ]
 }

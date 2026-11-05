@@ -67,6 +67,7 @@ const judgementSlice = createSlice({
     draft: null,
     reviseCodingId: null,
     focusedCodingId: null,
+    quotedSpan: null,
     pendingCriterionId: null,
     lastAction: null,
     spans: [],
@@ -100,10 +101,14 @@ const judgementSlice = createSlice({
     focusCoding(state, action) {
       state.focusedCodingId = action.payload;
     },
+    setQuotedSpan(state, action) {
+      state.quotedSpan = action.payload;
+    },
     resetJudgement(state) {
       state.draft = null;
       state.reviseCodingId = null;
       state.focusedCodingId = null;
+      state.quotedSpan = null;
       state.pendingCriterionId = null;
       state.lastAction = null;
       state.spans = [];
@@ -213,6 +218,7 @@ export const {
   startRevise,
   cancelRevise,
   focusCoding,
+  setQuotedSpan,
   setPendingCriterion,
   resetJudgement,
 } = judgementSlice.actions;

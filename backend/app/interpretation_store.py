@@ -4,11 +4,22 @@ from __future__ import annotations
 
 import json
 import os
+import threading
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 SCHEMA_VERSION = 2
+_FILE_LOCKS: dict[str, threading.Lock] = {}
+
+
+def _file_lock(path: Path) -> threading.Lock:
+    key = str(path.resolve())
+    lock = _FILE_LOCKS.get(key)
+    if lock is None:
+        lock = threading.Lock()
+        _FILE_LOCKS[key] = lock
+    return lock
 
 
 def _utc_now() -> str:
@@ -42,6 +53,20 @@ class AIInterpretationStore:
             json.dump(payload, handle, indent=2)
             handle.write("\n")
         os.replace(tmp_path, path)
+
+    def update(
+        self,
+        marking_session_id: str,
+        response_id: str,
+        mutator: Callable[[dict[str, Any]], Any],
+    ) -> Any:
+        """Reload, mutate, and save under a per-file lock so checks cannot overwrite each other."""
+        path = self._path(marking_session_id, response_id)
+        with _file_lock(path):
+            payload = self.load(marking_session_id, response_id)
+            result = mutator(payload)
+            self.save(payload)
+            return result
 
     def _empty_payload(self, marking_session_id: str, response_id: str) -> dict[str, Any]:
         return {
@@ -92,6 +117,35 @@ class AIInterpretationStore:
 
     def find(self, payload: dict[str, Any], ai_id: str) -> dict[str, Any]:
         return self.find_evidence(payload, ai_id)
+
+
+def resolve_evidence_interpretation(
+    payload: dict[str, Any],
+    *,
+    ai_id: str | None = None,
+    coding_id: str | None = None,
+) -> dict[str, Any]:
+    """Find an evidence interpretation by id, or the latest one for a coding."""
+    if ai_id:
+        for interpretation in payload.get("interpretations", []):
+            if interpretation.get("id") == ai_id:
+                return interpretation
+    if coding_id:
+        matches = [
+            item
+            for item in payload.get("interpretations", [])
+            if item.get("coding_id") == coding_id and item.get("status") != "superseded"
+        ]
+        if not matches:
+            matches = [
+                item
+                for item in payload.get("interpretations", [])
+                if item.get("coding_id") == coding_id
+            ]
+        if matches:
+            matches.sort(key=lambda item: item.get("updated_at") or item.get("created_at") or "")
+            return matches[-1]
+    raise KeyError(ai_id or coding_id or "interpretation")
 
 
 def _coding_matches(interpretation: dict[str, Any], relation: dict[str, Any], span: dict[str, Any]) -> bool:

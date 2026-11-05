@@ -15,6 +15,10 @@ def _snippet(text: str, limit: int = SNIPPET_LENGTH) -> str:
     return cleaned[: limit - 1] + "…"
 
 
+def _guidance_text(text: str) -> str:
+    return " ".join(text.split())
+
+
 def _alignment(decision: dict[str, Any]) -> str:
     return str(decision.get("alignment") or decision.get("outcome") or "UNCERTAIN")
 
@@ -94,7 +98,7 @@ def decide_level_intervention(
             "nuance_items": [
                 {
                     "node_id": item.get("node_id", ""),
-                    "text": _snippet(item["text"]),
+                    "text": _guidance_text(item["text"]),
                 }
                 for item in anchors[:2]
             ],
@@ -126,7 +130,7 @@ def decide_level_intervention(
             "nuance_items": [
                 {
                     "node_id": item.get("node_id", ""),
-                    "text": _snippet(item["text"]),
+                    "text": _guidance_text(item["text"]),
                 }
                 for item in anchors[:2]
             ],

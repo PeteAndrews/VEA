@@ -10,7 +10,7 @@ import {
 } from "../conversationSlice";
 import { tabLabelsForContexts } from "../conversationTabLabels";
 import { focusEvidenceSpan } from "../evidenceNavigation";
-import { focusCoding } from "../judgementSlice";
+import { setQuotedSpan } from "../judgementSlice";
 
 function formatTime(isoString) {
   if (!isoString) return "";
@@ -30,7 +30,7 @@ function AssistantMessage({ message, onCitationClick }) {
               <li key={`${citation.type}-${index}`}>
                 <button type="button" className="assistant-citation" onClick={() => onCitationClick(citation)}>
                   {citation.type === "response_span"
-                    ? `Response: "${citation.text?.slice(0, 60) || "span"}"`
+                    ? `Response: "${citation.text || "span"}"`
                     : `Criterion: ${citation.text || citation.criterion_id}`}
                 </button>
               </li>
@@ -48,6 +48,7 @@ export default function ExaminerAssistantPanel({ assessmentId, candidateId }) {
   const messagesEndRef = useRef(null);
   const [draftsByContext, setDraftsByContext] = useState({});
   const { markingSessionId } = useSelector((state) => state.auth);
+  const selectedResponse = useSelector((state) => state.marking.selectedResponse);
   const {
     conversation,
     collapsed,
@@ -94,11 +95,21 @@ export default function ExaminerAssistantPanel({ assessmentId, candidateId }) {
 
   function handleCitationClick(citation) {
     if (citation.type !== "response_span") return;
+    const responseText = selectedResponse?.text || "";
+    let startChar = citation.start_char;
+    let endChar = citation.end_char;
+    if ((startChar == null || endChar == null) && citation.text && responseText) {
+      const index = responseText.indexOf(citation.text);
+      if (index >= 0) {
+        startChar = index;
+        endChar = index + citation.text.length;
+      }
+    }
+    if (startChar == null || endChar == null) return;
+    dispatch(setQuotedSpan({ start_char: startChar, end_char: endChar }));
     focusEvidenceSpan({
-      startChar: citation.start_char,
-      endChar: citation.end_char,
-      dispatch,
-      focusCoding,
+      startChar,
+      endChar,
     });
   }
 

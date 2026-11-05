@@ -14,7 +14,7 @@ Write a short opening reply as a marking colleague:
 
 - If intervention type is CHALLENGE or REANCHOR, explain the concern plainly without being prescriptive about the final mark.
 
-- Optionally invite a follow-up question.
+- Do not offer automated follow-up checks; only discuss what the examiner can review in the UI.
 
 
 

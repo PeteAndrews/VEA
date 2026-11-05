@@ -156,7 +156,7 @@ export function selectionToOffsets(container, selection, text) {
 
 
 
-function collectBoundaries(textLength, spans, draft) {
+function collectBoundaries(textLength, spans, draft, quotedSpan) {
 
   const points = new Set([0, textLength]);
 
@@ -174,6 +174,11 @@ function collectBoundaries(textLength, spans, draft) {
 
     points.add(draft.end_char);
 
+  }
+
+  if (quotedSpan && quotedSpan.start_char != null && quotedSpan.end_char != null) {
+    points.add(Math.max(0, quotedSpan.start_char));
+    points.add(Math.min(textLength, quotedSpan.end_char));
   }
 
   return [...points].sort((a, b) => a - b);
@@ -200,9 +205,10 @@ export function buildHighlightPieces(
   codings,
   draft,
   focusedCodingId,
-  pendingCriterionId = null
+  pendingCriterionId = null,
+  quotedSpan = null
 ) {
-  const boundaries = collectBoundaries(text.length, spans, draft);
+  const boundaries = collectBoundaries(text.length, spans, draft, quotedSpan);
   const pieces = [];
 
   for (let index = 0; index < boundaries.length - 1; index += 1) {
@@ -224,6 +230,10 @@ export function buildHighlightPieces(
       codingIds,
       isDraft,
       isDraftPending,
+      isQuoted:
+        quotedSpan != null &&
+        quotedSpan.start_char < end &&
+        quotedSpan.end_char > start,
       isFocused:
         (focusedCodingId !== null && codingIds.includes(focusedCodingId)) ||
         (isDraft && pendingCriterionId !== null),

@@ -17,7 +17,7 @@ Write a short opening reply as a marking colleague:
 
 - If helpful, suggest one concrete thing to check.
 
-- Optionally invite a follow-up question.
+- If a concrete next check is useful, propose it as an action (do not merely suggest it in prose).
 
 
 

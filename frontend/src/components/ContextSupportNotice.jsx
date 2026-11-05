@@ -8,13 +8,14 @@ import { snippet } from "../responseUtils";
 export default function ContextSupportNotice({ assessmentId, candidateId, interpretation, coding }) {
   const dispatch = useDispatch();
   const [confirming, setConfirming] = useState(false);
+  const [closed, setClosed] = useState(false);
   const { markingSessionId } = useSelector((state) => state.auth);
   const { saving } = useSelector((state) => state.judgement);
   const { launchStatus } = useSelector((state) => state.conversation);
   const suggested =
     interpretation.suggested_evidence_span || interpretation.suggested_span;
 
-  if (!isContextSupportNoticeActive(interpretation)) {
+  if (closed || !isContextSupportNoticeActive(interpretation)) {
     return null;
   }
 
@@ -62,8 +63,20 @@ export default function ContextSupportNotice({ assessmentId, candidateId, interp
           text: suggested.text,
         },
       })
-    );
-    setConfirming(false);
+    ).then((result) => {
+      if (!updateCodingSpan.fulfilled.match(result)) return;
+      setClosed(true);
+      dispatch(
+        setInterventionStatus({
+          markingSessionId,
+          assessmentId,
+          candidateId,
+          aiId: interpretation.id,
+          codingId: interpretation.coding_id,
+          status: "dismissed",
+        })
+      );
+    });
   }
 
   return (

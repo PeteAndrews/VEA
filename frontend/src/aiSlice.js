@@ -46,8 +46,15 @@ export const runEvidenceCheck = createAsyncThunk(
 
 export const setInterventionStatus = createAsyncThunk(
   "ai/setStatus",
-  async ({ markingSessionId, assessmentId, candidateId, aiId, status }) =>
-    updateAiInterpretation(markingSessionId, assessmentId, candidateId, aiId, status)
+  async ({ markingSessionId, assessmentId, candidateId, aiId, status, codingId }) =>
+    updateAiInterpretation(
+      markingSessionId,
+      assessmentId,
+      candidateId,
+      aiId,
+      status,
+      codingId
+    )
 );
 
 const aiSlice = createSlice({
@@ -115,7 +122,12 @@ const aiSlice = createSlice({
       applyInterpretation(state, action.payload);
       if (action.payload.status === "dismissed") {
         state.activeCardId = null;
+        state.error = null;
       }
+    });
+    builder.addCase(setInterventionStatus.rejected, (state, action) => {
+      state.activeCardId = null;
+      state.error = action.error.message;
     });
 
     builder.addCase(launchAssistant.fulfilled, (state, action) => {

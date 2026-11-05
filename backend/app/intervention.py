@@ -268,13 +268,17 @@ def nuance_items(graph_context: dict[str, Any]) -> list[dict[str, Any]]:
     return popup_guidance_items(graph_context)
 
 
+def _guidance_text(text: str) -> str:
+    return " ".join(text.split())
+
+
 def _nuance_payload(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return [
         {
             "node_id": item["node_id"],
             "relation": item["relation"],
             "scope": item["scope"],
-            "text": _snippet(item["text"]),
+            "text": _guidance_text(item["text"]),
         }
         for item in items[:MAX_NUANCE_ITEMS]
     ]
@@ -474,7 +478,7 @@ def run_evidence_check(
         "graph_context": {
             "node_ids": graph_context["context_node_ids"],
             "items": [
-                {**item, "text": _snippet(item["text"], 240)} for item in graph_context["items"]
+                {**item, "text": _guidance_text(item["text"])} for item in graph_context["items"]
             ],
         },
         "stage": stage,
@@ -562,18 +566,17 @@ def build_explore_context(
         "suggested_evidence_span": interpretation.get("suggested_evidence_span"),
         "additional_evidence": interpretation.get("additional_evidence"),
         "intervention": interpretation.get("intervention"),
-        "graph_context": interpretation["graph_context"],
+        "graph_context": interpretation.get("graph_context") or {},
         "stage": interpretation["stage"],
         "tentative_level": judgement_state.get("tentative_level"),
         "prepared_at": _utc_now(),
     }
 
 
-def _find_interpretation(payload: dict[str, Any], ai_id: str) -> dict[str, Any]:
-    for interpretation in payload["interpretations"]:
-        if interpretation["id"] == ai_id:
-            return interpretation
-    raise KeyError(ai_id)
+def _find_interpretation(payload: dict[str, Any], ai_id: str, coding_id: str | None = None) -> dict[str, Any]:
+    from app.interpretation_store import resolve_evidence_interpretation
+
+    return resolve_evidence_interpretation(payload, ai_id=ai_id, coding_id=coding_id)
 
 
 def update_interpretation_status(
@@ -581,10 +584,11 @@ def update_interpretation_status(
     ai_id: str,
     status: str,
     judgement_state: dict[str, Any],
+    coding_id: str | None = None,
 ) -> dict[str, Any]:
     if status not in USER_STATUSES:
         raise ValueError(f"Unsupported status: {status}")
-    interpretation = _find_interpretation(payload, ai_id)
+    interpretation = _find_interpretation(payload, ai_id, coding_id)
     if interpretation["status"] not in {"pending", "dismissed", "explore"}:
         raise ValueError(f"Interpretation is not actionable: {interpretation['status']}")
     interpretation["status"] = status

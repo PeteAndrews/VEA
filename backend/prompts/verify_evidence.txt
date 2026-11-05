@@ -20,7 +20,7 @@ Write a short opening reply as a marking colleague:
 
 - Note any caveat that might affect how strongly you would rely on this evidence.
 
-- Optionally invite a follow-up question.
+- If a concrete next check is useful, propose it as an action (do not merely suggest it in prose).
 
 
 

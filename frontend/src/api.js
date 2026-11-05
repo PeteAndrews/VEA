@@ -126,11 +126,18 @@ export function runLevelAiCheck(markingSessionId, assessmentId, candidateId, pay
   );
 }
 
-export function updateAiInterpretation(markingSessionId, assessmentId, candidateId, aiId, status) {
+export function updateAiInterpretation(
+  markingSessionId,
+  assessmentId,
+  candidateId,
+  aiId,
+  status,
+  codingId
+) {
   return sendJson(
     "PATCH",
     `/api/marking-sessions/${markingSessionId}/assessments/${assessmentId}/candidates/${candidateId}/ai-interpretations/${aiId}`,
-    { status }
+    { status, coding_id: codingId }
   );
 }
 
