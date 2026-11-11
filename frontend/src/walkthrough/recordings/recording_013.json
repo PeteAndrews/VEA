@@ -1,0 +1,52 @@
+{
+  "recording": 13,
+  "kind": "conversation_launch",
+  "endpoint": "POST /marking-sessions/ms-dacff1bd/assessments/B-JUN24-84612H-05_6/candidates/B/conversation/launch",
+  "recorded_at": "2026-11-05T14:10:38.950208+00:00",
+  "context": {
+    "marking_session_id": "ms-dacff1bd",
+    "assessment_id": "B-JUN24-84612H-05_6",
+    "candidate_id": "B",
+    "response_id": "B-JUN24-84612H-05_6_response-top-mark",
+    "coding_id": "rel-262cc7fa",
+    "stage": "EVIDENCE_MAPPING",
+    "tentative_level": null
+  },
+  "request": {
+    "source": "verify",
+    "coding_id": "rel-262cc7fa",
+    "interpretation_id": "ai-4229303d",
+    "stage": "EVIDENCE_MAPPING",
+    "last_action": "link_evidence"
+  },
+  "response": {
+    "active_context_id": "ctx-631d823c",
+    "messages": [
+      {
+        "id": "msg-70183825",
+        "role": "assistant",
+        "content": "I think the selected span \"For infertility, FSH can be given to stimulate eggs to mature in the ovaries\" does support the linked criterion about FSH stimulating maturation of eggs or follicles and increasing the number matured. The wording is clear about FSH's role in stimulating maturation, which aligns well with the criterion. However, it is somewhat brief and lacks explicit mention of \"several\" eggs or an increase in quantity beyond the stimulation, which might make the link borderline for full detail, but it does meet the basic requirement. If we want stronger coverage, checking nearby text might reveal more detail on the increase in number of eggs matured.",
+        "context_id": "ctx-631d823c",
+        "created_at": "2026-11-05T14:10:38.946202+00:00"
+      }
+    ],
+    "active_context": {
+      "context_id": "ctx-631d823c",
+      "source": "verify",
+      "coding_id": "rel-262cc7fa",
+      "criterion": {
+        "text": "o (FSH) stimulates maturation of (several) egg(s) / follicle(s) - (FSH) increases number of eggs matured"
+      }
+    },
+    "contexts": [
+      {
+        "context_id": "ctx-631d823c",
+        "source": "verify",
+        "coding_id": "rel-262cc7fa",
+        "criterion": {
+          "text": "o (FSH) stimulates maturation of (several) egg(s) / follicle(s) - (FSH) increases number of eggs matured"
+        }
+      }
+    ]
+  }
+}

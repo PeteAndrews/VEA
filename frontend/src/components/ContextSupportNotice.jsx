@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isContextSupportNoticeActive, setInterventionStatus } from "../aiSlice";
 import { launchAssistant } from "../conversationSlice";
@@ -12,6 +12,14 @@ export default function ContextSupportNotice({ assessmentId, candidateId, interp
   const { markingSessionId } = useSelector((state) => state.auth);
   const { saving } = useSelector((state) => state.judgement);
   const { launchStatus } = useSelector((state) => state.conversation);
+  useEffect(() => {
+    function resetConfirm() {
+      setConfirming(false);
+    }
+    window.addEventListener("vea-walkthrough-restart", resetConfirm);
+    return () => window.removeEventListener("vea-walkthrough-restart", resetConfirm);
+  }, []);
+
   const suggested =
     interpretation.suggested_evidence_span || interpretation.suggested_span;
 
@@ -94,6 +102,7 @@ export default function ContextSupportNotice({ assessmentId, candidateId, interp
             <button
               type="button"
               className="button-primary"
+              data-walkthrough="confirm-expand"
               disabled={saving}
               onClick={handleConfirmAdjust}
             >
@@ -114,6 +123,7 @@ export default function ContextSupportNotice({ assessmentId, candidateId, interp
           <button
             type="button"
             className="button-secondary"
+            data-walkthrough="adjust-code"
             disabled={!suggested || saving}
             onClick={handleAdjustCode}
           >
@@ -125,6 +135,7 @@ export default function ContextSupportNotice({ assessmentId, candidateId, interp
           <button
             type="button"
             className="button-secondary"
+            data-walkthrough="explore"
             disabled={launchStatus === "loading"}
             onClick={handleExplore}
           >

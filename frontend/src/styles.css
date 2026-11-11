@@ -43,6 +43,11 @@ button,
   display: inline-block;
 }
 
+.questions-page button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 .login-page {
   min-height: 100vh;
   display: grid;
@@ -1732,4 +1737,100 @@ body:has(.marking-page) {
 
 .response-status-pending {
   color: var(--muted);
+}
+
+.walkthrough-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+}
+
+.walkthrough-spotlight,
+.walkthrough-sentence,
+.walkthrough-card {
+  position: fixed;
+  pointer-events: none;
+}
+
+.walkthrough-dim {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.walkthrough-spotlight {
+  border-radius: 8px;
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+.walkthrough-card {
+  pointer-events: auto;
+  width: min(420px, calc(100vw - 32px));
+  padding: 16px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.28);
+  z-index: 41;
+}
+
+.walkthrough-card-right {
+  top: 16px;
+  right: 16px;
+}
+
+.walkthrough-card-left {
+  top: 16px;
+  left: 16px;
+}
+
+.walkthrough-card-bottom {
+  bottom: 16px;
+  left: 50%;
+  top: auto;
+  transform: translateX(-50%);
+}
+
+.walkthrough-card-bottom-left {
+  bottom: 16px;
+  left: 16px;
+  top: auto;
+}
+
+.walkthrough-card-bottom-right {
+  bottom: 16px;
+  right: 16px;
+  top: auto;
+}
+
+.walkthrough-spotlight-mark {
+  outline: 3px solid #f59e0b;
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.45);
+  border-radius: 999px;
+  z-index: 42;
+}
+
+.walkthrough-kicker {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.walkthrough-card p {
+  margin: 0 0 10px;
+}
+
+.walkthrough-hint {
+  color: #b45309;
+}
+
+.walkthrough-card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.walkthrough-error {
+  padding: 24px;
 }

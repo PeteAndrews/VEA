@@ -13,6 +13,14 @@ export default function StudentResponsePanel({ response }) {
   const [showAllEvidence, setShowAllEvidence] = useState(false);
 
   useEffect(() => {
+    function closeForRestart() {
+      setShowAllEvidence(false);
+    }
+    window.addEventListener("vea-walkthrough-restart", closeForRestart);
+    return () => window.removeEventListener("vea-walkthrough-restart", closeForRestart);
+  }, []);
+
+  useEffect(() => {
     function handleKeyDown(event) {
       if (event.key === "Escape") {
         dispatch(clearDraft());
@@ -97,6 +105,7 @@ export default function StudentResponsePanel({ response }) {
             <button
               type="button"
               className="link-button"
+              data-walkthrough="view-all-evidence"
               onClick={() => setShowAllEvidence(true)}
             >
               View all evidence ({codings.length})

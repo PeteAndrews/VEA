@@ -1,0 +1,38 @@
+{
+  "recording": 2,
+  "kind": "evidence_check",
+  "endpoint": "POST /marking-sessions/ms-dacff1bd/assessments/B-JUN24-84612H-05_6/candidates/B/judgement/codings/rel-9e2c8094/ai-check",
+  "recorded_at": "2026-11-05T14:02:17.529693+00:00",
+  "context": {
+    "marking_session_id": "ms-dacff1bd",
+    "assessment_id": "B-JUN24-84612H-05_6",
+    "candidate_id": "B",
+    "response_id": "B-JUN24-84612H-05_6_response-top-mark",
+    "coding_id": "rel-9e2c8094",
+    "stage": "EVIDENCE_MAPPING",
+    "tentative_level": null
+  },
+  "request": {
+    "coding_id": "rel-9e2c8094",
+    "stage": "EVIDENCE_MAPPING",
+    "last_action": "link_evidence"
+  },
+  "response": {
+    "id": "ai-43a00d53",
+    "coding_id": "rel-9e2c8094",
+    "status": "pending",
+    "intervention": {
+      "type": "SUPPORTED_WITH_ADDITIONAL_EVIDENCE",
+      "message": "More evidence is needed for this link. The nearby response contains the missing evidence.",
+      "nuance_items": []
+    },
+    "suggested_evidence_span": {
+      "start_char": 63,
+      "end_char": 148,
+      "text": "These inhibit FSH, so eggs do not mature and there is no mature egg to be fertilised."
+    },
+    "relation_check": {
+      "relation": "SUPPORTS"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getAiInterpretations, runLevelAiCheck, updateAiInterpretation } from "./api";
 import { launchAssistant } from "./conversationSlice";
+import { restoreWalkthroughCheckpoint } from "./walkthrough/checkpointAction";
 import { selectInteractionStage } from "./stage";
 
 export const loadLevelAiInterpretation = createAsyncThunk(
@@ -61,6 +62,7 @@ const levelAiSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(restoreWalkthroughCheckpoint, (_state, action) => action.payload.levelAi)
       .addCase(loadLevelAiInterpretation.pending, (state) => {
         state.status = "loading";
         state.error = null;

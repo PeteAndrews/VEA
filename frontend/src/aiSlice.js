@@ -5,6 +5,7 @@ import {
   updateAiInterpretation,
 } from "./api";
 import { launchAssistant } from "./conversationSlice";
+import { restoreWalkthroughCheckpoint } from "./walkthrough/checkpointAction";
 import { selectInteractionStage } from "./stage";
 
 export function isContextSupportNoticeActive(interpretation) {
@@ -83,6 +84,7 @@ const aiSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(restoreWalkthroughCheckpoint, (_state, action) => action.payload.ai)
       .addCase(loadAiInterpretations.pending, (state) => {
         state.status = "loading";
         state.error = null;

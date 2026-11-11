@@ -1,0 +1,52 @@
+{
+  "recording": 17,
+  "kind": "conversation_launch",
+  "endpoint": "POST /marking-sessions/ms-dacff1bd/assessments/B-JUN24-84612H-05_6/candidates/B/conversation/launch",
+  "recorded_at": "2026-11-05T14:13:56.435514+00:00",
+  "context": {
+    "marking_session_id": "ms-dacff1bd",
+    "assessment_id": "B-JUN24-84612H-05_6",
+    "candidate_id": "B",
+    "response_id": "B-JUN24-84612H-05_6_response-top-mark",
+    "coding_id": null,
+    "stage": "LEVEL_JUDGEMENT",
+    "tentative_level": {
+      "level": 2,
+      "level_node_id": "ms_05_6-level-2",
+      "source": "mark_scheme",
+      "examiner_id": "BIO-VEA-001",
+      "set_at": "2026-11-05T14:13:10.294911+00:00"
+    }
+  },
+  "request": {
+    "source": "explore_level",
+    "coding_id": null,
+    "interpretation_id": "ai-addfbc1a",
+    "stage": "LEVEL_JUDGEMENT",
+    "last_action": "set_tentative_level"
+  },
+  "response": {
+    "active_context_id": "ctx-c2cbc53a",
+    "messages": [
+      {
+        "id": "msg-557288b1",
+        "role": "assistant",
+        "content": "I see the tentative Level 2 assigned is cautious but understandable given some partial clarity issues. The coded evidence shows relevant and scientifically accurate hormone roles with logical links covering both contraception and infertility, including FSH, LH, and progesterone. The IVF explanation is brief and only partially supported, which weakens clarity. Overall, the evidence aligns more closely with Level 3 descriptors due to detail and linked points, though not perfectly clear. So, I think Level 2 partially fits, but there is a solid argument for Level 3 based on the markscheme rules requiring detailed, linked points for both areas.",
+        "context_id": "ctx-c2cbc53a",
+        "created_at": "2026-11-05T14:13:56.427518+00:00"
+      }
+    ],
+    "active_context": {
+      "context_id": "ctx-c2cbc53a",
+      "source": "explore_level",
+      "level": 2
+    },
+    "contexts": [
+      {
+        "context_id": "ctx-c2cbc53a",
+        "source": "explore_level",
+        "level": 2
+      }
+    ]
+  }
+}

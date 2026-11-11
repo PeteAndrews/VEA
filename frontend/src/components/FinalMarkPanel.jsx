@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { submitFinalMark } from "../studySlice";
 
-export default function FinalMarkPanel({ trialId, maximumMark, submitted, finalMark }) {
+export default function FinalMarkPanel({ trialId, maximumMark, submitted, finalMark, onSubmit }) {
   const dispatch = useDispatch();
   const { status, error } = useSelector((state) => state.study);
-  const [mark, setMark] = useState(finalMark ?? 0);
+  const [mark, setMark] = useState(finalMark ?? "");
+  const [submitError, setSubmitError] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   if (submitted) {
     return (
@@ -18,8 +20,20 @@ export default function FinalMarkPanel({ trialId, maximumMark, submitted, finalM
     );
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+    if (onSubmit) {
+      setSubmitting(true);
+      setSubmitError(null);
+      try {
+        await onSubmit(Number(mark));
+      } catch (err) {
+        setSubmitError(err.message);
+      } finally {
+        setSubmitting(false);
+      }
+      return;
+    }
     dispatch(submitFinalMark({ trialId, finalMark: Number(mark) }));
   }
 
@@ -35,11 +49,11 @@ export default function FinalMarkPanel({ trialId, maximumMark, submitted, finalM
           value={mark}
           onChange={(event) => setMark(event.target.value)}
         />
-        <button type="submit" disabled={status === "loading"}>
-          {status === "loading" ? "Submitting..." : "Submit mark"}
+        <button type="submit" disabled={status === "loading" || submitting || mark === ""}>
+          {status === "loading" || submitting ? "Submitting..." : "Submit mark"}
         </button>
       </div>
-      {error ? <p className="error">{error}</p> : null}
+      {submitError || error ? <p className="error">{submitError || error}</p> : null}
     </form>
   );
 }

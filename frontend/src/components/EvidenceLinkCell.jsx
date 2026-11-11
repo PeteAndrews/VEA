@@ -164,6 +164,8 @@ export default function EvidenceLinkCell({
           {links.map((coding) => (
             <div
               key={coding.id}
+              data-start={coding.start_char}
+              data-end={coding.end_char}
               className={`evidence-popover-item${
                 focusedCodingId === coding.id ? " focused" : ""
               }${reviseCodingId === coding.id ? " revising" : ""}`}
@@ -179,6 +181,7 @@ export default function EvidenceLinkCell({
                 <button
                   type="button"
                   className="button-secondary"
+                  data-walkthrough="verify"
                   disabled={!canVerify(coding.id) || launchStatus === "loading"}
                   onClick={() => handleVerify(coding.id)}
                 >
@@ -195,6 +198,7 @@ export default function EvidenceLinkCell({
                 <button
                   type="button"
                   className="button-danger"
+                  data-walkthrough="unlink"
                   disabled={saving}
                   onClick={() => handleUnlink(coding.id)}
                 >

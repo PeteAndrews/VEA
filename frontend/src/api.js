@@ -14,7 +14,17 @@ function formatApiError(status, body) {
   return trimmed;
 }
 
+let requestInterceptor = null;
+
+export function setRequestInterceptor(interceptor) {
+  requestInterceptor = interceptor;
+}
+
 async function fetchJson(path, options = {}) {
+  if (requestInterceptor) {
+    const handled = await requestInterceptor(path, options);
+    if (handled !== undefined) return handled;
+  }
   const response = await fetch(path, { credentials: "include", ...options });
   if (!response.ok) {
     const detail = await response.text();
@@ -207,4 +217,15 @@ export function fetchTrial(trialId) {
 
 export function submitTrialMark(trialId, finalMark) {
   return sendJson("POST", `/api/study/trials/${trialId}/submit`, { final_mark: finalMark });
+}
+
+export function startWalkthrough() {
+  return sendJson("POST", "/api/study/walkthrough/start");
+}
+
+export function completeWalkthrough(markingSessionId, finalMark) {
+  return sendJson("POST", "/api/study/walkthrough/complete", {
+    marking_session_id: markingSessionId,
+    final_mark: finalMark,
+  });
 }

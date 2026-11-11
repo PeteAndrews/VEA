@@ -1,0 +1,39 @@
+{
+  "recording": 4,
+  "kind": "evidence_check",
+  "endpoint": "POST /marking-sessions/ms-dacff1bd/assessments/B-JUN24-84612H-05_6/candidates/B/judgement/codings/rel-06ccd775/ai-check",
+  "recorded_at": "2026-11-05T14:02:59.030806+00:00",
+  "context": {
+    "marking_session_id": "ms-dacff1bd",
+    "assessment_id": "B-JUN24-84612H-05_6",
+    "candidate_id": "B",
+    "response_id": "B-JUN24-84612H-05_6_response-top-mark",
+    "coding_id": "rel-06ccd775",
+    "stage": "EVIDENCE_MAPPING",
+    "tentative_level": null
+  },
+  "request": {
+    "coding_id": "rel-06ccd775",
+    "stage": "EVIDENCE_MAPPING",
+    "last_action": "link_evidence"
+  },
+  "response": {
+    "id": "ai-1bf0964f",
+    "coding_id": "rel-06ccd775",
+    "status": "pending",
+    "intervention": {
+      "type": "NUANCE",
+      "message": "This evidence appears to support 'inhibition of LH (production / release) - lack of LH prevents ovulation - there…', but guidance affects how it is applied.",
+      "nuance_items": [
+        {
+          "node_id": "commentary_05_6-fsh-lh-guidance",
+          "relation": "CONSTRAINS",
+          "text": "In the contraception section we cannot give credit for saying what FSH and LH normally do, the indicative content focuses on the consequence of a lack of these hormones."
+        }
+      ]
+    },
+    "relation_check": {
+      "relation": "SUPPORTS"
+    }
+  }
+}

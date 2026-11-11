@@ -1,0 +1,52 @@
+{
+  "recording": 7,
+  "kind": "conversation_launch",
+  "endpoint": "POST /marking-sessions/ms-dacff1bd/assessments/B-JUN24-84612H-05_6/candidates/B/conversation/launch",
+  "recorded_at": "2026-11-05T14:04:26.567154+00:00",
+  "context": {
+    "marking_session_id": "ms-dacff1bd",
+    "assessment_id": "B-JUN24-84612H-05_6",
+    "candidate_id": "B",
+    "response_id": "B-JUN24-84612H-05_6_response-top-mark",
+    "coding_id": "rel-4ffb7fde",
+    "stage": "EVIDENCE_MAPPING",
+    "tentative_level": null
+  },
+  "request": {
+    "source": "explore",
+    "coding_id": "rel-4ffb7fde",
+    "interpretation_id": "ai-9c09419c",
+    "stage": "EVIDENCE_MAPPING",
+    "last_action": "link_evidence"
+  },
+  "response": {
+    "active_context_id": "ctx-56c6214f",
+    "messages": [
+      {
+        "id": "msg-51f08861",
+        "role": "assistant",
+        "content": "I’m not convinced this evidence supports the criterion about contraception inhibition of FSH. The text describes giving FSH to stimulate egg maturation for infertility, which is sort of the opposite of what the criterion about contraception requires: inhibition of FSH to prevent egg development. I'd want to check the response for explicit mentions of inhibiting FSH related to contraception use, since here the hormone’s role is described in infertility treatment, not contraception. Should I propose an action to search for contraceptive-related inhibition of FSH in the candidate's text?",
+        "context_id": "ctx-56c6214f",
+        "created_at": "2026-11-05T14:04:26.564187+00:00"
+      }
+    ],
+    "active_context": {
+      "context_id": "ctx-56c6214f",
+      "source": "explore",
+      "coding_id": "rel-4ffb7fde",
+      "criterion": {
+        "text": "o inhibition of FSH (production / release) - lack of FSH prevents follicle / egg development / maturation - therefore there is no egg to fertilise"
+      }
+    },
+    "contexts": [
+      {
+        "context_id": "ctx-56c6214f",
+        "source": "explore",
+        "coding_id": "rel-4ffb7fde",
+        "criterion": {
+          "text": "o inhibition of FSH (production / release) - lack of FSH prevents follicle / egg development / maturation - therefore there is no egg to fertilise"
+        }
+      }
+    ]
+  }
+}

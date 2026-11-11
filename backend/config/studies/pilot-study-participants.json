@@ -6,37 +6,43 @@
       "participant_id": "CHEM-VEA-001",
       "token": "chem-vea-token-replace-me",
       "condition": "vea",
-      "subject": "chemistry"
+      "subject": "chemistry",
+      "walkthrough_required": false
     },
     {
       "participant_id": "CHEM-CTL-001",
       "token": "chem-control-token-replace-me",
       "condition": "control",
-      "subject": "chemistry"
+      "subject": "chemistry",
+      "walkthrough_required": false
     },
     {
       "participant_id": "BIO-VEA-001",
       "token": "bio-vea-001",
       "condition": "vea",
-      "subject": "biology"
+      "subject": "biology",
+      "walkthrough_required": true
     },
     {
       "participant_id": "BIO-CTL-001",
       "token": "bio-control-token-replace-me",
       "condition": "control",
-      "subject": "biology"
+      "subject": "biology",
+      "walkthrough_required": false
     },
     {
       "participant_id": "BIO-VEA-002",
       "token": "bio-vea-002",
       "condition": "vea",
-      "subject": "biology"
+      "subject": "biology",
+      "walkthrough_required": true
     },
     {
       "participant_id": "BIO-VEA-003",
       "token": "bio-vea-003",
       "condition": "vea",
-      "subject": "biology"
+      "subject": "biology",
+      "walkthrough_required": true
     }
   ]
 }

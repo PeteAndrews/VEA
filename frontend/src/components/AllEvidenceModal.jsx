@@ -24,7 +24,7 @@ export default function AllEvidenceModal({ open, onClose }) {
       <div className="all-evidence-modal" onClick={(event) => event.stopPropagation()}>
         <header className="all-evidence-header">
           <h3>All linked evidence ({codings.length})</h3>
-          <button type="button" className="button-secondary" onClick={onClose}>
+          <button type="button" className="button-secondary" data-walkthrough="close-all-evidence" onClick={onClose}>
             Close
           </button>
         </header>

@@ -37,6 +37,7 @@ class StudyService:
         return {
             "session_id": session["session_id"],
             "participant": self._public_participant(participant),
+            "walkthrough": self.walkthrough_status(participant),
         }
 
     def restore_session(self, session_id: str) -> dict[str, Any]:
@@ -49,6 +50,7 @@ class StudyService:
         return {
             "session_id": session_id,
             "participant": self._public_participant(participant),
+            "walkthrough": self.walkthrough_status(participant),
         }
 
     def list_questions(self, participant_id: str) -> dict[str, Any]:
@@ -66,6 +68,7 @@ class StudyService:
                 participant_id,
                 question["assessment_id"],
                 question["artifact_version"],
+                self._excluded_response_ids(participant),
             )
             all_complete = all_complete and progress["complete"]
             items.append(
@@ -99,6 +102,7 @@ class StudyService:
         if assessment_id not in assigned:
             raise PermissionError("Question not assigned")
         question = assigned[assessment_id]
+        self._require_walkthrough_for_vea(participant)
         result = next_or_resume_trial(
             self.store,
             self.judgement_store,
@@ -106,6 +110,7 @@ class StudyService:
             participant_id,
             assessment_id,
             question["artifact_version"],
+            self._excluded_response_ids(participant),
         )
         trial = result["trial"]
         return self._trial_destination(participant, trial)
@@ -136,6 +141,7 @@ class StudyService:
             participant_id,
             trial_id,
             final_mark,
+            self._excluded_response_ids(participant),
         )
         questions = self.list_questions(participant_id)
         response = {
@@ -152,6 +158,7 @@ class StudyService:
                 participant_id,
                 outcome["assessment_id"],
                 outcome["artifact_version"],
+                self._excluded_response_ids(participant),
             )
             response["next_trial"] = self._trial_destination(participant, next_result["trial"])
         return response
@@ -260,6 +267,113 @@ class StudyService:
             return metadata
         version = get_version_record(self.data_dir, assessment_id, artifact_version)
         return version.get("metadata") or {}
+
+    def walkthrough_status(self, participant: dict[str, Any]) -> dict[str, bool]:
+        config = self._walkthrough_config(participant)
+        entry = self._participant_config_entry(participant)
+        flagged = bool(entry and entry.get("walkthrough_required"))
+        required = (
+            participant.get("experience") == "vea_marking"
+            and flagged
+            and config is not None
+        )
+        completed = self.store.get_walkthrough_completion(participant["participant_id"]) is not None
+        return {"required": required, "completed": completed}
+
+    def start_walkthrough(self, participant_id: str) -> dict[str, Any]:
+        participant = self.store.get_participant(participant_id)
+        if participant is None:
+            raise KeyError(participant_id)
+        config = self._walkthrough_config(participant)
+        if participant.get("experience") != "vea_marking" or config is None:
+            raise PermissionError("Walkthrough is not available for this participant")
+        session = self.judgement_store.create_session(participant_id, label="walkthrough")
+        artifact_version = self._artifact_version(participant_id, config["assessment_id"])
+        metadata = self._question_metadata(config["assessment_id"], artifact_version)
+        return {
+            "marking_session_id": session["marking_session_id"],
+            "assessment_id": config["assessment_id"],
+            "candidate_id": config["candidate_id"],
+            "maximum_mark": metadata.get("maximum_mark"),
+        }
+
+    def complete_walkthrough(
+        self,
+        participant_id: str,
+        marking_session_id: str,
+        final_mark: int,
+    ) -> dict[str, Any]:
+        participant = self.store.get_participant(participant_id)
+        if participant is None:
+            raise KeyError(participant_id)
+        config = self._walkthrough_config(participant)
+        if config is None:
+            raise PermissionError("Walkthrough is not available for this participant")
+        try:
+            session = self.judgement_store.get_session(marking_session_id)
+        except KeyError:
+            raise PermissionError("Walkthrough session not found") from None
+        if session.get("examiner_id") != participant_id or session.get("label") != "walkthrough":
+            raise PermissionError("Walkthrough session does not belong to this participant")
+        artifact_version = self._artifact_version(participant_id, config["assessment_id"])
+        maximum_mark = int(self._question_metadata(config["assessment_id"], artifact_version)["maximum_mark"])
+        if final_mark < 0 or final_mark > maximum_mark:
+            raise ValueError(f"Mark must be between 0 and {maximum_mark}")
+        completion = self.store.record_walkthrough_completion(
+            participant_id,
+            marking_session_id,
+            final_mark,
+        )
+        return {
+            "completed": True,
+            "final_mark": completion["final_mark"],
+            "marking_session_id": completion["marking_session_id"],
+        }
+
+    def _require_walkthrough_for_vea(self, participant: dict[str, Any]) -> None:
+        if participant.get("experience") != "vea_marking":
+            return
+        status = self.walkthrough_status(participant)
+        if status["required"] and not status["completed"]:
+            raise ValueError("Walkthrough required")
+
+    def _walkthrough_config(self, participant: dict[str, Any]) -> dict[str, Any] | None:
+        study = load_study_config(participant["study_id"], self.project_root)
+        subjects = study.get("subjects") or {}
+        entry = subjects.get(participant["subject"]) or subjects.get(str(participant["subject"]).strip().lower())
+        walkthrough = (entry or {}).get("walkthrough") or {}
+        assessment_id = walkthrough.get("assessment_id")
+        response_id = walkthrough.get("response_id")
+        candidate_id = walkthrough.get("candidate_id")
+        if not assessment_id or not response_id or not candidate_id:
+            return None
+        return {
+            "assessment_id": str(assessment_id),
+            "response_id": str(response_id),
+            "candidate_id": str(candidate_id),
+        }
+
+    def _excluded_response_ids(self, participant: dict[str, Any]) -> set[str]:
+        config = self._walkthrough_config(participant)
+        if config is None:
+            return set()
+        return {config["response_id"]}
+
+    def _participant_config_entry(self, participant: dict[str, Any]) -> dict[str, Any] | None:
+        try:
+            payload = load_participants_config(participant["study_id"], self.project_root)
+        except FileNotFoundError:
+            return None
+        for entry in payload.get("participants", []):
+            if str(entry.get("participant_id")) == participant["participant_id"]:
+                return entry
+        return None
+
+    def _artifact_version(self, participant_id: str, assessment_id: str) -> str:
+        for question in self.store.list_participant_questions(participant_id):
+            if question["assessment_id"] == assessment_id:
+                return question["artifact_version"]
+        return "legacy"
 
     def _public_participant(self, participant: dict[str, Any]) -> dict[str, Any]:
         return {

@@ -22,6 +22,11 @@ class SubmitFinalMarkRequest(BaseModel):
     final_mark: int = Field(ge=0)
 
 
+class CompleteWalkthroughRequest(BaseModel):
+    marking_session_id: str = Field(min_length=1)
+    final_mark: int = Field(ge=0)
+
+
 @router.post("/session")
 def create_study_session(body: StudySessionRequest, response: Response) -> dict:
     try:
@@ -49,6 +54,36 @@ def list_study_questions(request: Request) -> dict:
     _, payload = require_study_session(request)
     participant_id = payload["participant"]["participant_id"]
     return study_service().list_questions(participant_id)
+
+
+@router.post("/walkthrough/start")
+def start_walkthrough(request: Request) -> dict:
+    _, payload = require_study_session(request)
+    participant_id = payload["participant"]["participant_id"]
+    try:
+        return study_service().start_walkthrough(participant_id)
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Participant not found") from None
+    except PermissionError as exc:
+        raise HTTPException(status_code=403, detail=str(exc)) from None
+
+
+@router.post("/walkthrough/complete")
+def complete_walkthrough(body: CompleteWalkthroughRequest, request: Request) -> dict:
+    _, payload = require_study_session(request)
+    participant_id = payload["participant"]["participant_id"]
+    try:
+        return study_service().complete_walkthrough(
+            participant_id,
+            body.marking_session_id,
+            body.final_mark,
+        )
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Participant not found") from None
+    except PermissionError as exc:
+        raise HTTPException(status_code=403, detail=str(exc)) from None
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from None
 
 
 @router.post("/questions/{assessment_id}/next-trial")

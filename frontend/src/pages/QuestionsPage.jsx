@@ -14,11 +14,16 @@ function responseStatusLabel(status) {
 export default function QuestionsPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { participant, questions, studyComplete, status, error } = useSelector((state) => state.study);
+  const { participant, questions, studyComplete, status, error, walkthrough } = useSelector(
+    (state) => state.study
+  );
 
   useEffect(() => {
     dispatch(loadStudyQuestions());
   }, [dispatch]);
+
+  const showWalkthrough = Boolean(walkthrough?.required);
+  const needsWalkthrough = Boolean(showWalkthrough && !walkthrough.completed);
 
   function handleContinue(assessmentId) {
     dispatch(continueQuestion({ assessmentId })).then((result) => {
@@ -39,6 +44,21 @@ export default function QuestionsPage() {
         ) : null}
         {status === "loading" ? <p>Loading assigned questions...</p> : null}
         {error ? <p className="error">{error}</p> : null}
+        {showWalkthrough ? (
+          <section className="assessment-card">
+            <header>
+              <h2>Practice walkthrough</h2>
+            </header>
+            <p className="muted">
+              {needsWalkthrough
+                ? "Complete this before the VEA marking tasks."
+                : "You have completed the practice walkthrough."}
+            </p>
+            <button type="button" className="button-link" onClick={() => navigate("/study/walkthrough")}>
+              {needsWalkthrough ? "Start walkthrough" : "Open walkthrough"}
+            </button>
+          </section>
+        ) : null}
         {studyComplete ? (
           <div className="study-complete-banner">
             <h2>Study complete</h2>
@@ -72,6 +92,7 @@ export default function QuestionsPage() {
                 <button
                   type="button"
                   className="button-link"
+                  disabled={needsWalkthrough}
                   onClick={() => handleContinue(question.assessment_id)}
                 >
                   {question.progress.completed_responses > 0 || question.progress.has_open_trial

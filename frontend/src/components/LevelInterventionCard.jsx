@@ -61,7 +61,7 @@ export default function LevelInterventionCard({
         <span className={`intervention-tag intervention-${intervention.type.toLowerCase()}`}>
           {TYPE_LABELS[intervention.type] || intervention.type}
         </span>
-        <button type="button" className="link-button" onClick={handleDismiss}>
+        <button type="button" className="link-button" data-walkthrough="dismiss-level" onClick={handleDismiss}>
           Dismiss
         </button>
       </div>
@@ -74,7 +74,7 @@ export default function LevelInterventionCard({
         </ul>
       ) : null}
       <div className="intervention-actions">
-        <button type="button" className="button-secondary" onClick={handleExplore}>
+        <button type="button" className="button-secondary" data-walkthrough="explore-level" onClick={handleExplore}>
           Explore
         </button>
       </div>

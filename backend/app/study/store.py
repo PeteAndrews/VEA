@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any, Iterator
 
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 
 def _utc_now() -> str:
@@ -119,6 +119,13 @@ class StudyStore:
                 trial_id TEXT PRIMARY KEY REFERENCES trials(trial_id),
                 final_mark INTEGER NOT NULL,
                 submitted_at TEXT NOT NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS walkthrough_completions (
+                participant_id TEXT PRIMARY KEY REFERENCES participants(participant_id),
+                marking_session_id TEXT NOT NULL,
+                final_mark INTEGER NOT NULL,
+                completed_at TEXT NOT NULL
             );
             """
         )
@@ -323,6 +330,40 @@ class StudyStore:
                 (trial_id,),
             )
             row = conn.execute("SELECT * FROM trials WHERE trial_id = ?", (trial_id,)).fetchone()
+            return dict(row) if row else {}
+
+    def get_walkthrough_completion(self, participant_id: str) -> dict[str, Any] | None:
+        with self.connect() as conn:
+            row = conn.execute(
+                "SELECT * FROM walkthrough_completions WHERE participant_id = ?",
+                (participant_id,),
+            ).fetchone()
+            return dict(row) if row else None
+
+    def record_walkthrough_completion(
+        self,
+        participant_id: str,
+        marking_session_id: str,
+        final_mark: int,
+    ) -> dict[str, Any]:
+        now = _utc_now()
+        with self.connect() as conn:
+            conn.execute(
+                """
+                INSERT INTO walkthrough_completions (
+                    participant_id, marking_session_id, final_mark, completed_at
+                ) VALUES (?, ?, ?, ?)
+                ON CONFLICT(participant_id) DO UPDATE SET
+                    marking_session_id=excluded.marking_session_id,
+                    final_mark=excluded.final_mark,
+                    completed_at=excluded.completed_at
+                """,
+                (participant_id, marking_session_id, final_mark, now),
+            )
+            row = conn.execute(
+                "SELECT * FROM walkthrough_completions WHERE participant_id = ?",
+                (participant_id,),
+            ).fetchone()
             return dict(row) if row else {}
 
     def get_submission(self, trial_id: str) -> dict[str, Any] | None:

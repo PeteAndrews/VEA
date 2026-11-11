@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import MarkingPage from "./pages/MarkingPage";
 import QuestionsPage from "./pages/QuestionsPage";
 import StudyMarkingPage from "./pages/StudyMarkingPage";
+import WalkthroughPage from "./pages/WalkthroughPage";
 
 function RequireStudyLogin({ children }) {
   const participant = useSelector((state) => state.study.participant);
@@ -28,6 +29,14 @@ export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+      <Route
+        path="/study/walkthrough"
+        element={
+          <RequireStudyLogin>
+            <WalkthroughPage />
+          </RequireStudyLogin>
+        }
+      />
       <Route
         path="/questions"
         element={

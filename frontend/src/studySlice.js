@@ -45,6 +45,7 @@ const studySlice = createSlice({
     studyComplete: false,
     currentTrial: null,
     submitResult: null,
+    walkthrough: null,
     status: "idle",
     error: null,
   },
@@ -56,11 +57,15 @@ const studySlice = createSlice({
       state.studyComplete = false;
       state.currentTrial = null;
       state.submitResult = null;
+      state.walkthrough = null;
       state.status = "idle";
       state.error = null;
     },
     clearSubmitResult(state) {
       state.submitResult = null;
+    },
+    markWalkthroughComplete(state) {
+      state.walkthrough = { ...(state.walkthrough || {}), completed: true };
     },
   },
   extraReducers: (builder) => {
@@ -73,6 +78,7 @@ const studySlice = createSlice({
         state.status = "succeeded";
         state.sessionId = action.payload.session_id;
         state.participant = action.payload.participant;
+        state.walkthrough = action.payload.walkthrough || null;
       })
       .addCase(openStudySession.rejected, (state, action) => {
         state.status = "failed";
@@ -81,6 +87,7 @@ const studySlice = createSlice({
       .addCase(restoreStudySession.fulfilled, (state, action) => {
         state.sessionId = action.payload.session_id;
         state.participant = action.payload.participant;
+        state.walkthrough = action.payload.walkthrough || null;
         state.status = "succeeded";
       })
       .addCase(restoreStudySession.rejected, (state) => {
@@ -114,5 +121,5 @@ const studySlice = createSlice({
   },
 });
 
-export const { resetStudy, clearSubmitResult } = studySlice.actions;
+export const { resetStudy, clearSubmitResult, markWalkthroughComplete } = studySlice.actions;
 export default studySlice.reducer;

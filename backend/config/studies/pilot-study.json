@@ -11,7 +11,12 @@
       "assessment_order": ["C-JUN25-8464C1H-02_3"]
     },
     "biology": {
-      "assessment_order": ["B-JUN24-84612H-05_6"]
+      "assessment_order": ["B-JUN24-84612H-05_6"],
+      "walkthrough": {
+        "assessment_id": "B-JUN24-84612H-05_6",
+        "response_id": "B-JUN24-84612H-05_6_response-top-mark",
+        "candidate_id": "B"
+      }
     }
   }
 }

@@ -7,6 +7,7 @@ import {
   openGeneralConversationContext,
   sendConversationMessage,
 } from "./api";
+import { restoreWalkthroughCheckpoint } from "./walkthrough/checkpointAction";
 import { selectInteractionStage } from "./stage";
 
 export const loadConversation = createAsyncThunk(
@@ -101,6 +102,7 @@ const conversationSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(restoreWalkthroughCheckpoint, (_state, action) => action.payload.conversation)
       .addCase(loadConversation.pending, (state) => {
         state.status = "loading";
         state.error = null;

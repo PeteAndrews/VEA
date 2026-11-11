@@ -117,7 +117,7 @@ export default function LevelReviewPanel({ assessmentId, candidateId, levelConte
             </button>
           ) : null}
           {canVerify ? (
-            <button type="button" className="button-secondary" onClick={handleVerify}>
+            <button type="button" className="button-secondary" data-walkthrough="verify-level" onClick={handleVerify}>
               Verify with AI
             </button>
           ) : null}

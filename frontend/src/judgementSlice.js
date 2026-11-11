@@ -6,6 +6,7 @@ import {
   setTentativeLevel as apiSetTentativeLevel,
   updateCoding as apiUpdateCoding,
 } from "./api";
+import { restoreWalkthroughCheckpoint } from "./walkthrough/checkpointAction";
 
 function applyJudgementPayload(state, payload) {
   state.spans = payload.spans;
@@ -122,6 +123,7 @@ const judgementSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(restoreWalkthroughCheckpoint, (_state, action) => action.payload.judgement)
       .addCase(loadJudgement.pending, (state) => {
         state.status = "loading";
         state.error = null;

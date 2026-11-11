@@ -1,0 +1,38 @@
+{
+  "recording": 14,
+  "kind": "evidence_check",
+  "endpoint": "POST /marking-sessions/ms-dacff1bd/assessments/B-JUN24-84612H-05_6/candidates/B/judgement/codings/rel-2c762731/ai-check",
+  "recorded_at": "2026-11-05T14:12:00.366288+00:00",
+  "context": {
+    "marking_session_id": "ms-dacff1bd",
+    "assessment_id": "B-JUN24-84612H-05_6",
+    "candidate_id": "B",
+    "response_id": "B-JUN24-84612H-05_6_response-top-mark",
+    "coding_id": "rel-2c762731",
+    "stage": "EVIDENCE_MAPPING",
+    "tentative_level": null
+  },
+  "request": {
+    "coding_id": "rel-2c762731",
+    "stage": "EVIDENCE_MAPPING",
+    "last_action": "link_evidence"
+  },
+  "response": {
+    "id": "ai-1bb44374",
+    "coding_id": "rel-2c762731",
+    "status": "pending",
+    "intervention": {
+      "type": "SUPPORTED_WITH_ADDITIONAL_EVIDENCE",
+      "message": "More evidence is needed for this link. The nearby response contains the missing evidence.",
+      "nuance_items": []
+    },
+    "suggested_evidence_span": {
+      "start_char": 317,
+      "end_char": 500,
+      "text": "LH can then stimulate ovulation, increasing the chance of an egg being fertilised. In IVF, eggs are collected and fertilised outside the body, and an embryo is placed into the uterus."
+    },
+    "relation_check": {
+      "relation": "PARTIALLY_SUPPORTS"
+    }
+  }
+}

@@ -20,13 +20,19 @@ def _maximum_mark(data_dir: str, assessment_id: str, artifact_version: str) -> i
     return int(version["metadata"]["maximum_mark"])
 
 
-def _responses_for_version(data_dir: str, assessment_id: str, artifact_version: str) -> list[dict[str, Any]]:
+def _responses_for_version(
+    data_dir: str,
+    assessment_id: str,
+    artifact_version: str,
+    exclude_response_ids: set[str] | None = None,
+) -> list[dict[str, Any]]:
     if artifact_version == "legacy":
         from app.views import _candidate_aliases_for_assessment, _list_response_ids_for_assessment
 
         responses_dir = Path(data_dir) / "responses"
         response_ids = _list_response_ids_for_assessment(responses_dir, assessment_id)
         aliases = _candidate_aliases_for_assessment(data_dir, assessment_id, response_ids)
+        excluded = exclude_response_ids or set()
         return [
             {
                 "response_id": response_id,
@@ -34,10 +40,15 @@ def _responses_for_version(data_dir: str, assessment_id: str, artifact_version: 
                 "response_order": index,
             }
             for index, response_id in enumerate(sorted(response_ids), start=1)
+            if response_id not in excluded
         ]
 
     version = get_version_record(data_dir, assessment_id, artifact_version)
-    return sorted(version.get("responses", []), key=lambda item: item["response_order"])
+    excluded = exclude_response_ids or set()
+    responses = [
+        item for item in version.get("responses", []) if item.get("response_id") not in excluded
+    ]
+    return sorted(responses, key=lambda item: item["response_order"])
 
 
 def question_progress(
@@ -46,8 +57,11 @@ def question_progress(
     participant_id: str,
     assessment_id: str,
     artifact_version: str,
+    exclude_response_ids: set[str] | None = None,
 ) -> dict[str, Any]:
-    responses = _responses_for_version(data_dir, assessment_id, artifact_version)
+    responses = _responses_for_version(
+        data_dir, assessment_id, artifact_version, exclude_response_ids
+    )
     trials = store.list_trials_for_question(participant_id, assessment_id)
     trials_by_response = {trial["response_id"]: trial for trial in trials}
     response_items: list[dict[str, Any]] = []
@@ -89,12 +103,15 @@ def next_or_resume_trial(
     participant_id: str,
     assessment_id: str,
     artifact_version: str,
+    exclude_response_ids: set[str] | None = None,
 ) -> dict[str, Any]:
     open_trial = store.get_open_trial(participant_id, assessment_id)
     if open_trial is not None:
         return {"trial": open_trial, "created": False}
 
-    responses = _responses_for_version(data_dir, assessment_id, artifact_version)
+    responses = _responses_for_version(
+        data_dir, assessment_id, artifact_version, exclude_response_ids
+    )
     trials = store.list_trials_for_question(participant_id, assessment_id)
     started_ids = {trial["response_id"] for trial in trials}
     submitted_ids = {trial["response_id"] for trial in trials if trial.get("submitted_at")}
@@ -132,6 +149,7 @@ def submit_trial_mark(
     participant_id: str,
     trial_id: str,
     final_mark: int,
+    exclude_response_ids: set[str] | None = None,
 ) -> dict[str, Any]:
     trial = store.get_trial(trial_id)
     if trial is None:
@@ -145,7 +163,12 @@ def submit_trial_mark(
 
     store.submit_trial(trial_id, final_mark)
 
-    responses = _responses_for_version(data_dir, trial["assessment_id"], trial["artifact_version"])
+    responses = _responses_for_version(
+        data_dir,
+        trial["assessment_id"],
+        trial["artifact_version"],
+        exclude_response_ids,
+    )
     trials = store.list_trials_for_question(participant_id, trial["assessment_id"])
     submitted_ids = {item["response_id"] for item in trials if item.get("submitted_at") or item["status"] == "submitted"}
 

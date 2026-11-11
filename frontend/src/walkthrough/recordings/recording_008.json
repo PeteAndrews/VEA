@@ -1,0 +1,33 @@
+{
+  "recording": 8,
+  "kind": "evidence_check",
+  "endpoint": "POST /marking-sessions/ms-dacff1bd/assessments/B-JUN24-84612H-05_6/candidates/B/judgement/codings/rel-fa7b3ab0/ai-check",
+  "recorded_at": "2026-11-05T14:05:58.219299+00:00",
+  "context": {
+    "marking_session_id": "ms-dacff1bd",
+    "assessment_id": "B-JUN24-84612H-05_6",
+    "candidate_id": "B",
+    "response_id": "B-JUN24-84612H-05_6_response-top-mark",
+    "coding_id": "rel-fa7b3ab0",
+    "stage": "EVIDENCE_MAPPING",
+    "tentative_level": null
+  },
+  "request": {
+    "coding_id": "rel-fa7b3ab0",
+    "stage": "EVIDENCE_MAPPING",
+    "last_action": "link_evidence"
+  },
+  "response": {
+    "id": "ai-f656e34f",
+    "coding_id": "rel-fa7b3ab0",
+    "status": "pending",
+    "intervention": {
+      "type": "CHALLENGE",
+      "message": "This evidence reads as not supporting '(FSH) stimulates maturation of (several) egg(s) / follicle(s) - (FSH) increases…'. Check the full step is evidenced.",
+      "nuance_items": []
+    },
+    "relation_check": {
+      "relation": "DOES_NOT_SUPPORT"
+    }
+  }
+}
