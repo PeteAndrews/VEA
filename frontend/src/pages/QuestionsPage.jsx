@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import AppShell from "../components/AppShell";
-import { continueQuestion, loadStudyQuestions } from "../studySlice";
+import { clearSubmitResult, continueQuestion, loadStudyQuestions } from "../studySlice";
 
 function responseStatusLabel(status) {
   if (status === "submitted") return "Submitted";
@@ -201,6 +201,7 @@ export default function QuestionsPage() {
 
   useEffect(() => {
     let cancelled = false;
+    dispatch(clearSubmitResult());
     dispatch(loadStudyQuestions()).then((result) => {
       if (cancelled || result.meta.requestStatus !== "fulfilled") return;
       const next = result.payload.progress?.next;
@@ -221,6 +222,7 @@ export default function QuestionsPage() {
 
   function handleContinue(assessmentId) {
     setContinueError("");
+    dispatch(clearSubmitResult());
     dispatch(continueQuestion({ assessmentId })).then((result) => {
       if (result.meta.requestStatus === "fulfilled") {
         navigate(result.payload.route);

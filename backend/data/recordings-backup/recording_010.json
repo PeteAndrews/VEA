@@ -1,0 +1,56 @@
+{
+  "recording": 10,
+  "kind": "conversation_message",
+  "endpoint": "POST /marking-sessions/ms-de49dc3d/assessments/B-JUN24-84612H-05_6/candidates/B/conversation/messages",
+  "recorded_at": "2026-11-05T13:27:15.432458+00:00",
+  "context": {
+    "marking_session_id": "ms-de49dc3d",
+    "assessment_id": "B-JUN24-84612H-05_6",
+    "candidate_id": "B",
+    "response_id": "B-JUN24-84612H-05_6_response-top-mark",
+    "coding_id": null,
+    "stage": "EVIDENCE_MAPPING",
+    "tentative_level": null
+  },
+  "request": {
+    "content": "Does this answer contain evidence for LH stimulating ovulation?"
+  },
+  "response": {
+    "active_context_id": "ctx-d54ddc48",
+    "messages": [
+      {
+        "id": "msg-950344bb",
+        "role": "user",
+        "content": "Does this answer contain evidence for LH stimulating ovulation?",
+        "context_id": "ctx-d54ddc48",
+        "created_at": "2026-11-05T13:27:08.361329+00:00"
+      },
+      {
+        "id": "msg-1eccf19b",
+        "role": "assistant",
+        "content": "Yes, the answer contains evidence for LH stimulating ovulation in the segment: \"LH can then stimulate ovulation, increasing the chance of an egg being fertilised.\"",
+        "context_id": "ctx-d54ddc48",
+        "created_at": "2026-11-05T13:27:15.429456+00:00",
+        "citations": [
+          {
+            "type": "response_span",
+            "text": "LH can then stimulate ovulation, increasing the chance of an egg being fertilised.",
+            "start_char": 317,
+            "end_char": 399,
+            "segment_id": "B-JUN24-84612H-05_6_response-top-mark-seg-5"
+          }
+        ]
+      }
+    ],
+    "active_context": {
+      "context_id": "ctx-d54ddc48",
+      "source": "general"
+    },
+    "contexts": [
+      {
+        "context_id": "ctx-d54ddc48",
+        "source": "general"
+      }
+    ]
+  }
+}

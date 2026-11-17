@@ -21,6 +21,7 @@ from app.assessment_paths import (
     artifact_version_dir,
     iter_source_response_txt,
     legacy_responses_dir,
+    load_jev_verification,
     source_assessment_path,
     source_errata_path,
     source_jev_verification_path,
@@ -168,13 +169,13 @@ def ingest_assessment(
     jev_path = source_jev_verification_path(data_dir, assessment_id)
     errata_path = source_errata_path(data_dir, assessment_id)
 
-    for path in (assessment_path, relationships_path, jev_path):
+    for path in (assessment_path, relationships_path):
         if not path.is_file():
             raise FileNotFoundError(f"Missing source file: {path}")
 
     stage1 = json.loads(assessment_path.read_text(encoding="utf-8"))
     stage2 = json.loads(relationships_path.read_text(encoding="utf-8"))
-    jev = json.loads(jev_path.read_text(encoding="utf-8"))
+    jev = load_jev_verification(data_dir, assessment_id)
     metadata = _validate_sources(assessment_id, stage1, stage2, jev)
 
     source_hashes = registry_store.hash_sources(
@@ -296,9 +297,8 @@ def ingest_all(data_dir: str | Path, *, rebuild: bool = False) -> list[dict[str,
     for assessment_id in list_assessment_ids(data_dir):
         try:
             relationships_path = source_relationships_path(data_dir, assessment_id)
-            jev_path = source_jev_verification_path(data_dir, assessment_id)
-            if not relationships_path.is_file() or not jev_path.is_file():
-                results.append({"assessment_id": assessment_id, "status": "skipped", "reason": "incomplete triplet"})
+            if not relationships_path.is_file():
+                results.append({"assessment_id": assessment_id, "status": "skipped", "reason": "missing relationships"})
                 continue
             result = ingest_assessment(data_dir, assessment_id, rebuild=rebuild)
             results.append({"assessment_id": assessment_id, **result})

@@ -399,11 +399,12 @@ def candidate_view(
 
 def _list_response_ids_for_assessment(responses_dir: Path, assessment_id: str) -> list[str]:
     from app.assessment_paths import legacy_responses_dir
-    from app.assessment_runtime import get_version_record, use_registry
+    from app.assessment_runtime import artifact_version_for_responses, get_version_record
 
     data_dir = responses_dir.parent
-    if use_registry(data_dir, assessment_id):
-        version = get_version_record(data_dir, assessment_id)
+    version_id = artifact_version_for_responses(data_dir, assessment_id)
+    if version_id:
+        version = get_version_record(data_dir, assessment_id, version_id)
         return [item["response_id"] for item in version.get("responses", [])]
 
     nested_dir = legacy_responses_dir(data_dir, assessment_id)
@@ -422,17 +423,15 @@ def _list_response_ids_for_assessment(responses_dir: Path, assessment_id: str) -
 
 
 def _candidate_aliases_for_assessment(data_dir: str | Path, assessment_id: str, response_ids: list[str]) -> dict[str, str]:
-    from app.assessment_runtime import get_version_record, use_registry
+    from app.assessment_runtime import artifact_version_for_responses, get_version_record
 
-    if use_registry():
-        try:
-            version = get_version_record(data_dir, assessment_id)
-            return {
-                item["response_id"]: item["candidate_id"]
-                for item in version.get("responses", [])
-            }
-        except KeyError:
-            pass
+    version_id = artifact_version_for_responses(data_dir, assessment_id)
+    if version_id:
+        version = get_version_record(data_dir, assessment_id, version_id)
+        return {
+            item["response_id"]: item["candidate_id"]
+            for item in version.get("responses", [])
+        }
     return candidate_aliases(response_ids)
 
 
@@ -485,11 +484,9 @@ def candidate_detail_view(
 
 
 def _artifact_version_for_assessment(data_dir: str | Path, assessment_id: str) -> str | None:
-    from app.assessment_runtime import get_version_record, use_registry
+    from app.assessment_runtime import artifact_version_for_responses
 
-    if not use_registry(data_dir, assessment_id):
-        return None
-    return get_version_record(data_dir, assessment_id)["artifact_version"]
+    return artifact_version_for_responses(data_dir, assessment_id)
 
 
 def resolve_response_id(

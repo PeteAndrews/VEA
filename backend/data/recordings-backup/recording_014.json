@@ -1,0 +1,33 @@
+{
+  "recording": 14,
+  "kind": "evidence_check",
+  "endpoint": "POST /marking-sessions/ms-de49dc3d/assessments/B-JUN24-84612H-05_6/candidates/B/judgement/codings/rel-b92f3005/ai-check",
+  "recorded_at": "2026-11-05T13:34:45.867531+00:00",
+  "context": {
+    "marking_session_id": "ms-de49dc3d",
+    "assessment_id": "B-JUN24-84612H-05_6",
+    "candidate_id": "B",
+    "response_id": "B-JUN24-84612H-05_6_response-top-mark",
+    "coding_id": "rel-b92f3005",
+    "stage": "EVIDENCE_MAPPING",
+    "tentative_level": null
+  },
+  "request": {
+    "coding_id": "rel-b92f3005",
+    "stage": "EVIDENCE_MAPPING",
+    "last_action": "link_evidence"
+  },
+  "response": {
+    "id": "ai-a9ff1cb9",
+    "coding_id": "rel-b92f3005",
+    "status": "silent",
+    "intervention": {
+      "type": "SILENCE",
+      "message": "",
+      "nuance_items": []
+    },
+    "relation_check": {
+      "relation": "SUPPORTS"
+    }
+  }
+}

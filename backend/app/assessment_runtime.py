@@ -22,6 +22,28 @@ from app.graph import AssessmentGraph, load_graph, load_graph_artifact
 from app.graph_service import GraphService
 
 
+def artifact_version_for_responses(data_dir: str | Path, assessment_id: str) -> str | None:
+    """Artifact version that holds student responses for this question.
+
+    Honours VEA_USE_REGISTRY when it is on. When it is off, still uses a ready
+    artifact if the legacy response folder has no JSON scripts.
+    """
+    if use_registry(data_dir, assessment_id):
+        return get_version_record(data_dir, assessment_id)["artifact_version"]
+
+    registry = AssessmentRegistry(data_dir).load()
+    version = AssessmentRegistry(data_dir).latest_ready(registry, assessment_id)
+    if version is None:
+        return None
+
+    from app.assessment_paths import legacy_responses_dir
+
+    folder = legacy_responses_dir(data_dir, assessment_id)
+    if folder.is_dir() and any(folder.glob("*.json")):
+        return None
+    return version["artifact_version"]
+
+
 def use_registry(data_dir: str | Path = "data", assessment_id: str | None = None) -> bool:
     if os.getenv("VEA_USE_REGISTRY", "0").strip().lower() in {"0", "false", "no"}:
         return False

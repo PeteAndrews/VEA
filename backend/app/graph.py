@@ -316,14 +316,15 @@ def load_graph(
 ) -> AssessmentGraph:
     from app.assessment_paths import (
         source_assessment_path,
-        source_jev_verification_path,
         source_relationships_path,
     )
 
     data_dir = Path(data_dir)
     stage1 = _load_json(source_assessment_path(data_dir, assessment_id))
     stage2 = _load_json(source_relationships_path(data_dir, assessment_id))
-    jev = _load_json(source_jev_verification_path(data_dir, assessment_id))
+    from app.assessment_paths import load_jev_verification
+
+    jev = load_jev_verification(data_dir, assessment_id)
     return load_graph_from_sources(
         assessment_id=assessment_id,
         stage1=stage1,

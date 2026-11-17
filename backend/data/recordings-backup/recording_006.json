@@ -1,0 +1,44 @@
+{
+  "recording": 6,
+  "kind": "evidence_check",
+  "endpoint": "POST /marking-sessions/ms-de49dc3d/assessments/B-JUN24-84612H-05_6/candidates/B/judgement/codings/rel-1c342bc7/ai-check",
+  "recorded_at": "2026-11-05T13:24:23.098947+00:00",
+  "context": {
+    "marking_session_id": "ms-de49dc3d",
+    "assessment_id": "B-JUN24-84612H-05_6",
+    "candidate_id": "B",
+    "response_id": "B-JUN24-84612H-05_6_response-top-mark",
+    "coding_id": "rel-1c342bc7",
+    "stage": "EVIDENCE_MAPPING",
+    "tentative_level": null
+  },
+  "request": {
+    "coding_id": "rel-1c342bc7",
+    "stage": "EVIDENCE_MAPPING",
+    "last_action": "link_evidence"
+  },
+  "response": {
+    "id": "ai-43dd3afa",
+    "coding_id": "rel-1c342bc7",
+    "status": "pending",
+    "intervention": {
+      "type": "REANCHOR",
+      "message": "Explicit mark-scheme guidance applies to 'inhibition of FSH (production / release) - lack of FSH prevents follicle / egg …'. Check this evidence against it before confirming the link.",
+      "nuance_items": [
+        {
+          "node_id": "commentary_05_6-fsh-lh-guidance",
+          "relation": "CONSTRAINS",
+          "text": "In the contraception section we cannot give credit for saying what FSH and LH normally do, the indicative content focuses on the consequence of a lack of these hormones."
+        },
+        {
+          "node_id": "commentary_05_6-egg-growth-guidance",
+          "relation": "REJECTS",
+          "text": "Preventing egg growth is too vague in terms of egg development/maturation."
+        }
+      ]
+    },
+    "relation_check": {
+      "relation": "DOES_NOT_SUPPORT"
+    }
+  }
+}

@@ -65,11 +65,15 @@ _LEVEL_START = re.compile(
     re.IGNORECASE,
 )
 _MARK_SUFFIX = re.compile(r"\s*Mark:\s*([0-9]+(?:[–\-][0-9]+)?)\s*$", re.IGNORECASE)
+_TRAILING_MARK = re.compile(r"(?:^|\s)([0-9]+(?:[–\-][0-9]+)?)\s*$")
+_MARK_ONLY = re.compile(r"^[0-9]+(?:[–\-][0-9]+)?$")
 
 
 def parse_mark_scheme_text(text: str) -> dict[str, Any]:
     normalized = text.replace("\r\n", "\n")
-    parts = re.split(r"\n\s*Indicative content\s*\n", normalized, maxsplit=1, flags=re.IGNORECASE)
+    for dash in ("‐", "‑", "‒", "–", "—", "−"):
+        normalized = normalized.replace(dash, "-")
+    parts = re.split(r"\n\s*Indicative content\s*:?\s*\n", normalized, maxsplit=1, flags=re.IGNORECASE)
     level_block = parts[0]
     indicative_block = parts[1] if len(parts) > 1 else ""
 
@@ -101,7 +105,7 @@ def _parse_levels(block: str) -> list[dict[str, Any]]:
             label = match.group(1)
             level_num = int(match.group(2)) if match.group(2) else 0
             rest = match.group(3) or ""
-            mark_match = _MARK_SUFFIX.search(rest)
+            mark_match = _MARK_SUFFIX.search(rest) or _TRAILING_MARK.search(rest)
             mark = None
             descriptor_start = rest
             if mark_match:
@@ -116,10 +120,10 @@ def _parse_levels(block: str) -> list[dict[str, Any]]:
             continue
         if current is not None:
             mark_only = re.match(r"^Mark:\s*([0-9]+(?:[–\-][0-9]+)?)\s*$", line, re.IGNORECASE)
-            if mark_only:
-                current["mark"] = mark_only.group(1).replace("-", "–")
+            if mark_only or _MARK_ONLY.match(line):
+                current["mark"] = (mark_only.group(1) if mark_only else line).replace("-", "–")
                 continue
-            mark_inline = _MARK_SUFFIX.search(line)
+            mark_inline = _MARK_SUFFIX.search(line) or _TRAILING_MARK.search(line)
             if mark_inline:
                 current["mark"] = mark_inline.group(1).replace("-", "–")
                 line = line[: mark_inline.start()].strip()

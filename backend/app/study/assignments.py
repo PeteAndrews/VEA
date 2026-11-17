@@ -5,17 +5,14 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from app.assessment_paths import source_jev_verification_path, source_relationships_path
+from app.assessment_paths import source_relationships_path
 from app.assessment_registry import AssessmentRegistry
 from app.views import list_assessment_ids, load_stage1
 
 
 def _is_complete_assessment(data_dir: str | Path, assessment_id: str) -> bool:
     data_dir = Path(data_dir)
-    return (
-        source_relationships_path(data_dir, assessment_id).is_file()
-        and source_jev_verification_path(data_dir, assessment_id).is_file()
-    )
+    return source_relationships_path(data_dir, assessment_id).is_file()
 
 
 def list_assessments_for_subject(

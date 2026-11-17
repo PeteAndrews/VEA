@@ -147,10 +147,14 @@ def load_response(
     artifact_version: str | None = None,
 ) -> dict:
     from app.assessment_paths import resolve_response_paths
-    from app.assessment_runtime import load_registered_response, use_registry
+    from app.assessment_runtime import load_registered_response
 
     data_dir = Path(responses_dir).parent if Path(responses_dir).name == "responses" else Path(responses_dir)
-    if use_registry(data_dir, assessment_id) and assessment_id and artifact_version:
+    if assessment_id and not artifact_version:
+        from app.assessment_runtime import artifact_version_for_responses
+
+        artifact_version = artifact_version_for_responses(data_dir, assessment_id)
+    if assessment_id and artifact_version:
         return load_registered_response(data_dir, assessment_id, artifact_version, response_id)
 
     paths = resolve_response_paths(data_dir, assessment_id or _infer_assessment_id(response_id, data_dir), response_id)

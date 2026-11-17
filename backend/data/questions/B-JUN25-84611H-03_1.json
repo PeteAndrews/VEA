@@ -3,7 +3,7 @@
   "assessment_id": "B-JUN25-84611H-03_1",
   "question_id": "03_1",
   "metadata": {
-    "subject": null,
+    "subject": "biology",
     "qualification": null,
     "paper": null,
     "maximum_mark": 6,
@@ -354,7 +354,7 @@
         {
           "id": "q_03_1-instruction-1",
           "type": "question_instruction",
-          "text": "Evaluate the student’s method.",
+          "text": "Evaluate the student\u2019s method.",
           "order": 11,
           "parent_id": null,
           "annotations": [
@@ -467,7 +467,7 @@
         {
           "id": "ms_03_1-level-3",
           "type": "level_descriptor",
-          "text": "Level 3: A judgement, strongly linked and logically supported by a sufficient range of correct reasons, is given. 5–6",
+          "text": "Level 3: A judgement, strongly linked and logically supported by a sufficient range of correct reasons, is given. 5\u20136",
           "order": 2,
           "parent_id": null,
           "annotations": [
@@ -506,7 +506,7 @@
         {
           "id": "ms_03_1-level-2",
           "type": "level_descriptor",
-          "text": "Level 2: Some logically linked reasons are given. There may also be a simple judgement. 3–4",
+          "text": "Level 2: Some logically linked reasons are given. There may also be a simple judgement. 3\u20134",
           "order": 3,
           "parent_id": null,
           "annotations": [
@@ -545,7 +545,7 @@
         {
           "id": "ms_03_1-level-1",
           "type": "level_descriptor",
-          "text": "Level 1: Relevant points are made. They are not logically linked. 1–2",
+          "text": "Level 1: Relevant points are made. They are not logically linked. 1\u20132",
           "order": 4,
           "parent_id": null,
           "annotations": [
@@ -626,7 +626,7 @@
         {
           "id": "ms_03_1-strength-1",
           "type": "indicative_point",
-          "text": "• same / a / one plant / potato used",
+          "text": "\u2022 same / a / one plant / potato used",
           "order": 8,
           "parent_id": "ms_03_1-strengths",
           "annotations": [
@@ -662,7 +662,7 @@
         {
           "id": "ms_03_1-strength-2",
           "type": "indicative_point",
-          "text": "• all potato pieces used were cubes",
+          "text": "\u2022 all potato pieces used were cubes",
           "order": 9,
           "parent_id": "ms_03_1-strengths",
           "annotations": [
@@ -698,7 +698,7 @@
         {
           "id": "ms_03_1-strength-3",
           "type": "indicative_point",
-          "text": "• mass was recorded before and after",
+          "text": "\u2022 mass was recorded before and after",
           "order": 10,
           "parent_id": "ms_03_1-strengths",
           "annotations": [
@@ -722,7 +722,7 @@
         {
           "id": "ms_03_1-strength-4",
           "type": "indicative_point",
-          "text": "• change in mass was calculated",
+          "text": "\u2022 change in mass was calculated",
           "order": 11,
           "parent_id": "ms_03_1-strengths",
           "annotations": [
@@ -746,7 +746,7 @@
         {
           "id": "ms_03_1-strength-5",
           "type": "indicative_point",
-          "text": "• different concentrations of salt solution were used",
+          "text": "\u2022 different concentrations of salt solution were used",
           "order": 12,
           "parent_id": "ms_03_1-strengths",
           "annotations": [
@@ -787,7 +787,7 @@
         {
           "id": "ms_03_1-improvement-1",
           "type": "indicative_point",
-          "text": "• use the same / a / one potato for all pieces",
+          "text": "\u2022 use the same / a / one potato for all pieces",
           "order": 14,
           "parent_id": "ms_03_1-improvements",
           "annotations": [
@@ -847,7 +847,7 @@
         {
           "id": "ms_03_1-improvement-2",
           "type": "indicative_point",
-          "text": "• remove skin or peel the potato",
+          "text": "\u2022 remove skin or peel the potato",
           "order": 16,
           "parent_id": "ms_03_1-improvements",
           "annotations": [
@@ -901,7 +901,7 @@
         {
           "id": "ms_03_1-improvement-3",
           "type": "indicative_point",
-          "text": "• blot / dry cube before measuring mass",
+          "text": "\u2022 blot / dry cube before measuring mass",
           "order": 18,
           "parent_id": "ms_03_1-improvements",
           "annotations": [
@@ -967,7 +967,7 @@
         {
           "id": "ms_03_1-improvement-4",
           "type": "indicative_point",
-          "text": "• use same / set size / surface area of potato piece each time",
+          "text": "\u2022 use same / set size / surface area of potato piece each time",
           "order": 20,
           "parent_id": "ms_03_1-improvements",
           "annotations": [
@@ -1051,7 +1051,7 @@
         {
           "id": "ms_03_1-improvement-5",
           "type": "indicative_point",
-          "text": "• repeat (whole investigation or at each concentration)",
+          "text": "\u2022 repeat (whole investigation or at each concentration)",
           "order": 22,
           "parent_id": "ms_03_1-improvements",
           "annotations": [
@@ -1135,7 +1135,7 @@
         {
           "id": "ms_03_1-improvement-6",
           "type": "indicative_point",
-          "text": "• calculate mean (from repeats)",
+          "text": "\u2022 calculate mean (from repeats)",
           "order": 25,
           "parent_id": "ms_03_1-improvements",
           "annotations": [
@@ -1189,7 +1189,7 @@
         {
           "id": "ms_03_1-improvement-7",
           "type": "indicative_point",
-          "text": "• same time for each piece to be in solution",
+          "text": "\u2022 same time for each piece to be in solution",
           "order": 27,
           "parent_id": "ms_03_1-improvements",
           "annotations": [
@@ -1261,7 +1261,7 @@
         {
           "id": "ms_03_1-improvement-8",
           "type": "indicative_point",
-          "text": "• control temperature of solution using water bath",
+          "text": "\u2022 control temperature of solution using water bath",
           "order": 29,
           "parent_id": "ms_03_1-improvements",
           "annotations": [
@@ -1333,7 +1333,7 @@
         {
           "id": "ms_03_1-improvement-9",
           "type": "indicative_point",
-          "text": "• use same volume of solution for each piece of potato  \nor ensure all pieces are completely submerged",
+          "text": "\u2022 use same volume of solution for each piece of potato  \nor ensure all pieces are completely submerged",
           "order": 31,
           "parent_id": "ms_03_1-improvements",
           "annotations": [
@@ -1405,7 +1405,7 @@
         {
           "id": "ms_03_1-improvement-10",
           "type": "indicative_point",
-          "text": "• calculate percentage change in mass",
+          "text": "\u2022 calculate percentage change in mass",
           "order": 33,
           "parent_id": "ms_03_1-improvements",
           "annotations": [
@@ -1465,7 +1465,7 @@
         {
           "id": "ms_03_1-improvement-11",
           "type": "indicative_point",
-          "text": "• include control experiment with boiled cube",
+          "text": "\u2022 include control experiment with boiled cube",
           "order": 35,
           "parent_id": "ms_03_1-improvements",
           "annotations": [
@@ -1519,7 +1519,7 @@
         {
           "id": "ms_03_1-improvement-12",
           "type": "indicative_point",
-          "text": "• increase the number of concentrations (of salt solution) used",
+          "text": "\u2022 increase the number of concentrations (of salt solution) used",
           "order": 37,
           "parent_id": "ms_03_1-improvements",
           "annotations": [
@@ -1659,7 +1659,7 @@
         {
           "id": "commentary_03_1-guidance-1",
           "type": "commentary_guidance",
-          "text": "Please read the information in the introduction to this \ncommentary document regarding how to annotate student’s responses.",
+          "text": "Please read the information in the introduction to this \ncommentary document regarding how to annotate student\u2019s responses.",
           "order": 3,
           "parent_id": null,
           "annotations": [],
@@ -1753,7 +1753,7 @@
         {
           "id": "commentary_03_1-guidance-3",
           "type": "commentary_guidance",
-          "text": "Examiners are \nadvised to number the ‘strengths’ bullet points in the mark scheme from 1-5 and the \nimprovements and reasons from 1-12.",
+          "text": "Examiners are \nadvised to number the \u2018strengths\u2019 bullet points in the mark scheme from 1-5 and the \nimprovements and reasons from 1-12.",
           "order": 7,
           "parent_id": null,
           "annotations": [
@@ -1783,7 +1783,7 @@
         {
           "id": "commentary_03_1-guidance-4",
           "type": "commentary_guidance",
-          "text": "When using the star annotation for strengths, place the \nstar on the left-hand side of the student’s response and the improvements and reasons on the \nright-hand side.",
+          "text": "When using the star annotation for strengths, place the \nstar on the left-hand side of the student\u2019s response and the improvements and reasons on the \nright-hand side.",
           "order": 8,
           "parent_id": null,
           "annotations": [],
@@ -1925,7 +1925,7 @@
         {
           "id": "commentary_03_1-guidance-10",
           "type": "commentary_guidance",
-          "text": "If the student mentions ‘the potato’ this is not sufficient for credit in relation to using the same \npotato (as a strength BP or as an improvement BP).",
+          "text": "If the student mentions \u2018the potato\u2019 this is not sufficient for credit in relation to using the same \npotato (as a strength BP or as an improvement BP).",
           "order": 14,
           "parent_id": null,
           "annotations": [
@@ -1949,7 +1949,7 @@
         {
           "id": "commentary_03_1-guidance-11",
           "type": "commentary_guidance",
-          "text": "However, if the student states ‘a potato’ or \n‘one potato’ credit should be awarded.",
+          "text": "However, if the student states \u2018a potato\u2019 or \n\u2018one potato\u2019 credit should be awarded.",
           "order": 15,
           "parent_id": null,
           "annotations": [
@@ -2009,7 +2009,7 @@
         {
           "id": "commentary_03_1-guidance-13",
           "type": "commentary_guidance",
-          "text": "For BP5, the idea of ‘repeat’ without qualification is sufficient to gain credit.",
+          "text": "For BP5, the idea of \u2018repeat\u2019 without qualification is sufficient to gain credit.",
           "order": 17,
           "parent_id": null,
           "annotations": [

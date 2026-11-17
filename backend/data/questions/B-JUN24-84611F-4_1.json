@@ -3,7 +3,7 @@
   "assessment_id": "B-JUN24-84611F-4_1",
   "question_id": "4_1",
   "metadata": {
-    "subject": null,
+    "subject": "biology",
     "qualification": null,
     "paper": null,
     "maximum_mark": 4,
@@ -259,7 +259,7 @@
         {
           "id": "ms_4_1-level-2",
           "type": "level_descriptor",
-          "text": "Level 2: Scientifically relevant facts, events or processes are \nidentified and given in detail to form an accurate account. 3–4",
+          "text": "Level 2: Scientifically relevant facts, events or processes are \nidentified and given in detail to form an accurate account. 3\u20134",
           "order": 2,
           "parent_id": null,
           "annotations": [
@@ -283,7 +283,7 @@
             },
             {
               "type": "quantifier",
-              "text": "3–4",
+              "text": "3\u20134",
               "start": 125,
               "end": 128
             }
@@ -304,7 +304,7 @@
         {
           "id": "ms_4_1-level-1",
           "type": "level_descriptor",
-          "text": "Level 1: Facts, events or processes are identified and simply \nstated but their relevance is not clear. 1–2",
+          "text": "Level 1: Facts, events or processes are identified and simply \nstated but their relevance is not clear. 1\u20132",
           "order": 3,
           "parent_id": null,
           "annotations": [
@@ -322,7 +322,7 @@
             },
             {
               "type": "quantifier",
-              "text": "1–2",
+              "text": "1\u20132",
               "start": 104,
               "end": 107
             }
@@ -367,9 +367,9 @@
           "marks": 0,
           "level": 0,
           "mark_range": {
-              "min": 0,
-              "max": 0
-            },
+            "min": 0,
+            "max": 0
+          },
           "assessment_objective": null,
           "specification_reference": null
         },
@@ -417,7 +417,7 @@
         {
           "id": "ms_4_1-starch-test",
           "type": "indicative_point",
-          "text": "• iodine (solution) tests for starch",
+          "text": "\u2022 iodine (solution) tests for starch",
           "order": 7,
           "parent_id": "ms_4_1-starch-group",
           "annotations": [
@@ -447,7 +447,7 @@
         {
           "id": "ms_4_1-starch-positive",
           "type": "indicative_point",
-          "text": "• iodine (solution) turns to blue-black or black or dark blue (if \nstarch is present)",
+          "text": "\u2022 iodine (solution) turns to blue-black or black or dark blue (if \nstarch is present)",
           "order": 8,
           "parent_id": "ms_4_1-starch-group",
           "annotations": [
@@ -495,7 +495,7 @@
         {
           "id": "ms_4_1-starch-negative",
           "type": "indicative_point",
-          "text": "• iodine (solution) remains unchanged / yellow / orange / brown (if \nno starch is present)",
+          "text": "\u2022 iodine (solution) remains unchanged / yellow / orange / brown (if \nno starch is present)",
           "order": 9,
           "parent_id": "ms_4_1-starch-group",
           "annotations": [
@@ -579,13 +579,13 @@
         {
           "id": "ms_4_1-sugar-test",
           "type": "indicative_point",
-          "text": "• Benedict’s (reagent / solution) tests for sugar",
+          "text": "\u2022 Benedict\u2019s (reagent / solution) tests for sugar",
           "order": 11,
           "parent_id": "ms_4_1-sugar-group",
           "annotations": [
             {
               "type": "domain_term",
-              "text": "Benedict’s (reagent / solution)",
+              "text": "Benedict\u2019s (reagent / solution)",
               "start": 2,
               "end": 33
             },
@@ -609,7 +609,7 @@
         {
           "id": "ms_4_1-heating",
           "type": "indicative_point",
-          "text": "• boil or heat (to at least 60 °C)",
+          "text": "\u2022 boil or heat (to at least 60 \u00b0C)",
           "order": 12,
           "parent_id": "ms_4_1-sugar-group",
           "annotations": [
@@ -633,7 +633,7 @@
             },
             {
               "type": "domain_term",
-              "text": "60 °C",
+              "text": "60 \u00b0C",
               "start": 28,
               "end": 33
             }
@@ -651,13 +651,13 @@
         {
           "id": "ms_4_1-sugar-positive",
           "type": "indicative_point",
-          "text": "• Benedict’s (reagent / solution) turns green / yellow / orange / \nbrown / (brick) red (if sugar is present)",
+          "text": "\u2022 Benedict\u2019s (reagent / solution) turns green / yellow / orange / \nbrown / (brick) red (if sugar is present)",
           "order": 13,
           "parent_id": "ms_4_1-sugar-group",
           "annotations": [
             {
               "type": "domain_term",
-              "text": "Benedict’s (reagent / solution)",
+              "text": "Benedict\u2019s (reagent / solution)",
               "start": 2,
               "end": 33
             },
@@ -711,13 +711,13 @@
         {
           "id": "ms_4_1-sugar-negative",
           "type": "indicative_point",
-          "text": "• Benedict’s (reagent / solution) remains unchanged / blue (if no \nsugar is present)",
+          "text": "\u2022 Benedict\u2019s (reagent / solution) remains unchanged / blue (if no \nsugar is present)",
           "order": 14,
           "parent_id": "ms_4_1-sugar-group",
           "annotations": [
             {
               "type": "domain_term",
-              "text": "Benedict’s (reagent / solution)",
+              "text": "Benedict\u2019s (reagent / solution)",
               "start": 2,
               "end": 33
             },
@@ -1065,13 +1065,13 @@
         {
           "id": "commentary_4_1-benedicts-example",
           "type": "commentary_example",
-          "text": "For example, ‘Benedict’s tests for sugar and you need to heat it’ would achieve 2 marks in Level 1.",
+          "text": "For example, \u2018Benedict\u2019s tests for sugar and you need to heat it\u2019 would achieve 2 marks in Level 1.",
           "order": 7,
           "parent_id": null,
           "annotations": [
             {
               "type": "domain_term",
-              "text": "Benedict’s tests",
+              "text": "Benedict\u2019s tests",
               "start": 14,
               "end": 30
             },
@@ -1113,7 +1113,7 @@
         {
           "id": "commentary_4_1-context-guidance",
           "type": "commentary_guidance",
-          "text": "Reference to ‘boil’ or ‘heat’ without any context is not creditworthy, whereas ‘boiling or heating Benedict’s (reagent)’ or ‘the sugar test needs heating’ would gain one mark in Level 1.",
+          "text": "Reference to \u2018boil\u2019 or \u2018heat\u2019 without any context is not creditworthy, whereas \u2018boiling or heating Benedict\u2019s (reagent)\u2019 or \u2018the sugar test needs heating\u2019 would gain one mark in Level 1.",
           "order": 8,
           "parent_id": null,
           "annotations": [
@@ -1131,7 +1131,7 @@
             },
             {
               "type": "domain_term",
-              "text": "boiling or heating Benedict’s (reagent)",
+              "text": "boiling or heating Benedict\u2019s (reagent)",
               "start": 80,
               "end": 119
             },

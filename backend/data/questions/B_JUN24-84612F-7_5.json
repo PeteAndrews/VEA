@@ -3,7 +3,7 @@
   "assessment_id": "B_JUN24-84612F-7_5",
   "question_id": "7_5",
   "metadata": {
-    "subject": null,
+    "subject": "biology",
     "qualification": null,
     "paper": null,
     "maximum_mark": 4,
@@ -212,7 +212,7 @@
         {
           "id": "ms_7_5-level-2",
           "type": "level_descriptor",
-          "text": "Level 2:  Relevant points (reasons/causes) are identified, given in \ndetail and logically linked to form a clear account. \n3–4",
+          "text": "Level 2:  Relevant points (reasons/causes) are identified, given in \ndetail and logically linked to form a clear account. \n3\u20134",
           "order": 1,
           "parent_id": null,
           "annotations": [],
@@ -232,7 +232,7 @@
         {
           "id": "ms_7_5-level-1",
           "type": "level_descriptor",
-          "text": "Level 1: Points are identified and stated simply, but their relevance \nis not clear and there is no attempt at logical thinking. \n1–2",
+          "text": "Level 1: Points are identified and stated simply, but their relevance \nis not clear and there is no attempt at logical thinking. \n1\u20132",
           "order": 2,
           "parent_id": null,
           "annotations": [],
@@ -313,7 +313,7 @@
         {
           "id": "ms_7_5-point-quicker",
           "type": "indicative_point",
-          "text": "• quicker",
+          "text": "\u2022 quicker",
           "order": 6,
           "parent_id": "ms_7_5-taking-cuttings",
           "annotations": [
@@ -373,7 +373,7 @@
         {
           "id": "ms_7_5-point-identical-flowers",
           "type": "indicative_point",
-          "text": "• all offspring identical (in appearance) or all have large /  \nbrightly-coloured flowers",
+          "text": "\u2022 all offspring identical (in appearance) or all have large /  \nbrightly-coloured flowers",
           "order": 8,
           "parent_id": "ms_7_5-taking-cuttings",
           "annotations": [
@@ -463,7 +463,7 @@
         {
           "id": "ms_7_5-point-asexual",
           "type": "indicative_point",
-          "text": "• asexual reproduction or not sexual reproduction or cloning",
+          "text": "\u2022 asexual reproduction or not sexual reproduction or cloning",
           "order": 10,
           "parent_id": "ms_7_5-taking-cuttings",
           "annotations": [
@@ -595,7 +595,7 @@
         {
           "id": "ms_7_5-point-mitosis",
           "type": "indicative_point",
-          "text": "• involves mitosis",
+          "text": "\u2022 involves mitosis",
           "order": 14,
           "parent_id": "ms_7_5-taking-cuttings",
           "annotations": [
@@ -649,7 +649,7 @@
         {
           "id": "ms_7_5-point-meiosis",
           "type": "indicative_point",
-          "text": "• does not involve meiosis",
+          "text": "\u2022 does not involve meiosis",
           "order": 16,
           "parent_id": "ms_7_5-taking-cuttings",
           "annotations": [
@@ -709,7 +709,7 @@
         {
           "id": "ms_7_5-point-variation",
           "type": "indicative_point",
-          "text": "• avoids variation in flowers",
+          "text": "\u2022 avoids variation in flowers",
           "order": 18,
           "parent_id": "ms_7_5-taking-cuttings",
           "annotations": [
@@ -805,7 +805,7 @@
         {
           "id": "ms_7_5-point-profitability",
           "type": "indicative_point",
-          "text": "• increased profitability",
+          "text": "\u2022 increased profitability",
           "order": 21,
           "parent_id": "ms_7_5-taking-cuttings",
           "annotations": [
@@ -1206,7 +1206,7 @@
         {
           "id": "commentary_7_5-guidance-genetic-information",
           "type": "commentary_guidance",
-          "text": "If a student uses the term “genetic information” it may be given credit but only to raise them within Level 1 i.e. from 1 mark to 2 marks.",
+          "text": "If a student uses the term \u201cgenetic information\u201d it may be given credit but only to raise them within Level 1 i.e. from 1 mark to 2 marks.",
           "order": 11,
           "parent_id": null,
           "annotations": [

@@ -3,7 +3,7 @@
   "assessment_id": "B-JUN25-84641H-6_2",
   "question_id": "6_2",
   "metadata": {
-    "subject": null,
+    "subject": "biology",
     "qualification": null,
     "paper": null,
     "maximum_mark": 6,
@@ -217,7 +217,7 @@
         {
           "id": "q_6_2-subquestion-1",
           "type": "subquestion",
-          "text": "• how the test can indicate which type of diabetes a person has",
+          "text": "\u2022 how the test can indicate which type of diabetes a person has",
           "order": 7,
           "parent_id": "q_6_2-instruction",
           "annotations": [
@@ -247,7 +247,7 @@
         {
           "id": "q_6_2-subquestion-2",
           "type": "subquestion",
-          "text": "• the importance of finding out whether a person being treated for Type 1 diabetes \nactually has Type 2 diabetes.",
+          "text": "\u2022 the importance of finding out whether a person being treated for Type 1 diabetes \nactually has Type 2 diabetes.",
           "order": 8,
           "parent_id": "q_6_2-instruction",
           "annotations": [
@@ -325,13 +325,13 @@
         {
           "id": "ms_6_2-level-3",
           "type": "level_descriptor",
-          "text": "Level 3: Relevant points (reasons / causes) are identified, given in \ndetail and logically linked to form a clear account. 5–6",
+          "text": "Level 3: Relevant points (reasons / causes) are identified, given in \ndetail and logically linked to form a clear account. 5\u20136",
           "order": 2,
           "parent_id": null,
           "annotations": [
             {
               "type": "quantifier",
-              "text": "5–6",
+              "text": "5\u20136",
               "start": 123,
               "end": 126
             }
@@ -352,7 +352,7 @@
         {
           "id": "ms_6_2-level-2",
           "type": "level_descriptor",
-          "text": "Level 2: Relevant points (reasons / causes) are identified, and \nthere are attempts at logical linking.  The resulting account is not fully clear. 3–4",
+          "text": "Level 2: Relevant points (reasons / causes) are identified, and \nthere are attempts at logical linking.  The resulting account is not fully clear. 3\u20134",
           "order": 3,
           "parent_id": null,
           "annotations": [
@@ -364,7 +364,7 @@
             },
             {
               "type": "quantifier",
-              "text": "3–4",
+              "text": "3\u20134",
               "start": 147,
               "end": 150
             }
@@ -385,7 +385,7 @@
         {
           "id": "ms_6_2-level-1",
           "type": "level_descriptor",
-          "text": "Level 1: Points are identified and stated simply, but their relevance \nis not clear and there is no attempt at logical linking. 1–2",
+          "text": "Level 1: Points are identified and stated simply, but their relevance \nis not clear and there is no attempt at logical linking. 1\u20132",
           "order": 4,
           "parent_id": null,
           "annotations": [
@@ -397,7 +397,7 @@
             },
             {
               "type": "quantifier",
-              "text": "1–2",
+              "text": "1\u20132",
               "start": 128,
               "end": 131
             }
@@ -486,7 +486,7 @@
         {
           "id": "ms_6_2-type-1-point-1",
           "type": "indicative_point",
-          "text": "• in Type 1 (diabetes) the pancreas does not produce (enough) \ninsulin",
+          "text": "\u2022 in Type 1 (diabetes) the pancreas does not produce (enough) \ninsulin",
           "order": 8,
           "parent_id": "ms_6_2-group-type-1",
           "annotations": [
@@ -534,7 +534,7 @@
         {
           "id": "ms_6_2-type-1-point-2",
           "type": "indicative_point",
-          "text": "• (so) C-peptide (concentration in blood) would be low(er)",
+          "text": "\u2022 (so) C-peptide (concentration in blood) would be low(er)",
           "order": 9,
           "parent_id": "ms_6_2-group-type-1",
           "annotations": [
@@ -576,7 +576,7 @@
         {
           "id": "ms_6_2-type-1-point-3",
           "type": "indicative_point",
-          "text": "• even if patient is taking / injecting insulin",
+          "text": "\u2022 even if patient is taking / injecting insulin",
           "order": 10,
           "parent_id": "ms_6_2-group-type-1",
           "annotations": [
@@ -630,7 +630,7 @@
         {
           "id": "ms_6_2-type-2-point-1",
           "type": "indicative_point",
-          "text": "• in Type 2 (diabetes) the body / cells no longer respond to insulin",
+          "text": "\u2022 in Type 2 (diabetes) the body / cells no longer respond to insulin",
           "order": 12,
           "parent_id": "ms_6_2-group-type-2",
           "annotations": [
@@ -666,7 +666,7 @@
         {
           "id": "ms_6_2-type-2-point-2",
           "type": "indicative_point",
-          "text": "• in Type 2 (diabetes) insulin is produced",
+          "text": "\u2022 in Type 2 (diabetes) insulin is produced",
           "order": 13,
           "parent_id": "ms_6_2-group-type-2",
           "annotations": [
@@ -696,7 +696,7 @@
         {
           "id": "ms_6_2-type-2-point-3",
           "type": "indicative_point",
-          "text": "• (so) C-peptide (concentration in blood) would be  \nhigh(er) / normal",
+          "text": "\u2022 (so) C-peptide (concentration in blood) would be  \nhigh(er) / normal",
           "order": 14,
           "parent_id": "ms_6_2-group-type-2",
           "annotations": [
@@ -738,7 +738,7 @@
         {
           "id": "ms_6_2-group-importance",
           "type": "indicative_content_group",
-          "text": "The importance…",
+          "text": "The importance\u2026",
           "order": 15,
           "parent_id": "ms_6_2-indicative-heading",
           "annotations": [],
@@ -755,7 +755,7 @@
         {
           "id": "ms_6_2-importance-point-1",
           "type": "indicative_point",
-          "text": "• if patient has Type 2 (diabetes) they could stop insulin injections",
+          "text": "\u2022 if patient has Type 2 (diabetes) they could stop insulin injections",
           "order": 16,
           "parent_id": "ms_6_2-group-importance",
           "annotations": [
@@ -785,7 +785,7 @@
         {
           "id": "ms_6_2-importance-point-2",
           "type": "indicative_point",
-          "text": "• insulin injections have side effects",
+          "text": "\u2022 insulin injections have side effects",
           "order": 17,
           "parent_id": "ms_6_2-group-importance",
           "annotations": [
@@ -815,7 +815,7 @@
         {
           "id": "ms_6_2-importance-point-3",
           "type": "indicative_point",
-          "text": "• insulin injections are expensive",
+          "text": "\u2022 insulin injections are expensive",
           "order": 18,
           "parent_id": "ms_6_2-group-importance",
           "annotations": [
@@ -839,7 +839,7 @@
         {
           "id": "ms_6_2-importance-point-4",
           "type": "indicative_point",
-          "text": "• (Type 2 diabetes) can be treated with a carbohydrate-controlled \ndiet and / or (increased) exercise",
+          "text": "\u2022 (Type 2 diabetes) can be treated with a carbohydrate-controlled \ndiet and / or (increased) exercise",
           "order": 19,
           "parent_id": "ms_6_2-group-importance",
           "annotations": [
@@ -881,7 +881,7 @@
         {
           "id": "ms_6_2-importance-point-5",
           "type": "indicative_point",
-          "text": "• (Type 2 diabetes) can be treated with other medication (that is \nnot injected)",
+          "text": "\u2022 (Type 2 diabetes) can be treated with other medication (that is \nnot injected)",
           "order": 20,
           "parent_id": "ms_6_2-group-importance",
           "annotations": [
@@ -1255,7 +1255,7 @@
         {
           "id": "commentary_6_2-bp1-rule-1",
           "type": "commentary_guidance",
-          "text": "For BP1, in Type 1 diabetes, it would be insufficient to simply state ‘the person’ does not produce \ninsulin.",
+          "text": "For BP1, in Type 1 diabetes, it would be insufficient to simply state \u2018the person\u2019 does not produce \ninsulin.",
           "order": 13,
           "parent_id": null,
           "annotations": [
@@ -1375,7 +1375,7 @@
         {
           "id": "commentary_6_2-bp3-rule-2",
           "type": "commentary_guidance",
-          "text": "The two BPs are linked with the words ‘even if.’",
+          "text": "The two BPs are linked with the words \u2018even if.\u2019",
           "order": 17,
           "parent_id": null,
           "annotations": [
@@ -1441,7 +1441,7 @@
         {
           "id": "commentary_6_2-bp4-rule",
           "type": "commentary_guidance",
-          "text": "It would be \ninsufficient to say that in Type 2 the body is ‘immune to insulin’, ‘can’t detect insulin’, ‘rejects \ninsulin’ or that ‘insulin doesn’t work’, but becoming ‘resistant to insulin’, ‘insensitive to insulin’ or \n‘not reacting to insulin’ could gain credit.",
+          "text": "It would be \ninsufficient to say that in Type 2 the body is \u2018immune to insulin\u2019, \u2018can\u2019t detect insulin\u2019, \u2018rejects \ninsulin\u2019 or that \u2018insulin doesn\u2019t work\u2019, but becoming \u2018resistant to insulin\u2019, \u2018insensitive to insulin\u2019 or \n\u2018not reacting to insulin\u2019 could gain credit.",
           "order": 19,
           "parent_id": null,
           "annotations": [
@@ -1459,7 +1459,7 @@
             },
             {
               "type": "domain_term",
-              "text": "can’t detect insulin",
+              "text": "can\u2019t detect insulin",
               "start": 82,
               "end": 102
             },
@@ -1495,7 +1495,7 @@
         {
           "id": "commentary_6_2-bp5-rule",
           "type": "commentary_guidance",
-          "text": "For BP5, ‘People with Type 2 have increased insulin’ or ‘Type 2 have insulin’ would be \nequivalent to insulin being produced.",
+          "text": "For BP5, \u2018People with Type 2 have increased insulin\u2019 or \u2018Type 2 have insulin\u2019 would be \nequivalent to insulin being produced.",
           "order": 20,
           "parent_id": null,
           "annotations": [
@@ -1585,7 +1585,7 @@
         {
           "id": "commentary_6_2-bp7-equivalence",
           "type": "commentary_guidance",
-          "text": "For BP7, in the ‘importance’ indicative content ‘insulin shots’ is taken as being equivalent to \n‘insulin injections’.",
+          "text": "For BP7, in the \u2018importance\u2019 indicative content \u2018insulin shots\u2019 is taken as being equivalent to \n\u2018insulin injections\u2019.",
           "order": 23,
           "parent_id": null,
           "annotations": [
@@ -1615,7 +1615,7 @@
         {
           "id": "commentary_6_2-bp7-rule",
           "type": "commentary_guidance",
-          "text": "The idea that ‘in Type 2, insulin injections will not work’ is insufficient.",
+          "text": "The idea that \u2018in Type 2, insulin injections will not work\u2019 is insufficient.",
           "order": 24,
           "parent_id": null,
           "annotations": [
@@ -1657,7 +1657,7 @@
         {
           "id": "commentary_6_2-bp8-rule",
           "type": "commentary_guidance",
-          "text": "BP8 – stating that insulin is dangerous, would be too high, would cause a diabetic coma or death \nwould not be credited.",
+          "text": "BP8 \u2013 stating that insulin is dangerous, would be too high, would cause a diabetic coma or death \nwould not be credited.",
           "order": 25,
           "parent_id": null,
           "annotations": [
@@ -1693,7 +1693,7 @@
         {
           "id": "commentary_6_2-bp10-rule",
           "type": "commentary_guidance",
-          "text": "BP10 – statements such as healthy diet / lifestyle would be insufficient for this BP. Candidates \ncan give the converse such as ‘Type 2 is more likely if you are inactive / obese’.  ‘Type 2 is \ncaused by a lack of exercise’ or ‘people have Type 2 because of a bad diet’ would be \ninsufficient.",
+          "text": "BP10 \u2013 statements such as healthy diet / lifestyle would be insufficient for this BP. Candidates \ncan give the converse such as \u2018Type 2 is more likely if you are inactive / obese\u2019.  \u2018Type 2 is \ncaused by a lack of exercise\u2019 or \u2018people have Type 2 because of a bad diet\u2019 would be \ninsufficient.",
           "order": 26,
           "parent_id": null,
           "annotations": [
@@ -1870,7 +1870,7 @@
         {
           "id": "commentary_6_2-level-2-bullet",
           "type": "commentary_guidance",
-          "text": "• linked to  •",
+          "text": "\u2022 linked to  \u2022",
           "order": 32,
           "parent_id": null,
           "annotations": [],
@@ -1928,7 +1928,7 @@
         {
           "id": "commentary_6_2-level-2-example-1",
           "type": "commentary_example",
-          "text": "So, ‘People with Type 2 could stop having insulin injections, \nwhich have side effects (BP7 and BP8) is a logical link.",
+          "text": "So, \u2018People with Type 2 could stop having insulin injections, \nwhich have side effects (BP7 and BP8) is a logical link.",
           "order": 35,
           "parent_id": null,
           "annotations": [
@@ -2095,7 +2095,7 @@
         {
           "id": "commentary_6_2-level-1-bullet",
           "type": "commentary_guidance",
-          "text": "• any indicative content",
+          "text": "\u2022 any indicative content",
           "order": 41,
           "parent_id": null,
           "annotations": [],
@@ -2156,7 +2156,7 @@
         {
           "id": "commentary_6_2-example-1",
           "type": "commentary_example",
-          "text": "“In Type 1, the pancreas does not produce insulin” 1 mark",
+          "text": "\u201cIn Type 1, the pancreas does not produce insulin\u201d 1 mark",
           "order": 44,
           "parent_id": null,
           "annotations": [
@@ -2198,7 +2198,7 @@
         {
           "id": "commentary_6_2-example-2",
           "type": "commentary_example",
-          "text": "“In Type 1, the C-peptide would be low because the pancreas does not produce insulin” 3 marks",
+          "text": "\u201cIn Type 1, the C-peptide would be low because the pancreas does not produce insulin\u201d 3 marks",
           "order": 45,
           "parent_id": null,
           "annotations": [
@@ -2246,7 +2246,7 @@
         {
           "id": "commentary_6_2-example-3",
           "type": "commentary_example",
-          "text": "“In Type 1, the C-peptide would be low because the pancreas does not produce insulin, but in \nType 2 the C-peptide would be high” 4 marks",
+          "text": "\u201cIn Type 1, the C-peptide would be low because the pancreas does not produce insulin, but in \nType 2 the C-peptide would be high\u201d 4 marks",
           "order": 46,
           "parent_id": null,
           "annotations": [
@@ -2300,7 +2300,7 @@
         {
           "id": "commentary_6_2-example-4",
           "type": "commentary_example",
-          "text": "“In Type 1, the pancreas does not produce insulin.  In Type 2, the body cells no longer respond \nto insulin but insulin is still produced.  Type 2 diabetes can be treated with a carbohydrate\ncontrolled diet.”  4 marks",
+          "text": "\u201cIn Type 1, the pancreas does not produce insulin.  In Type 2, the body cells no longer respond \nto insulin but insulin is still produced.  Type 2 diabetes can be treated with a carbohydrate\ncontrolled diet.\u201d  4 marks",
           "order": 47,
           "parent_id": null,
           "annotations": [
@@ -2390,7 +2390,7 @@
         {
           "id": "commentary_6_2-example-5",
           "type": "commentary_example",
-          "text": "“In Type 1, the C-peptide would be low because the pancreas does not produce insulin, but in \nType 2 the C-peptide would be high.  If they have Type 2, they could stop insulin injections.” 5 \nmarks",
+          "text": "\u201cIn Type 1, the C-peptide would be low because the pancreas does not produce insulin, but in \nType 2 the C-peptide would be high.  If they have Type 2, they could stop insulin injections.\u201d 5 \nmarks",
           "order": 49,
           "parent_id": null,
           "annotations": [

@@ -3,7 +3,7 @@
   "assessment_id": "B-JUN24-84611H-3_1",
   "question_id": "3_1",
   "metadata": {
-    "subject": null,
+    "subject": "biology",
     "qualification": null,
     "paper": null,
     "maximum_mark": 6,
@@ -198,7 +198,7 @@
         {
           "id": "ms_3_1-level-3",
           "type": "level_descriptor",
-          "text": "Level 3: The method would lead to the production of a valid \noutcome. The key steps are identified and logically sequenced. 5–6 ",
+          "text": "Level 3: The method would lead to the production of a valid \noutcome. The key steps are identified and logically sequenced. 5\u20136 ",
           "order": 2,
           "parent_id": null,
           "annotations": [
@@ -231,7 +231,7 @@
         {
           "id": "ms_3_1-level-2",
           "type": "level_descriptor",
-          "text": "Level 2: The method would not necessarily lead to a valid \noutcome. Most steps are identified, but the method is not fully \nlogically sequenced. 3–4 ",
+          "text": "Level 2: The method would not necessarily lead to a valid \noutcome. Most steps are identified, but the method is not fully \nlogically sequenced. 3\u20134 ",
           "order": 3,
           "parent_id": null,
           "annotations": [
@@ -258,7 +258,7 @@
         {
           "id": "ms_3_1-level-1",
           "type": "level_descriptor",
-          "text": "Level 1: The method would not lead to a valid outcome. Some \nrelevant steps are identified, but links are not made clear. 1–2",
+          "text": "Level 1: The method would not lead to a valid outcome. Some \nrelevant steps are identified, but links are not made clear. 1\u20132",
           "order": 4,
           "parent_id": null,
           "annotations": [
@@ -328,7 +328,7 @@
         {
           "id": "ms_3_1-point-1",
           "type": "indicative_point",
-          "text": "• iodine solution tests for starch ",
+          "text": "\u2022 iodine solution tests for starch ",
           "order": 7,
           "parent_id": "ms_3_1-indicative-content",
           "annotations": [
@@ -358,7 +358,7 @@
         {
           "id": "ms_3_1-point-2",
           "type": "indicative_point",
-          "text": "• iodine changes from yellow / orange / brown ",
+          "text": "\u2022 iodine changes from yellow / orange / brown ",
           "order": 8,
           "parent_id": "ms_3_1-indicative-content",
           "annotations": [
@@ -388,7 +388,7 @@
         {
           "id": "ms_3_1-point-3",
           "type": "indicative_point",
-          "text": "• to blue-black or black or dark blue (to show starch is present \nwhen added to cake) ",
+          "text": "\u2022 to blue-black or black or dark blue (to show starch is present \nwhen added to cake) ",
           "order": 9,
           "parent_id": "ms_3_1-indicative-content",
           "annotations": [
@@ -430,13 +430,13 @@
         {
           "id": "ms_3_1-point-4",
           "type": "indicative_point",
-          "text": "• Benedict’s (reagent) tests for sugar / glucose ",
+          "text": "\u2022 Benedict\u2019s (reagent) tests for sugar / glucose ",
           "order": 10,
           "parent_id": "ms_3_1-indicative-content",
           "annotations": [
             {
               "type": "domain_term",
-              "text": "Benedict’s (reagent)",
+              "text": "Benedict\u2019s (reagent)",
               "start": 2,
               "end": 22
             },
@@ -460,7 +460,7 @@
         {
           "id": "ms_3_1-point-5",
           "type": "indicative_point",
-          "text": "• heat (to at least 60 °C) / boil cake with Benedict’s (reagent) ",
+          "text": "\u2022 heat (to at least 60 \u00b0C) / boil cake with Benedict\u2019s (reagent) ",
           "order": 11,
           "parent_id": "ms_3_1-indicative-content",
           "annotations": [
@@ -478,7 +478,7 @@
             },
             {
               "type": "domain_term",
-              "text": "60 °C",
+              "text": "60 \u00b0C",
               "start": 20,
               "end": 25
             },
@@ -496,7 +496,7 @@
             },
             {
               "type": "domain_term",
-              "text": "Benedict’s (reagent)",
+              "text": "Benedict\u2019s (reagent)",
               "start": 44,
               "end": 64
             }
@@ -514,13 +514,13 @@
         {
           "id": "ms_3_1-point-6",
           "type": "indicative_point",
-          "text": "• Benedict’s (reagent) changes from blue ",
+          "text": "\u2022 Benedict\u2019s (reagent) changes from blue ",
           "order": 12,
           "parent_id": "ms_3_1-indicative-content",
           "annotations": [
             {
               "type": "domain_term",
-              "text": "Benedict’s (reagent)",
+              "text": "Benedict\u2019s (reagent)",
               "start": 2,
               "end": 22
             },
@@ -544,7 +544,7 @@
         {
           "id": "ms_3_1-point-7",
           "type": "indicative_point",
-          "text": "• to green / yellow / orange / brown / (brick) red (to show sugar / \nglucose is present when added to cake) ",
+          "text": "\u2022 to green / yellow / orange / brown / (brick) red (to show sugar / \nglucose is present when added to cake) ",
           "order": 13,
           "parent_id": "ms_3_1-indicative-content",
           "annotations": [
@@ -586,7 +586,7 @@
         {
           "id": "ms_3_1-point-8",
           "type": "indicative_point",
-          "text": "• risk of skin burns from flame (when heating) or risk of skin burns \nfrom hot glass or risk of scald / burn from boiling water ",
+          "text": "\u2022 risk of skin burns from flame (when heating) or risk of skin burns \nfrom hot glass or risk of scald / burn from boiling water ",
           "order": 14,
           "parent_id": "ms_3_1-indicative-content",
           "annotations": [
@@ -688,13 +688,13 @@
         {
           "id": "ms_3_1-point-9",
           "type": "indicative_point",
-          "text": "• risk of Benedict’s (reagent) spitting into face / eyes when heating  ",
+          "text": "\u2022 risk of Benedict\u2019s (reagent) spitting into face / eyes when heating  ",
           "order": 17,
           "parent_id": "ms_3_1-indicative-content",
           "annotations": [
             {
               "type": "domain_term",
-              "text": "Benedict’s (reagent)",
+              "text": "Benedict\u2019s (reagent)",
               "start": 10,
               "end": 30
             },
@@ -790,13 +790,13 @@
         {
           "id": "ms_3_1-point-10",
           "type": "indicative_point",
-          "text": "• risk of Benedict’s (reagent) as an irritant or risk of iodine \n(solution) as an irritant ",
+          "text": "\u2022 risk of Benedict\u2019s (reagent) as an irritant or risk of iodine \n(solution) as an irritant ",
           "order": 20,
           "parent_id": "ms_3_1-indicative-content",
           "annotations": [
             {
               "type": "domain_term",
-              "text": "Benedict’s (reagent)",
+              "text": "Benedict\u2019s (reagent)",
               "start": 10,
               "end": 30
             },
@@ -995,7 +995,7 @@
         {
           "id": "commentary_3_1-guidance-1",
           "type": "commentary_guidance",
-          "text": "To achieve a mark in Level 3, students must give details of both reagents and both positive results, as well as at least one risk with its linked control measure. In addition, students must include good scientific terminology – as such, we would expect Level 3 students to be clear in their wording, e.g. iodine solution (which could be inferred by using ‘drops’) in the starch test, and in the Benedict’s test they should convey a clear understanding of the need to heat the mixture appropriately. ",
+          "text": "To achieve a mark in Level 3, students must give details of both reagents and both positive results, as well as at least one risk with its linked control measure. In addition, students must include good scientific terminology \u2013 as such, we would expect Level 3 students to be clear in their wording, e.g. iodine solution (which could be inferred by using \u2018drops\u2019) in the starch test, and in the Benedict\u2019s test they should convey a clear understanding of the need to heat the mixture appropriately. ",
           "order": 1,
           "parent_id": null,
           "annotations": [
@@ -1049,7 +1049,7 @@
             },
             {
               "type": "domain_term",
-              "text": "Benedict’s test",
+              "text": "Benedict\u2019s test",
               "start": 395,
               "end": 410
             },
@@ -1163,7 +1163,7 @@
         {
           "id": "commentary_3_1-guidance-4",
           "type": "commentary_guidance",
-          "text": "When considering detail from the ‘Risk Assessment’ part of the indicative content, at Level 3, please note we are looking for an understanding of the risk, as well as giving a specific measure to control the risk. For Level 3 we need to see both a black bullet point (bp) and a related white bp for the risk assessment, whereas at Level 2 a black bp alone is sufficient. Note that a white bp alone (control measure) is not creditworthy at any level. ",
+          "text": "When considering detail from the \u2018Risk Assessment\u2019 part of the indicative content, at Level 3, please note we are looking for an understanding of the risk, as well as giving a specific measure to control the risk. For Level 3 we need to see both a black bullet point (bp) and a related white bp for the risk assessment, whereas at Level 2 a black bp alone is sufficient. Note that a white bp alone (control measure) is not creditworthy at any level. ",
           "order": 4,
           "parent_id": null,
           "annotations": [
@@ -1241,7 +1241,7 @@
         {
           "id": "commentary_3_1-example-1",
           "type": "commentary_example",
-          "text": " • ‘Iodine solution is an irritant if it gets on the skin, so we should wear gloves.’ ",
+          "text": " \u2022 \u2018Iodine solution is an irritant if it gets on the skin, so we should wear gloves.\u2019 ",
           "order": 6,
           "parent_id": null,
           "annotations": [
@@ -1283,13 +1283,13 @@
         {
           "id": "commentary_3_1-example-2",
           "type": "commentary_example",
-          "text": " • ‘Benedict’s solution is harmful, and we need to be careful when using it so as not to spill on ourselves and wash it off if we do.’ ",
+          "text": " \u2022 \u2018Benedict\u2019s solution is harmful, and we need to be careful when using it so as not to spill on ourselves and wash it off if we do.\u2019 ",
           "order": 7,
           "parent_id": null,
           "annotations": [
             {
               "type": "domain_term",
-              "text": "Benedict’s solution",
+              "text": "Benedict\u2019s solution",
               "start": 4,
               "end": 23
             },
@@ -1325,13 +1325,13 @@
         {
           "id": "commentary_3_1-example-3",
           "type": "commentary_example",
-          "text": " • ‘Benedict’s solution needs to be heated, so we should wear goggles.’ ",
+          "text": " \u2022 \u2018Benedict\u2019s solution needs to be heated, so we should wear goggles.\u2019 ",
           "order": 8,
           "parent_id": null,
           "annotations": [
             {
               "type": "domain_term",
-              "text": "Benedict’s solution",
+              "text": "Benedict\u2019s solution",
               "start": 4,
               "end": 23
             },
@@ -1361,13 +1361,13 @@
         {
           "id": "commentary_3_1-example-4",
           "type": "commentary_example",
-          "text": " • ‘Benedict’s solution needs to be heated so we should be careful when using it so it doesn’t spill on us. Hot test tubes should be cooled down before clearing it away’ ",
+          "text": " \u2022 \u2018Benedict\u2019s solution needs to be heated so we should be careful when using it so it doesn\u2019t spill on us. Hot test tubes should be cooled down before clearing it away\u2019 ",
           "order": 9,
           "parent_id": null,
           "annotations": [
             {
               "type": "domain_term",
-              "text": "Benedict’s solution",
+              "text": "Benedict\u2019s solution",
               "start": 4,
               "end": 23
             },
@@ -1409,7 +1409,7 @@
         {
           "id": "commentary_3_1-example-5",
           "type": "commentary_example",
-          "text": " • ‘You should wear lab gloves on wash hands immediately if you spill it on them’ ",
+          "text": " \u2022 \u2018You should wear lab gloves on wash hands immediately if you spill it on them\u2019 ",
           "order": 10,
           "parent_id": null,
           "annotations": [
@@ -1445,7 +1445,7 @@
         {
           "id": "commentary_3_1-guidance-5",
           "type": "commentary_guidance",
-          "text": "Other answers are creditworthy if they meet general laboratory rules not specifically linked to using these reagents, and similarly vague ideas such as ‘breaking glassware’ or ‘causing stains’ are also insufficient. Remember that students may give creditworthy control measures that are not detailed on the indicative content (such as the use of ‘heat protective gloves’). ",
+          "text": "Other answers are creditworthy if they meet general laboratory rules not specifically linked to using these reagents, and similarly vague ideas such as \u2018breaking glassware\u2019 or \u2018causing stains\u2019 are also insufficient. Remember that students may give creditworthy control measures that are not detailed on the indicative content (such as the use of \u2018heat protective gloves\u2019). ",
           "order": 11,
           "parent_id": null,
           "annotations": [

@@ -12,7 +12,17 @@
       "assessment_order": ["C-JUN25-8464C1H-02_3"]
     },
     "biology": {
-      "assessment_order": ["B-JUN24-84612H-05_6"],
+      "assessment_order": [
+        "B-JUN24-84612H-05_6",
+        "B-JUN23-84611H-03_2",
+        "B-JUN23-84612H-04_1",
+        "B-JUN24-84611F-4_1",
+        "B-JUN24-84611H-3_1",
+        "B-JUN24-84612H-09_1",
+        "B_JUN24-84612F-7_5",
+        "B-JUN25-84641H-6_2",
+        "B-JUN25-84611H-03_1"
+      ],
       "practice": {
         "assessment_id": "B-JUN24-84612H-05_6",
         "vea": {

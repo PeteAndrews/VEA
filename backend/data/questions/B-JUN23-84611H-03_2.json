@@ -3,7 +3,7 @@
   "assessment_id": "B-JUN23-84611H-03_2",
   "question_id": "03_2",
   "metadata": {
-    "subject": null,
+    "subject": "biology",
     "qualification": null,
     "paper": null,
     "maximum_mark": 4,
@@ -169,7 +169,7 @@
         {
           "id": "q_03_2-subquestion-1",
           "type": "subquestion",
-          "text": "• the immune systems of animals respond to a vaccination",
+          "text": "\u2022 the immune systems of animals respond to a vaccination",
           "order": 6,
           "parent_id": "q_03_2-instruction",
           "annotations": [
@@ -205,7 +205,7 @@
         {
           "id": "q_03_2-subquestion-2",
           "type": "subquestion",
-          "text": "• the immune response in farm animals prevents an outbreak of food poisoning in \nhumans.",
+          "text": "\u2022 the immune response in farm animals prevents an outbreak of food poisoning in \nhumans.",
           "order": 7,
           "parent_id": "q_03_2-instruction",
           "annotations": [
@@ -429,7 +429,7 @@
         {
           "id": "ms_03_2-vaccination-point-1",
           "type": "indicative_point",
-          "text": "• (animal’s) white blood cells / lymphocytes produce antibodies \n(against Salmonella / vaccine / antigens)",
+          "text": "\u2022 (animal\u2019s) white blood cells / lymphocytes produce antibodies \n(against Salmonella / vaccine / antigens)",
           "order": 7,
           "parent_id": "ms_03_2-group-vaccination",
           "annotations": [
@@ -483,7 +483,7 @@
         {
           "id": "ms_03_2-vaccination-point-2",
           "type": "indicative_point",
-          "text": "• antibodies are specific / complementary / correct to Salmonella \n/ antigens",
+          "text": "\u2022 antibodies are specific / complementary / correct to Salmonella \n/ antigens",
           "order": 8,
           "parent_id": "ms_03_2-group-vaccination",
           "annotations": [
@@ -531,7 +531,7 @@
         {
           "id": "ms_03_2-vaccination-point-3",
           "type": "indicative_point",
-          "text": "• (specific) antibodies bind to Salmonella / antigens",
+          "text": "\u2022 (specific) antibodies bind to Salmonella / antigens",
           "order": 9,
           "parent_id": "ms_03_2-group-vaccination",
           "annotations": [
@@ -609,7 +609,7 @@
         {
           "id": "ms_03_2-secondary-point-1",
           "type": "indicative_point",
-          "text": "• if infected (specific) antibodies are produced quickly or in large \nnumbers",
+          "text": "\u2022 if infected (specific) antibodies are produced quickly or in large \nnumbers",
           "order": 11,
           "parent_id": "ms_03_2-group-secondary-response",
           "annotations": [
@@ -657,7 +657,7 @@
         {
           "id": "ms_03_2-secondary-point-2",
           "type": "indicative_point",
-          "text": "• (so) white blood cells or antibodies would kill (live) Salmonella  ",
+          "text": "\u2022 (so) white blood cells or antibodies would kill (live) Salmonella  ",
           "order": 12,
           "parent_id": "ms_03_2-group-secondary-response",
           "annotations": [
@@ -705,7 +705,7 @@
         {
           "id": "ms_03_2-secondary-point-3",
           "type": "indicative_point",
-          "text": "• (so) fewer / no bacteria / pathogens / Salmonella in animals or \nin animal products (meat / milk / eggs)",
+          "text": "\u2022 (so) fewer / no bacteria / pathogens / Salmonella in animals or \nin animal products (meat / milk / eggs)",
           "order": 13,
           "parent_id": "ms_03_2-group-secondary-response",
           "annotations": [
@@ -813,7 +813,7 @@
         {
           "id": "ms_03_2-prevention-point-1",
           "type": "indicative_point",
-          "text": "• (so) fewer / no bacteria / pathogens / Salmonella eaten or in \n(named) food",
+          "text": "\u2022 (so) fewer / no bacteria / pathogens / Salmonella eaten or in \n(named) food",
           "order": 15,
           "parent_id": "ms_03_2-group-prevention",
           "annotations": [
@@ -867,7 +867,7 @@
         {
           "id": "ms_03_2-prevention-point-2",
           "type": "indicative_point",
-          "text": "• (so) number of bacteria never reaches a high enough level for \ninfection to develop",
+          "text": "\u2022 (so) number of bacteria never reaches a high enough level for \ninfection to develop",
           "order": 16,
           "parent_id": "ms_03_2-group-prevention",
           "annotations": [
@@ -915,7 +915,7 @@
         {
           "id": "ms_03_2-prevention-point-3",
           "type": "indicative_point",
-          "text": "• (so) fewer toxins produced (in humans).",
+          "text": "\u2022 (so) fewer toxins produced (in humans).",
           "order": 17,
           "parent_id": "ms_03_2-group-prevention",
           "annotations": [
@@ -1023,7 +1023,7 @@
         {
           "id": "commentary_03_2-introduction-1",
           "type": "commentary_text",
-          "text": "This is an ‘Extended Response’ style of question.",
+          "text": "This is an \u2018Extended Response\u2019 style of question.",
           "order": 2,
           "parent_id": null,
           "annotations": [],
@@ -1285,7 +1285,7 @@
         {
           "id": "commentary_03_2-guidance-5",
           "type": "commentary_guidance",
-          "text": "For Level 2 the idea of ‘new’ antibodies are made in the animal not that they simply hanging around from the primary response, is required.",
+          "text": "For Level 2 the idea of \u2018new\u2019 antibodies are made in the animal not that they simply hanging around from the primary response, is required.",
           "order": 11,
           "parent_id": null,
           "annotations": [
@@ -1381,7 +1381,7 @@
         {
           "id": "commentary_03_2-guidance-7",
           "type": "commentary_guidance",
-          "text": "At this level we would expect students to refer to white blood cells, rather than ‘WBC’.",
+          "text": "At this level we would expect students to refer to white blood cells, rather than \u2018WBC\u2019.",
           "order": 13,
           "parent_id": null,
           "annotations": [
@@ -1441,7 +1441,7 @@
         {
           "id": "commentary_03_2-guidance-9",
           "type": "commentary_guidance",
-          "text": "If there is no full term in any part of the response, then ‘WBC’ is acceptable on second and subsequent occasions.",
+          "text": "If there is no full term in any part of the response, then \u2018WBC\u2019 is acceptable on second and subsequent occasions.",
           "order": 15,
           "parent_id": null,
           "annotations": [
@@ -1477,7 +1477,7 @@
         {
           "id": "commentary_03_2-guidance-10",
           "type": "commentary_guidance",
-          "text": "Of course, students might alternatively refer to ‘lymphocytes’.",
+          "text": "Of course, students might alternatively refer to \u2018lymphocytes\u2019.",
           "order": 16,
           "parent_id": null,
           "annotations": [
@@ -1501,7 +1501,7 @@
         {
           "id": "commentary_03_2-guidance-11",
           "type": "commentary_guidance",
-          "text": "If the term ‘virus’ is used throughout, instead of bacteria, then the answer can only achieve Level 1.",
+          "text": "If the term \u2018virus\u2019 is used throughout, instead of bacteria, then the answer can only achieve Level 1.",
           "order": 17,
           "parent_id": null,
           "annotations": [

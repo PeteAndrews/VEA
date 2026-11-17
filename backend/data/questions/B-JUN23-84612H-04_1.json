@@ -3,7 +3,7 @@
   "assessment_id": "B-JUN23-84612H-04_1",
   "question_id": "04_1",
   "metadata": {
-    "subject": null,
+    "subject": "biology",
     "qualification": null,
     "paper": null,
     "maximum_mark": 6,
@@ -325,7 +325,7 @@
         {
           "id": "ms_04_1-level-2",
           "type": "level_descriptor",
-          "text": "Level 2: Scientifically relevant facts, events or processes are \nidentified and given in detail to form an accurate account. 4‒6",
+          "text": "Level 2: Scientifically relevant facts, events or processes are \nidentified and given in detail to form an accurate account. 4\u20126",
           "order": 1,
           "parent_id": null,
           "annotations": [
@@ -364,7 +364,7 @@
         {
           "id": "ms_04_1-level-1",
           "type": "level_descriptor",
-          "text": "Level 1: Facts, events or processes are identified and simply \nstated but their relevance is not clear. 1‒3",
+          "text": "Level 1: Facts, events or processes are identified and simply \nstated but their relevance is not clear. 1\u20123",
           "order": 2,
           "parent_id": null,
           "annotations": [
@@ -441,7 +441,7 @@
         {
           "id": "ms_04_1-indicative-point-1",
           "type": "indicative_point",
-          "text": "• microorganisms / bacteria / fungi (cause decay)",
+          "text": "\u2022 microorganisms / bacteria / fungi (cause decay)",
           "order": 5,
           "parent_id": "ms_04_1-indicative-content",
           "annotations": [
@@ -483,7 +483,7 @@
         {
           "id": "ms_04_1-indicative-point-2",
           "type": "indicative_point",
-          "text": "• (named) enzyme used in decay / digestion",
+          "text": "\u2022 (named) enzyme used in decay / digestion",
           "order": 6,
           "parent_id": "ms_04_1-indicative-content",
           "annotations": [
@@ -519,7 +519,7 @@
         {
           "id": "ms_04_1-indicative-point-3",
           "type": "indicative_point",
-          "text": "• digestion or large molecules to small molecules",
+          "text": "\u2022 digestion or large molecules to small molecules",
           "order": 7,
           "parent_id": "ms_04_1-indicative-content",
           "annotations": [
@@ -555,7 +555,7 @@
         {
           "id": "ms_04_1-indicative-point-4",
           "type": "indicative_point",
-          "text": "• respiration by microorganisms",
+          "text": "\u2022 respiration by microorganisms",
           "order": 8,
           "parent_id": "ms_04_1-indicative-content",
           "annotations": [
@@ -585,7 +585,7 @@
         {
           "id": "ms_04_1-indicative-point-5",
           "type": "indicative_point",
-          "text": "• production / release of carbon dioxide",
+          "text": "\u2022 production / release of carbon dioxide",
           "order": 9,
           "parent_id": "ms_04_1-indicative-content",
           "annotations": [
@@ -621,7 +621,7 @@
         {
           "id": "ms_04_1-indicative-point-6",
           "type": "indicative_point",
-          "text": "• carbon dioxide is released into the air",
+          "text": "\u2022 carbon dioxide is released into the air",
           "order": 10,
           "parent_id": "ms_04_1-indicative-content",
           "annotations": [
@@ -651,7 +651,7 @@
         {
           "id": "ms_04_1-indicative-point-7",
           "type": "indicative_point",
-          "text": "• carbon dioxide taken in by stomata / leaves",
+          "text": "\u2022 carbon dioxide taken in by stomata / leaves",
           "order": 11,
           "parent_id": "ms_04_1-indicative-content",
           "annotations": [
@@ -687,7 +687,7 @@
         {
           "id": "ms_04_1-indicative-point-8",
           "type": "indicative_point",
-          "text": "• carbon dioxide used in photosynthesis",
+          "text": "\u2022 carbon dioxide used in photosynthesis",
           "order": 12,
           "parent_id": "ms_04_1-indicative-content",
           "annotations": [
@@ -717,7 +717,7 @@
         {
           "id": "ms_04_1-indicative-point-9",
           "type": "indicative_point",
-          "text": "• making glucose / sugar / starch / cellulose / other named \nexample",
+          "text": "\u2022 making glucose / sugar / starch / cellulose / other named \nexample",
           "order": 13,
           "parent_id": "ms_04_1-indicative-content",
           "annotations": [
@@ -759,7 +759,7 @@
         {
           "id": "ms_04_1-indicative-point-10",
           "type": "indicative_point",
-          "text": "• release of nitrate (ions) into the soil",
+          "text": "\u2022 release of nitrate (ions) into the soil",
           "order": 14,
           "parent_id": "ms_04_1-indicative-content",
           "annotations": [
@@ -795,7 +795,7 @@
         {
           "id": "ms_04_1-indicative-point-11",
           "type": "indicative_point",
-          "text": "• nitrate (ions) taken in (by roots)",
+          "text": "\u2022 nitrate (ions) taken in (by roots)",
           "order": 15,
           "parent_id": "ms_04_1-indicative-content",
           "annotations": [
@@ -825,7 +825,7 @@
         {
           "id": "ms_04_1-indicative-point-12",
           "type": "indicative_point",
-          "text": "• nitrate (ions) taken in by active transport",
+          "text": "\u2022 nitrate (ions) taken in by active transport",
           "order": 16,
           "parent_id": "ms_04_1-indicative-content",
           "annotations": [
@@ -855,7 +855,7 @@
         {
           "id": "ms_04_1-indicative-point-13",
           "type": "indicative_point",
-          "text": "• nitrate (ions) for making amino acids / proteins / DNA / other \nnamed example",
+          "text": "\u2022 nitrate (ions) for making amino acids / proteins / DNA / other \nnamed example",
           "order": 17,
           "parent_id": "ms_04_1-indicative-content",
           "annotations": [
@@ -952,7 +952,7 @@
         {
           "id": "commentary_04_1-text-1",
           "type": "commentary_text",
-          "text": "This is an ‘Extended Response’ style of question. Such questions are marked holistically. You will see that there are overall generic descriptions for the two levels of response at the top of the scheme, giving a hierarchy of response. Within each Level of Response there are three marks.",
+          "text": "This is an \u2018Extended Response\u2019 style of question. Such questions are marked holistically. You will see that there are overall generic descriptions for the two levels of response at the top of the scheme, giving a hierarchy of response. Within each Level of Response there are three marks.",
           "order": 1,
           "parent_id": null,
           "annotations": [

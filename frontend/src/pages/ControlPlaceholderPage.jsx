@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -6,16 +6,22 @@ import AppShell from "../components/AppShell";
 import BaselineMarkingLayout from "../components/BaselineMarkingLayout";
 import FinalMarkPanel from "../components/FinalMarkPanel";
 import { setTrialMarkingSession } from "../authSlice";
-import { loadTrial } from "../studySlice";
+import { clearSubmitResult, loadTrial } from "../studySlice";
 
 export default function ControlPlaceholderPage() {
   const { trialId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { currentTrial, submitResult } = useSelector((state) => state.study);
+  const [loadError, setLoadError] = useState("");
 
   useEffect(() => {
-    dispatch(loadTrial({ trialId }));
+    setLoadError("");
+    dispatch(loadTrial({ trialId })).then((result) => {
+      if (result.meta.requestStatus === "rejected") {
+        setLoadError(result.error?.message || "Could not open this response");
+      }
+    });
   }, [dispatch, trialId]);
 
   useEffect(() => {
@@ -28,16 +34,19 @@ export default function ControlPlaceholderPage() {
     if (!submitResult) return;
     if (submitResult.destination === "next_trial" && submitResult.next_trial) {
       navigate(submitResult.next_trial.route, { replace: true });
+      dispatch(clearSubmitResult());
       return;
     }
     if (submitResult.destination === "questionnaire" && submitResult.route) {
       navigate(submitResult.route, { replace: true });
+      dispatch(clearSubmitResult());
       return;
     }
     if (submitResult.destination === "question_selection") {
       navigate("/questions", { replace: true });
+      dispatch(clearSubmitResult());
     }
-  }, [submitResult, navigate]);
+  }, [submitResult, navigate, dispatch]);
 
   if (!currentTrial || currentTrial.trial_id !== trialId) {
     return (
@@ -51,8 +60,10 @@ export default function ControlPlaceholderPage() {
 
   return (
     <AppShell breadcrumb="Study > Baseline marking">
-      {!materials ? (
-        <p className="error">Baseline marking materials are not available for this question.</p>
+      {loadError ? (
+        <p className="error">{loadError}</p>
+      ) : !materials ? (
+        <p>Loading marking materials...</p>
       ) : (
         <BaselineMarkingLayout
           materials={materials}

@@ -413,7 +413,11 @@ class EvidencePipeline:
         start_char: int | None = None,
         end_char: int | None = None,
     ) -> EvidenceRef:
-        record = load_response(response_id, responses_dir=self.responses_dir)
+        record = load_response(
+            response_id,
+            responses_dir=self.responses_dir,
+            assessment_id=self.assessment_id,
+        )
 
         if segment_id is not None:
             for segment in record["segments"]:
@@ -486,7 +490,11 @@ class EvidencePipeline:
         context["evidence_id"] = evidence.evidence_id
         context["start_char"] = evidence.start_char
         context["end_char"] = evidence.end_char
-        record = load_response(evidence.response_id, responses_dir=self.responses_dir)
+        record = load_response(
+            evidence.response_id,
+            responses_dir=self.responses_dir,
+            assessment_id=self.assessment_id,
+        )
         context["response_context"] = build_response_local_context(record, evidence)
 
         decision = self.classifier.classify(

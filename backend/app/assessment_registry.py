@@ -67,14 +67,15 @@ class AssessmentRegistry:
         *,
         assessment_path: Path,
         relationships_path: Path,
-        jev_path: Path,
+        jev_path: Path | None = None,
         errata_path: Path | None = None,
     ) -> dict[str, str]:
         hashes = {
             "assessment": _sha256_file(assessment_path),
             "relationships": _sha256_file(relationships_path),
-            "jev_verification": _sha256_file(jev_path),
         }
+        if jev_path is not None and jev_path.is_file():
+            hashes["jev_verification"] = _sha256_file(jev_path)
         if errata_path is not None and errata_path.is_file():
             hashes["errata"] = _sha256_file(errata_path)
         return hashes

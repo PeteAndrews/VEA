@@ -154,11 +154,23 @@ const studySlice = createSlice({
       })
       .addCase(submitFinalMark.fulfilled, (state, action) => {
         state.submitResult = action.payload;
+        state.status = "succeeded";
+        state.error = null;
+        if (action.payload.progress) {
+          state.progress = action.payload.progress;
+        }
         if (action.payload.next_trial) {
           state.currentTrial = action.payload.next_trial;
         } else {
           state.currentTrial = null;
         }
+      })
+      .addCase(submitFinalMark.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(submitFinalMark.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });

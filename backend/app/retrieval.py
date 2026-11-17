@@ -61,6 +61,7 @@ class RetrievalService:
         graph_service: GraphService,
         data_dir: str | Path = "data",
         model: SentenceTransformer | None = None,
+        artifact_version: str | None = None,
     ) -> None:
         self.graph_service = graph_service
         self.graph = graph_service.graph
@@ -70,7 +71,7 @@ class RetrievalService:
         self.model = model
         self._retrieval_node_ids: list[str] = []
         self._retrieval_embeddings: torch.Tensor | None = None
-        self._artifact_version: str | None = None
+        self._artifact_version: str | None = artifact_version
         self._ensure_assessment_embeddings()
 
     @classmethod
@@ -83,13 +84,23 @@ class RetrievalService:
         *,
         artifact_version: str | None = None,
     ) -> RetrievalService:
-        from app.assessment_runtime import get_graph_service, get_version_record, use_registry
+        from app.assessment_runtime import (
+            RegisteredGraphService,
+            artifact_version_for_responses,
+            get_version_record,
+            load_registered_graph,
+        )
         from app.graph import load_graph
 
-        if use_registry(data_dir, assessment_id):
-            version = get_version_record(data_dir, assessment_id, artifact_version)
-            graph_service = get_graph_service(str(data_dir), assessment_id, version["artifact_version"])
-            graph = graph_service.graph
+        resolved_version = artifact_version or artifact_version_for_responses(data_dir, assessment_id)
+        if resolved_version:
+            version = get_version_record(data_dir, assessment_id, resolved_version)
+            graph = load_registered_graph(str(data_dir), assessment_id, version["artifact_version"])
+            graph_service = RegisteredGraphService(
+                graph,
+                artifact_version=version["artifact_version"],
+                version_record=version,
+            )
             artifact_version = version["artifact_version"]
         else:
             graph = load_graph(data_dir=data_dir, assessment_id=assessment_id)
@@ -104,9 +115,12 @@ class RetrievalService:
                 artifact_version=artifact_version,
             )
             attach_response_to_graph(graph, response)
-        service = cls(graph_service, data_dir=data_dir, model=model)
-        service._artifact_version = artifact_version
-        return service
+        return cls(
+            graph_service,
+            data_dir=data_dir,
+            model=model,
+            artifact_version=artifact_version,
+        )
 
     def ingest_response(self, txt_path: str | Path, assessment_id: str | None = None) -> dict:
         from app.responses import ingest_response_file
@@ -152,7 +166,7 @@ class RetrievalService:
     ) -> dict:
         """Semantic search across all segments in a candidate response."""
         from app.assessment_paths import resolve_response_paths
-        from app.assessment_runtime import load_registered_response_embeddings, use_registry
+        from app.assessment_runtime import load_registered_response_embeddings
 
         response = load_response(
             response_id,
@@ -160,7 +174,7 @@ class RetrievalService:
             assessment_id=self.graph.assessment_id,
             artifact_version=self._artifact_version,
         )
-        if use_registry(self.data_dir, self.graph.assessment_id) and self._artifact_version:
+        if self._artifact_version:
             payload = load_registered_response_embeddings(
                 self.data_dir, self.graph.assessment_id, self._artifact_version, response_id
             )
@@ -303,9 +317,7 @@ class RetrievalService:
 
     def _ensure_assessment_embeddings(self) -> None:
         from app.assessment_paths import artifact_embeddings_meta_path, artifact_embeddings_path
-        from app.assessment_runtime import use_registry
-
-        if use_registry(self.data_dir, self.graph.assessment_id) and self._artifact_version:
+        if self._artifact_version:
             meta_path = artifact_embeddings_meta_path(
                 self.data_dir, self.graph.assessment_id, self._artifact_version
             )
@@ -413,10 +425,10 @@ class RetrievalService:
 
     def _load_response_segment_embedding(self, response_id: str, segment_id: str) -> torch.Tensor:
         from app.assessment_paths import resolve_response_paths
-        from app.assessment_runtime import load_registered_response_embeddings, use_registry
+        from app.assessment_runtime import load_registered_response_embeddings
 
         assessment_id = self.graph.assessment_id
-        if use_registry(self.data_dir, assessment_id) and self._artifact_version:
+        if self._artifact_version:
             payload = load_registered_response_embeddings(
                 self.data_dir, assessment_id, self._artifact_version, response_id
             )

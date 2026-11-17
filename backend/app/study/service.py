@@ -274,8 +274,6 @@ class StudyService:
         }
         experience = self._experience_for_condition(question_condition, participant)
         if experience == "control_placeholder":
-            from app.views import candidate_detail_view
-
             try:
                 payload["baseline_materials"] = load_baseline_materials(
                     self.data_dir,
@@ -283,11 +281,7 @@ class StudyService:
                 )
             except FileNotFoundError as exc:
                 raise ValueError(str(exc)) from exc
-            payload["response"] = candidate_detail_view(
-                self.data_dir,
-                trial["assessment_id"],
-                trial["candidate_id"],
-            )
+            payload["response"] = self._baseline_response(trial)
         return payload
 
     def submit_final_mark(self, participant_id: str, trial_id: str, final_mark: int) -> dict[str, Any]:
@@ -491,6 +485,26 @@ class StudyService:
                 }
             )
         return {"study_id": study_id, "imported": len(results), "participants": results}
+
+    def _baseline_response(self, trial: dict[str, Any]) -> dict[str, Any]:
+        from app.views import candidate_detail_view, candidate_view
+
+        version = trial.get("artifact_version")
+        if version and version != "legacy":
+            from app.assessment_runtime import load_registered_response
+
+            record = load_registered_response(
+                self.data_dir,
+                trial["assessment_id"],
+                version,
+                trial["response_id"],
+            )
+            return candidate_view(record, trial["candidate_id"])
+        return candidate_detail_view(
+            self.data_dir,
+            trial["assessment_id"],
+            trial["candidate_id"],
+        )
 
     def _question_metadata(self, assessment_id: str, artifact_version: str) -> dict[str, Any]:
         if artifact_version == "legacy":

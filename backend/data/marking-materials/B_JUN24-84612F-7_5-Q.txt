@@ -1,0 +1,13 @@
+QS7.5 
+
+The gardener has four types of geranium plant: A, B, C and D. 
+ 
+Plant A produces larger, more brightly-coloured flowers than any of the other plants. 
+ 
+The gardener wants to grow more plants of type A. 
+ 
+ 
+Explain why the gardener chooses to take cuttings from plant A instead of growing 
+seeds from plant A.  
+
+[4 marks]

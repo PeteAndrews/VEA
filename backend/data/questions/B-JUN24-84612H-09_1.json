@@ -3,7 +3,7 @@
   "assessment_id": "B-JUN24-84612H-09_1",
   "question_id": "09_1",
   "metadata": {
-    "subject": null,
+    "subject": "biology",
     "qualification": null,
     "paper": null,
     "maximum_mark": 6,
@@ -139,7 +139,7 @@
         {
           "id": "q_09_1-context-bullet-1",
           "type": "question_text",
-          "text": "• growing GM soya bean plants",
+          "text": "\u2022 growing GM soya bean plants",
           "order": 5,
           "parent_id": "q_09_1-context-3",
           "annotations": [
@@ -163,7 +163,7 @@
         {
           "id": "q_09_1-context-bullet-2",
           "type": "question_text",
-          "text": "• spraying glyphosate on the field.",
+          "text": "\u2022 spraying glyphosate on the field.",
           "order": 6,
           "parent_id": "q_09_1-context-3",
           "annotations": [
@@ -299,7 +299,7 @@
         {
           "id": "ms_09_1-level-3",
           "type": "level_descriptor",
-          "text": "Level 3: Relevant points (reasons / causes) are identified, given in \ndetail and logically linked to form a clear account. 5–6",
+          "text": "Level 3: Relevant points (reasons / causes) are identified, given in \ndetail and logically linked to form a clear account. 5\u20136",
           "order": 2,
           "parent_id": null,
           "annotations": [],
@@ -319,7 +319,7 @@
         {
           "id": "ms_09_1-level-2",
           "type": "level_descriptor",
-          "text": "Level 2: Relevant points (reasons / causes) are identified, and there are attempts at logical linking.  The resulting account is not fully clear. 3–4",
+          "text": "Level 2: Relevant points (reasons / causes) are identified, and there are attempts at logical linking.  The resulting account is not fully clear. 3\u20134",
           "order": 3,
           "parent_id": null,
           "annotations": [
@@ -346,7 +346,7 @@
         {
           "id": "ms_09_1-level-1",
           "type": "level_descriptor",
-          "text": "Level 1: Points are identified and stated simply, but their relevance is not clear and there is no attempt at logical linking. 1–2",
+          "text": "Level 1: Points are identified and stated simply, but their relevance is not clear and there is no attempt at logical linking. 1\u20132",
           "order": 4,
           "parent_id": null,
           "annotations": [
@@ -420,7 +420,7 @@
         {
           "id": "ms_09_1-indicative-point-1",
           "type": "indicative_point",
-          "text": "• glyphosate kills weeds but does not harm GM soya",
+          "text": "\u2022 glyphosate kills weeds but does not harm GM soya",
           "order": 7,
           "parent_id": "ms_09_1-indicative-group-1",
           "annotations": [
@@ -456,7 +456,7 @@
         {
           "id": "ms_09_1-indicative-point-2",
           "type": "indicative_point",
-          "text": "• (so) less competition for light / water / ions / (named) minerals / \n(named) salts / space",
+          "text": "\u2022 (so) less competition for light / water / ions / (named) minerals / \n(named) salts / space",
           "order": 8,
           "parent_id": "ms_09_1-indicative-group-1",
           "annotations": [
@@ -522,7 +522,7 @@
         {
           "id": "ms_09_1-indicative-point-3",
           "type": "indicative_point",
-          "text": "• more light / water for photosynthesis",
+          "text": "\u2022 more light / water for photosynthesis",
           "order": 9,
           "parent_id": "ms_09_1-indicative-group-1",
           "annotations": [
@@ -594,7 +594,7 @@
         {
           "id": "ms_09_1-indicative-point-4",
           "type": "indicative_point",
-          "text": "• more glucose for",
+          "text": "\u2022 more glucose for",
           "order": 11,
           "parent_id": "ms_09_1-indicative-group-1",
           "annotations": [
@@ -804,7 +804,7 @@
         {
           "id": "ms_09_1-indicative-point-5",
           "type": "indicative_point",
-          "text": "• more water for",
+          "text": "\u2022 more water for",
           "order": 17,
           "parent_id": "ms_09_1-indicative-group-1",
           "annotations": [
@@ -954,7 +954,7 @@
         {
           "id": "ms_09_1-indicative-point-6",
           "type": "indicative_point",
-          "text": "• more magnesium",
+          "text": "\u2022 more magnesium",
           "order": 22,
           "parent_id": "ms_09_1-indicative-group-1",
           "annotations": [
@@ -1008,7 +1008,7 @@
         {
           "id": "ms_09_1-indicative-point-7",
           "type": "indicative_point",
-          "text": "• more nitrate",
+          "text": "\u2022 more nitrate",
           "order": 24,
           "parent_id": "ms_09_1-indicative-group-1",
           "annotations": [
@@ -1068,7 +1068,7 @@
         {
           "id": "ms_09_1-indicative-point-8",
           "type": "indicative_point",
-          "text": "• more phosphate",
+          "text": "\u2022 more phosphate",
           "order": 26,
           "parent_id": "ms_09_1-indicative-group-1",
           "annotations": [
@@ -1229,7 +1229,7 @@
         {
           "id": "commentary_09_1-guidance-3",
           "type": "commentary_guidance",
-          "text": "Most of the points in the mark scheme are structured in terms of linked ideas. These are \nrepresented by ‘black bullet points’ and ‘white bullet points’ So to get credit for linked ideas, \nas described in the Generic Level Descriptors at the top of the mark scheme, students must \ngive a black bullet point along with one of its associated white bullet points.",
+          "text": "Most of the points in the mark scheme are structured in terms of linked ideas. These are \nrepresented by \u2018black bullet points\u2019 and \u2018white bullet points\u2019 So to get credit for linked ideas, \nas described in the Generic Level Descriptors at the top of the mark scheme, students must \ngive a black bullet point along with one of its associated white bullet points.",
           "order": 4,
           "parent_id": null,
           "annotations": [
@@ -1259,7 +1259,7 @@
         {
           "id": "commentary_09_1-guidance-4",
           "type": "commentary_guidance",
-          "text": "Beware of bp2 in the indicative content. Credit should only be given if the student refers to \nreduced competition for some factor specified, not just ‘resources’ or ‘nutrients’ which are too \nvague.",
+          "text": "Beware of bp2 in the indicative content. Credit should only be given if the student refers to \nreduced competition for some factor specified, not just \u2018resources\u2019 or \u2018nutrients\u2019 which are too \nvague.",
           "order": 5,
           "parent_id": null,
           "annotations": [
@@ -1325,7 +1325,7 @@
         {
           "id": "commentary_09_1-guidance-5",
           "type": "commentary_guidance",
-          "text": "Furthermore, many students having referred to bp1, then state words such as ‘…so \nthe GM soya gets more light’ – this is also not sufficient for bp2 as it does not refer to \nreduced competition, well enough, at this level of demand.",
+          "text": "Furthermore, many students having referred to bp1, then state words such as \u2018\u2026so \nthe GM soya gets more light\u2019 \u2013 this is also not sufficient for bp2 as it does not refer to \nreduced competition, well enough, at this level of demand.",
           "order": 6,
           "parent_id": null,
           "annotations": [
@@ -1384,7 +1384,7 @@
         {
           "id": "commentary_09_1-example-1",
           "type": "commentary_example",
-          "text": "Thus, ‘more light for \nphotosynthesis so more glucose is produced’ would achieve this, as would ‘more \nmagnesium to make chlorophyll’.",
+          "text": "Thus, \u2018more light for \nphotosynthesis so more glucose is produced\u2019 would achieve this, as would \u2018more \nmagnesium to make chlorophyll\u2019.",
           "order": 8,
           "parent_id": null,
           "annotations": [
@@ -1578,7 +1578,7 @@
       {
         "document_id": "ms_09_1",
         "page": null,
-        "message": "The final level rule refers to “GM maize”, whereas the question and indicative content refer to GM soya; the source wording has been preserved."
+        "message": "The final level rule refers to \u201cGM maize\u201d, whereas the question and indicative content refer to GM soya; the source wording has been preserved."
       },
       {
         "document_id": "commentary_09_1",

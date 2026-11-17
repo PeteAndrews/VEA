@@ -1,0 +1,165 @@
+{
+  "recording": 15,
+  "kind": "level_check",
+  "endpoint": "POST /marking-sessions/ms-de49dc3d/assessments/B-JUN24-84612H-05_6/candidates/B/judgement/tentative-level/ai-check",
+  "recorded_at": "2026-11-05T13:37:08.659703+00:00",
+  "context": {
+    "marking_session_id": "ms-de49dc3d",
+    "assessment_id": "B-JUN24-84612H-05_6",
+    "candidate_id": "B",
+    "response_id": "B-JUN24-84612H-05_6_response-top-mark",
+    "coding_id": null,
+    "stage": "LEVEL_JUDGEMENT",
+    "tentative_level": {
+      "level": 2,
+      "level_node_id": "ms_05_6-level-2",
+      "source": "mark_scheme",
+      "examiner_id": "BIO-VEA-001",
+      "set_at": "2026-11-05T13:37:03.406199+00:00"
+    }
+  },
+  "request": {
+    "stage": "LEVEL_JUDGEMENT",
+    "last_action": "set_tentative_level"
+  },
+  "response": {
+    "id": "ai-2b9308dd",
+    "status": "pending",
+    "intervention": {
+      "type": "CHALLENGE",
+      "message": "Although the examiner tentatively selected Level 2, the response provides detailed, relevant points for both contraception and infertility hormones, including cause-effect explanations, which aligns better with Level 3 descriptors. Some minor clarity or linking could be stronger, hence PARTIALLY_ALIGNS rather than fully aligned with Level 3. Check descriptor fit before confirming Level 2.",
+      "nuance_items": []
+    },
+    "verdict": {
+      "alignment": "PARTIALLY_ALIGNS"
+    },
+    "summary": {
+      "level": 2,
+      "descriptor_text": "Relevant points (reasons / causes) are identified, and \nthere are attempts at logical linking.  The resulting account is not \nfully clear. Mark:3–4",
+      "ai_check_label": "Needs review",
+      "alignment": "PARTIALLY_ALIGNS",
+      "evidence_mapped": [
+        {
+          "criterion_id": "ms_05_6-contraception-fsh",
+          "label": "inhibition of FSH (production / release) - lack of FSH prevents follicle / egg development / maturation - therefore there is no egg to fertilise",
+          "spans": [
+            {
+              "coding_id": "rel-4dd45cfb",
+              "text": "These inhibit FSH, so eggs do not mature and there is no mature egg to be fertilised."
+            },
+            {
+              "coding_id": "rel-1c342bc7",
+              "text": "For infertility, FSH can be given to stimulate eggs to mature in the ovaries"
+            }
+          ]
+        },
+        {
+          "criterion_id": "ms_05_6-contraception-lh",
+          "label": "inhibition of LH (production / release) - lack of LH prevents ovulation - therefore there is no egg to fertilise",
+          "spans": [
+            {
+              "coding_id": "rel-24694dc8",
+              "text": "They also inhibit LH, preventing ovulation, so an egg is not released for fertilisation."
+            }
+          ]
+        },
+        {
+          "criterion_id": "ms_05_6-infertility-fsh-detail",
+          "label": "(FSH) stimulates maturation of (several) egg(s) / follicle(s) - (FSH) increases number of eggs matured",
+          "spans": [
+            {
+              "coding_id": "rel-b92f3005",
+              "text": "For infertility, FSH can be given to stimulate eggs to mature in the ovaries"
+            }
+          ]
+        },
+        {
+          "criterion_id": "ms_05_6-infertility-lh-detail",
+          "label": "(LH) stimulates ovulation - (LH) allows eggs / follicles to be collected (from ovary) \n - (so) increased chance of fertilising an egg - IVF and insertion of embryo(s) into uterus",
+          "spans": [
+            {
+              "coding_id": "rel-92e58536",
+              "text": " LH can then stimulate ovulation, increasing the chance of an egg being fertilised."
+            },
+            {
+              "coding_id": "rel-89146f58",
+              "text": "In IVF, eggs are collected and fertilised outside the body, and an embryo is placed into the uterus."
+            }
+          ]
+        },
+        {
+          "criterion_id": "ms_05_6-infertility-progesterone-detail",
+          "label": "(to) maintain uterus lining - increased chance of implantation",
+          "spans": [
+            {
+              "coding_id": "rel-866fbb1f",
+              "text": "Progesterone can be given to maintain the uterus lining, increasing the chance of the embryo implanting."
+            }
+          ]
+        }
+      ],
+      "needs_attention": [],
+      "key_guidance": "To enter Level 2 (3 marks), there are several ways the student can do this. They can have a full linked statement including hormone, role and consequence for EITHER contraception or infertility. Alternatively, they can partially link the hormone/role/consequence for BOTH contraception and fertility. This can be mixed and matched e.g. A hormone and role for contraception AND a hormone and consequence for fertility. Any additional content, beyond the minimum required for entry to the level, (but short of the level above it) will increase the mark to the higher mark in the level (2, 4 or 6). If students mention relevant hormones and then give their roles and/or consequences in the correct respective order, we can give this credit only if they write ‘respectively’.",
+      "mapped_evidence_detail": [
+        {
+          "criterion_id": "ms_05_6-contraception-fsh",
+          "label": "inhibition of FSH (production / release) - lack of FSH prevents follicle / egg development / maturation - therefore there is no egg to fertilise",
+          "spans": [
+            {
+              "coding_id": "rel-4dd45cfb",
+              "text": "These inhibit FSH, so eggs do not mature and there is no mature egg to be fertilised."
+            },
+            {
+              "coding_id": "rel-1c342bc7",
+              "text": "For infertility, FSH can be given to stimulate eggs to mature in the ovaries"
+            }
+          ]
+        },
+        {
+          "criterion_id": "ms_05_6-contraception-lh",
+          "label": "inhibition of LH (production / release) - lack of LH prevents ovulation - therefore there is no egg to fertilise",
+          "spans": [
+            {
+              "coding_id": "rel-24694dc8",
+              "text": "They also inhibit LH, preventing ovulation, so an egg is not released for fertilisation."
+            }
+          ]
+        },
+        {
+          "criterion_id": "ms_05_6-infertility-fsh-detail",
+          "label": "(FSH) stimulates maturation of (several) egg(s) / follicle(s) - (FSH) increases number of eggs matured",
+          "spans": [
+            {
+              "coding_id": "rel-b92f3005",
+              "text": "For infertility, FSH can be given to stimulate eggs to mature in the ovaries"
+            }
+          ]
+        },
+        {
+          "criterion_id": "ms_05_6-infertility-lh-detail",
+          "label": "(LH) stimulates ovulation - (LH) allows eggs / follicles to be collected (from ovary) \n - (so) increased chance of fertilising an egg - IVF and insertion of embryo(s) into uterus",
+          "spans": [
+            {
+              "coding_id": "rel-92e58536",
+              "text": " LH can then stimulate ovulation, increasing the chance of an egg being fertilised."
+            },
+            {
+              "coding_id": "rel-89146f58",
+              "text": "In IVF, eggs are collected and fertilised outside the body, and an embryo is placed into the uterus."
+            }
+          ]
+        },
+        {
+          "criterion_id": "ms_05_6-infertility-progesterone-detail",
+          "label": "(to) maintain uterus lining - increased chance of implantation",
+          "spans": [
+            {
+              "coding_id": "rel-866fbb1f",
+              "text": "Progesterone can be given to maintain the uterus lining, increasing the chance of the embryo implanting."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

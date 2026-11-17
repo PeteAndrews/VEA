@@ -59,6 +59,18 @@ def source_jev_verification_path(data_dir: str | Path, assessment_id: str) -> Pa
     return legacy_questions_dir(data_dir) / f"{assessment_id}-jev-verification.json"
 
 
+def load_jev_verification(data_dir: str | Path, assessment_id: str) -> dict:
+    """Stored edge verifications are optional. A missing file means none."""
+    path = source_jev_verification_path(data_dir, assessment_id)
+    if not path.is_file():
+        return {"verifications": []}
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        return {"verifications": []}
+    payload.setdefault("verifications", [])
+    return payload
+
+
 def source_errata_path(data_dir: str | Path, assessment_id: str) -> Path:
     packaged = assessment_source_dir(data_dir, assessment_id) / "errata.json"
     if packaged.is_file():

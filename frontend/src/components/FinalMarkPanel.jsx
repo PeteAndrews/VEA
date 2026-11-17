@@ -34,7 +34,16 @@ export default function FinalMarkPanel({ trialId, maximumMark, submitted, finalM
       }
       return;
     }
-    dispatch(submitFinalMark({ trialId, finalMark: Number(mark) }));
+    setSubmitting(true);
+    setSubmitError(null);
+    dispatch(submitFinalMark({ trialId, finalMark: Number(mark) }))
+      .unwrap()
+      .catch((err) => {
+        setSubmitError(err.message || "Could not submit mark");
+      })
+      .finally(() => {
+        setSubmitting(false);
+      });
   }
 
   return (

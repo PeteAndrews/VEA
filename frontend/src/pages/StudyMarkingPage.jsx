@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { setTrialMarkingSession } from "../authSlice";
-import { loadTrial } from "../studySlice";
+import { clearSubmitResult, loadTrial } from "../studySlice";
 import FinalMarkPanel from "../components/FinalMarkPanel";
 import MarkingPage from "./MarkingPage";
 
@@ -27,16 +27,19 @@ export default function StudyMarkingPage() {
     if (!submitResult) return;
     if (submitResult.destination === "next_trial" && submitResult.next_trial) {
       navigate(submitResult.next_trial.route, { replace: true });
+      dispatch(clearSubmitResult());
       return;
     }
     if (submitResult.destination === "questionnaire" && submitResult.route) {
       navigate(submitResult.route, { replace: true });
+      dispatch(clearSubmitResult());
       return;
     }
     if (submitResult.destination === "question_selection") {
       navigate("/questions", { replace: true });
+      dispatch(clearSubmitResult());
     }
-  }, [submitResult, navigate]);
+  }, [submitResult, navigate, dispatch]);
 
   if (!currentTrial || currentTrial.trial_id !== trialId) {
     return <p>Loading trial...</p>;

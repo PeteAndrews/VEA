@@ -67,6 +67,7 @@ from app.views import (
     candidate_view,
     candidate_aliases,
     resolve_response_id,
+    _artifact_version_for_assessment,
     _list_response_ids_for_assessment,
 )
 
@@ -212,6 +213,7 @@ def _load_judgement_context(
             response_id,
             responses_dir=RESPONSES_DIR,
             assessment_id=assessment_id,
+            artifact_version=_artifact_version_for_assessment(DATA_DIR, assessment_id),
         )
     except KeyError:
         raise HTTPException(status_code=404, detail=f"Response not found: {response_id}") from None
