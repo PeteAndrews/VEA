@@ -42,10 +42,16 @@ const studySlice = createSlice({
     participant: null,
     sessionId: null,
     questions: [],
+    conditions: [],
+    layout: "single",
+    conditionOrder: [],
     studyComplete: false,
+    progress: null,
     currentTrial: null,
     submitResult: null,
     walkthrough: null,
+    missingExperimentalConfig: false,
+    baselineWalkthrough: null,
     status: "idle",
     error: null,
   },
@@ -54,10 +60,16 @@ const studySlice = createSlice({
       state.participant = null;
       state.sessionId = null;
       state.questions = [];
+      state.conditions = [];
+      state.layout = "single";
+      state.conditionOrder = [];
       state.studyComplete = false;
+      state.progress = null;
       state.currentTrial = null;
       state.submitResult = null;
       state.walkthrough = null;
+      state.missingExperimentalConfig = false;
+      state.baselineWalkthrough = null;
       state.status = "idle";
       state.error = null;
     },
@@ -66,6 +78,25 @@ const studySlice = createSlice({
     },
     markWalkthroughComplete(state) {
       state.walkthrough = { ...(state.walkthrough || {}), completed: true };
+    },
+    applyStudyProgress(state, action) {
+      state.progress = action.payload || null;
+      if (action.payload && typeof action.payload.study_complete === "boolean") {
+        state.studyComplete = action.payload.study_complete;
+      }
+    },
+    markBaselineWalkthroughComplete(state) {
+      if (state.baselineWalkthrough) {
+        state.baselineWalkthrough = { ...state.baselineWalkthrough, completed: true };
+      }
+      state.conditions = state.conditions.map((block) =>
+        block.condition === "baseline" && block.baseline_walkthrough
+          ? {
+              ...block,
+              baseline_walkthrough: { ...block.baseline_walkthrough, completed: true },
+            }
+          : block
+      );
     },
   },
   extraReducers: (builder) => {
@@ -79,6 +110,7 @@ const studySlice = createSlice({
         state.sessionId = action.payload.session_id;
         state.participant = action.payload.participant;
         state.walkthrough = action.payload.walkthrough || null;
+        state.progress = action.payload.progress || null;
       })
       .addCase(openStudySession.rejected, (state, action) => {
         state.status = "failed";
@@ -88,6 +120,7 @@ const studySlice = createSlice({
         state.sessionId = action.payload.session_id;
         state.participant = action.payload.participant;
         state.walkthrough = action.payload.walkthrough || null;
+        state.progress = action.payload.progress || null;
         state.status = "succeeded";
       })
       .addCase(restoreStudySession.rejected, (state) => {
@@ -96,7 +129,16 @@ const studySlice = createSlice({
       })
       .addCase(loadStudyQuestions.fulfilled, (state, action) => {
         state.questions = action.payload.questions;
+        state.conditions = action.payload.conditions || [];
+        state.layout = action.payload.layout || "single";
+        state.conditionOrder = action.payload.condition_order || [];
         state.studyComplete = action.payload.study_complete;
+        state.progress = action.payload.progress || null;
+        state.missingExperimentalConfig = Boolean(action.payload.missing_experimental_config);
+        state.baselineWalkthrough = action.payload.baseline_walkthrough || null;
+        if (action.payload.walkthrough) {
+          state.walkthrough = action.payload.walkthrough;
+        }
         state.participant = {
           ...state.participant,
           subject: action.payload.subject,
@@ -121,5 +163,11 @@ const studySlice = createSlice({
   },
 });
 
-export const { resetStudy, clearSubmitResult, markWalkthroughComplete } = studySlice.actions;
+export const {
+  resetStudy,
+  clearSubmitResult,
+  applyStudyProgress,
+  markWalkthroughComplete,
+  markBaselineWalkthroughComplete,
+} = studySlice.actions;
 export default studySlice.reducer;

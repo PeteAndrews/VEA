@@ -95,3 +95,33 @@ def build_question_assignments(
             }
         )
     return questions
+
+
+def build_assignments_for_condition_lists(
+    data_dir: str | Path,
+    subject: str,
+    *,
+    condition_order: list[str],
+    questions_by_condition: dict[str, list[str]],
+) -> list[dict[str, Any]]:
+    assignments: list[dict[str, Any]] = []
+    order_index = 0
+    for condition in condition_order:
+        assessment_ids = list(questions_by_condition.get(condition) or [])
+        if not assessment_ids:
+            continue
+        built = build_question_assignments(
+            data_dir,
+            subject,
+            assessment_order=assessment_ids,
+        )
+        for item in built:
+            order_index += 1
+            assignments.append(
+                {
+                    **item,
+                    "condition": condition,
+                    "question_order": order_index,
+                }
+            )
+    return assignments

@@ -4,7 +4,8 @@
   "label": "VEA pilot study",
   "condition_profiles": {
     "vea": "vea_marking",
-    "control": "control_placeholder"
+    "control": "control_placeholder",
+    "baseline": "control_placeholder"
   },
   "subjects": {
     "chemistry": {
@@ -12,10 +13,14 @@
     },
     "biology": {
       "assessment_order": ["B-JUN24-84612H-05_6"],
-      "walkthrough": {
+      "practice": {
         "assessment_id": "B-JUN24-84612H-05_6",
-        "response_id": "B-JUN24-84612H-05_6_response-top-mark",
-        "candidate_id": "B"
+        "vea": {
+          "response_id": "B-JUN24-84612H-05_6_response-top-mark"
+        },
+        "baseline": {
+          "response_id": "B-JUN24-84612H-05_6_response-low-mark"
+        }
       }
     }
   }

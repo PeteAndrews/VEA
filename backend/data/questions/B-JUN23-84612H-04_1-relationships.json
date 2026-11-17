@@ -1,0 +1,71 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "B-JUN23-84612H-04_1",
+  "question_id": "04_1",
+  "relationships": [
+    {
+      "source_id": "ms_04_1-level-2-rule",
+      "target_id": "ms_04_1-level-2",
+      "relation": "CONSTRAINS",
+      "confidence": 0.98,
+      "rationale": "The rule limits Level 2 to responses covering breakdown and the use of both nitrogen and carbon compounds.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_04_1-guidance-1",
+      "target_id": "ms_04_1-level-2-rule",
+      "relation": "CLARIFIES",
+      "confidence": 0.97,
+      "rationale": "The guidance specifies the key breakdown and use ideas needed to satisfy the Level 2 rule.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_04_1-guidance-2",
+      "target_id": "ms_04_1-level-1",
+      "relation": "CONSTRAINS",
+      "confidence": 0.96,
+      "rationale": "The guidance sets the entry benchmark for Level 1 as one key idea plus another idea from the indicative-content blocks.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_04_1-guidance-4",
+      "target_id": "ms_04_1-indicative-content",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "Clarifies that the indicative content is not exhaustive and that other ideas of the same standard may also receive credit.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_04_1-text-1",
+      "target_id": "ms_04_1-level-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.91,
+      "rationale": "The commentary explains that the Level 2 descriptor is applied holistically and contains three available marks.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_04_1-text-1",
+      "target_id": "ms_04_1-level-1",
+      "relation": "CLARIFIES",
+      "confidence": 0.91,
+      "rationale": "The commentary explains that the Level 1 descriptor is applied holistically and contains three available marks.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_04_1-text-2",
+      "target_id": "ms_04_1-indicative-point-13",
+      "relation": "ACCEPTS",
+      "confidence": 0.99,
+      "rationale": "The commentary explicitly accepts chlorophyll production as another named example of nitrate-ion use.",
+      "provenance": "llm"
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-11-17T09:47:03.418503+00:00",
+    "requires_review": false,
+    "warnings": [
+      "The non-exhaustive-content guidance was not linked because no aggregate indicative-content segment is provided, and attaching it to individual points would overstate its specificity."
+    ]
+  }
+}

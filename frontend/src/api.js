@@ -229,3 +229,33 @@ export function completeWalkthrough(markingSessionId, finalMark) {
     final_mark: finalMark,
   });
 }
+
+export function startBaselineWalkthrough() {
+  return sendJson("POST", "/api/study/baseline-walkthrough/start");
+}
+
+export function fetchQuestionnaire(key, scope) {
+  return fetchJson(`/api/study/questionnaires/${encodeURIComponent(key)}/${encodeURIComponent(scope)}`);
+}
+
+export function saveQuestionnaireDraft(key, scope, answers, updatedAt) {
+  return sendJson("PUT", `/api/study/questionnaires/${encodeURIComponent(key)}/${encodeURIComponent(scope)}`, {
+    answers,
+    updated_at: updatedAt,
+  });
+}
+
+export function submitQuestionnaire(key, scope, answers, updatedAt) {
+  return sendJson(
+    "POST",
+    `/api/study/questionnaires/${encodeURIComponent(key)}/${encodeURIComponent(scope)}/submit`,
+    { answers, updated_at: updatedAt }
+  );
+}
+
+export function completeBaselineWalkthrough(markingSessionId, finalMark) {
+  return sendJson("POST", "/api/study/baseline-walkthrough/complete", {
+    marking_session_id: markingSessionId,
+    final_mark: finalMark,
+  });
+}

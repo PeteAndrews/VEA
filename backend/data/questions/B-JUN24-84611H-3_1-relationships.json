@@ -1,0 +1,135 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "B-JUN24-84611H-3_1",
+  "question_id": "3_1",
+  "relationships": [
+    {
+      "source_id": "ms_3_1-level-3-rule",
+      "target_id": "ms_3_1-level-3",
+      "relation": "CONSTRAINS",
+      "confidence": 0.98,
+      "rationale": "The rule specifies the mandatory content requirements for achieving Level 3.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_3_1-extra-1",
+      "target_id": "q_3_1-instruction-1",
+      "relation": "ACCEPTS",
+      "confidence": 0.99,
+      "rationale": "It explicitly allows the requested tests to be described using bread instead of cake.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_3_1-guidance-1",
+      "target_id": "ms_3_1-level-3-rule",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It specifies that both reagents, both positive results, and at least one linked risk-control pair are needed for Level 3.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_3_1-guidance-1",
+      "target_id": "ms_3_1-point-1",
+      "relation": "ACCEPTS",
+      "confidence": 0.93,
+      "rationale": "It explicitly allows iodine solution to be inferred from wording such as using ‘drops’.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_3_1-guidance-1",
+      "target_id": "ms_3_1-point-5",
+      "relation": "CLARIFIES",
+      "confidence": 0.94,
+      "rationale": "It emphasizes that candidates must communicate a clear understanding of appropriately heating the Benedict’s mixture.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_3_1-guidance-2",
+      "target_id": "ms_3_1-level-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It defines the content threshold for Level 2: one named test with its positive result plus another indicative point.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_3_1-guidance-3",
+      "target_id": "ms_3_1-level-1",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It states that one creditworthy indicative-content point is sufficient for the basic Level 1 threshold.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_3_1-guidance-4",
+      "target_id": "ms_3_1-level-3-rule",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains that a Level 3 risk assessment must pair an identified risk with a specific related control measure.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_3_1-guidance-4",
+      "target_id": "commentary_3_1-guidance-2",
+      "relation": "CONSTRAINS",
+      "confidence": 0.97,
+      "rationale": "It limits what counts as Level 2 risk content: a risk alone can count, but a control measure alone cannot.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_3_1-guidance-4",
+      "target_id": "commentary_3_1-guidance-3",
+      "relation": "CONSTRAINS",
+      "confidence": 0.96,
+      "rationale": "It restricts the apparent breadth of ‘any’ indicative point by excluding a control measure presented without a risk.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_3_1-example-1",
+      "target_id": "ms_3_1-point-10",
+      "relation": "EXEMPLIFIES",
+      "confidence": 0.99,
+      "rationale": "The example identifies iodine solution as an irritant, directly instantiating this risk point.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_3_1-example-1",
+      "target_id": "ms_3_1-detail-10b",
+      "relation": "EXEMPLIFIES",
+      "confidence": 0.99,
+      "rationale": "Wearing gloves is a direct example of the listed protective control measure.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_3_1-example-4",
+      "target_id": "ms_3_1-point-8",
+      "relation": "EXEMPLIFIES",
+      "confidence": 0.91,
+      "rationale": "The example recognizes the hazard associated with handling hot test tubes after heating.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_3_1-example-4",
+      "target_id": "ms_3_1-detail-8b",
+      "relation": "EXEMPLIFIES",
+      "confidence": 0.99,
+      "rationale": "Cooling hot test tubes before clearing them away directly exemplifies waiting for equipment to cool before touching it.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_3_1-guidance-5",
+      "target_id": "commentary_3_1-guidance-4",
+      "relation": "EXTENDS",
+      "confidence": 0.91,
+      "rationale": "It adds that suitable linked control measures may receive credit even when they are not listed in the indicative content.",
+      "provenance": "llm"
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-11-17T10:09:29.588510+00:00",
+    "requires_review": false,
+    "warnings": [
+      "The opening sentence of commentary_3_1-guidance-5 appears inconsistent with its following statement that vague, non-specific laboratory ideas are insufficient; no relationship was inferred from that ambiguous clause."
+    ]
+  }
+}

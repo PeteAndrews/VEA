@@ -9,6 +9,7 @@ from typing import Any
 EXPERIENCE_BY_CONDITION = {
     "vea": "vea_marking",
     "control": "control_placeholder",
+    "baseline": "control_placeholder",
 }
 
 

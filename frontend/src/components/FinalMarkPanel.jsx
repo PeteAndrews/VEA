@@ -38,7 +38,7 @@ export default function FinalMarkPanel({ trialId, maximumMark, submitted, finalM
   }
 
   return (
-    <form className="final-mark-panel" onSubmit={handleSubmit}>
+    <form className="final-mark-panel" data-baseline-tour="final-mark" onSubmit={handleSubmit}>
       <label htmlFor="final-mark">Final mark (0–{maximumMark})</label>
       <div className="final-mark-row">
         <input
@@ -49,7 +49,11 @@ export default function FinalMarkPanel({ trialId, maximumMark, submitted, finalM
           value={mark}
           onChange={(event) => setMark(event.target.value)}
         />
-        <button type="submit" disabled={status === "loading" || submitting || mark === ""}>
+        <button
+          type="submit"
+          data-baseline-tour="final-mark-submit"
+          disabled={status === "loading" || submitting || mark === ""}
+        >
           {status === "loading" || submitting ? "Submitting..." : "Submit mark"}
         </button>
       </div>

@@ -1,0 +1,197 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "B_JUN24-84612F-7_5",
+  "question_id": "7_5",
+  "relationships": [
+    {
+      "source_id": "ms_7_5-detail-wait",
+      "target_id": "ms_7_5-point-quicker",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "Explains that cuttings are quicker because there is less waiting for flowers, fruits, or seeds.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_7_5-detail-same-genes",
+      "target_id": "ms_7_5-point-identical-flowers",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "Explains genetic identity as the reason offspring have identical appearance or flower traits.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_7_5-detail-gametes",
+      "target_id": "ms_7_5-point-asexual",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "Specifies that asexual reproduction involves no fusion of gametes.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_7_5-detail-mixing-1",
+      "target_id": "ms_7_5-point-asexual",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "Explains that asexual reproduction avoids mixing genes from two parents.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_7_5-detail-identical-offspring",
+      "target_id": "ms_7_5-point-asexual",
+      "relation": "CLARIFIES",
+      "confidence": 0.97,
+      "rationale": "States the resulting identical offspring associated with asexual reproduction or cloning.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_7_5-detail-copies-material",
+      "target_id": "ms_7_5-point-mitosis",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "Explains that mitosis copies genetic material or chromosomes.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_7_5-detail-different-material",
+      "target_id": "ms_7_5-point-meiosis",
+      "relation": "CLARIFIES",
+      "confidence": 0.97,
+      "rationale": "Explains why avoiding meiosis helps avoid genetically different material or chromosomes.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_7_5-detail-pollination",
+      "target_id": "ms_7_5-point-variation",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "Identifies pollination or cross-pollination as a source of the variation being avoided.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_7_5-detail-mixing-2",
+      "target_id": "ms_7_5-point-variation",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "Explains that avoiding gene mixing from two parents prevents variation.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_7_5-detail-resources",
+      "target_id": "ms_7_5-point-profitability",
+      "relation": "CLARIFIES",
+      "confidence": 0.96,
+      "rationale": "Explains increased profitability in terms of fewer resources being required.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_7_5-detail-turnover",
+      "target_id": "ms_7_5-point-profitability",
+      "relation": "CLARIFIES",
+      "confidence": 0.97,
+      "rationale": "Explains increased profitability through quicker turnover.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_7_5-detail-quality",
+      "target_id": "ms_7_5-point-profitability",
+      "relation": "CLARIFIES",
+      "confidence": 0.96,
+      "rationale": "Explains increased profitability through consistent plant or flower quality.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_7_5-text-1",
+      "target_id": "ms_7_5-indicative-content",
+      "relation": "EXTENDS",
+      "confidence": 0.91,
+      "rationale": "Clarifies that the indicative content is non-exhaustive and that other valid responses may receive credit.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_7_5-guidance-level-1",
+      "target_id": "ms_7_5-level-1",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "Restates that Level 1 points are not logically linked.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_7_5-guidance-level-2",
+      "target_id": "ms_7_5-level-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "Clarifies that Level 2 requires points to be linked clearly and correctly.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_7_5-guidance-link-words",
+      "target_id": "ms_7_5-level-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.97,
+      "rationale": "Identifies words that can signal the logical links required by the Level 2 descriptor.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_7_5-guidance-valid-links",
+      "target_id": "ms_7_5-level-2",
+      "relation": "EXTENDS",
+      "confidence": 0.97,
+      "rationale": "Adds that valid Level 2 links need not follow adjacent solid and open bullets.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_7_5-guidance-meaning",
+      "target_id": "ms_7_5-taking-cuttings",
+      "relation": "APPLIES_TO",
+      "confidence": 0.91,
+      "rationale": "Directs examiners to accept the meaning of responses rather than require wording identical to the indicative content.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_7_5-example-variation",
+      "target_id": "ms_7_5-point-identical-flowers",
+      "relation": "ACCEPTS",
+      "confidence": 0.98,
+      "rationale": "Explicitly treats “no variation” as equivalent to “identical” for the relevant marking point.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_7_5-guidance-reverse",
+      "target_id": "ms_7_5-taking-cuttings",
+      "relation": "EXTENDS",
+      "confidence": 0.9,
+      "rationale": "Adds that correct reverse arguments may also receive credit against the indicative content.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_7_5-guidance-duplicate-marks",
+      "target_id": "ms_7_5-taking-cuttings",
+      "relation": "CONSTRAINS",
+      "confidence": 0.93,
+      "rationale": "Restricts application of the indicative marking points by prohibiting double credit for repeated versions of one point.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_7_5-guidance-genetic-information",
+      "target_id": "ms_7_5-level-1",
+      "relation": "ACCEPTS",
+      "confidence": 0.98,
+      "rationale": "Explicitly permits “genetic information” to raise an answer from one to two marks within Level 1.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_7_5-guidance-vague",
+      "target_id": "ms_7_5-level-2",
+      "relation": "REJECTS",
+      "confidence": 0.96,
+      "rationale": "States that the preceding term “genetic information” is too vague for credit above Level 1.",
+      "provenance": "llm"
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-11-17T11:56:30.642671+00:00",
+    "requires_review": false,
+    "warnings": []
+  }
+}

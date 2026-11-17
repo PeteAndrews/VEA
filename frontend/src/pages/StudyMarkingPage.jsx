@@ -29,6 +29,10 @@ export default function StudyMarkingPage() {
       navigate(submitResult.next_trial.route, { replace: true });
       return;
     }
+    if (submitResult.destination === "questionnaire" && submitResult.route) {
+      navigate(submitResult.route, { replace: true });
+      return;
+    }
     if (submitResult.destination === "question_selection") {
       navigate("/questions", { replace: true });
     }

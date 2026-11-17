@@ -1,0 +1,2054 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "B-JUN25-84611H-03_1",
+  "question_id": "03_1",
+  "metadata": {
+    "subject": null,
+    "qualification": null,
+    "paper": null,
+    "maximum_mark": 6,
+    "assessment_objective": null,
+    "specification_reference": null,
+    "marking_mode": "level_of_response"
+  },
+  "documents": [
+    {
+      "document_id": "q_03_1",
+      "document_type": "question",
+      "source_file": "B-JUN25-84611H-03_1-Q.txt",
+      "segments": [
+        {
+          "id": "q_03_1-label-1",
+          "type": "other_question_content",
+          "text": "0.3",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_1-context-1",
+          "type": "question_text",
+          "text": "A student investigated osmosis in pieces of potato.",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "osmosis",
+              "start": 23,
+              "end": 30
+            },
+            {
+              "type": "domain_term",
+              "text": "pieces of potato",
+              "start": 34,
+              "end": 50
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_1-method-intro",
+          "type": "question_text",
+          "text": "This is the method used.",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "method",
+              "start": 12,
+              "end": 18
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_1-method-step-1",
+          "type": "question_text",
+          "text": "1. Cut a piece of potato into a cube.",
+          "order": 4,
+          "parent_id": "q_03_1-method-intro",
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "Cut",
+              "start": 3,
+              "end": 6
+            },
+            {
+              "type": "domain_term",
+              "text": "piece of potato",
+              "start": 9,
+              "end": 24
+            },
+            {
+              "type": "domain_term",
+              "text": "cube",
+              "start": 32,
+              "end": 36
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_1-method-step-2",
+          "type": "question_text",
+          "text": "2. Record the mass of the cube.",
+          "order": 5,
+          "parent_id": "q_03_1-method-intro",
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "Record",
+              "start": 3,
+              "end": 9
+            },
+            {
+              "type": "domain_term",
+              "text": "mass",
+              "start": 14,
+              "end": 18
+            },
+            {
+              "type": "domain_term",
+              "text": "cube",
+              "start": 26,
+              "end": 30
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_1-method-step-3",
+          "type": "question_text",
+          "text": "3. Place the cube into a beaker containing 0.4 mol/dm3 salt solution.",
+          "order": 6,
+          "parent_id": "q_03_1-method-intro",
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "Place",
+              "start": 3,
+              "end": 8
+            },
+            {
+              "type": "domain_term",
+              "text": "cube",
+              "start": 13,
+              "end": 17
+            },
+            {
+              "type": "domain_term",
+              "text": "beaker",
+              "start": 25,
+              "end": 31
+            },
+            {
+              "type": "quantifier",
+              "text": "0.4 mol/dm3",
+              "start": 43,
+              "end": 54
+            },
+            {
+              "type": "domain_term",
+              "text": "salt solution",
+              "start": 55,
+              "end": 68
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_1-method-step-4",
+          "type": "question_text",
+          "text": "4. After some time, remove the cube and record the mass.",
+          "order": 7,
+          "parent_id": "q_03_1-method-intro",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "some",
+              "start": 9,
+              "end": 13
+            },
+            {
+              "type": "domain_term",
+              "text": "time",
+              "start": 14,
+              "end": 18
+            },
+            {
+              "type": "command_word",
+              "text": "remove",
+              "start": 20,
+              "end": 26
+            },
+            {
+              "type": "domain_term",
+              "text": "cube",
+              "start": 31,
+              "end": 35
+            },
+            {
+              "type": "command_word",
+              "text": "record",
+              "start": 40,
+              "end": 46
+            },
+            {
+              "type": "domain_term",
+              "text": "mass",
+              "start": 51,
+              "end": 55
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_1-method-step-5",
+          "type": "question_text",
+          "text": "5. Calculate the change in the mass of the cube.",
+          "order": 8,
+          "parent_id": "q_03_1-method-intro",
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "Calculate",
+              "start": 3,
+              "end": 12
+            },
+            {
+              "type": "domain_term",
+              "text": "change in the mass",
+              "start": 17,
+              "end": 35
+            },
+            {
+              "type": "domain_term",
+              "text": "cube",
+              "start": 43,
+              "end": 47
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_1-method-step-6",
+          "type": "question_text",
+          "text": "6. Repeat steps 1 to 5 using two more different concentrations of salt solution.",
+          "order": 9,
+          "parent_id": "q_03_1-method-intro",
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "Repeat",
+              "start": 3,
+              "end": 9
+            },
+            {
+              "type": "quantifier",
+              "text": "two more",
+              "start": 29,
+              "end": 37
+            },
+            {
+              "type": "domain_term",
+              "text": "concentrations of salt solution",
+              "start": 48,
+              "end": 79
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_1-label-2",
+          "type": "other_question_content",
+          "text": "Q03.1",
+          "order": 10,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_1-instruction-1",
+          "type": "question_instruction",
+          "text": "Evaluate the student’s method.",
+          "order": 11,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "Evaluate",
+              "start": 0,
+              "end": 8
+            },
+            {
+              "type": "domain_term",
+              "text": "method",
+              "start": 23,
+              "end": 29
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_1-instruction-2",
+          "type": "question_instruction",
+          "text": "You should include how the student could improve the validity of their results.",
+          "order": 12,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "include",
+              "start": 11,
+              "end": 18
+            },
+            {
+              "type": "command_word",
+              "text": "improve",
+              "start": 41,
+              "end": 48
+            },
+            {
+              "type": "domain_term",
+              "text": "validity",
+              "start": 53,
+              "end": 61
+            },
+            {
+              "type": "domain_term",
+              "text": "results",
+              "start": 71,
+              "end": 78
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_1-marks-1",
+          "type": "other_question_content",
+          "text": "[6 marks]",
+          "order": 13,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-Q.txt",
+            "page": null
+          },
+          "marks": 6,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    },
+    {
+      "document_id": "ms_03_1",
+      "document_type": "mark_scheme",
+      "source_file": "B-JUN25-84611H-03_1-MS.txt",
+      "segments": [
+        {
+          "id": "ms_03_1-reference-1",
+          "type": "other_mark_scheme_content",
+          "text": "Q.03.1",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-level-3",
+          "type": "level_descriptor",
+          "text": "Level 3: A judgement, strongly linked and logically supported by a sufficient range of correct reasons, is given. 5–6",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "strongly linked",
+              "start": 22,
+              "end": 37
+            },
+            {
+              "type": "qualifier",
+              "text": "logically supported",
+              "start": 42,
+              "end": 61
+            },
+            {
+              "type": "qualifier",
+              "text": "sufficient range",
+              "start": 67,
+              "end": 83
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": {
+            "min": 5,
+            "max": 6
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-level-2",
+          "type": "level_descriptor",
+          "text": "Level 2: Some logically linked reasons are given. There may also be a simple judgement. 3–4",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "Some",
+              "start": 9,
+              "end": 13
+            },
+            {
+              "type": "qualifier",
+              "text": "logically linked",
+              "start": 14,
+              "end": 30
+            },
+            {
+              "type": "qualifier",
+              "text": "simple",
+              "start": 70,
+              "end": 76
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": {
+            "min": 3,
+            "max": 4
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-level-1",
+          "type": "level_descriptor",
+          "text": "Level 1: Relevant points are made. They are not logically linked. 1–2",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not logically linked",
+              "start": 44,
+              "end": 64
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": {
+            "min": 1,
+            "max": 2
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-level-0",
+          "type": "level_rule",
+          "text": "No relevant content. 0",
+          "order": 5,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": 0,
+          "level": 0,
+          "mark_range": {
+            "min": 0,
+            "max": 0
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-indicative-content",
+          "type": "indicative_content_group",
+          "text": "Indicative content:",
+          "order": 6,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-strengths",
+          "type": "indicative_content_group",
+          "text": "(strengths)",
+          "order": 7,
+          "parent_id": "ms_03_1-indicative-content",
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-strength-1",
+          "type": "indicative_point",
+          "text": "• same / a / one plant / potato used",
+          "order": 8,
+          "parent_id": "ms_03_1-strengths",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "one",
+              "start": 13,
+              "end": 16
+            },
+            {
+              "type": "domain_term",
+              "text": "plant",
+              "start": 17,
+              "end": 22
+            },
+            {
+              "type": "domain_term",
+              "text": "potato",
+              "start": 25,
+              "end": 31
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-strength-2",
+          "type": "indicative_point",
+          "text": "• all potato pieces used were cubes",
+          "order": 9,
+          "parent_id": "ms_03_1-strengths",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "all",
+              "start": 2,
+              "end": 5
+            },
+            {
+              "type": "domain_term",
+              "text": "potato pieces",
+              "start": 6,
+              "end": 19
+            },
+            {
+              "type": "domain_term",
+              "text": "cubes",
+              "start": 30,
+              "end": 35
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-strength-3",
+          "type": "indicative_point",
+          "text": "• mass was recorded before and after",
+          "order": 10,
+          "parent_id": "ms_03_1-strengths",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "mass",
+              "start": 2,
+              "end": 6
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-strength-4",
+          "type": "indicative_point",
+          "text": "• change in mass was calculated",
+          "order": 11,
+          "parent_id": "ms_03_1-strengths",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "change in mass",
+              "start": 2,
+              "end": 16
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-strength-5",
+          "type": "indicative_point",
+          "text": "• different concentrations of salt solution were used",
+          "order": 12,
+          "parent_id": "ms_03_1-strengths",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "concentrations of salt solution",
+              "start": 12,
+              "end": 43
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvements",
+          "type": "indicative_content_group",
+          "text": "(improvement and reason)",
+          "order": 13,
+          "parent_id": "ms_03_1-indicative-content",
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-1",
+          "type": "indicative_point",
+          "text": "• use the same / a / one potato for all pieces",
+          "order": 14,
+          "parent_id": "ms_03_1-improvements",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "one",
+              "start": 21,
+              "end": 24
+            },
+            {
+              "type": "domain_term",
+              "text": "potato",
+              "start": 25,
+              "end": 31
+            },
+            {
+              "type": "quantifier",
+              "text": "all",
+              "start": 36,
+              "end": 39
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-1-reason",
+          "type": "indicative_point",
+          "text": "o (because the student) may have used different potatoes",
+          "order": 15,
+          "parent_id": "ms_03_1-improvement-1",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "potatoes",
+              "start": 48,
+              "end": 56
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-2",
+          "type": "indicative_point",
+          "text": "• remove skin or peel the potato",
+          "order": 16,
+          "parent_id": "ms_03_1-improvements",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "skin",
+              "start": 9,
+              "end": 13
+            },
+            {
+              "type": "domain_term",
+              "text": "potato",
+              "start": 26,
+              "end": 32
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-2-reason",
+          "type": "indicative_point",
+          "text": "o (because) skin (may still be) present",
+          "order": 17,
+          "parent_id": "ms_03_1-improvement-2",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "skin",
+              "start": 12,
+              "end": 16
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-3",
+          "type": "indicative_point",
+          "text": "• blot / dry cube before measuring mass",
+          "order": 18,
+          "parent_id": "ms_03_1-improvements",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "cube",
+              "start": 13,
+              "end": 17
+            },
+            {
+              "type": "domain_term",
+              "text": "mass",
+              "start": 35,
+              "end": 39
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-3-reason",
+          "type": "indicative_point",
+          "text": "o (because) cube will have excess water on surface",
+          "order": 19,
+          "parent_id": "ms_03_1-improvement-3",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "cube",
+              "start": 12,
+              "end": 16
+            },
+            {
+              "type": "domain_term",
+              "text": "excess water",
+              "start": 27,
+              "end": 39
+            },
+            {
+              "type": "domain_term",
+              "text": "surface",
+              "start": 43,
+              "end": 50
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-4",
+          "type": "indicative_point",
+          "text": "• use same / set size / surface area of potato piece each time",
+          "order": 20,
+          "parent_id": "ms_03_1-improvements",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "size",
+              "start": 17,
+              "end": 21
+            },
+            {
+              "type": "domain_term",
+              "text": "surface area",
+              "start": 24,
+              "end": 36
+            },
+            {
+              "type": "domain_term",
+              "text": "potato piece",
+              "start": 40,
+              "end": 52
+            },
+            {
+              "type": "domain_term",
+              "text": "time",
+              "start": 58,
+              "end": 62
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-4-reason",
+          "type": "indicative_point",
+          "text": "o (because) size / surface area of cubes not controlled /\nspecified",
+          "order": 21,
+          "parent_id": "ms_03_1-improvement-4",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "size",
+              "start": 12,
+              "end": 16
+            },
+            {
+              "type": "domain_term",
+              "text": "surface area",
+              "start": 19,
+              "end": 31
+            },
+            {
+              "type": "domain_term",
+              "text": "cubes",
+              "start": 35,
+              "end": 40
+            },
+            {
+              "type": "qualifier",
+              "text": "not controlled",
+              "start": 41,
+              "end": 55
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-5",
+          "type": "indicative_point",
+          "text": "• repeat (whole investigation or at each concentration)",
+          "order": 22,
+          "parent_id": "ms_03_1-improvements",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "repeat",
+              "start": 2,
+              "end": 8
+            },
+            {
+              "type": "domain_term",
+              "text": "investigation",
+              "start": 16,
+              "end": 29
+            },
+            {
+              "type": "domain_term",
+              "text": "concentration",
+              "start": 41,
+              "end": 54
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-5-reason-1",
+          "type": "indicative_point",
+          "text": "o (because there were) no repeats",
+          "order": 23,
+          "parent_id": "ms_03_1-improvement-5",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "repeats",
+              "start": 26,
+              "end": 33
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-5-reason-2",
+          "type": "indicative_point",
+          "text": "o to spot anomalies",
+          "order": 24,
+          "parent_id": "ms_03_1-improvement-5",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "anomalies",
+              "start": 10,
+              "end": 19
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-6",
+          "type": "indicative_point",
+          "text": "• calculate mean (from repeats)",
+          "order": 25,
+          "parent_id": "ms_03_1-improvements",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "mean",
+              "start": 12,
+              "end": 16
+            },
+            {
+              "type": "domain_term",
+              "text": "repeats",
+              "start": 23,
+              "end": 30
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-6-reason",
+          "type": "indicative_point",
+          "text": "o (because there was) no mean calculated",
+          "order": 26,
+          "parent_id": "ms_03_1-improvement-6",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "mean",
+              "start": 25,
+              "end": 29
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-7",
+          "type": "indicative_point",
+          "text": "• same time for each piece to be in solution",
+          "order": 27,
+          "parent_id": "ms_03_1-improvements",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "time",
+              "start": 7,
+              "end": 11
+            },
+            {
+              "type": "domain_term",
+              "text": "piece",
+              "start": 21,
+              "end": 26
+            },
+            {
+              "type": "domain_term",
+              "text": "solution",
+              "start": 36,
+              "end": 44
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-7-reason",
+          "type": "indicative_point",
+          "text": "o (because) length of time in solution not specified",
+          "order": 28,
+          "parent_id": "ms_03_1-improvement-7",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "length of time",
+              "start": 12,
+              "end": 26
+            },
+            {
+              "type": "domain_term",
+              "text": "solution",
+              "start": 30,
+              "end": 38
+            },
+            {
+              "type": "qualifier",
+              "text": "not specified",
+              "start": 39,
+              "end": 52
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-8",
+          "type": "indicative_point",
+          "text": "• control temperature of solution using water bath",
+          "order": 29,
+          "parent_id": "ms_03_1-improvements",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "temperature",
+              "start": 10,
+              "end": 21
+            },
+            {
+              "type": "domain_term",
+              "text": "solution",
+              "start": 25,
+              "end": 33
+            },
+            {
+              "type": "domain_term",
+              "text": "water bath",
+              "start": 40,
+              "end": 50
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-8-reason",
+          "type": "indicative_point",
+          "text": "o (because) temperature (of solution) not controlled /\nspecified",
+          "order": 30,
+          "parent_id": "ms_03_1-improvement-8",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "temperature",
+              "start": 12,
+              "end": 23
+            },
+            {
+              "type": "domain_term",
+              "text": "solution",
+              "start": 28,
+              "end": 36
+            },
+            {
+              "type": "qualifier",
+              "text": "not controlled",
+              "start": 38,
+              "end": 52
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-9",
+          "type": "indicative_point",
+          "text": "• use same volume of solution for each piece of potato  \nor ensure all pieces are completely submerged",
+          "order": 31,
+          "parent_id": "ms_03_1-improvements",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "volume of solution",
+              "start": 11,
+              "end": 29
+            },
+            {
+              "type": "domain_term",
+              "text": "piece of potato",
+              "start": 39,
+              "end": 54
+            },
+            {
+              "type": "quantifier",
+              "text": "all",
+              "start": 67,
+              "end": 70
+            },
+            {
+              "type": "domain_term",
+              "text": "submerged",
+              "start": 93,
+              "end": 102
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-9-reason",
+          "type": "indicative_point",
+          "text": "o (because) volume of solution not specified / controlled",
+          "order": 32,
+          "parent_id": "ms_03_1-improvement-9",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "volume of solution",
+              "start": 12,
+              "end": 30
+            },
+            {
+              "type": "qualifier",
+              "text": "not specified",
+              "start": 31,
+              "end": 44
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-10",
+          "type": "indicative_point",
+          "text": "• calculate percentage change in mass",
+          "order": 33,
+          "parent_id": "ms_03_1-improvements",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "percentage change in mass",
+              "start": 12,
+              "end": 37
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-10-reason",
+          "type": "indicative_point",
+          "text": "o (because) percentage change in mass not calculated\nor \n(because) each potato piece had a different starting mass",
+          "order": 34,
+          "parent_id": "ms_03_1-improvement-10",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "percentage change in mass",
+              "start": 12,
+              "end": 37
+            },
+            {
+              "type": "domain_term",
+              "text": "potato piece",
+              "start": 72,
+              "end": 84
+            },
+            {
+              "type": "domain_term",
+              "text": "starting mass",
+              "start": 101,
+              "end": 114
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-11",
+          "type": "indicative_point",
+          "text": "• include control experiment with boiled cube",
+          "order": 35,
+          "parent_id": "ms_03_1-improvements",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "control experiment",
+              "start": 10,
+              "end": 28
+            },
+            {
+              "type": "domain_term",
+              "text": "boiled cube",
+              "start": 34,
+              "end": 45
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-11-reason",
+          "type": "indicative_point",
+          "text": "o (because) no control experiment included",
+          "order": 36,
+          "parent_id": "ms_03_1-improvement-11",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "control experiment",
+              "start": 15,
+              "end": 33
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-12",
+          "type": "indicative_point",
+          "text": "• increase the number of concentrations (of salt solution) used",
+          "order": 37,
+          "parent_id": "ms_03_1-improvements",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "concentrations",
+              "start": 25,
+              "end": 39
+            },
+            {
+              "type": "domain_term",
+              "text": "salt solution",
+              "start": 44,
+              "end": 57
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-improvement-12-reason",
+          "type": "indicative_point",
+          "text": "o (because) only 3 different concentrations (of salt solution) \nused",
+          "order": 38,
+          "parent_id": "ms_03_1-improvement-12",
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "only",
+              "start": 12,
+              "end": 16
+            },
+            {
+              "type": "quantifier",
+              "text": "3",
+              "start": 17,
+              "end": 18
+            },
+            {
+              "type": "domain_term",
+              "text": "concentrations",
+              "start": 29,
+              "end": 43
+            },
+            {
+              "type": "domain_term",
+              "text": "salt solution",
+              "start": 48,
+              "end": 61
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_1-level-3-rule",
+          "type": "level_rule",
+          "text": "For Level 3, a strength and improvements / reasons must be \nincluded.",
+          "order": 39,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "must be \nincluded",
+              "start": 51,
+              "end": 68
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": {
+            "min": 5,
+            "max": 6
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    },
+    {
+      "document_id": "commentary_03_1",
+      "document_type": "commentary",
+      "source_file": "B-JUN25-84611H-03_1-C.txt",
+      "segments": [
+        {
+          "id": "commentary_03_1-heading-1",
+          "type": "commentary_heading",
+          "text": "03.1",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_1-text-1",
+          "type": "commentary_text",
+          "text": "This is an Extended Response question.",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_1-guidance-1",
+          "type": "commentary_guidance",
+          "text": "Please read the information in the introduction to this \ncommentary document regarding how to annotate student’s responses.",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_1-text-2",
+          "type": "commentary_text",
+          "text": "You may find it helpful to download the infographic (star-chart) from the additional supporting \ninformation in OLS.",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_1-text-3",
+          "type": "commentary_text",
+          "text": "This shows what details are required to gain access (i.e. achieve the lower \nmark) for each Level in a visual format.",
+          "order": 5,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "required",
+              "start": 28,
+              "end": 36
+            },
+            {
+              "type": "qualifier",
+              "text": "lower",
+              "start": 70,
+              "end": 75
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_1-guidance-2",
+          "type": "commentary_guidance",
+          "text": "In the mark scheme, there are 5 strengths shown by a black dot and 12 improvements shown \nby a black dot and their corresponding reason(s) shown by a white dot(s).",
+          "order": 6,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "5",
+              "start": 30,
+              "end": 31
+            },
+            {
+              "type": "quantifier",
+              "text": "12",
+              "start": 67,
+              "end": 69
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_1-guidance-3",
+          "type": "commentary_guidance",
+          "text": "Examiners are \nadvised to number the ‘strengths’ bullet points in the mark scheme from 1-5 and the \nimprovements and reasons from 1-12.",
+          "order": 7,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "1-5",
+              "start": 87,
+              "end": 90
+            },
+            {
+              "type": "quantifier",
+              "text": "1-12",
+              "start": 130,
+              "end": 134
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_1-guidance-4",
+          "type": "commentary_guidance",
+          "text": "When using the star annotation for strengths, place the \nstar on the left-hand side of the student’s response and the improvements and reasons on the \nright-hand side.",
+          "order": 8,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_1-guidance-5",
+          "type": "commentary_guidance",
+          "text": "If the improvement and reason are linked, place the star icons next to each \nother.",
+          "order": 9,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "linked",
+              "start": 34,
+              "end": 40
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_1-guidance-6",
+          "type": "commentary_guidance",
+          "text": "To achieve entry to Level 3, the student must identify at least one strength from the method \ngiven at the start of the question.",
+          "order": 10,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "at least one",
+              "start": 55,
+              "end": 67
+            },
+            {
+              "type": "domain_term",
+              "text": "method",
+              "start": 86,
+              "end": 92
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_1-guidance-7",
+          "type": "commentary_guidance",
+          "text": "There must also be a linked improvement and corresponding \nreason, along with additional improvements / reasons as indicated in the infographic.",
+          "order": 11,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "linked",
+              "start": 21,
+              "end": 27
+            },
+            {
+              "type": "quantifier",
+              "text": "additional",
+              "start": 78,
+              "end": 88
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_1-guidance-8",
+          "type": "commentary_guidance",
+          "text": "For entry \ninto Level 2, students must identify some improvements or reasons.",
+          "order": 12,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "some",
+              "start": 48,
+              "end": 52
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_1-guidance-9",
+          "type": "commentary_guidance",
+          "text": "To achieve entry into Level \n1, a student can give a strength or an improvement or a reason.",
+          "order": 13,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_1-guidance-10",
+          "type": "commentary_guidance",
+          "text": "If the student mentions ‘the potato’ this is not sufficient for credit in relation to using the same \npotato (as a strength BP or as an improvement BP).",
+          "order": 14,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not sufficient",
+              "start": 45,
+              "end": 59
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_1-guidance-11",
+          "type": "commentary_guidance",
+          "text": "However, if the student states ‘a potato’ or \n‘one potato’ credit should be awarded.",
+          "order": 15,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "a potato",
+              "start": 32,
+              "end": 40
+            },
+            {
+              "type": "domain_term",
+              "text": "one potato",
+              "start": 47,
+              "end": 57
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_1-guidance-12",
+          "type": "commentary_guidance",
+          "text": "Take care not to award credit twice for the same potato \nbeing used as a strength, and as an improvement.",
+          "order": 16,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "twice",
+              "start": 30,
+              "end": 35
+            },
+            {
+              "type": "domain_term",
+              "text": "same potato",
+              "start": 44,
+              "end": 55
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_1-guidance-13",
+          "type": "commentary_guidance",
+          "text": "For BP5, the idea of ‘repeat’ without qualification is sufficient to gain credit.",
+          "order": 17,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "repeat",
+              "start": 22,
+              "end": 28
+            },
+            {
+              "type": "qualifier",
+              "text": "without qualification",
+              "start": 30,
+              "end": 51
+            },
+            {
+              "type": "qualifier",
+              "text": "sufficient",
+              "start": 55,
+              "end": 65
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84611H-03_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-11-13T11:41:01.087337+00:00",
+    "requires_review": false,
+    "warnings": []
+  }
+}

@@ -27,6 +27,11 @@ class CompleteWalkthroughRequest(BaseModel):
     final_mark: int = Field(ge=0)
 
 
+class QuestionnaireWriteRequest(BaseModel):
+    answers: dict
+    updated_at: str | None = None
+
+
 @router.post("/session")
 def create_study_session(body: StudySessionRequest, response: Response) -> dict:
     try:
@@ -66,6 +71,8 @@ def start_walkthrough(request: Request) -> dict:
         raise HTTPException(status_code=404, detail="Participant not found") from None
     except PermissionError as exc:
         raise HTTPException(status_code=403, detail=str(exc)) from None
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from None
 
 
 @router.post("/walkthrough/complete")
@@ -84,6 +91,87 @@ def complete_walkthrough(body: CompleteWalkthroughRequest, request: Request) -> 
         raise HTTPException(status_code=403, detail=str(exc)) from None
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from None
+
+
+@router.post("/baseline-walkthrough/start")
+def start_baseline_walkthrough(request: Request) -> dict:
+    _, payload = require_study_session(request)
+    participant_id = payload["participant"]["participant_id"]
+    try:
+        return study_service().start_baseline_walkthrough(participant_id)
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Participant not found") from None
+    except PermissionError as exc:
+        raise HTTPException(status_code=403, detail=str(exc)) from None
+
+
+@router.post("/baseline-walkthrough/complete")
+def complete_baseline_walkthrough(body: CompleteWalkthroughRequest, request: Request) -> dict:
+    _, payload = require_study_session(request)
+    participant_id = payload["participant"]["participant_id"]
+    try:
+        return study_service().complete_baseline_walkthrough(
+            participant_id,
+            body.marking_session_id,
+            body.final_mark,
+        )
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Participant not found") from None
+    except PermissionError as exc:
+        raise HTTPException(status_code=403, detail=str(exc)) from None
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from None
+
+
+def _questionnaire_error(exc: ValueError) -> HTTPException:
+    message = str(exc)
+    if "already submitted" in message or "updated elsewhere" in message:
+        return HTTPException(status_code=409, detail=message)
+    return HTTPException(status_code=422, detail=message)
+
+
+@router.get("/questionnaires/{key}/{scope}")
+def get_questionnaire(key: str, scope: str, request: Request) -> dict:
+    _, payload = require_study_session(request)
+    participant_id = payload["participant"]["participant_id"]
+    try:
+        return study_service().get_questionnaire(participant_id, key, scope)
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Participant not found") from None
+    except PermissionError as exc:
+        raise HTTPException(status_code=403, detail=str(exc)) from None
+
+
+@router.put("/questionnaires/{key}/{scope}")
+def save_questionnaire(key: str, scope: str, body: QuestionnaireWriteRequest, request: Request) -> dict:
+    _, payload = require_study_session(request)
+    participant_id = payload["participant"]["participant_id"]
+    try:
+        return study_service().save_questionnaire_draft(
+            participant_id, key, scope, body.answers, body.updated_at
+        )
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Participant not found") from None
+    except PermissionError as exc:
+        raise HTTPException(status_code=403, detail=str(exc)) from None
+    except ValueError as exc:
+        raise _questionnaire_error(exc) from None
+
+
+@router.post("/questionnaires/{key}/{scope}/submit")
+def submit_questionnaire(key: str, scope: str, body: QuestionnaireWriteRequest, request: Request) -> dict:
+    _, payload = require_study_session(request)
+    participant_id = payload["participant"]["participant_id"]
+    try:
+        return study_service().submit_questionnaire(
+            participant_id, key, scope, body.answers, body.updated_at
+        )
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Participant not found") from None
+    except PermissionError as exc:
+        raise HTTPException(status_code=403, detail=str(exc)) from None
+    except ValueError as exc:
+        raise _questionnaire_error(exc) from None
 
 
 @router.post("/questions/{assessment_id}/next-trial")
@@ -106,6 +194,8 @@ def get_trial(trial_id: str, request: Request) -> dict:
         return study_service().get_trial(participant_id, trial_id)
     except KeyError:
         raise HTTPException(status_code=404, detail=f"Trial not found: {trial_id}") from None
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from None
 
 
 @router.post("/trials/{trial_id}/submit")

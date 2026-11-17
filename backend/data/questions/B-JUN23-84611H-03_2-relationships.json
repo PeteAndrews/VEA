@@ -1,0 +1,149 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "B-JUN23-84611H-03_2",
+  "question_id": "03_2",
+  "relationships": [
+    {
+      "source_id": "ms_03_2-group-vaccination",
+      "target_id": "q_03_2-subquestion-1",
+      "relation": "APPLIES_TO",
+      "confidence": 0.98,
+      "rationale": "This indicative-content block addresses how an animal responds to vaccination.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_2-group-secondary-response",
+      "target_id": "q_03_2-subquestion-1",
+      "relation": "APPLIES_TO",
+      "confidence": 0.93,
+      "rationale": "The secondary immune response is part of the requested explanation of animals' response following vaccination.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_2-group-prevention",
+      "target_id": "q_03_2-subquestion-2",
+      "relation": "APPLIES_TO",
+      "confidence": 0.99,
+      "rationale": "This block directly addresses prevention of food poisoning in humans.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_2-level-2-rule",
+      "target_id": "ms_03_2-level-2",
+      "relation": "CONSTRAINS",
+      "confidence": 0.99,
+      "rationale": "The rule limits Level 2 to responses that link animal immunity to prevention of a human outbreak.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_2-introduction-2",
+      "target_id": "ms_03_2-level-1",
+      "relation": "APPLIES_TO",
+      "confidence": 0.91,
+      "rationale": "The statement that responses are marked holistically applies to assigning Level 1.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_2-introduction-2",
+      "target_id": "ms_03_2-level-2",
+      "relation": "APPLIES_TO",
+      "confidence": 0.91,
+      "rationale": "The statement that responses are marked holistically applies to assigning Level 2.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_2-guidance-2",
+      "target_id": "commentary_03_2-guidance-1",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "It explains that 'indicative content' means the listed points are not exhaustive and other suitable ideas may receive credit.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_2-guidance-4",
+      "target_id": "ms_03_2-level-2-rule",
+      "relation": "CONSTRAINS",
+      "confidence": 0.99,
+      "rationale": "It specifies that the Level 2 link must cover primary and secondary animal responses as well as prevention of human infection.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_2-guidance-5",
+      "target_id": "ms_03_2-level-2-rule",
+      "relation": "CONSTRAINS",
+      "confidence": 0.98,
+      "rationale": "It adds that Level 2 requires newly produced antibodies rather than antibodies merely remaining from the primary response.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_2-guidance-5",
+      "target_id": "ms_03_2-secondary-point-1",
+      "relation": "CLARIFIES",
+      "confidence": 0.97,
+      "rationale": "It makes clear that antibodies produced during the secondary response are newly made antibodies.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_2-guidance-6",
+      "target_id": "ms_03_2-level-1",
+      "relation": "CONSTRAINS",
+      "confidence": 0.98,
+      "rationale": "It specifies that Level 1 credit requires descriptions of both primary and secondary animal responses.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_2-guidance-7",
+      "target_id": "ms_03_2-vaccination-point-1",
+      "relation": "APPLIES_TO",
+      "confidence": 0.97,
+      "rationale": "Its terminology guidance concerns the point crediting white blood cells or lymphocytes.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_2-guidance-7",
+      "target_id": "ms_03_2-secondary-point-2",
+      "relation": "APPLIES_TO",
+      "confidence": 0.95,
+      "rationale": "Its terminology guidance also concerns the point referring to white blood cells killing Salmonella.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_2-guidance-8",
+      "target_id": "commentary_03_2-guidance-7",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "It explains that using the full term anywhere in the response is sufficient when the abbreviation WBC is also used.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_2-guidance-9",
+      "target_id": "commentary_03_2-guidance-7",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "It provides the conditional exception that WBC is acceptable from its second occurrence even if the full term is absent.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_2-guidance-10",
+      "target_id": "commentary_03_2-guidance-7",
+      "relation": "CLARIFIES",
+      "confidence": 0.95,
+      "rationale": "It identifies lymphocytes as an acceptable alternative to the term white blood cells.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_2-guidance-11",
+      "target_id": "ms_03_2-level-2",
+      "relation": "CONSTRAINS",
+      "confidence": 0.99,
+      "rationale": "It excludes an answer consistently substituting virus for bacteria from Level 2 by capping it at Level 1.",
+      "provenance": "llm"
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-11-17T09:40:14.552764+00:00",
+    "requires_review": false,
+    "warnings": []
+  }
+}

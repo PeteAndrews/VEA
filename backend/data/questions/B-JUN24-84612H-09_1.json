@@ -1,0 +1,1595 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "B-JUN24-84612H-09_1",
+  "question_id": "09_1",
+  "metadata": {
+    "subject": null,
+    "qualification": null,
+    "paper": null,
+    "maximum_mark": 6,
+    "assessment_objective": null,
+    "specification_reference": null,
+    "marking_mode": "level_of_response"
+  },
+  "documents": [
+    {
+      "document_id": "q_09_1",
+      "document_type": "question",
+      "source_file": "B-JUN24-84612H-09_1-Q.txt",
+      "segments": [
+        {
+          "id": "q_09_1-label-1",
+          "type": "other_question_content",
+          "text": "09",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_09_1-context-1",
+          "type": "question_text",
+          "text": "Glyphosate is a herbicide used in agriculture.",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Glyphosate",
+              "start": 0,
+              "end": 10
+            },
+            {
+              "type": "domain_term",
+              "text": "herbicide",
+              "start": 16,
+              "end": 25
+            },
+            {
+              "type": "domain_term",
+              "text": "agriculture",
+              "start": 34,
+              "end": 45
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_09_1-context-2",
+          "type": "question_text",
+          "text": "Soya bean plants have been genetically modified (GM) to be resistant to glyphosate.",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Soya bean plants",
+              "start": 0,
+              "end": 16
+            },
+            {
+              "type": "domain_term",
+              "text": "genetically modified (GM)",
+              "start": 27,
+              "end": 52
+            },
+            {
+              "type": "domain_term",
+              "text": "glyphosate",
+              "start": 72,
+              "end": 82
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_09_1-context-3",
+          "type": "question_text",
+          "text": "A farmer can increase the yield of soya beans by:",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "yield",
+              "start": 26,
+              "end": 31
+            },
+            {
+              "type": "domain_term",
+              "text": "soya beans",
+              "start": 35,
+              "end": 45
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_09_1-context-bullet-1",
+          "type": "question_text",
+          "text": "• growing GM soya bean plants",
+          "order": 5,
+          "parent_id": "q_09_1-context-3",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "GM soya bean plants",
+              "start": 10,
+              "end": 29
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_09_1-context-bullet-2",
+          "type": "question_text",
+          "text": "• spraying glyphosate on the field.",
+          "order": 6,
+          "parent_id": "q_09_1-context-3",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "spraying glyphosate",
+              "start": 2,
+              "end": 21
+            },
+            {
+              "type": "domain_term",
+              "text": "field",
+              "start": 29,
+              "end": 34
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_09_1-label-2",
+          "type": "other_question_content",
+          "text": "09.1",
+          "order": 7,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_09_1-instruction-1",
+          "type": "question_instruction",
+          "text": "Explain how the use of GM soya bean plants and glyphosate can increase the yield  \nof soya beans.",
+          "order": 8,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "Explain",
+              "start": 0,
+              "end": 7
+            },
+            {
+              "type": "domain_term",
+              "text": "GM soya bean plants",
+              "start": 23,
+              "end": 42
+            },
+            {
+              "type": "domain_term",
+              "text": "glyphosate",
+              "start": 47,
+              "end": 57
+            },
+            {
+              "type": "domain_term",
+              "text": "yield",
+              "start": 75,
+              "end": 80
+            },
+            {
+              "type": "domain_term",
+              "text": "soya beans",
+              "start": 86,
+              "end": 96
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_09_1-marks-1",
+          "type": "other_question_content",
+          "text": "[6 marks]",
+          "order": 9,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-Q.txt",
+            "page": null
+          },
+          "marks": 6,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    },
+    {
+      "document_id": "ms_09_1",
+      "document_type": "mark_scheme",
+      "source_file": "B-JUN24-84612H-09_1-MS.txt",
+      "segments": [
+        {
+          "id": "ms_09_1-label-1",
+          "type": "other_mark_scheme_content",
+          "text": "Q. 09.1",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-level-3",
+          "type": "level_descriptor",
+          "text": "Level 3: Relevant points (reasons / causes) are identified, given in \ndetail and logically linked to form a clear account. 5–6",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": {
+            "min": 5,
+            "max": 6
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-level-2",
+          "type": "level_descriptor",
+          "text": "Level 2: Relevant points (reasons / causes) are identified, and there are attempts at logical linking.  The resulting account is not fully clear. 3–4",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not fully clear",
+              "start": 129,
+              "end": 144
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": {
+            "min": 3,
+            "max": 4
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-level-1",
+          "type": "level_descriptor",
+          "text": "Level 1: Points are identified and stated simply, but their relevance is not clear and there is no attempt at logical linking. 1–2",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not clear",
+              "start": 73,
+              "end": 82
+            },
+            {
+              "type": "quantifier",
+              "text": "no attempt",
+              "start": 96,
+              "end": 106
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": {
+            "min": 1,
+            "max": 2
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-level-0",
+          "type": "level_rule",
+          "text": "No relevant content 0",
+          "order": 5,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "No relevant content",
+              "start": 0,
+              "end": 19
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": 0,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-indicative-group-1",
+          "type": "indicative_content_group",
+          "text": "Indicative content",
+          "order": 6,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-indicative-point-1",
+          "type": "indicative_point",
+          "text": "• glyphosate kills weeds but does not harm GM soya",
+          "order": 7,
+          "parent_id": "ms_09_1-indicative-group-1",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "glyphosate",
+              "start": 2,
+              "end": 12
+            },
+            {
+              "type": "domain_term",
+              "text": "weeds",
+              "start": 19,
+              "end": 24
+            },
+            {
+              "type": "domain_term",
+              "text": "GM soya",
+              "start": 43,
+              "end": 50
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-indicative-point-2",
+          "type": "indicative_point",
+          "text": "• (so) less competition for light / water / ions / (named) minerals / \n(named) salts / space",
+          "order": 8,
+          "parent_id": "ms_09_1-indicative-group-1",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "competition",
+              "start": 12,
+              "end": 23
+            },
+            {
+              "type": "domain_term",
+              "text": "light",
+              "start": 28,
+              "end": 33
+            },
+            {
+              "type": "domain_term",
+              "text": "water",
+              "start": 36,
+              "end": 41
+            },
+            {
+              "type": "domain_term",
+              "text": "ions",
+              "start": 44,
+              "end": 48
+            },
+            {
+              "type": "domain_term",
+              "text": "minerals",
+              "start": 59,
+              "end": 67
+            },
+            {
+              "type": "domain_term",
+              "text": "salts",
+              "start": 79,
+              "end": 84
+            },
+            {
+              "type": "domain_term",
+              "text": "space",
+              "start": 87,
+              "end": 92
+            },
+            {
+              "type": "qualifier",
+              "text": "less",
+              "start": 7,
+              "end": 11
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-indicative-point-3",
+          "type": "indicative_point",
+          "text": "• more light / water for photosynthesis",
+          "order": 9,
+          "parent_id": "ms_09_1-indicative-group-1",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "more",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "type": "domain_term",
+              "text": "light",
+              "start": 7,
+              "end": 12
+            },
+            {
+              "type": "domain_term",
+              "text": "water",
+              "start": 15,
+              "end": 20
+            },
+            {
+              "type": "domain_term",
+              "text": "photosynthesis",
+              "start": 25,
+              "end": 39
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-answer-detail-1",
+          "type": "indicative_point",
+          "text": "o (so) more glucose produced",
+          "order": 10,
+          "parent_id": "ms_09_1-indicative-point-3",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "more",
+              "start": 7,
+              "end": 11
+            },
+            {
+              "type": "domain_term",
+              "text": "glucose",
+              "start": 12,
+              "end": 19
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-indicative-point-4",
+          "type": "indicative_point",
+          "text": "• more glucose for",
+          "order": 11,
+          "parent_id": "ms_09_1-indicative-group-1",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "more",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "type": "domain_term",
+              "text": "glucose",
+              "start": 7,
+              "end": 14
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-answer-detail-2",
+          "type": "indicative_point",
+          "text": "o respiration for energy",
+          "order": 12,
+          "parent_id": "ms_09_1-indicative-point-4",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "respiration",
+              "start": 2,
+              "end": 13
+            },
+            {
+              "type": "domain_term",
+              "text": "energy",
+              "start": 18,
+              "end": 24
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-answer-detail-3",
+          "type": "indicative_point",
+          "text": "o cellulose for cell walls",
+          "order": 13,
+          "parent_id": "ms_09_1-indicative-point-4",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "cellulose",
+              "start": 2,
+              "end": 11
+            },
+            {
+              "type": "domain_term",
+              "text": "cell walls",
+              "start": 16,
+              "end": 26
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-answer-detail-4",
+          "type": "indicative_point",
+          "text": "o starch for stored energy / glucose (in soya beans)",
+          "order": 14,
+          "parent_id": "ms_09_1-indicative-point-4",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "starch",
+              "start": 2,
+              "end": 8
+            },
+            {
+              "type": "domain_term",
+              "text": "stored energy",
+              "start": 13,
+              "end": 26
+            },
+            {
+              "type": "domain_term",
+              "text": "glucose",
+              "start": 29,
+              "end": 36
+            },
+            {
+              "type": "domain_term",
+              "text": "soya beans",
+              "start": 41,
+              "end": 51
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-answer-detail-5",
+          "type": "indicative_point",
+          "text": "o protein for cell structure / storage (in soya beans)",
+          "order": 15,
+          "parent_id": "ms_09_1-indicative-point-4",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "protein",
+              "start": 2,
+              "end": 9
+            },
+            {
+              "type": "domain_term",
+              "text": "cell structure",
+              "start": 14,
+              "end": 28
+            },
+            {
+              "type": "domain_term",
+              "text": "storage",
+              "start": 31,
+              "end": 38
+            },
+            {
+              "type": "domain_term",
+              "text": "soya beans",
+              "start": 43,
+              "end": 53
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-answer-detail-6",
+          "type": "indicative_point",
+          "text": "o lipids for energy storage (in soya beans)",
+          "order": 16,
+          "parent_id": "ms_09_1-indicative-point-4",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "lipids",
+              "start": 2,
+              "end": 8
+            },
+            {
+              "type": "domain_term",
+              "text": "energy storage",
+              "start": 13,
+              "end": 27
+            },
+            {
+              "type": "domain_term",
+              "text": "soya beans",
+              "start": 32,
+              "end": 42
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-indicative-point-5",
+          "type": "indicative_point",
+          "text": "• more water for",
+          "order": 17,
+          "parent_id": "ms_09_1-indicative-group-1",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "more",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "type": "domain_term",
+              "text": "water",
+              "start": 7,
+              "end": 12
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-answer-detail-7",
+          "type": "indicative_point",
+          "text": "o turgor / support",
+          "order": 18,
+          "parent_id": "ms_09_1-indicative-point-5",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "turgor",
+              "start": 2,
+              "end": 8
+            },
+            {
+              "type": "domain_term",
+              "text": "support",
+              "start": 11,
+              "end": 18
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-answer-detail-8",
+          "type": "indicative_point",
+          "text": "o transport",
+          "order": 19,
+          "parent_id": "ms_09_1-indicative-point-5",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "transport",
+              "start": 2,
+              "end": 11
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-answer-detail-9",
+          "type": "indicative_point",
+          "text": "o medium for reactions",
+          "order": 20,
+          "parent_id": "ms_09_1-indicative-point-5",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "medium",
+              "start": 2,
+              "end": 8
+            },
+            {
+              "type": "domain_term",
+              "text": "reactions",
+              "start": 13,
+              "end": 22
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-answer-detail-10",
+          "type": "indicative_point",
+          "text": "o hydrolysis / digestion of (stored) organic substances",
+          "order": 21,
+          "parent_id": "ms_09_1-indicative-point-5",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "hydrolysis",
+              "start": 2,
+              "end": 12
+            },
+            {
+              "type": "domain_term",
+              "text": "digestion",
+              "start": 15,
+              "end": 24
+            },
+            {
+              "type": "domain_term",
+              "text": "organic substances",
+              "start": 37,
+              "end": 55
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-indicative-point-6",
+          "type": "indicative_point",
+          "text": "• more magnesium",
+          "order": 22,
+          "parent_id": "ms_09_1-indicative-group-1",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "more",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "type": "domain_term",
+              "text": "magnesium",
+              "start": 7,
+              "end": 16
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-answer-detail-11",
+          "type": "indicative_point",
+          "text": "o for chlorophyll",
+          "order": 23,
+          "parent_id": "ms_09_1-indicative-point-6",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "chlorophyll",
+              "start": 6,
+              "end": 17
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-indicative-point-7",
+          "type": "indicative_point",
+          "text": "• more nitrate",
+          "order": 24,
+          "parent_id": "ms_09_1-indicative-group-1",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "more",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "type": "domain_term",
+              "text": "nitrate",
+              "start": 7,
+              "end": 14
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-answer-detail-12",
+          "type": "indicative_point",
+          "text": "o for amino acids / proteins",
+          "order": 25,
+          "parent_id": "ms_09_1-indicative-point-7",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "amino acids",
+              "start": 6,
+              "end": 17
+            },
+            {
+              "type": "domain_term",
+              "text": "proteins",
+              "start": 20,
+              "end": 28
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-indicative-point-8",
+          "type": "indicative_point",
+          "text": "• more phosphate",
+          "order": 26,
+          "parent_id": "ms_09_1-indicative-group-1",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "more",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "type": "domain_term",
+              "text": "phosphate",
+              "start": 7,
+              "end": 16
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-answer-detail-13",
+          "type": "indicative_point",
+          "text": "o for DNA",
+          "order": 27,
+          "parent_id": "ms_09_1-indicative-point-8",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "DNA",
+              "start": 6,
+              "end": 9
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_09_1-level-rule-1",
+          "type": "level_rule",
+          "text": "For Level 3, answers must include detail of factors that increase \nthe yield of GM maize.",
+          "order": 28,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "must",
+              "start": 21,
+              "end": 25
+            },
+            {
+              "type": "domain_term",
+              "text": "yield",
+              "start": 71,
+              "end": 76
+            },
+            {
+              "type": "domain_term",
+              "text": "GM maize",
+              "start": 80,
+              "end": 88
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    },
+    {
+      "document_id": "commentary_09_1",
+      "document_type": "commentary",
+      "source_file": "B-JUN24-84612H-09_1-C.txt",
+      "segments": [
+        {
+          "id": "commentary_09_1-heading-1",
+          "type": "commentary_heading",
+          "text": "09.1",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_09_1-guidance-1",
+          "type": "commentary_guidance",
+          "text": "This is an Extended Response question. Please read the information in the introduction to \nthis commentary document regarding how to annotate students' responses.",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_09_1-guidance-2",
+          "type": "commentary_guidance",
+          "text": "You may find it helpful to download the infographic (star-chart) from the additional supporting \ninformation in OLS. This shows what details are required to gain access (i.e. achieve the \nlower mark) for each Level in a visual format.",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "required",
+              "start": 145,
+              "end": 153
+            },
+            {
+              "type": "qualifier",
+              "text": "lower mark",
+              "start": 188,
+              "end": 198
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_09_1-guidance-3",
+          "type": "commentary_guidance",
+          "text": "Most of the points in the mark scheme are structured in terms of linked ideas. These are \nrepresented by ‘black bullet points’ and ‘white bullet points’ So to get credit for linked ideas, \nas described in the Generic Level Descriptors at the top of the mark scheme, students must \ngive a black bullet point along with one of its associated white bullet points.",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "must",
+              "start": 275,
+              "end": 279
+            },
+            {
+              "type": "quantifier",
+              "text": "one",
+              "start": 318,
+              "end": 321
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_09_1-guidance-4",
+          "type": "commentary_guidance",
+          "text": "Beware of bp2 in the indicative content. Credit should only be given if the student refers to \nreduced competition for some factor specified, not just ‘resources’ or ‘nutrients’ which are too \nvague.",
+          "order": 5,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "only",
+              "start": 55,
+              "end": 59
+            },
+            {
+              "type": "domain_term",
+              "text": "reduced competition",
+              "start": 95,
+              "end": 114
+            },
+            {
+              "type": "domain_term",
+              "text": "factor",
+              "start": 124,
+              "end": 130
+            },
+            {
+              "type": "qualifier",
+              "text": "not just",
+              "start": 142,
+              "end": 150
+            },
+            {
+              "type": "domain_term",
+              "text": "resources",
+              "start": 152,
+              "end": 161
+            },
+            {
+              "type": "domain_term",
+              "text": "nutrients",
+              "start": 167,
+              "end": 176
+            },
+            {
+              "type": "qualifier",
+              "text": "too",
+              "start": 188,
+              "end": 191
+            },
+            {
+              "type": "qualifier",
+              "text": "vague",
+              "start": 193,
+              "end": 198
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_09_1-guidance-5",
+          "type": "commentary_guidance",
+          "text": "Furthermore, many students having referred to bp1, then state words such as ‘…so \nthe GM soya gets more light’ – this is also not sufficient for bp2 as it does not refer to \nreduced competition, well enough, at this level of demand.",
+          "order": 6,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "GM soya",
+              "start": 86,
+              "end": 93
+            },
+            {
+              "type": "domain_term",
+              "text": "light",
+              "start": 104,
+              "end": 109
+            },
+            {
+              "type": "qualifier",
+              "text": "not sufficient",
+              "start": 126,
+              "end": 140
+            },
+            {
+              "type": "domain_term",
+              "text": "reduced competition",
+              "start": 174,
+              "end": 193
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_09_1-guidance-6",
+          "type": "commentary_guidance",
+          "text": "Access to Level 2 can be achieved by describing a linked idea.",
+          "order": 7,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_09_1-example-1",
+          "type": "commentary_example",
+          "text": "Thus, ‘more light for \nphotosynthesis so more glucose is produced’ would achieve this, as would ‘more \nmagnesium to make chlorophyll’.",
+          "order": 8,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "light",
+              "start": 12,
+              "end": 17
+            },
+            {
+              "type": "domain_term",
+              "text": "photosynthesis",
+              "start": 23,
+              "end": 37
+            },
+            {
+              "type": "domain_term",
+              "text": "glucose",
+              "start": 46,
+              "end": 53
+            },
+            {
+              "type": "domain_term",
+              "text": "magnesium",
+              "start": 103,
+              "end": 112
+            },
+            {
+              "type": "domain_term",
+              "text": "chlorophyll",
+              "start": 121,
+              "end": 132
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_09_1-guidance-7",
+          "type": "commentary_guidance",
+          "text": "You will see that there are many ways that this level can \nbe reached, as any black bullet point along with an associated white bullet point is all that is \nrequired.",
+          "order": 9,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "all",
+              "start": 144,
+              "end": 147
+            },
+            {
+              "type": "qualifier",
+              "text": "required",
+              "start": 157,
+              "end": 165
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_09_1-guidance-8",
+          "type": "commentary_guidance",
+          "text": "To reach Level 3, two linked ideas are required, along with a clear indication that glyphosate \nkills weeds but does not affect GM soya (the first black bullet point).",
+          "order": 10,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "two",
+              "start": 18,
+              "end": 21
+            },
+            {
+              "type": "qualifier",
+              "text": "required",
+              "start": 39,
+              "end": 47
+            },
+            {
+              "type": "domain_term",
+              "text": "glyphosate",
+              "start": 84,
+              "end": 94
+            },
+            {
+              "type": "domain_term",
+              "text": "weeds",
+              "start": 102,
+              "end": 107
+            },
+            {
+              "type": "domain_term",
+              "text": "GM soya",
+              "start": 128,
+              "end": 135
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_09_1-guidance-9",
+          "type": "commentary_guidance",
+          "text": "The details above describe what is required to reach the lower mark (1, 3 or 5) in each of the \nthree Levels. In each case, just one additional piece of information is required to achieve the \nhigher mark in the respective level. However, several unlinked ideas might be given but this \nwill not raise the mark beyond the higher mark in that Level.",
+          "order": 11,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "required",
+              "start": 35,
+              "end": 43
+            },
+            {
+              "type": "qualifier",
+              "text": "lower mark",
+              "start": 57,
+              "end": 67
+            },
+            {
+              "type": "quantifier",
+              "text": "1, 3 or 5",
+              "start": 69,
+              "end": 78
+            },
+            {
+              "type": "quantifier",
+              "text": "three",
+              "start": 96,
+              "end": 101
+            },
+            {
+              "type": "quantifier",
+              "text": "just one",
+              "start": 124,
+              "end": 132
+            },
+            {
+              "type": "quantifier",
+              "text": "several",
+              "start": 239,
+              "end": 246
+            },
+            {
+              "type": "qualifier",
+              "text": "will not",
+              "start": 287,
+              "end": 295
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84612H-09_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-11-13T10:35:49.704044+00:00",
+    "requires_review": true,
+    "warnings": [
+      {
+        "document_id": "ms_09_1",
+        "page": null,
+        "message": "The final level rule refers to “GM maize”, whereas the question and indicative content refer to GM soya; the source wording has been preserved."
+      },
+      {
+        "document_id": "commentary_09_1",
+        "page": null,
+        "message": "Dropped annotation on commentary_09_1-guidance-7: could not place qualifier 'any' with exact unique offsets"
+      },
+      {
+        "document_id": "commentary_09_1",
+        "page": null,
+        "message": "Dropped annotation on commentary_09_1-guidance-9: could not place qualifier 'higher mark' with exact unique offsets"
+      }
+    ]
+  }
+}

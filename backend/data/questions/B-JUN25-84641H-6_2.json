@@ -1,0 +1,2487 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "B-JUN25-84641H-6_2",
+  "question_id": "6_2",
+  "metadata": {
+    "subject": null,
+    "qualification": null,
+    "paper": null,
+    "maximum_mark": 6,
+    "assessment_objective": null,
+    "specification_reference": null,
+    "marking_mode": "level_of_response"
+  },
+  "documents": [
+    {
+      "document_id": "q_6_2",
+      "document_type": "question",
+      "source_file": "B-JUN25-84641H-6_2-Q.txt",
+      "segments": [
+        {
+          "id": "q_6_2-label",
+          "type": "other_question_content",
+          "text": "Q6.2",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_6_2-context-1",
+          "type": "question_text",
+          "text": "When the body makes insulin, C-peptide is also made.",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "body",
+              "start": 9,
+              "end": 13
+            },
+            {
+              "type": "domain_term",
+              "text": "insulin",
+              "start": 20,
+              "end": 27
+            },
+            {
+              "type": "domain_term",
+              "text": "C-peptide",
+              "start": 29,
+              "end": 38
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_6_2-context-2",
+          "type": "question_text",
+          "text": "The concentration of C-peptide in the blood is not increased by insulin injections.",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "concentration",
+              "start": 4,
+              "end": 17
+            },
+            {
+              "type": "domain_term",
+              "text": "C-peptide",
+              "start": 21,
+              "end": 30
+            },
+            {
+              "type": "domain_term",
+              "text": "blood",
+              "start": 38,
+              "end": 43
+            },
+            {
+              "type": "qualifier",
+              "text": "not increased",
+              "start": 47,
+              "end": 60
+            },
+            {
+              "type": "domain_term",
+              "text": "insulin injections",
+              "start": 64,
+              "end": 82
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_6_2-context-3",
+          "type": "question_text",
+          "text": "Some people with Type 2 diabetes are incorrectly told they have Type 1 diabetes.",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 2 diabetes",
+              "start": 17,
+              "end": 32
+            },
+            {
+              "type": "qualifier",
+              "text": "incorrectly",
+              "start": 37,
+              "end": 48
+            },
+            {
+              "type": "domain_term",
+              "text": "Type 1 diabetes",
+              "start": 64,
+              "end": 79
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_6_2-context-4",
+          "type": "question_text",
+          "text": "Doctors can test the concentration of C-peptide in the blood to check which type  \nof diabetes a person has.",
+          "order": 5,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "concentration",
+              "start": 21,
+              "end": 34
+            },
+            {
+              "type": "domain_term",
+              "text": "C-peptide",
+              "start": 38,
+              "end": 47
+            },
+            {
+              "type": "domain_term",
+              "text": "blood",
+              "start": 55,
+              "end": 60
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_6_2-instruction",
+          "type": "question_instruction",
+          "text": "Explain:",
+          "order": 6,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "Explain",
+              "start": 0,
+              "end": 7
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_6_2-subquestion-1",
+          "type": "subquestion",
+          "text": "• how the test can indicate which type of diabetes a person has",
+          "order": 7,
+          "parent_id": "q_6_2-instruction",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "test",
+              "start": 10,
+              "end": 14
+            },
+            {
+              "type": "domain_term",
+              "text": "diabetes",
+              "start": 42,
+              "end": 50
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_6_2-subquestion-2",
+          "type": "subquestion",
+          "text": "• the importance of finding out whether a person being treated for Type 1 diabetes \nactually has Type 2 diabetes.",
+          "order": 8,
+          "parent_id": "q_6_2-instruction",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 1 diabetes",
+              "start": 67,
+              "end": 82
+            },
+            {
+              "type": "domain_term",
+              "text": "Type 2 diabetes",
+              "start": 97,
+              "end": 112
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_6_2-mark-label",
+          "type": "other_question_content",
+          "text": "[6 marks]",
+          "order": 9,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "6",
+              "start": 1,
+              "end": 2
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-Q.txt",
+            "page": null
+          },
+          "marks": 6,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    },
+    {
+      "document_id": "ms_6_2",
+      "document_type": "mark_scheme",
+      "source_file": "B-JUN25-84641H-6_2-MS.txt",
+      "segments": [
+        {
+          "id": "ms_6_2-label",
+          "type": "other_mark_scheme_content",
+          "text": "06.2",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-level-3",
+          "type": "level_descriptor",
+          "text": "Level 3: Relevant points (reasons / causes) are identified, given in \ndetail and logically linked to form a clear account. 5–6",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "5–6",
+              "start": 123,
+              "end": 126
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": {
+            "min": 5,
+            "max": 6
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-level-2",
+          "type": "level_descriptor",
+          "text": "Level 2: Relevant points (reasons / causes) are identified, and \nthere are attempts at logical linking.  The resulting account is not fully clear. 3–4",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not fully clear",
+              "start": 130,
+              "end": 145
+            },
+            {
+              "type": "quantifier",
+              "text": "3–4",
+              "start": 147,
+              "end": 150
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": {
+            "min": 3,
+            "max": 4
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-level-1",
+          "type": "level_descriptor",
+          "text": "Level 1: Points are identified and stated simply, but their relevance \nis not clear and there is no attempt at logical linking. 1–2",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not clear",
+              "start": 74,
+              "end": 83
+            },
+            {
+              "type": "quantifier",
+              "text": "1–2",
+              "start": 128,
+              "end": 131
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": {
+            "min": 1,
+            "max": 2
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-no-content",
+          "type": "level_rule",
+          "text": "No relevant content 0",
+          "order": 5,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "0",
+              "start": 20,
+              "end": 21
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": 0,
+          "level": 0,
+          "mark_range": {
+            "min": 0,
+            "max": 0
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-indicative-heading",
+          "type": "indicative_content_group",
+          "text": "Indicative content",
+          "order": 6,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-group-type-1",
+          "type": "indicative_content_group",
+          "text": "Type 1",
+          "order": 7,
+          "parent_id": "ms_6_2-indicative-heading",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 1",
+              "start": 0,
+              "end": 6
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-type-1-point-1",
+          "type": "indicative_point",
+          "text": "• in Type 1 (diabetes) the pancreas does not produce (enough) \ninsulin",
+          "order": 8,
+          "parent_id": "ms_6_2-group-type-1",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 1 (diabetes)",
+              "start": 5,
+              "end": 22
+            },
+            {
+              "type": "domain_term",
+              "text": "pancreas",
+              "start": 27,
+              "end": 35
+            },
+            {
+              "type": "qualifier",
+              "text": "not",
+              "start": 41,
+              "end": 44
+            },
+            {
+              "type": "qualifier",
+              "text": "enough",
+              "start": 54,
+              "end": 60
+            },
+            {
+              "type": "domain_term",
+              "text": "insulin",
+              "start": 63,
+              "end": 70
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-type-1-point-2",
+          "type": "indicative_point",
+          "text": "• (so) C-peptide (concentration in blood) would be low(er)",
+          "order": 9,
+          "parent_id": "ms_6_2-group-type-1",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "C-peptide",
+              "start": 7,
+              "end": 16
+            },
+            {
+              "type": "domain_term",
+              "text": "concentration",
+              "start": 18,
+              "end": 31
+            },
+            {
+              "type": "domain_term",
+              "text": "blood",
+              "start": 35,
+              "end": 40
+            },
+            {
+              "type": "qualifier",
+              "text": "low(er)",
+              "start": 51,
+              "end": 58
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-type-1-point-3",
+          "type": "indicative_point",
+          "text": "• even if patient is taking / injecting insulin",
+          "order": 10,
+          "parent_id": "ms_6_2-group-type-1",
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "even if",
+              "start": 2,
+              "end": 9
+            },
+            {
+              "type": "domain_term",
+              "text": "injecting insulin",
+              "start": 30,
+              "end": 47
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-group-type-2",
+          "type": "indicative_content_group",
+          "text": "Type 2",
+          "order": 11,
+          "parent_id": "ms_6_2-indicative-heading",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 2",
+              "start": 0,
+              "end": 6
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-type-2-point-1",
+          "type": "indicative_point",
+          "text": "• in Type 2 (diabetes) the body / cells no longer respond to insulin",
+          "order": 12,
+          "parent_id": "ms_6_2-group-type-2",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 2 (diabetes)",
+              "start": 5,
+              "end": 22
+            },
+            {
+              "type": "domain_term",
+              "text": "body / cells",
+              "start": 27,
+              "end": 39
+            },
+            {
+              "type": "domain_term",
+              "text": "respond to insulin",
+              "start": 50,
+              "end": 68
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-type-2-point-2",
+          "type": "indicative_point",
+          "text": "• in Type 2 (diabetes) insulin is produced",
+          "order": 13,
+          "parent_id": "ms_6_2-group-type-2",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 2 (diabetes)",
+              "start": 5,
+              "end": 22
+            },
+            {
+              "type": "domain_term",
+              "text": "insulin",
+              "start": 23,
+              "end": 30
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-type-2-point-3",
+          "type": "indicative_point",
+          "text": "• (so) C-peptide (concentration in blood) would be  \nhigh(er) / normal",
+          "order": 14,
+          "parent_id": "ms_6_2-group-type-2",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "C-peptide",
+              "start": 7,
+              "end": 16
+            },
+            {
+              "type": "domain_term",
+              "text": "concentration",
+              "start": 18,
+              "end": 31
+            },
+            {
+              "type": "domain_term",
+              "text": "blood",
+              "start": 35,
+              "end": 40
+            },
+            {
+              "type": "qualifier",
+              "text": "high(er) / normal",
+              "start": 53,
+              "end": 70
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-group-importance",
+          "type": "indicative_content_group",
+          "text": "The importance…",
+          "order": 15,
+          "parent_id": "ms_6_2-indicative-heading",
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-importance-point-1",
+          "type": "indicative_point",
+          "text": "• if patient has Type 2 (diabetes) they could stop insulin injections",
+          "order": 16,
+          "parent_id": "ms_6_2-group-importance",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 2 (diabetes)",
+              "start": 17,
+              "end": 34
+            },
+            {
+              "type": "domain_term",
+              "text": "insulin injections",
+              "start": 51,
+              "end": 69
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-importance-point-2",
+          "type": "indicative_point",
+          "text": "• insulin injections have side effects",
+          "order": 17,
+          "parent_id": "ms_6_2-group-importance",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "insulin injections",
+              "start": 2,
+              "end": 20
+            },
+            {
+              "type": "domain_term",
+              "text": "side effects",
+              "start": 26,
+              "end": 38
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-importance-point-3",
+          "type": "indicative_point",
+          "text": "• insulin injections are expensive",
+          "order": 18,
+          "parent_id": "ms_6_2-group-importance",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "insulin injections",
+              "start": 2,
+              "end": 20
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-importance-point-4",
+          "type": "indicative_point",
+          "text": "• (Type 2 diabetes) can be treated with a carbohydrate-controlled \ndiet and / or (increased) exercise",
+          "order": 19,
+          "parent_id": "ms_6_2-group-importance",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 2 diabetes",
+              "start": 3,
+              "end": 18
+            },
+            {
+              "type": "domain_term",
+              "text": "carbohydrate-controlled",
+              "start": 42,
+              "end": 65
+            },
+            {
+              "type": "domain_term",
+              "text": "diet",
+              "start": 67,
+              "end": 71
+            },
+            {
+              "type": "domain_term",
+              "text": "exercise",
+              "start": 93,
+              "end": 101
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-importance-point-5",
+          "type": "indicative_point",
+          "text": "• (Type 2 diabetes) can be treated with other medication (that is \nnot injected)",
+          "order": 20,
+          "parent_id": "ms_6_2-group-importance",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 2 diabetes",
+              "start": 3,
+              "end": 18
+            },
+            {
+              "type": "domain_term",
+              "text": "medication",
+              "start": 46,
+              "end": 56
+            },
+            {
+              "type": "qualifier",
+              "text": "not injected",
+              "start": 67,
+              "end": 79
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_6_2-level-3-rule",
+          "type": "level_rule",
+          "text": "For Level 3, details of Type 1 and Type 2 diabetes must be \nconsidered, with the link to C-peptide and the importance of the test \ndescribed.",
+          "order": 21,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 1",
+              "start": 24,
+              "end": 30
+            },
+            {
+              "type": "domain_term",
+              "text": "Type 2 diabetes",
+              "start": 35,
+              "end": 50
+            },
+            {
+              "type": "domain_term",
+              "text": "C-peptide",
+              "start": 89,
+              "end": 98
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": {
+            "min": 5,
+            "max": 6
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    },
+    {
+      "document_id": "commentary_6_2",
+      "document_type": "commentary",
+      "source_file": "B-JUN25-84641H-6_2-C.txt",
+      "segments": [
+        {
+          "id": "commentary_6_2-heading",
+          "type": "commentary_heading",
+          "text": "Q.6.2",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-intro-1",
+          "type": "commentary_text",
+          "text": "You will see that there are overall generic descriptions for the three levels of response at the top of the scheme, giving a hierarchy \nof response.",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "three",
+              "start": 65,
+              "end": 70
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-intro-2",
+          "type": "commentary_text",
+          "text": "Within each Level of Response there are two marks.",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "two",
+              "start": 40,
+              "end": 43
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-intro-3",
+          "type": "commentary_text",
+          "text": "The indicative points in the \nmark scheme are divided into headings relating to Type 1, Type 2 and the importance of the test.",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 1",
+              "start": 80,
+              "end": 86
+            },
+            {
+              "type": "domain_term",
+              "text": "Type 2",
+              "start": 88,
+              "end": 94
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-annotation-rule-1",
+          "type": "commentary_guidance",
+          "text": "When marking this (and other extended response questions) you must NOT use the tick \nannotation (as if a school / student requests to see the paper the annotations will remain and \nthey can justifiably expect a tick to represent a mark).",
+          "order": 5,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "must NOT",
+              "start": 62,
+              "end": 70
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-annotation-rule-2",
+          "type": "commentary_guidance",
+          "text": "Annotations are not required but using \nthem will help you arrive at a mark.",
+          "order": 6,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not required",
+              "start": 16,
+              "end": 28
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-annotation-rule-3",
+          "type": "commentary_guidance",
+          "text": "We ask that you use the star annotation, along with highlight \nor underlining tools if you wish.",
+          "order": 7,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-annotation-rule-4",
+          "type": "commentary_guidance",
+          "text": "Please do NOT use the eye symbol as this has consequences \nfor reviews.",
+          "order": 8,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "do NOT",
+              "start": 7,
+              "end": 13
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-marking-rule-1",
+          "type": "commentary_guidance",
+          "text": "This is not marked as 1 idea gains 1 mark, 5 ideas gain 5 marks etc.",
+          "order": 9,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not",
+              "start": 8,
+              "end": 11
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-marking-rule-2",
+          "type": "commentary_guidance",
+          "text": "You may find it helpful to number the bullet points and make a note of which number bp you see \n(on a sheet of paper, not on screen) to help you decide the level and then the mark (and to avoid \ncrediting the same idea several times).",
+          "order": 10,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not on screen",
+              "start": 118,
+              "end": 131
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-stem-rule",
+          "type": "commentary_guidance",
+          "text": "Please familiarise yourselves with the question to ensure credit is not being given where \ncandidates are simply repeating detail that is in the stem.",
+          "order": 11,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not being given",
+              "start": 68,
+              "end": 83
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-linking-rule",
+          "type": "commentary_guidance",
+          "text": "Credit should not be awarded for \nincorrect linking between C-peptide and insulin injections.",
+          "order": 12,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not be awarded",
+              "start": 14,
+              "end": 28
+            },
+            {
+              "type": "domain_term",
+              "text": "C-peptide",
+              "start": 60,
+              "end": 69
+            },
+            {
+              "type": "domain_term",
+              "text": "insulin injections",
+              "start": 74,
+              "end": 92
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-bp1-rule-1",
+          "type": "commentary_guidance",
+          "text": "For BP1, in Type 1 diabetes, it would be insufficient to simply state ‘the person’ does not produce \ninsulin.",
+          "order": 13,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 1 diabetes",
+              "start": 12,
+              "end": 27
+            },
+            {
+              "type": "qualifier",
+              "text": "insufficient",
+              "start": 41,
+              "end": 53
+            },
+            {
+              "type": "qualifier",
+              "text": "does not produce",
+              "start": 83,
+              "end": 99
+            },
+            {
+              "type": "domain_term",
+              "text": "insulin",
+              "start": 101,
+              "end": 108
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-bp1-rule-2",
+          "type": "commentary_guidance",
+          "text": "The pancreas needs to be included.",
+          "order": 14,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "pancreas",
+              "start": 4,
+              "end": 12
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-bp2-rule",
+          "type": "commentary_guidance",
+          "text": "For BP2, no C-peptide would be equivalent to low C-peptide.",
+          "order": 15,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "low C-peptide",
+              "start": 45,
+              "end": 58
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-bp3-rule-1",
+          "type": "commentary_guidance",
+          "text": "BP3 cannot be awarded if BP2 is not credited.",
+          "order": 16,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "cannot be awarded",
+              "start": 4,
+              "end": 21
+            },
+            {
+              "type": "qualifier",
+              "text": "not credited",
+              "start": 32,
+              "end": 44
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-bp3-rule-2",
+          "type": "commentary_guidance",
+          "text": "The two BPs are linked with the words ‘even if.’",
+          "order": 17,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "two",
+              "start": 4,
+              "end": 7
+            },
+            {
+              "type": "qualifier",
+              "text": "even if",
+              "start": 39,
+              "end": 46
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-bp4-equivalents",
+          "type": "commentary_guidance",
+          "text": "In Type 2, BP4, equivalent words for the body / cells could be muscle / liver.",
+          "order": 18,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 2",
+              "start": 3,
+              "end": 9
+            },
+            {
+              "type": "domain_term",
+              "text": "body / cells",
+              "start": 41,
+              "end": 53
+            },
+            {
+              "type": "domain_term",
+              "text": "muscle / liver",
+              "start": 63,
+              "end": 77
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-bp4-rule",
+          "type": "commentary_guidance",
+          "text": "It would be \ninsufficient to say that in Type 2 the body is ‘immune to insulin’, ‘can’t detect insulin’, ‘rejects \ninsulin’ or that ‘insulin doesn’t work’, but becoming ‘resistant to insulin’, ‘insensitive to insulin’ or \n‘not reacting to insulin’ could gain credit.",
+          "order": 19,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 2",
+              "start": 41,
+              "end": 47
+            },
+            {
+              "type": "domain_term",
+              "text": "immune to insulin",
+              "start": 61,
+              "end": 78
+            },
+            {
+              "type": "domain_term",
+              "text": "can’t detect insulin",
+              "start": 82,
+              "end": 102
+            },
+            {
+              "type": "domain_term",
+              "text": "resistant to insulin",
+              "start": 170,
+              "end": 190
+            },
+            {
+              "type": "domain_term",
+              "text": "insensitive to insulin",
+              "start": 194,
+              "end": 216
+            },
+            {
+              "type": "domain_term",
+              "text": "not reacting to insulin",
+              "start": 223,
+              "end": 246
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-bp5-rule",
+          "type": "commentary_guidance",
+          "text": "For BP5, ‘People with Type 2 have increased insulin’ or ‘Type 2 have insulin’ would be \nequivalent to insulin being produced.",
+          "order": 20,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "increased insulin",
+              "start": 34,
+              "end": 51
+            },
+            {
+              "type": "domain_term",
+              "text": "insulin being produced",
+              "start": 102,
+              "end": 124
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-bp6-rule-1",
+          "type": "commentary_guidance",
+          "text": "In BP6, it would be insufficient to simply state that C-peptide would be made or that its \nconcentration would fluctuate.",
+          "order": 21,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "insufficient",
+              "start": 20,
+              "end": 32
+            },
+            {
+              "type": "domain_term",
+              "text": "C-peptide",
+              "start": 54,
+              "end": 63
+            },
+            {
+              "type": "domain_term",
+              "text": "concentration",
+              "start": 91,
+              "end": 104
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-bp6-rule-2",
+          "type": "commentary_guidance",
+          "text": "However, stating it would be a normal level would be equivalent.",
+          "order": 22,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "normal level",
+              "start": 31,
+              "end": 43
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-bp7-equivalence",
+          "type": "commentary_guidance",
+          "text": "For BP7, in the ‘importance’ indicative content ‘insulin shots’ is taken as being equivalent to \n‘insulin injections’.",
+          "order": 23,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "insulin shots",
+              "start": 49,
+              "end": 62
+            },
+            {
+              "type": "domain_term",
+              "text": "insulin injections",
+              "start": 98,
+              "end": 116
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-bp7-rule",
+          "type": "commentary_guidance",
+          "text": "The idea that ‘in Type 2, insulin injections will not work’ is insufficient.",
+          "order": 24,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 2",
+              "start": 18,
+              "end": 24
+            },
+            {
+              "type": "domain_term",
+              "text": "insulin injections",
+              "start": 26,
+              "end": 44
+            },
+            {
+              "type": "qualifier",
+              "text": "will not work",
+              "start": 45,
+              "end": 58
+            },
+            {
+              "type": "qualifier",
+              "text": "insufficient",
+              "start": 63,
+              "end": 75
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-bp8-rule",
+          "type": "commentary_guidance",
+          "text": "BP8 – stating that insulin is dangerous, would be too high, would cause a diabetic coma or death \nwould not be credited.",
+          "order": 25,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "insulin",
+              "start": 19,
+              "end": 26
+            },
+            {
+              "type": "domain_term",
+              "text": "diabetic coma",
+              "start": 74,
+              "end": 87
+            },
+            {
+              "type": "qualifier",
+              "text": "not be credited",
+              "start": 104,
+              "end": 119
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-bp10-rule",
+          "type": "commentary_guidance",
+          "text": "BP10 – statements such as healthy diet / lifestyle would be insufficient for this BP. Candidates \ncan give the converse such as ‘Type 2 is more likely if you are inactive / obese’.  ‘Type 2 is \ncaused by a lack of exercise’ or ‘people have Type 2 because of a bad diet’ would be \ninsufficient.",
+          "order": 26,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "healthy diet / lifestyle",
+              "start": 26,
+              "end": 50
+            },
+            {
+              "type": "domain_term",
+              "text": "inactive / obese",
+              "start": 162,
+              "end": 178
+            },
+            {
+              "type": "domain_term",
+              "text": "lack of exercise",
+              "start": 206,
+              "end": 222
+            },
+            {
+              "type": "qualifier",
+              "text": "insufficient",
+              "start": 60,
+              "end": 72
+            },
+            {
+              "type": "qualifier",
+              "text": "insufficient",
+              "start": 280,
+              "end": 292
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-level-3-heading",
+          "type": "commentary_heading",
+          "text": "To enter level 3",
+          "order": 27,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": {
+            "min": 5,
+            "max": 6
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-level-3-note",
+          "type": "commentary_guidance",
+          "text": "Note the statement at the end of the indicative content.",
+          "order": 28,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-level-3-rule",
+          "type": "commentary_guidance",
+          "text": "For Level 3, details of Type 1 and Type 2 diabetes must be considered, with the link to  \nC-peptide and the importance of the test described.",
+          "order": 29,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 1",
+              "start": 24,
+              "end": 30
+            },
+            {
+              "type": "domain_term",
+              "text": "Type 2 diabetes",
+              "start": 35,
+              "end": 50
+            },
+            {
+              "type": "domain_term",
+              "text": "C-peptide",
+              "start": 90,
+              "end": 99
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": {
+            "min": 5,
+            "max": 6
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-level-3-requirements",
+          "type": "commentary_guidance",
+          "text": "So for level 3, there must be: \nIndicative content from each of the 3 headings \nand \nIndicative content relating to C-peptide (this will be BP2 and / or BP6) \nand \nAt least one logical link within one of the 3 headings.",
+          "order": 30,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "C-peptide",
+              "start": 116,
+              "end": 125
+            },
+            {
+              "type": "quantifier",
+              "text": "At least one",
+              "start": 164,
+              "end": 176
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": {
+            "min": 5,
+            "max": 6
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-level-2-heading",
+          "type": "commentary_heading",
+          "text": "To enter level 2",
+          "order": 31,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": {
+            "min": 3,
+            "max": 4
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-level-2-bullet",
+          "type": "commentary_guidance",
+          "text": "• linked to  •",
+          "order": 32,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-level-2-rule-1",
+          "type": "commentary_guidance",
+          "text": "The logical link can be between any bullet points within one of the 3 headings on the mark \nscheme.",
+          "order": 33,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-level-2-rule-2",
+          "type": "commentary_guidance",
+          "text": "The link must show some logic.",
+          "order": 34,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "must",
+              "start": 9,
+              "end": 13
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-level-2-example-1",
+          "type": "commentary_example",
+          "text": "So, ‘People with Type 2 could stop having insulin injections, \nwhich have side effects (BP7 and BP8) is a logical link.",
+          "order": 35,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 2",
+              "start": 17,
+              "end": 23
+            },
+            {
+              "type": "domain_term",
+              "text": "insulin injections",
+              "start": 42,
+              "end": 60
+            },
+            {
+              "type": "domain_term",
+              "text": "side effects",
+              "start": 74,
+              "end": 86
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-level-2-rule-3",
+          "type": "commentary_guidance",
+          "text": "However, there is no linking between some BPs.",
+          "order": 36,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "no linking",
+              "start": 18,
+              "end": 28
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-level-2-example-2",
+          "type": "commentary_example",
+          "text": "e.g. insulin injections have side effects and \nare expensive (BP8 and BP9).",
+          "order": 37,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "insulin injections",
+              "start": 5,
+              "end": 23
+            },
+            {
+              "type": "domain_term",
+              "text": "side effects",
+              "start": 29,
+              "end": 41
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-level-2-rule-4",
+          "type": "commentary_guidance",
+          "text": "These are just 2 different statements with no logical link.",
+          "order": 38,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "2",
+              "start": 15,
+              "end": 16
+            },
+            {
+              "type": "qualifier",
+              "text": "no logical link",
+              "start": 43,
+              "end": 58
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-level-2-rule-5",
+          "type": "commentary_guidance",
+          "text": "If there is more than the above requirement, but insufficient to achieve level 3, consider a \nhigher mark in level 2",
+          "order": 39,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "insufficient",
+              "start": 49,
+              "end": 61
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": {
+            "min": 3,
+            "max": 4
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-level-1-heading",
+          "type": "commentary_heading",
+          "text": "To enter level 1",
+          "order": 40,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": {
+            "min": 1,
+            "max": 2
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-level-1-bullet",
+          "type": "commentary_guidance",
+          "text": "• any indicative content",
+          "order": 41,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-level-1-rule",
+          "type": "commentary_guidance",
+          "text": "Anything more than this, but insufficient to achieve level 2, consider a higher mark in level 1",
+          "order": 42,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "insufficient",
+              "start": 29,
+              "end": 41
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": {
+            "min": 1,
+            "max": 2
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-examples-heading",
+          "type": "commentary_heading",
+          "text": "For example,",
+          "order": 43,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-example-1",
+          "type": "commentary_example",
+          "text": "“In Type 1, the pancreas does not produce insulin” 1 mark",
+          "order": 44,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 1",
+              "start": 4,
+              "end": 10
+            },
+            {
+              "type": "domain_term",
+              "text": "pancreas",
+              "start": 16,
+              "end": 24
+            },
+            {
+              "type": "domain_term",
+              "text": "insulin",
+              "start": 42,
+              "end": 49
+            },
+            {
+              "type": "quantifier",
+              "text": "1",
+              "start": 51,
+              "end": 52
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": 1,
+          "level": 1,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-example-2",
+          "type": "commentary_example",
+          "text": "“In Type 1, the C-peptide would be low because the pancreas does not produce insulin” 3 marks",
+          "order": 45,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 1",
+              "start": 4,
+              "end": 10
+            },
+            {
+              "type": "domain_term",
+              "text": "C-peptide",
+              "start": 16,
+              "end": 25
+            },
+            {
+              "type": "domain_term",
+              "text": "pancreas",
+              "start": 51,
+              "end": 59
+            },
+            {
+              "type": "domain_term",
+              "text": "insulin",
+              "start": 77,
+              "end": 84
+            },
+            {
+              "type": "quantifier",
+              "text": "3",
+              "start": 86,
+              "end": 87
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": 3,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-example-3",
+          "type": "commentary_example",
+          "text": "“In Type 1, the C-peptide would be low because the pancreas does not produce insulin, but in \nType 2 the C-peptide would be high” 4 marks",
+          "order": 46,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 1",
+              "start": 4,
+              "end": 10
+            },
+            {
+              "type": "domain_term",
+              "text": "pancreas",
+              "start": 51,
+              "end": 59
+            },
+            {
+              "type": "domain_term",
+              "text": "insulin",
+              "start": 77,
+              "end": 84
+            },
+            {
+              "type": "domain_term",
+              "text": "Type 2",
+              "start": 94,
+              "end": 100
+            },
+            {
+              "type": "qualifier",
+              "text": "high",
+              "start": 124,
+              "end": 128
+            },
+            {
+              "type": "quantifier",
+              "text": "4",
+              "start": 130,
+              "end": 131
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": 4,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-example-4",
+          "type": "commentary_example",
+          "text": "“In Type 1, the pancreas does not produce insulin.  In Type 2, the body cells no longer respond \nto insulin but insulin is still produced.  Type 2 diabetes can be treated with a carbohydrate\ncontrolled diet.”  4 marks",
+          "order": 47,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 1",
+              "start": 4,
+              "end": 10
+            },
+            {
+              "type": "domain_term",
+              "text": "pancreas",
+              "start": 16,
+              "end": 24
+            },
+            {
+              "type": "domain_term",
+              "text": "body cells",
+              "start": 67,
+              "end": 77
+            },
+            {
+              "type": "domain_term",
+              "text": "Type 2 diabetes",
+              "start": 140,
+              "end": 155
+            },
+            {
+              "type": "domain_term",
+              "text": "controlled diet",
+              "start": 191,
+              "end": 206
+            },
+            {
+              "type": "quantifier",
+              "text": "4",
+              "start": 210,
+              "end": 211
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": 4,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-example-4-explanation",
+          "type": "commentary_text",
+          "text": "The student has given detail from the 3 headings, and a logical link is \ngiven, but they have not linked this to C-peptide, therefore cannot enter level 3.",
+          "order": 48,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not linked",
+              "start": 94,
+              "end": 104
+            },
+            {
+              "type": "domain_term",
+              "text": "C-peptide",
+              "start": 113,
+              "end": 122
+            },
+            {
+              "type": "qualifier",
+              "text": "cannot enter",
+              "start": 134,
+              "end": 146
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_6_2-example-5",
+          "type": "commentary_example",
+          "text": "“In Type 1, the C-peptide would be low because the pancreas does not produce insulin, but in \nType 2 the C-peptide would be high.  If they have Type 2, they could stop insulin injections.” 5 \nmarks",
+          "order": 49,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Type 1",
+              "start": 4,
+              "end": 10
+            },
+            {
+              "type": "domain_term",
+              "text": "pancreas",
+              "start": 51,
+              "end": 59
+            },
+            {
+              "type": "domain_term",
+              "text": "Type 2, they could stop insulin injections",
+              "start": 144,
+              "end": 186
+            },
+            {
+              "type": "quantifier",
+              "text": "5",
+              "start": 189,
+              "end": 190
+            }
+          ],
+          "source": {
+            "file": "B-JUN25-84641H-6_2-C.txt",
+            "page": null
+          },
+          "marks": 5,
+          "level": 3,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-11-13T11:13:29.932647+00:00",
+    "requires_review": true,
+    "warnings": [
+      {
+        "document_id": "commentary_6_2",
+        "page": null,
+        "message": "Dropped annotation on commentary_6_2-bp10-rule: could not place qualifier 'insufficient' with exact unique offsets"
+      },
+      {
+        "document_id": "commentary_6_2",
+        "page": null,
+        "message": "Cleared parent_id on commentary_6_2-level-3-requirements (heading is not a semantic parent)"
+      },
+      {
+        "document_id": "commentary_6_2",
+        "page": null,
+        "message": "Cleared parent_id on commentary_6_2-level-2-bullet (heading is not a semantic parent)"
+      },
+      {
+        "document_id": "commentary_6_2",
+        "page": null,
+        "message": "Cleared parent_id on commentary_6_2-level-1-bullet (heading is not a semantic parent)"
+      },
+      {
+        "document_id": "commentary_6_2",
+        "page": null,
+        "message": "Cleared parent_id on commentary_6_2-example-1 (heading is not a semantic parent)"
+      },
+      {
+        "document_id": "commentary_6_2",
+        "page": null,
+        "message": "Cleared parent_id on commentary_6_2-example-2 (heading is not a semantic parent)"
+      },
+      {
+        "document_id": "commentary_6_2",
+        "page": null,
+        "message": "Cleared parent_id on commentary_6_2-example-3 (heading is not a semantic parent)"
+      },
+      {
+        "document_id": "commentary_6_2",
+        "page": null,
+        "message": "Cleared parent_id on commentary_6_2-example-4 (heading is not a semantic parent)"
+      },
+      {
+        "document_id": "commentary_6_2",
+        "page": null,
+        "message": "Cleared parent_id on commentary_6_2-example-5 (heading is not a semantic parent)"
+      }
+    ]
+  }
+}

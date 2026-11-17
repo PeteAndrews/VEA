@@ -6,8 +6,10 @@ import { restoreStudySession } from "./studySlice";
 import ControlPlaceholderPage from "./pages/ControlPlaceholderPage";
 import LoginPage from "./pages/LoginPage";
 import MarkingPage from "./pages/MarkingPage";
+import QuestionnairePage from "./pages/QuestionnairePage";
 import QuestionsPage from "./pages/QuestionsPage";
 import StudyMarkingPage from "./pages/StudyMarkingPage";
+import BaselineWalkthroughPage from "./pages/BaselineWalkthroughPage";
 import WalkthroughPage from "./pages/WalkthroughPage";
 
 function RequireStudyLogin({ children }) {
@@ -34,6 +36,22 @@ export default function App() {
         element={
           <RequireStudyLogin>
             <WalkthroughPage />
+          </RequireStudyLogin>
+        }
+      />
+      <Route
+        path="/study/baseline-walkthrough"
+        element={
+          <RequireStudyLogin>
+            <BaselineWalkthroughPage />
+          </RequireStudyLogin>
+        }
+      />
+      <Route
+        path="/study/questionnaire/:key/:scope"
+        element={
+          <RequireStudyLogin>
+            <QuestionnairePage />
           </RequireStudyLogin>
         }
       />

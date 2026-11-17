@@ -1,0 +1,133 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "B-JUN24-84611F-4_1",
+  "question_id": "4_1",
+  "relationships": [
+    {
+      "source_id": "ms_4_1-starch-test",
+      "target_id": "q_4_1-starch-subquestion",
+      "relation": "APPLIES_TO",
+      "confidence": 0.99,
+      "rationale": "The iodine test is the specified test for the starch subquestion.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_4_1-sugar-test",
+      "target_id": "q_4_1-sugar-subquestion",
+      "relation": "APPLIES_TO",
+      "confidence": 0.99,
+      "rationale": "The Benedict’s test is the specified test for the sugar subquestion.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_4_1-starch-positive",
+      "target_id": "q_4_1-results-instruction",
+      "relation": "APPLIES_TO",
+      "confidence": 0.98,
+      "rationale": "This point supplies the requested positive result for the starch test.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_4_1-starch-negative",
+      "target_id": "q_4_1-results-instruction",
+      "relation": "APPLIES_TO",
+      "confidence": 0.98,
+      "rationale": "This point supplies the requested negative result for the starch test.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_4_1-sugar-positive",
+      "target_id": "q_4_1-results-instruction",
+      "relation": "APPLIES_TO",
+      "confidence": 0.98,
+      "rationale": "This point supplies the requested positive result for the sugar test.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_4_1-sugar-negative",
+      "target_id": "q_4_1-results-instruction",
+      "relation": "APPLIES_TO",
+      "confidence": 0.98,
+      "rationale": "This point supplies the requested negative result for the sugar test.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_4_1-heating",
+      "target_id": "ms_4_1-sugar-test",
+      "relation": "APPLIES_TO",
+      "confidence": 0.97,
+      "rationale": "The heating instruction is a procedural part of the Benedict’s sugar test.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_4_1-level-2",
+      "target_id": "ms_4_1-level-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "The rule specifies that the detailed Level 2 account must cover tests for both starch and sugar.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_4_1-level-2-access",
+      "target_id": "ms_4_1-level-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "The commentary defines the minimum evidence needed to satisfy the Level 2 requirement: both reagents and one test colour.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_4_1-level-2-higher-mark",
+      "target_id": "ms_4_1-level-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "The commentary specifies what distinguishes the higher mark within the 3–4 mark level.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_4_1-level-1-access",
+      "target_id": "ms_4_1-level-1",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "The commentary identifies one indicative point as the minimum evidence for entry into Level 1.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_4_1-level-1-limit",
+      "target_id": "ms_4_1-level-1",
+      "relation": "CONSTRAINS",
+      "confidence": 0.99,
+      "rationale": "It establishes that responses covering only one carbohydrate cannot progress beyond Level 1.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_4_1-heat-guidance",
+      "target_id": "ms_4_1-heating",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "The commentary explains that heating can earn Level 1 credit but is not necessary for Level 2.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_4_1-benedicts-example",
+      "target_id": "commentary_4_1-heat-guidance",
+      "relation": "EXEMPLIFIES",
+      "confidence": 0.98,
+      "rationale": "The quoted response demonstrates heating being used as a creditworthy Level 1 point with the Benedict’s test.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_4_1-context-guidance",
+      "target_id": "ms_4_1-heating",
+      "relation": "CONSTRAINS",
+      "confidence": 0.99,
+      "rationale": "It restricts credit for heating to statements that connect it to Benedict’s reagent or the sugar test.",
+      "provenance": "llm"
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-11-17T09:58:46.189965+00:00",
+    "requires_review": false,
+    "warnings": []
+  }
+}

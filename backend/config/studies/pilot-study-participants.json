@@ -3,46 +3,48 @@
   "study_id": "pilot-study",
   "participants": [
     {
-      "participant_id": "CHEM-VEA-001",
-      "token": "chem-vea-token-replace-me",
-      "condition": "vea",
-      "subject": "chemistry",
-      "walkthrough_required": false
-    },
-    {
-      "participant_id": "CHEM-CTL-001",
-      "token": "chem-control-token-replace-me",
-      "condition": "control",
-      "subject": "chemistry",
-      "walkthrough_required": false
-    },
-    {
-      "participant_id": "BIO-VEA-001",
-      "token": "bio-vea-001",
-      "condition": "vea",
+      "participant_id": "BIO-001",
+      "token": "bio-001a",
       "subject": "biology",
+      "condition_order": ["vea", "baseline"],
+      "questions": {
+        "vea": ["B-JUN24-84612H-05_6"],
+        "baseline": []
+      },
       "walkthrough_required": true
     },
     {
-      "participant_id": "BIO-CTL-001",
-      "token": "bio-control-token-replace-me",
-      "condition": "control",
+      "participant_id": "BIO-002",
+      "token": "bio-002a",
       "subject": "biology",
+      "condition_order": ["baseline", "vea"],
+      "questions": {
+        "vea": [],
+        "baseline": ["B-JUN24-84612H-05_6"]
+      },
       "walkthrough_required": false
     },
     {
-      "participant_id": "BIO-VEA-002",
-      "token": "bio-vea-002",
-      "condition": "vea",
+      "participant_id": "BIO-003",
+      "token": "bio-003a",
       "subject": "biology",
-      "walkthrough_required": true
+      "condition_order": ["baseline", "vea"],
+      "questions": {
+        "vea": [],
+        "baseline": ["B-JUN24-84612H-05_6"]
+      },
+      "walkthrough_required": false
     },
     {
-      "participant_id": "BIO-VEA-003",
-      "token": "bio-vea-003",
-      "condition": "vea",
+      "participant_id": "BIO-004",
+      "token": "bio-004a",
       "subject": "biology",
-      "walkthrough_required": true
+      "condition_order": ["baseline", "vea"],
+      "questions": {
+        "vea": [],
+        "baseline": ["B-JUN24-84612H-05_6"]
+      },
+      "walkthrough_required": false
     }
   ]
 }

@@ -14,7 +14,7 @@ export default function LoginPage() {
     event.preventDefault();
     dispatch(openStudySession({ token: token.trim() })).then((result) => {
       if (result.meta.requestStatus === "fulfilled") {
-        navigate("/questions");
+        navigate(result.payload.progress?.next?.route || "/questions");
       }
     });
   }

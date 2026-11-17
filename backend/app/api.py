@@ -535,6 +535,15 @@ def get_judgement(marking_session_id: str, assessment_id: str, candidate_id: str
     return judgement_view(state, service, DATA_DIR)
 
 
+def _require_study_marking_open(marking_session_id: str) -> None:
+    from app.dependencies import study_service
+
+    try:
+        study_service().assert_trial_marking_open(marking_session_id)
+    except PermissionError as exc:
+        raise HTTPException(status_code=403, detail=str(exc)) from None
+
+
 @app.post(
     "/marking-sessions/{marking_session_id}/assessments/{assessment_id}/candidates/{candidate_id}/judgement/codings"
 )
@@ -544,6 +553,7 @@ def post_judgement_coding(
     candidate_id: str,
     body: CreateCodingRequest,
 ) -> dict:
+    _require_study_marking_open(marking_session_id)
     session = _require_session(marking_session_id)
     service, record, state, store = _load_judgement_context(
         marking_session_id,
@@ -579,6 +589,7 @@ def patch_judgement_coding(
     coding_id: str,
     body: UpdateCodingRequest,
 ) -> dict:
+    _require_study_marking_open(marking_session_id)
     session = _require_session(marking_session_id)
     service, record, state, store = _load_judgement_context(
         marking_session_id,
@@ -614,6 +625,7 @@ def delete_judgement_coding(
     candidate_id: str,
     coding_id: str,
 ) -> dict:
+    _require_study_marking_open(marking_session_id)
     session = _require_session(marking_session_id)
     service, _record, state, store = _load_judgement_context(
         marking_session_id,
@@ -636,6 +648,7 @@ def put_tentative_level(
     candidate_id: str,
     body: TentativeLevelRequest,
 ) -> dict:
+    _require_study_marking_open(marking_session_id)
     session = _require_session(marking_session_id)
     service, _record, state, store = _load_judgement_context(
         marking_session_id,

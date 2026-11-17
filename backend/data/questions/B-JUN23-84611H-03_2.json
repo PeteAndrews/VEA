@@ -1,0 +1,1552 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "B-JUN23-84611H-03_2",
+  "question_id": "03_2",
+  "metadata": {
+    "subject": null,
+    "qualification": null,
+    "paper": null,
+    "maximum_mark": 4,
+    "assessment_objective": null,
+    "specification_reference": null,
+    "marking_mode": "level_of_response"
+  },
+  "documents": [
+    {
+      "document_id": "q_03_2",
+      "document_type": "question",
+      "source_file": "B-JUN23-84611H-03_2-Q.txt",
+      "segments": [
+        {
+          "id": "q_03_2-number",
+          "type": "other_question_content",
+          "text": "03.2",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_2-context-1",
+          "type": "question_text",
+          "text": "During a food poisoning outbreak, scientists identified the farm where the food \ncame from.",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "food poisoning outbreak",
+              "start": 9,
+              "end": 32
+            },
+            {
+              "type": "domain_term",
+              "text": "farm",
+              "start": 60,
+              "end": 64
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_2-context-2",
+          "type": "question_text",
+          "text": "The farmer had not vaccinated the farm animals against Salmonella bacteria.",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not",
+              "start": 15,
+              "end": 18
+            },
+            {
+              "type": "domain_term",
+              "text": "vaccinated",
+              "start": 19,
+              "end": 29
+            },
+            {
+              "type": "domain_term",
+              "text": "farm animals",
+              "start": 34,
+              "end": 46
+            },
+            {
+              "type": "domain_term",
+              "text": "Salmonella bacteria",
+              "start": 55,
+              "end": 74
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_2-context-3",
+          "type": "question_text",
+          "text": "The food poisoning outbreak could have been prevented if the farm animals had \nbeen vaccinated.",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "food poisoning outbreak",
+              "start": 4,
+              "end": 27
+            },
+            {
+              "type": "domain_term",
+              "text": "farm animals",
+              "start": 61,
+              "end": 73
+            },
+            {
+              "type": "domain_term",
+              "text": "vaccinated",
+              "start": 84,
+              "end": 94
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_2-instruction",
+          "type": "question_instruction",
+          "text": "Explain how:",
+          "order": 5,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "Explain",
+              "start": 0,
+              "end": 7
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_2-subquestion-1",
+          "type": "subquestion",
+          "text": "• the immune systems of animals respond to a vaccination",
+          "order": 6,
+          "parent_id": "q_03_2-instruction",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "immune systems",
+              "start": 6,
+              "end": 20
+            },
+            {
+              "type": "domain_term",
+              "text": "animals",
+              "start": 24,
+              "end": 31
+            },
+            {
+              "type": "domain_term",
+              "text": "vaccination",
+              "start": 45,
+              "end": 56
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_2-subquestion-2",
+          "type": "subquestion",
+          "text": "• the immune response in farm animals prevents an outbreak of food poisoning in \nhumans.",
+          "order": 7,
+          "parent_id": "q_03_2-instruction",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "immune response",
+              "start": 6,
+              "end": 21
+            },
+            {
+              "type": "domain_term",
+              "text": "farm animals",
+              "start": 25,
+              "end": 37
+            },
+            {
+              "type": "domain_term",
+              "text": "food poisoning",
+              "start": 62,
+              "end": 76
+            },
+            {
+              "type": "domain_term",
+              "text": "humans",
+              "start": 81,
+              "end": 87
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_03_2-marks",
+          "type": "other_question_content",
+          "text": "[4 marks]",
+          "order": 8,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "4",
+              "start": 1,
+              "end": 2
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-Q.txt",
+            "page": null
+          },
+          "marks": 4,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    },
+    {
+      "document_id": "ms_03_2",
+      "document_type": "mark_scheme",
+      "source_file": "B-JUN23-84611H-03_2-MS.txt",
+      "segments": [
+        {
+          "id": "ms_03_2-number",
+          "type": "other_mark_scheme_content",
+          "text": "03.2",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_2-level-2",
+          "type": "level_descriptor",
+          "text": "Level 2: Relevant points (reasons / causes) are identified, given in \ndetail and logically linked to form a clear account. 3-4",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "logically linked",
+              "start": 81,
+              "end": 97
+            },
+            {
+              "type": "qualifier",
+              "text": "clear",
+              "start": 108,
+              "end": 113
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": {
+            "min": 3,
+            "max": 4
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_2-level-1",
+          "type": "level_descriptor",
+          "text": "Level 1: Relevant points (reasons / causes) are identified, and \nthere are attempts at logical linking.  The resulting account is not \nfully clear. 1-2",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not \nfully clear",
+              "start": 130,
+              "end": 146
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": {
+            "min": 1,
+            "max": 2
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_2-no-content",
+          "type": "level_rule",
+          "text": "No relevant content 0",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "No",
+              "start": 0,
+              "end": 2
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": 0,
+          "level": 0,
+          "mark_range": {
+            "min": 0,
+            "max": 0
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_2-indicative-heading",
+          "type": "indicative_content_group",
+          "text": "Indicative content:",
+          "order": 5,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_2-group-vaccination",
+          "type": "indicative_content_group",
+          "text": "Vaccination of animal",
+          "order": 6,
+          "parent_id": "ms_03_2-indicative-heading",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Vaccination",
+              "start": 0,
+              "end": 11
+            },
+            {
+              "type": "domain_term",
+              "text": "animal",
+              "start": 15,
+              "end": 21
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_2-vaccination-point-1",
+          "type": "indicative_point",
+          "text": "• (animal’s) white blood cells / lymphocytes produce antibodies \n(against Salmonella / vaccine / antigens)",
+          "order": 7,
+          "parent_id": "ms_03_2-group-vaccination",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "white blood cells",
+              "start": 13,
+              "end": 30
+            },
+            {
+              "type": "domain_term",
+              "text": "lymphocytes",
+              "start": 33,
+              "end": 44
+            },
+            {
+              "type": "domain_term",
+              "text": "antibodies",
+              "start": 53,
+              "end": 63
+            },
+            {
+              "type": "domain_term",
+              "text": "Salmonella",
+              "start": 74,
+              "end": 84
+            },
+            {
+              "type": "domain_term",
+              "text": "vaccine",
+              "start": 87,
+              "end": 94
+            },
+            {
+              "type": "domain_term",
+              "text": "antigens",
+              "start": 97,
+              "end": 105
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_2-vaccination-point-2",
+          "type": "indicative_point",
+          "text": "• antibodies are specific / complementary / correct to Salmonella \n/ antigens",
+          "order": 8,
+          "parent_id": "ms_03_2-group-vaccination",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "antibodies",
+              "start": 2,
+              "end": 12
+            },
+            {
+              "type": "domain_term",
+              "text": "specific",
+              "start": 17,
+              "end": 25
+            },
+            {
+              "type": "domain_term",
+              "text": "complementary",
+              "start": 28,
+              "end": 41
+            },
+            {
+              "type": "domain_term",
+              "text": "Salmonella",
+              "start": 55,
+              "end": 65
+            },
+            {
+              "type": "domain_term",
+              "text": "antigens",
+              "start": 69,
+              "end": 77
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_2-vaccination-point-3",
+          "type": "indicative_point",
+          "text": "• (specific) antibodies bind to Salmonella / antigens",
+          "order": 9,
+          "parent_id": "ms_03_2-group-vaccination",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "specific",
+              "start": 3,
+              "end": 11
+            },
+            {
+              "type": "domain_term",
+              "text": "antibodies",
+              "start": 13,
+              "end": 23
+            },
+            {
+              "type": "domain_term",
+              "text": "bind",
+              "start": 24,
+              "end": 28
+            },
+            {
+              "type": "domain_term",
+              "text": "Salmonella",
+              "start": 32,
+              "end": 42
+            },
+            {
+              "type": "domain_term",
+              "text": "antigens",
+              "start": 45,
+              "end": 53
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_2-group-secondary-response",
+          "type": "indicative_content_group",
+          "text": "Secondary response in animal",
+          "order": 10,
+          "parent_id": "ms_03_2-indicative-heading",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Secondary response",
+              "start": 0,
+              "end": 18
+            },
+            {
+              "type": "domain_term",
+              "text": "animal",
+              "start": 22,
+              "end": 28
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_2-secondary-point-1",
+          "type": "indicative_point",
+          "text": "• if infected (specific) antibodies are produced quickly or in large \nnumbers",
+          "order": 11,
+          "parent_id": "ms_03_2-group-secondary-response",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "infected",
+              "start": 5,
+              "end": 13
+            },
+            {
+              "type": "domain_term",
+              "text": "specific",
+              "start": 15,
+              "end": 23
+            },
+            {
+              "type": "domain_term",
+              "text": "antibodies",
+              "start": 25,
+              "end": 35
+            },
+            {
+              "type": "qualifier",
+              "text": "quickly",
+              "start": 49,
+              "end": 56
+            },
+            {
+              "type": "quantifier",
+              "text": "large \nnumbers",
+              "start": 63,
+              "end": 77
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_2-secondary-point-2",
+          "type": "indicative_point",
+          "text": "• (so) white blood cells or antibodies would kill (live) Salmonella  ",
+          "order": 12,
+          "parent_id": "ms_03_2-group-secondary-response",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "white blood cells",
+              "start": 7,
+              "end": 24
+            },
+            {
+              "type": "domain_term",
+              "text": "antibodies",
+              "start": 28,
+              "end": 38
+            },
+            {
+              "type": "domain_term",
+              "text": "kill",
+              "start": 45,
+              "end": 49
+            },
+            {
+              "type": "qualifier",
+              "text": "live",
+              "start": 51,
+              "end": 55
+            },
+            {
+              "type": "domain_term",
+              "text": "Salmonella",
+              "start": 57,
+              "end": 67
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_2-secondary-point-3",
+          "type": "indicative_point",
+          "text": "• (so) fewer / no bacteria / pathogens / Salmonella in animals or \nin animal products (meat / milk / eggs)",
+          "order": 13,
+          "parent_id": "ms_03_2-group-secondary-response",
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "fewer",
+              "start": 7,
+              "end": 12
+            },
+            {
+              "type": "qualifier",
+              "text": "no",
+              "start": 15,
+              "end": 17
+            },
+            {
+              "type": "domain_term",
+              "text": "bacteria",
+              "start": 18,
+              "end": 26
+            },
+            {
+              "type": "domain_term",
+              "text": "pathogens",
+              "start": 29,
+              "end": 38
+            },
+            {
+              "type": "domain_term",
+              "text": "Salmonella",
+              "start": 41,
+              "end": 51
+            },
+            {
+              "type": "domain_term",
+              "text": "animals",
+              "start": 55,
+              "end": 62
+            },
+            {
+              "type": "domain_term",
+              "text": "animal products",
+              "start": 70,
+              "end": 85
+            },
+            {
+              "type": "domain_term",
+              "text": "meat",
+              "start": 87,
+              "end": 91
+            },
+            {
+              "type": "domain_term",
+              "text": "milk",
+              "start": 94,
+              "end": 98
+            },
+            {
+              "type": "domain_term",
+              "text": "eggs",
+              "start": 101,
+              "end": 105
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_2-group-prevention",
+          "type": "indicative_content_group",
+          "text": "Prevention of food poisoning in humans",
+          "order": 14,
+          "parent_id": "ms_03_2-indicative-heading",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "food poisoning",
+              "start": 14,
+              "end": 28
+            },
+            {
+              "type": "domain_term",
+              "text": "humans",
+              "start": 32,
+              "end": 38
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_2-prevention-point-1",
+          "type": "indicative_point",
+          "text": "• (so) fewer / no bacteria / pathogens / Salmonella eaten or in \n(named) food",
+          "order": 15,
+          "parent_id": "ms_03_2-group-prevention",
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "fewer",
+              "start": 7,
+              "end": 12
+            },
+            {
+              "type": "qualifier",
+              "text": "no",
+              "start": 15,
+              "end": 17
+            },
+            {
+              "type": "domain_term",
+              "text": "bacteria",
+              "start": 18,
+              "end": 26
+            },
+            {
+              "type": "domain_term",
+              "text": "pathogens",
+              "start": 29,
+              "end": 38
+            },
+            {
+              "type": "domain_term",
+              "text": "Salmonella",
+              "start": 41,
+              "end": 51
+            },
+            {
+              "type": "domain_term",
+              "text": "food",
+              "start": 73,
+              "end": 77
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_2-prevention-point-2",
+          "type": "indicative_point",
+          "text": "• (so) number of bacteria never reaches a high enough level for \ninfection to develop",
+          "order": 16,
+          "parent_id": "ms_03_2-group-prevention",
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "number of bacteria",
+              "start": 7,
+              "end": 25
+            },
+            {
+              "type": "domain_term",
+              "text": "bacteria",
+              "start": 17,
+              "end": 25
+            },
+            {
+              "type": "qualifier",
+              "text": "never",
+              "start": 26,
+              "end": 31
+            },
+            {
+              "type": "qualifier",
+              "text": "high enough",
+              "start": 42,
+              "end": 53
+            },
+            {
+              "type": "domain_term",
+              "text": "infection",
+              "start": 65,
+              "end": 74
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_2-prevention-point-3",
+          "type": "indicative_point",
+          "text": "• (so) fewer toxins produced (in humans).",
+          "order": 17,
+          "parent_id": "ms_03_2-group-prevention",
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "fewer",
+              "start": 7,
+              "end": 12
+            },
+            {
+              "type": "domain_term",
+              "text": "toxins",
+              "start": 13,
+              "end": 19
+            },
+            {
+              "type": "domain_term",
+              "text": "humans",
+              "start": 33,
+              "end": 39
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_03_2-level-2-rule",
+          "type": "level_rule",
+          "text": "For Level 2 students must link immune response in animals to \nprevention of an outbreak in humans.",
+          "order": 18,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "must",
+              "start": 21,
+              "end": 25
+            },
+            {
+              "type": "domain_term",
+              "text": "immune response",
+              "start": 31,
+              "end": 46
+            },
+            {
+              "type": "domain_term",
+              "text": "animals",
+              "start": 50,
+              "end": 57
+            },
+            {
+              "type": "domain_term",
+              "text": "outbreak",
+              "start": 79,
+              "end": 87
+            },
+            {
+              "type": "domain_term",
+              "text": "humans",
+              "start": 91,
+              "end": 97
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    },
+    {
+      "document_id": "commentary_03_2",
+      "document_type": "commentary",
+      "source_file": "B-JUN23-84611H-03_2-C.txt",
+      "segments": [
+        {
+          "id": "commentary_03_2-heading",
+          "type": "commentary_heading",
+          "text": "Q03.2",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_2-introduction-1",
+          "type": "commentary_text",
+          "text": "This is an ‘Extended Response’ style of question.",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_2-introduction-2",
+          "type": "commentary_text",
+          "text": "Such questions are marked holistically.",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "holistically",
+              "start": 26,
+              "end": 38
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_2-introduction-3",
+          "type": "commentary_text",
+          "text": "You will see that there are overall generic descriptors for the two levels of response at the top of the scheme, giving a hierarchy of response.",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "overall",
+              "start": 28,
+              "end": 35
+            },
+            {
+              "type": "qualifier",
+              "text": "generic",
+              "start": 36,
+              "end": 43
+            },
+            {
+              "type": "quantifier",
+              "text": "two",
+              "start": 64,
+              "end": 67
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_2-introduction-4",
+          "type": "commentary_text",
+          "text": "Within each Level of Response there are two marks.",
+          "order": 5,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "each",
+              "start": 7,
+              "end": 11
+            },
+            {
+              "type": "quantifier",
+              "text": "two",
+              "start": 40,
+              "end": 43
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_2-introduction-5",
+          "type": "commentary_text",
+          "text": "The indicative content in the mark scheme is divided into three blocks.",
+          "order": 6,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "three",
+              "start": 58,
+              "end": 63
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_2-guidance-1",
+          "type": "commentary_guidance",
+          "text": "NOTE that the mark scheme shows indicative content.",
+          "order": 7,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_2-guidance-2",
+          "type": "commentary_guidance",
+          "text": "Hence, the list of bullet points is not exhaustive, so use your professional judgement as appropriate if the student suggests ideas that are not given in the mark scheme.",
+          "order": 8,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not exhaustive",
+              "start": 36,
+              "end": 50
+            },
+            {
+              "type": "qualifier",
+              "text": "not given",
+              "start": 141,
+              "end": 150
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_2-guidance-3",
+          "type": "commentary_guidance",
+          "text": "The question is set at high demand, so any points you consider might be creditworthy must be matched to this demand.",
+          "order": 9,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "high demand",
+              "start": 23,
+              "end": 34
+            },
+            {
+              "type": "qualifier",
+              "text": "must",
+              "start": 85,
+              "end": 89
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_2-guidance-4",
+          "type": "commentary_guidance",
+          "text": "To gain credit at Level 2, the student must refer to details of both the primary and secondary responses in animals, along with how this prevents infection of humans.",
+          "order": 10,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "must",
+              "start": 39,
+              "end": 43
+            },
+            {
+              "type": "quantifier",
+              "text": "both",
+              "start": 64,
+              "end": 68
+            },
+            {
+              "type": "domain_term",
+              "text": "primary and secondary responses",
+              "start": 73,
+              "end": 104
+            },
+            {
+              "type": "domain_term",
+              "text": "animals",
+              "start": 108,
+              "end": 115
+            },
+            {
+              "type": "domain_term",
+              "text": "infection",
+              "start": 146,
+              "end": 155
+            },
+            {
+              "type": "domain_term",
+              "text": "humans",
+              "start": 159,
+              "end": 165
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_2-guidance-5",
+          "type": "commentary_guidance",
+          "text": "For Level 2 the idea of ‘new’ antibodies are made in the animal not that they simply hanging around from the primary response, is required.",
+          "order": 11,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "new",
+              "start": 25,
+              "end": 28
+            },
+            {
+              "type": "domain_term",
+              "text": "antibodies",
+              "start": 30,
+              "end": 40
+            },
+            {
+              "type": "domain_term",
+              "text": "animal",
+              "start": 57,
+              "end": 63
+            },
+            {
+              "type": "qualifier",
+              "text": "not",
+              "start": 64,
+              "end": 67
+            },
+            {
+              "type": "domain_term",
+              "text": "primary response",
+              "start": 109,
+              "end": 125
+            },
+            {
+              "type": "qualifier",
+              "text": "required",
+              "start": 130,
+              "end": 138
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_2-guidance-6",
+          "type": "commentary_guidance",
+          "text": "To gain credit in Level 1 descriptions of both primary and secondary responses in animals are required.",
+          "order": 12,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "both",
+              "start": 42,
+              "end": 46
+            },
+            {
+              "type": "domain_term",
+              "text": "primary and secondary responses",
+              "start": 47,
+              "end": 78
+            },
+            {
+              "type": "domain_term",
+              "text": "animals",
+              "start": 82,
+              "end": 89
+            },
+            {
+              "type": "qualifier",
+              "text": "required",
+              "start": 94,
+              "end": 102
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_2-guidance-7",
+          "type": "commentary_guidance",
+          "text": "At this level we would expect students to refer to white blood cells, rather than ‘WBC’.",
+          "order": 13,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "white blood cells",
+              "start": 51,
+              "end": 68
+            },
+            {
+              "type": "domain_term",
+              "text": "WBC",
+              "start": 83,
+              "end": 86
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_2-guidance-8",
+          "type": "commentary_guidance",
+          "text": "Any mention of the full term in any part of the response will suffice if they give this abbreviation.",
+          "order": 14,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "Any",
+              "start": 0,
+              "end": 3
+            },
+            {
+              "type": "qualifier",
+              "text": "will suffice",
+              "start": 57,
+              "end": 69
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_2-guidance-9",
+          "type": "commentary_guidance",
+          "text": "If there is no full term in any part of the response, then ‘WBC’ is acceptable on second and subsequent occasions.",
+          "order": 15,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "no",
+              "start": 12,
+              "end": 14
+            },
+            {
+              "type": "domain_term",
+              "text": "WBC",
+              "start": 60,
+              "end": 63
+            },
+            {
+              "type": "quantifier",
+              "text": "second and subsequent occasions",
+              "start": 82,
+              "end": 113
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_2-guidance-10",
+          "type": "commentary_guidance",
+          "text": "Of course, students might alternatively refer to ‘lymphocytes’.",
+          "order": 16,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "lymphocytes",
+              "start": 50,
+              "end": 61
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_03_2-guidance-11",
+          "type": "commentary_guidance",
+          "text": "If the term ‘virus’ is used throughout, instead of bacteria, then the answer can only achieve Level 1.",
+          "order": 17,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "virus",
+              "start": 13,
+              "end": 18
+            },
+            {
+              "type": "qualifier",
+              "text": "throughout",
+              "start": 28,
+              "end": 38
+            },
+            {
+              "type": "domain_term",
+              "text": "bacteria",
+              "start": 51,
+              "end": 59
+            },
+            {
+              "type": "qualifier",
+              "text": "only",
+              "start": 81,
+              "end": 85
+            }
+          ],
+          "source": {
+            "file": "B-JUN23-84611H-03_2-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-11-17T09:31:54.326351+00:00",
+    "requires_review": false,
+    "warnings": []
+  }
+}

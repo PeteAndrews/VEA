@@ -1,0 +1,317 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "B-JUN25-84641H-6_2",
+  "question_id": "6_2",
+  "relationships": [
+    {
+      "source_id": "ms_6_2-group-type-1",
+      "target_id": "q_6_2-subquestion-1",
+      "relation": "APPLIES_TO",
+      "confidence": 0.96,
+      "rationale": "The Type 1 content addresses how C-peptide testing distinguishes a diabetes type.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_6_2-group-type-2",
+      "target_id": "q_6_2-subquestion-1",
+      "relation": "APPLIES_TO",
+      "confidence": 0.96,
+      "rationale": "The Type 2 content addresses how C-peptide testing distinguishes a diabetes type.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_6_2-group-importance",
+      "target_id": "q_6_2-subquestion-2",
+      "relation": "APPLIES_TO",
+      "confidence": 0.99,
+      "rationale": "This content group directly addresses the requested importance of identifying Type 2 diabetes correctly.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_6_2-level-3-rule",
+      "target_id": "ms_6_2-level-3",
+      "relation": "CONSTRAINS",
+      "confidence": 0.99,
+      "rationale": "The rule specifies the subject coverage and links needed for a Level 3 response.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-marking-rule-1",
+      "target_id": "ms_6_2-level-3",
+      "relation": "CONSTRAINS",
+      "confidence": 0.96,
+      "rationale": "It requires holistic level-of-response marking rather than awarding one mark per idea.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-marking-rule-1",
+      "target_id": "ms_6_2-level-2",
+      "relation": "CONSTRAINS",
+      "confidence": 0.96,
+      "rationale": "It requires holistic level-of-response marking rather than awarding one mark per idea.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-marking-rule-1",
+      "target_id": "ms_6_2-level-1",
+      "relation": "CONSTRAINS",
+      "confidence": 0.96,
+      "rationale": "It requires holistic level-of-response marking rather than awarding one mark per idea.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-linking-rule",
+      "target_id": "ms_6_2-type-1-point-3",
+      "relation": "CONSTRAINS",
+      "confidence": 0.94,
+      "rationale": "It prevents credit where the stated relationship between C-peptide and injected insulin is incorrect.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-bp1-rule-1",
+      "target_id": "ms_6_2-type-1-point-1",
+      "relation": "REJECTS",
+      "confidence": 0.99,
+      "rationale": "It explicitly says that merely stating that the person does not produce insulin is insufficient for BP1.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-bp1-rule-2",
+      "target_id": "ms_6_2-type-1-point-1",
+      "relation": "CONSTRAINS",
+      "confidence": 1.0,
+      "rationale": "It specifies that the pancreas must be identified for this point.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-bp2-rule",
+      "target_id": "ms_6_2-type-1-point-2",
+      "relation": "ACCEPTS",
+      "confidence": 1.0,
+      "rationale": "It explicitly accepts 'no C-peptide' as equivalent to low C-peptide.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-bp3-rule-1",
+      "target_id": "ms_6_2-type-1-point-3",
+      "relation": "CONSTRAINS",
+      "confidence": 1.0,
+      "rationale": "It makes credit for BP3 conditional on credit being awarded for the low C-peptide point.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-bp3-rule-2",
+      "target_id": "ms_6_2-type-1-point-3",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains that 'even if' links this point to the preceding low C-peptide point.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-bp4-equivalents",
+      "target_id": "ms_6_2-type-2-point-1",
+      "relation": "ACCEPTS",
+      "confidence": 1.0,
+      "rationale": "It accepts muscle or liver as equivalents for body or cells in BP4.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-bp4-rule",
+      "target_id": "ms_6_2-type-2-point-1",
+      "relation": "ACCEPTS",
+      "confidence": 0.99,
+      "rationale": "It explicitly accepts resistant, insensitive, or not reacting to insulin as creditworthy formulations.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-bp4-rule",
+      "target_id": "ms_6_2-type-2-point-1",
+      "relation": "REJECTS",
+      "confidence": 0.99,
+      "rationale": "It explicitly rejects formulations such as immune to, unable to detect, or rejecting insulin.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-bp5-rule",
+      "target_id": "ms_6_2-type-2-point-2",
+      "relation": "ACCEPTS",
+      "confidence": 1.0,
+      "rationale": "It accepts statements that people with Type 2 have insulin or increased insulin as equivalent to insulin being produced.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-bp6-rule-1",
+      "target_id": "ms_6_2-type-2-point-3",
+      "relation": "REJECTS",
+      "confidence": 1.0,
+      "rationale": "It states that saying C-peptide is made or fluctuates is insufficient for BP6.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-bp6-rule-2",
+      "target_id": "ms_6_2-type-2-point-3",
+      "relation": "ACCEPTS",
+      "confidence": 1.0,
+      "rationale": "It explicitly accepts a normal C-peptide level for this point.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-bp7-equivalence",
+      "target_id": "ms_6_2-importance-point-1",
+      "relation": "ACCEPTS",
+      "confidence": 1.0,
+      "rationale": "It accepts 'insulin shots' as equivalent to 'insulin injections' for BP7.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-bp7-rule",
+      "target_id": "ms_6_2-importance-point-1",
+      "relation": "REJECTS",
+      "confidence": 0.99,
+      "rationale": "It explicitly says that claiming insulin injections will not work in Type 2 is insufficient.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-bp8-rule",
+      "target_id": "ms_6_2-importance-point-2",
+      "relation": "REJECTS",
+      "confidence": 0.99,
+      "rationale": "It rejects the listed claims about insulin being dangerous, causing excessive levels, coma, or death as support for the side-effects point.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-bp10-rule",
+      "target_id": "ms_6_2-importance-point-4",
+      "relation": "ACCEPTS",
+      "confidence": 0.96,
+      "rationale": "It explicitly allows the converse idea that Type 2 is more likely with inactivity or obesity.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-bp10-rule",
+      "target_id": "ms_6_2-importance-point-4",
+      "relation": "REJECTS",
+      "confidence": 0.99,
+      "rationale": "It rejects vague healthy-lifestyle statements and simplistic claims that poor diet or lack of exercise causes Type 2.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-level-3-requirements",
+      "target_id": "ms_6_2-level-3-rule",
+      "relation": "CLARIFIES",
+      "confidence": 1.0,
+      "rationale": "It itemises the three-heading coverage, C-peptide content, and logical link needed to satisfy the Level 3 rule.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-level-2-rule-1",
+      "target_id": "ms_6_2-level-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "It specifies where the logical linking described by the Level 2 descriptor may occur.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-level-2-rule-2",
+      "target_id": "ms_6_2-level-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "It confirms that a qualifying link must express a logical relationship, not merely juxtapose points.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-level-2-example-1",
+      "target_id": "commentary_6_2-level-2-rule-2",
+      "relation": "EXEMPLIFIES",
+      "confidence": 1.0,
+      "rationale": "The example demonstrates a logical link between stopping injections and avoiding their side effects.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-level-2-example-2",
+      "target_id": "commentary_6_2-level-2-rule-3",
+      "relation": "EXEMPLIFIES",
+      "confidence": 0.99,
+      "rationale": "The example demonstrates two relevant statements that are not logically linked.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-level-2-rule-5",
+      "target_id": "ms_6_2-level-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains when to award the higher mark within the Level 2 band.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-level-1-bullet",
+      "target_id": "ms_6_2-level-1",
+      "relation": "CLARIFIES",
+      "confidence": 0.96,
+      "rationale": "It identifies any relevant indicative content as the basic threshold for Level 1.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-level-1-rule",
+      "target_id": "ms_6_2-level-1",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains when to award the higher mark within the Level 1 band.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-example-1",
+      "target_id": "ms_6_2-level-1",
+      "relation": "EXEMPLIFIES",
+      "confidence": 1.0,
+      "rationale": "The one-mark response exemplifies a simply stated relevant point without developed linking.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-example-2",
+      "target_id": "ms_6_2-level-2",
+      "relation": "EXEMPLIFIES",
+      "confidence": 1.0,
+      "rationale": "The three-mark response exemplifies linked Type 1 points at the lower end of Level 2.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-example-3",
+      "target_id": "ms_6_2-level-2",
+      "relation": "EXEMPLIFIES",
+      "confidence": 1.0,
+      "rationale": "The four-mark response exemplifies a more developed Level 2 account spanning Type 1 and Type 2.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-example-4",
+      "target_id": "ms_6_2-level-2",
+      "relation": "EXEMPLIFIES",
+      "confidence": 1.0,
+      "rationale": "The response is awarded four marks and exemplifies an upper-Level-2 answer that lacks the required C-peptide link.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-example-4-explanation",
+      "target_id": "commentary_6_2-example-4",
+      "relation": "CLARIFIES",
+      "confidence": 1.0,
+      "rationale": "It explains why the example remains at Level 2 despite covering all three headings.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_6_2-example-5",
+      "target_id": "ms_6_2-level-3",
+      "relation": "EXEMPLIFIES",
+      "confidence": 1.0,
+      "rationale": "The five-mark response exemplifies Level 3 by covering both diabetes types, C-peptide, importance, and logical linking.",
+      "provenance": "llm"
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-11-13T11:27:20.098180+00:00",
+    "requires_review": false,
+    "warnings": []
+  }
+}

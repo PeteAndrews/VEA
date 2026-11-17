@@ -1799,6 +1799,12 @@ body:has(.marking-page) {
   top: auto;
 }
 
+.walkthrough-card-baseline-anchor {
+  transform: none;
+  max-height: min(70vh, 420px);
+  overflow-y: auto;
+}
+
 .walkthrough-card-bottom-right {
   bottom: 16px;
   right: 16px;
@@ -1833,4 +1839,254 @@ body:has(.marking-page) {
 
 .walkthrough-error {
   padding: 24px;
+}
+
+.walkthrough-dim-solid {
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.condition-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.condition-block {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.1rem 1.2rem;
+  background: #fff;
+}
+
+.condition-block-locked {
+  opacity: 0.72;
+}
+
+.condition-block-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.condition-block-header h2 {
+  margin: 0;
+}
+
+.assessment-card-muted {
+  opacity: 0.85;
+}
+
+.baseline-marking-layout {
+  grid-template-columns: 400px minmax(0, 1fr) min(468px, 34vw);
+}
+
+.baseline-marking-layout .marking-column-right .commentary-panel {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.baseline-marking-layout .commentary-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.baseline-response-body {
+  white-space: pre-wrap;
+}
+
+.mark-scheme-table-wrap {
+  overflow-x: auto;
+}
+
+.mark-scheme-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.mark-scheme-table th,
+.mark-scheme-table td {
+  border: 1px solid var(--border);
+  padding: 0.55rem 0.65rem;
+  vertical-align: top;
+  text-align: left;
+}
+
+.mark-scheme-table thead th {
+  background: #f1f5f9;
+  font-weight: 700;
+}
+
+.mark-scheme-question-cell {
+  width: 4.5rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.mark-scheme-mark-cell {
+  width: 4rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.mark-scheme-answers-cell p {
+  margin: 0.35rem 0 0;
+}
+
+.mark-scheme-theme-title {
+  font-weight: 600;
+  margin: 0.65rem 0 0.25rem;
+}
+
+.mark-scheme-bullets,
+.mark-scheme-subbullets {
+  margin: 0.25rem 0 0.5rem;
+  padding-left: 1.2rem;
+}
+
+.mark-scheme-footer-note {
+  margin-top: 0.75rem;
+  font-style: italic;
+}
+
+.baseline-marking-layout .mark-scheme-panel {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.baseline-marking-layout .mark-scheme-panel .panel-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.questionnaire-page {
+  max-width: 960px;
+  display: grid;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}
+
+.questionnaire-item {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.9rem 1rem 1rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.questionnaire-item legend {
+  font-weight: 600;
+  padding: 0 0.25rem;
+}
+
+.questionnaire-options,
+.questionnaire-pair {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.questionnaire-options label,
+.questionnaire-ticks,
+.questionnaire-text {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.questionnaire-text,
+.questionnaire-ticks {
+  display: grid;
+  justify-items: stretch;
+  gap: 0.35rem;
+}
+
+.questionnaire-scale {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: flex-start;
+}
+
+.questionnaire-scale label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  width: 6.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.questionnaire-slider {
+  position: relative;
+  padding-top: 1.75rem;
+}
+
+.questionnaire-slider-bubble {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.questionnaire-slider-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.questionnaire-ticks input[type="range"] {
+  width: 100%;
+  margin: 0;
+}
+
+.questionnaire-pair {
+  display: grid;
+  grid-template-columns: minmax(9rem, 1fr) 16.5rem minmax(9rem, 1fr);
+  column-gap: 0.85rem;
+  align-items: center;
+}
+
+.questionnaire-pair > span:first-of-type {
+  text-align: right;
+}
+
+.questionnaire-pair > span:last-of-type {
+  text-align: left;
+}
+
+.questionnaire-pair-scale {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-items: center;
+  align-items: center;
+}
+
+.questionnaire-pair-scale input {
+  margin: 0;
+}
+
+.questionnaire-page textarea,
+.questionnaire-page select,
+.questionnaire-text input {
+  width: 100%;
+  font: inherit;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.questionnaire-reminder {
+  margin: 0;
 }

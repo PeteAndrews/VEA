@@ -1,0 +1,1534 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "B-JUN24-84611H-3_1",
+  "question_id": "3_1",
+  "metadata": {
+    "subject": null,
+    "qualification": null,
+    "paper": null,
+    "maximum_mark": 6,
+    "assessment_objective": null,
+    "specification_reference": null,
+    "marking_mode": "level_of_response"
+  },
+  "documents": [
+    {
+      "document_id": "q_3_1",
+      "document_type": "question",
+      "source_file": "B-JUN24-84611H-3_1-Q.txt",
+      "segments": [
+        {
+          "id": "q_3_1-label",
+          "type": "other_question_content",
+          "text": "Q3.1",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_3_1-context",
+          "type": "question_text",
+          "text": "Cake and bread each contain the same two types of carbohydrate. ",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Cake",
+              "start": 0,
+              "end": 4
+            },
+            {
+              "type": "domain_term",
+              "text": "bread",
+              "start": 9,
+              "end": 14
+            },
+            {
+              "type": "quantifier",
+              "text": "two",
+              "start": 37,
+              "end": 40
+            },
+            {
+              "type": "domain_term",
+              "text": "two types of carbohydrate",
+              "start": 37,
+              "end": 62
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_3_1-instruction-1",
+          "type": "question_instruction",
+          "text": "Describe the chemical tests that could be used to show the presence of the two types of carbohydrate in cake. ",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "Describe",
+              "start": 0,
+              "end": 8
+            },
+            {
+              "type": "domain_term",
+              "text": "chemical tests",
+              "start": 13,
+              "end": 27
+            },
+            {
+              "type": "quantifier",
+              "text": "two",
+              "start": 75,
+              "end": 78
+            },
+            {
+              "type": "domain_term",
+              "text": "two types of carbohydrate",
+              "start": 75,
+              "end": 100
+            },
+            {
+              "type": "domain_term",
+              "text": "cake",
+              "start": 104,
+              "end": 108
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_3_1-instruction-2",
+          "type": "question_instruction",
+          "text": "Include a risk assessment in your answer. ",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "Include",
+              "start": 0,
+              "end": 7
+            },
+            {
+              "type": "domain_term",
+              "text": "risk assessment",
+              "start": 10,
+              "end": 25
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_3_1-marks",
+          "type": "other_question_content",
+          "text": "6 Marks",
+          "order": 5,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-Q.txt",
+            "page": null
+          },
+          "marks": 6,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    },
+    {
+      "document_id": "ms_3_1",
+      "document_type": "mark_scheme",
+      "source_file": "B-JUN24-84611H-3_1-MS.txt",
+      "segments": [
+        {
+          "id": "ms_3_1-label",
+          "type": "other_mark_scheme_content",
+          "text": "03.1 ",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-level-3",
+          "type": "level_descriptor",
+          "text": "Level 3: The method would lead to the production of a valid \noutcome. The key steps are identified and logically sequenced. 5–6 ",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "method",
+              "start": 13,
+              "end": 19
+            },
+            {
+              "type": "domain_term",
+              "text": "steps",
+              "start": 78,
+              "end": 83
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": {
+            "min": 5,
+            "max": 6
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-level-2",
+          "type": "level_descriptor",
+          "text": "Level 2: The method would not necessarily lead to a valid \noutcome. Most steps are identified, but the method is not fully \nlogically sequenced. 3–4 ",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "steps",
+              "start": 73,
+              "end": 78
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": {
+            "min": 3,
+            "max": 4
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-level-1",
+          "type": "level_descriptor",
+          "text": "Level 1: The method would not lead to a valid outcome. Some \nrelevant steps are identified, but links are not made clear. 1–2",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "method",
+              "start": 13,
+              "end": 19
+            },
+            {
+              "type": "domain_term",
+              "text": "steps",
+              "start": 70,
+              "end": 75
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": {
+            "min": 1,
+            "max": 2
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-no-content",
+          "type": "level_rule",
+          "text": "No relevant content. 0",
+          "order": 5,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": 0,
+          "level": 0,
+          "mark_range": {
+            "min": 0,
+            "max": 0
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-indicative-content",
+          "type": "indicative_content_group",
+          "text": "Indicative content ",
+          "order": 6,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-point-1",
+          "type": "indicative_point",
+          "text": "• iodine solution tests for starch ",
+          "order": 7,
+          "parent_id": "ms_3_1-indicative-content",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "iodine solution",
+              "start": 2,
+              "end": 17
+            },
+            {
+              "type": "domain_term",
+              "text": "starch",
+              "start": 28,
+              "end": 34
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-point-2",
+          "type": "indicative_point",
+          "text": "• iodine changes from yellow / orange / brown ",
+          "order": 8,
+          "parent_id": "ms_3_1-indicative-content",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "iodine",
+              "start": 2,
+              "end": 8
+            },
+            {
+              "type": "domain_term",
+              "text": "yellow / orange / brown",
+              "start": 22,
+              "end": 45
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-point-3",
+          "type": "indicative_point",
+          "text": "• to blue-black or black or dark blue (to show starch is present \nwhen added to cake) ",
+          "order": 9,
+          "parent_id": "ms_3_1-indicative-content",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "blue-black",
+              "start": 5,
+              "end": 15
+            },
+            {
+              "type": "domain_term",
+              "text": "dark blue",
+              "start": 28,
+              "end": 37
+            },
+            {
+              "type": "domain_term",
+              "text": "starch",
+              "start": 47,
+              "end": 53
+            },
+            {
+              "type": "domain_term",
+              "text": "cake",
+              "start": 80,
+              "end": 84
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-point-4",
+          "type": "indicative_point",
+          "text": "• Benedict’s (reagent) tests for sugar / glucose ",
+          "order": 10,
+          "parent_id": "ms_3_1-indicative-content",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Benedict’s (reagent)",
+              "start": 2,
+              "end": 22
+            },
+            {
+              "type": "domain_term",
+              "text": "sugar / glucose",
+              "start": 33,
+              "end": 48
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-point-5",
+          "type": "indicative_point",
+          "text": "• heat (to at least 60 °C) / boil cake with Benedict’s (reagent) ",
+          "order": 11,
+          "parent_id": "ms_3_1-indicative-content",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "heat",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "type": "qualifier",
+              "text": "at least",
+              "start": 11,
+              "end": 19
+            },
+            {
+              "type": "domain_term",
+              "text": "60 °C",
+              "start": 20,
+              "end": 25
+            },
+            {
+              "type": "domain_term",
+              "text": "boil",
+              "start": 29,
+              "end": 33
+            },
+            {
+              "type": "domain_term",
+              "text": "cake",
+              "start": 34,
+              "end": 38
+            },
+            {
+              "type": "domain_term",
+              "text": "Benedict’s (reagent)",
+              "start": 44,
+              "end": 64
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-point-6",
+          "type": "indicative_point",
+          "text": "• Benedict’s (reagent) changes from blue ",
+          "order": 12,
+          "parent_id": "ms_3_1-indicative-content",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Benedict’s (reagent)",
+              "start": 2,
+              "end": 22
+            },
+            {
+              "type": "domain_term",
+              "text": "blue",
+              "start": 36,
+              "end": 40
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-point-7",
+          "type": "indicative_point",
+          "text": "• to green / yellow / orange / brown / (brick) red (to show sugar / \nglucose is present when added to cake) ",
+          "order": 13,
+          "parent_id": "ms_3_1-indicative-content",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "green / yellow / orange / brown / (brick) red",
+              "start": 5,
+              "end": 50
+            },
+            {
+              "type": "domain_term",
+              "text": "sugar",
+              "start": 60,
+              "end": 65
+            },
+            {
+              "type": "domain_term",
+              "text": "glucose",
+              "start": 69,
+              "end": 76
+            },
+            {
+              "type": "domain_term",
+              "text": "cake",
+              "start": 102,
+              "end": 106
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-point-8",
+          "type": "indicative_point",
+          "text": "• risk of skin burns from flame (when heating) or risk of skin burns \nfrom hot glass or risk of scald / burn from boiling water ",
+          "order": 14,
+          "parent_id": "ms_3_1-indicative-content",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "flame",
+              "start": 26,
+              "end": 31
+            },
+            {
+              "type": "domain_term",
+              "text": "heating",
+              "start": 38,
+              "end": 45
+            },
+            {
+              "type": "domain_term",
+              "text": "hot glass",
+              "start": 75,
+              "end": 84
+            },
+            {
+              "type": "domain_term",
+              "text": "scald / burn",
+              "start": 96,
+              "end": 108
+            },
+            {
+              "type": "domain_term",
+              "text": "boiling water",
+              "start": 114,
+              "end": 127
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-detail-8a",
+          "type": "indicative_point",
+          "text": "o use a water bath ",
+          "order": 15,
+          "parent_id": "ms_3_1-point-8",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "water bath",
+              "start": 8,
+              "end": 18
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-detail-8b",
+          "type": "indicative_point",
+          "text": "o wait for equipment to cool before touching ",
+          "order": 16,
+          "parent_id": "ms_3_1-point-8",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "equipment",
+              "start": 11,
+              "end": 20
+            },
+            {
+              "type": "domain_term",
+              "text": "cool",
+              "start": 24,
+              "end": 28
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-point-9",
+          "type": "indicative_point",
+          "text": "• risk of Benedict’s (reagent) spitting into face / eyes when heating  ",
+          "order": 17,
+          "parent_id": "ms_3_1-indicative-content",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Benedict’s (reagent)",
+              "start": 10,
+              "end": 30
+            },
+            {
+              "type": "domain_term",
+              "text": "spitting",
+              "start": 31,
+              "end": 39
+            },
+            {
+              "type": "domain_term",
+              "text": "face / eyes",
+              "start": 45,
+              "end": 56
+            },
+            {
+              "type": "domain_term",
+              "text": "heating",
+              "start": 62,
+              "end": 69
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-detail-9a",
+          "type": "indicative_point",
+          "text": "o wear eye protection ",
+          "order": 18,
+          "parent_id": "ms_3_1-point-9",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "eye protection",
+              "start": 7,
+              "end": 21
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-detail-9b",
+          "type": "indicative_point",
+          "text": "o point test tube away from face(s) when heating  ",
+          "order": 19,
+          "parent_id": "ms_3_1-point-9",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "test tube",
+              "start": 8,
+              "end": 17
+            },
+            {
+              "type": "domain_term",
+              "text": "face(s)",
+              "start": 28,
+              "end": 35
+            },
+            {
+              "type": "domain_term",
+              "text": "heating",
+              "start": 41,
+              "end": 48
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-point-10",
+          "type": "indicative_point",
+          "text": "• risk of Benedict’s (reagent) as an irritant or risk of iodine \n(solution) as an irritant ",
+          "order": 20,
+          "parent_id": "ms_3_1-indicative-content",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Benedict’s (reagent)",
+              "start": 10,
+              "end": 30
+            },
+            {
+              "type": "domain_term",
+              "text": "iodine",
+              "start": 57,
+              "end": 63
+            },
+            {
+              "type": "domain_term",
+              "text": "(solution)",
+              "start": 65,
+              "end": 75
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-detail-10a",
+          "type": "indicative_point",
+          "text": "o clean up spills immediately ",
+          "order": 21,
+          "parent_id": "ms_3_1-point-10",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "spills",
+              "start": 11,
+              "end": 17
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-detail-10b",
+          "type": "indicative_point",
+          "text": "o wear (protective) gloves or wear eye protection ",
+          "order": 22,
+          "parent_id": "ms_3_1-point-10",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "(protective) gloves",
+              "start": 7,
+              "end": 26
+            },
+            {
+              "type": "domain_term",
+              "text": "eye protection",
+              "start": 35,
+              "end": 49
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-detail-10c",
+          "type": "indicative_point",
+          "text": "o use a dropper bottle (to reduce chance of spills) ",
+          "order": 23,
+          "parent_id": "ms_3_1-point-10",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "dropper bottle",
+              "start": 8,
+              "end": 22
+            },
+            {
+              "type": "domain_term",
+              "text": "spills",
+              "start": 44,
+              "end": 50
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-extra-1",
+          "type": "extra_information",
+          "text": "(allow answers in terms of bread) ",
+          "order": 24,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "bread",
+              "start": 27,
+              "end": 32
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_3_1-level-3-rule",
+          "type": "level_rule",
+          "text": "For Level 3 answers should include the reagents used to test for \nstarch and sugar with correct positive results, and a risk \nassessment.",
+          "order": 25,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "reagents",
+              "start": 39,
+              "end": 47
+            },
+            {
+              "type": "domain_term",
+              "text": "starch",
+              "start": 66,
+              "end": 72
+            },
+            {
+              "type": "domain_term",
+              "text": "sugar",
+              "start": 77,
+              "end": 82
+            },
+            {
+              "type": "domain_term",
+              "text": "positive results",
+              "start": 96,
+              "end": 112
+            },
+            {
+              "type": "domain_term",
+              "text": "risk",
+              "start": 120,
+              "end": 124
+            },
+            {
+              "type": "domain_term",
+              "text": "assessment",
+              "start": 126,
+              "end": 136
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    },
+    {
+      "document_id": "commentary_3_1",
+      "document_type": "commentary",
+      "source_file": "B-JUN24-84611H-3_1-C.txt",
+      "segments": [
+        {
+          "id": "commentary_3_1-guidance-1",
+          "type": "commentary_guidance",
+          "text": "To achieve a mark in Level 3, students must give details of both reagents and both positive results, as well as at least one risk with its linked control measure. In addition, students must include good scientific terminology – as such, we would expect Level 3 students to be clear in their wording, e.g. iodine solution (which could be inferred by using ‘drops’) in the starch test, and in the Benedict’s test they should convey a clear understanding of the need to heat the mixture appropriately. ",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "reagents",
+              "start": 65,
+              "end": 73
+            },
+            {
+              "type": "domain_term",
+              "text": "positive results",
+              "start": 83,
+              "end": 99
+            },
+            {
+              "type": "quantifier",
+              "text": "at least one",
+              "start": 112,
+              "end": 124
+            },
+            {
+              "type": "domain_term",
+              "text": "risk",
+              "start": 125,
+              "end": 129
+            },
+            {
+              "type": "domain_term",
+              "text": "control measure",
+              "start": 146,
+              "end": 161
+            },
+            {
+              "type": "domain_term",
+              "text": "scientific terminology",
+              "start": 203,
+              "end": 225
+            },
+            {
+              "type": "domain_term",
+              "text": "iodine solution",
+              "start": 305,
+              "end": 320
+            },
+            {
+              "type": "domain_term",
+              "text": "starch test",
+              "start": 371,
+              "end": 382
+            },
+            {
+              "type": "domain_term",
+              "text": "Benedict’s test",
+              "start": 395,
+              "end": 410
+            },
+            {
+              "type": "domain_term",
+              "text": "heat",
+              "start": 467,
+              "end": 471
+            },
+            {
+              "type": "domain_term",
+              "text": "mixture",
+              "start": 476,
+              "end": 483
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 3,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_3_1-guidance-2",
+          "type": "commentary_guidance",
+          "text": "For Level 2, a description of the reagent used to test for either starch or sugar should be given, as well as the positive test result for the named reagent. In addition, the student must give an additional piece of indicative content from any one of the three blocks. ",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "either",
+              "start": 59,
+              "end": 65
+            },
+            {
+              "type": "domain_term",
+              "text": "starch",
+              "start": 66,
+              "end": 72
+            },
+            {
+              "type": "domain_term",
+              "text": "sugar",
+              "start": 76,
+              "end": 81
+            },
+            {
+              "type": "domain_term",
+              "text": "positive test result",
+              "start": 114,
+              "end": 134
+            },
+            {
+              "type": "quantifier",
+              "text": "one",
+              "start": 244,
+              "end": 247
+            },
+            {
+              "type": "quantifier",
+              "text": "three",
+              "start": 255,
+              "end": 260
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_3_1-guidance-3",
+          "type": "commentary_guidance",
+          "text": "At the most basic level, Level 1, students must give an indicative content point from any block. ",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "most basic",
+              "start": 7,
+              "end": 17
+            },
+            {
+              "type": "qualifier",
+              "text": "any",
+              "start": 86,
+              "end": 89
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_3_1-guidance-4",
+          "type": "commentary_guidance",
+          "text": "When considering detail from the ‘Risk Assessment’ part of the indicative content, at Level 3, please note we are looking for an understanding of the risk, as well as giving a specific measure to control the risk. For Level 3 we need to see both a black bullet point (bp) and a related white bp for the risk assessment, whereas at Level 2 a black bp alone is sufficient. Note that a white bp alone (control measure) is not creditworthy at any level. ",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Risk Assessment",
+              "start": 34,
+              "end": 49
+            },
+            {
+              "type": "domain_term",
+              "text": "specific measure",
+              "start": 176,
+              "end": 192
+            },
+            {
+              "type": "qualifier",
+              "text": "both",
+              "start": 241,
+              "end": 245
+            },
+            {
+              "type": "domain_term",
+              "text": "risk assessment",
+              "start": 303,
+              "end": 318
+            },
+            {
+              "type": "domain_term",
+              "text": "control measure",
+              "start": 399,
+              "end": 414
+            },
+            {
+              "type": "qualifier",
+              "text": "any",
+              "start": 439,
+              "end": 442
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_3_1-examples-heading",
+          "type": "commentary_heading",
+          "text": "Good examples of a risk assessment are: ",
+          "order": 5,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "risk assessment",
+              "start": 19,
+              "end": 34
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_3_1-example-1",
+          "type": "commentary_example",
+          "text": " • ‘Iodine solution is an irritant if it gets on the skin, so we should wear gloves.’ ",
+          "order": 6,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Iodine solution",
+              "start": 4,
+              "end": 19
+            },
+            {
+              "type": "domain_term",
+              "text": "irritant",
+              "start": 26,
+              "end": 34
+            },
+            {
+              "type": "domain_term",
+              "text": "skin",
+              "start": 53,
+              "end": 57
+            },
+            {
+              "type": "domain_term",
+              "text": "gloves",
+              "start": 77,
+              "end": 83
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_3_1-example-2",
+          "type": "commentary_example",
+          "text": " • ‘Benedict’s solution is harmful, and we need to be careful when using it so as not to spill on ourselves and wash it off if we do.’ ",
+          "order": 7,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Benedict’s solution",
+              "start": 4,
+              "end": 23
+            },
+            {
+              "type": "domain_term",
+              "text": "harmful",
+              "start": 27,
+              "end": 34
+            },
+            {
+              "type": "domain_term",
+              "text": "spill",
+              "start": 89,
+              "end": 94
+            },
+            {
+              "type": "domain_term",
+              "text": "wash it off",
+              "start": 112,
+              "end": 123
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_3_1-example-3",
+          "type": "commentary_example",
+          "text": " • ‘Benedict’s solution needs to be heated, so we should wear goggles.’ ",
+          "order": 8,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Benedict’s solution",
+              "start": 4,
+              "end": 23
+            },
+            {
+              "type": "domain_term",
+              "text": "heated",
+              "start": 36,
+              "end": 42
+            },
+            {
+              "type": "domain_term",
+              "text": "goggles",
+              "start": 62,
+              "end": 69
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_3_1-example-4",
+          "type": "commentary_example",
+          "text": " • ‘Benedict’s solution needs to be heated so we should be careful when using it so it doesn’t spill on us. Hot test tubes should be cooled down before clearing it away’ ",
+          "order": 9,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Benedict’s solution",
+              "start": 4,
+              "end": 23
+            },
+            {
+              "type": "domain_term",
+              "text": "heated",
+              "start": 36,
+              "end": 42
+            },
+            {
+              "type": "domain_term",
+              "text": "spill",
+              "start": 95,
+              "end": 100
+            },
+            {
+              "type": "domain_term",
+              "text": "Hot test tubes",
+              "start": 108,
+              "end": 122
+            },
+            {
+              "type": "domain_term",
+              "text": "cooled down",
+              "start": 133,
+              "end": 144
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_3_1-example-5",
+          "type": "commentary_example",
+          "text": " • ‘You should wear lab gloves on wash hands immediately if you spill it on them’ ",
+          "order": 10,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "lab gloves",
+              "start": 20,
+              "end": 30
+            },
+            {
+              "type": "domain_term",
+              "text": "wash hands",
+              "start": 34,
+              "end": 44
+            },
+            {
+              "type": "domain_term",
+              "text": "spill",
+              "start": 64,
+              "end": 69
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_3_1-guidance-5",
+          "type": "commentary_guidance",
+          "text": "Other answers are creditworthy if they meet general laboratory rules not specifically linked to using these reagents, and similarly vague ideas such as ‘breaking glassware’ or ‘causing stains’ are also insufficient. Remember that students may give creditworthy control measures that are not detailed on the indicative content (such as the use of ‘heat protective gloves’). ",
+          "order": 11,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "laboratory rules",
+              "start": 52,
+              "end": 68
+            },
+            {
+              "type": "domain_term",
+              "text": "reagents",
+              "start": 108,
+              "end": 116
+            },
+            {
+              "type": "domain_term",
+              "text": "breaking glassware",
+              "start": 153,
+              "end": 171
+            },
+            {
+              "type": "domain_term",
+              "text": "causing stains",
+              "start": 177,
+              "end": 191
+            },
+            {
+              "type": "domain_term",
+              "text": "control measures",
+              "start": 261,
+              "end": 277
+            },
+            {
+              "type": "domain_term",
+              "text": "heat protective gloves",
+              "start": 347,
+              "end": 369
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611H-3_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-11-17T10:03:18.975464+00:00",
+    "requires_review": true,
+    "warnings": [
+      {
+        "document_id": "commentary_3_1",
+        "page": null,
+        "message": "Cleared parent_id on commentary_3_1-example-1 (heading is not a semantic parent)"
+      },
+      {
+        "document_id": "commentary_3_1",
+        "page": null,
+        "message": "Cleared parent_id on commentary_3_1-example-2 (heading is not a semantic parent)"
+      },
+      {
+        "document_id": "commentary_3_1",
+        "page": null,
+        "message": "Cleared parent_id on commentary_3_1-example-3 (heading is not a semantic parent)"
+      },
+      {
+        "document_id": "commentary_3_1",
+        "page": null,
+        "message": "Cleared parent_id on commentary_3_1-example-4 (heading is not a semantic parent)"
+      },
+      {
+        "document_id": "commentary_3_1",
+        "page": null,
+        "message": "Cleared parent_id on commentary_3_1-example-5 (heading is not a semantic parent)"
+      }
+    ]
+  }
+}

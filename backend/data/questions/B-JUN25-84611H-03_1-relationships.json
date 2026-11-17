@@ -1,0 +1,245 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "B-JUN25-84611H-03_1",
+  "question_id": "03_1",
+  "relationships": [
+    {
+      "source_id": "ms_03_1-level-3-rule",
+      "target_id": "ms_03_1-level-3",
+      "relation": "APPLIES_TO",
+      "confidence": 0.99,
+      "rationale": "The rule explicitly states an additional condition for Level 3.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_1-level-3-rule",
+      "target_id": "ms_03_1-strengths",
+      "relation": "REQUIRES",
+      "confidence": 0.99,
+      "rationale": "The Level 3 rule makes inclusion of a strength necessary.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_1-level-3-rule",
+      "target_id": "ms_03_1-improvements",
+      "relation": "REQUIRES",
+      "confidence": 0.99,
+      "rationale": "The Level 3 rule makes improvements or reasons necessary.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_1-guidance-2",
+      "target_id": "ms_03_1-strengths",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "The commentary specifies that the group contains five black-dot strengths.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_1-guidance-2",
+      "target_id": "ms_03_1-improvements",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "The commentary explains the 12 improvements and their corresponding white-dot reasons.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_1-guidance-6",
+      "target_id": "ms_03_1-level-3-rule",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It specifies that at least one method strength is needed for entry to Level 3.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_1-guidance-7",
+      "target_id": "ms_03_1-level-3-rule",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It specifies the need for a linked improvement and reason plus additional improvement or reason content.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_1-guidance-8",
+      "target_id": "ms_03_1-level-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "It identifies improvements or reasons as the content needed to enter Level 2.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_1-guidance-9",
+      "target_id": "ms_03_1-level-1",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "It explains that one strength, improvement, or reason can provide entry to Level 1.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_1-guidance-10",
+      "target_id": "ms_03_1-strength-1",
+      "relation": "REJECTS",
+      "confidence": 0.99,
+      "rationale": "It explicitly rejects the unqualified phrase “the potato” for the same-potato strength point.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_1-guidance-10",
+      "target_id": "ms_03_1-improvement-1",
+      "relation": "REJECTS",
+      "confidence": 0.99,
+      "rationale": "It explicitly rejects the unqualified phrase “the potato” for the same-potato improvement point.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_1-guidance-11",
+      "target_id": "ms_03_1-strength-1",
+      "relation": "ACCEPTS",
+      "confidence": 0.99,
+      "rationale": "It explicitly accepts “a potato” or “one potato” for credit on the same-potato point.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_1-guidance-11",
+      "target_id": "ms_03_1-improvement-1",
+      "relation": "ACCEPTS",
+      "confidence": 0.99,
+      "rationale": "It explicitly accepts “a potato” or “one potato” for credit on the same-potato point.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_1-guidance-12",
+      "target_id": "ms_03_1-strength-1",
+      "relation": "CONSTRAINS",
+      "confidence": 0.99,
+      "rationale": "It prevents the same use of one potato from being credited both as this strength and as an improvement.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_1-guidance-12",
+      "target_id": "ms_03_1-improvement-1",
+      "relation": "CONSTRAINS",
+      "confidence": 0.99,
+      "rationale": "It prevents the same use of one potato from being credited both as this improvement and as a strength.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_03_1-guidance-13",
+      "target_id": "ms_03_1-improvement-5",
+      "relation": "ACCEPTS",
+      "confidence": 1.0,
+      "rationale": "It explicitly accepts the unqualified idea of “repeat” for improvement point 5.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_1-improvement-1-reason",
+      "target_id": "ms_03_1-improvement-1",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains that different potatoes may otherwise have been used.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_1-improvement-2-reason",
+      "target_id": "ms_03_1-improvement-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains that skin may still be present unless removed.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_1-improvement-3-reason",
+      "target_id": "ms_03_1-improvement-3",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains that surface water would affect the mass measurement.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_1-improvement-4-reason",
+      "target_id": "ms_03_1-improvement-4",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains that cube size or surface area was not controlled or specified.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_1-improvement-5-reason-1",
+      "target_id": "ms_03_1-improvement-5",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It identifies the absence of repeats as the defect addressed by the improvement.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_1-improvement-5-reason-2",
+      "target_id": "ms_03_1-improvement-5",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains that repeating the investigation allows anomalies to be spotted.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_1-improvement-6-reason",
+      "target_id": "ms_03_1-improvement-6",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It identifies that no mean was calculated in the original method.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_1-improvement-7-reason",
+      "target_id": "ms_03_1-improvement-7",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains that the time in solution was not specified.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_1-improvement-8-reason",
+      "target_id": "ms_03_1-improvement-8",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains that solution temperature was not controlled or specified.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_1-improvement-9-reason",
+      "target_id": "ms_03_1-improvement-9",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains that solution volume was not specified or controlled.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_1-improvement-10-reason",
+      "target_id": "ms_03_1-improvement-10",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains the need for percentage change when starting masses may differ.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_1-improvement-11-reason",
+      "target_id": "ms_03_1-improvement-11",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It identifies the absence of a control experiment.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "ms_03_1-improvement-12-reason",
+      "target_id": "ms_03_1-improvement-12",
+      "relation": "CLARIFIES",
+      "confidence": 0.99,
+      "rationale": "It explains that only three salt concentrations were used.",
+      "provenance": "llm"
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-11-13T11:48:27.608694+00:00",
+    "requires_review": false,
+    "warnings": []
+  }
+}

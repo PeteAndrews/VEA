@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "B-JUN24-84612H-09_1",
+  "question_id": "09_1",
+  "relationships": [
+    {
+      "source_id": "commentary_09_1-guidance-3",
+      "target_id": "ms_09_1-level-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.94,
+      "rationale": "Explains that logical linking requires a black bullet point together with an associated white bullet point.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_09_1-guidance-3",
+      "target_id": "ms_09_1-level-3",
+      "relation": "CLARIFIES",
+      "confidence": 0.94,
+      "rationale": "Explains how the descriptor's requirement for logically linked points is recognized in responses.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_09_1-guidance-4",
+      "target_id": "ms_09_1-indicative-point-2",
+      "relation": "CONSTRAINS",
+      "confidence": 0.99,
+      "rationale": "Restricts credit for reduced competition to a specified factor and excludes vague references to resources or nutrients.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_09_1-guidance-5",
+      "target_id": "ms_09_1-indicative-point-2",
+      "relation": "REJECTS",
+      "confidence": 0.99,
+      "rationale": "Explicitly states that saying the GM soya gets more light is insufficient unless reduced competition is identified.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_09_1-guidance-6",
+      "target_id": "ms_09_1-level-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.98,
+      "rationale": "Specifies that one linked idea provides access to Level 2.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_09_1-example-1",
+      "target_id": "ms_09_1-level-2",
+      "relation": "EXEMPLIFIES",
+      "confidence": 0.97,
+      "rationale": "Provides two response formulations that count as the linked idea needed to access Level 2.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_09_1-guidance-7",
+      "target_id": "ms_09_1-level-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.97,
+      "rationale": "Clarifies that any black bullet point paired with an associated white bullet point is sufficient to reach the level.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_09_1-guidance-8",
+      "target_id": "ms_09_1-level-rule-1",
+      "relation": "CLARIFIES",
+      "confidence": 0.96,
+      "rationale": "Specifies the Level 3 content threshold as two linked ideas plus the glyphosate-kills-weeds/does-not-affect-GM-soya point.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_09_1-guidance-9",
+      "target_id": "ms_09_1-level-1",
+      "relation": "CLARIFIES",
+      "confidence": 0.95,
+      "rationale": "Explains the distinction between the lower and higher mark within Level 1 and limits the effect of unlinked ideas.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_09_1-guidance-9",
+      "target_id": "ms_09_1-level-2",
+      "relation": "CLARIFIES",
+      "confidence": 0.95,
+      "rationale": "Explains the distinction between the lower and higher mark within Level 2 and limits the effect of unlinked ideas.",
+      "provenance": "llm"
+    },
+    {
+      "source_id": "commentary_09_1-guidance-9",
+      "target_id": "ms_09_1-level-3",
+      "relation": "CLARIFIES",
+      "confidence": 0.95,
+      "rationale": "Explains the distinction between the lower and higher mark within Level 3 and limits the effect of unlinked ideas.",
+      "provenance": "llm"
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-11-13T10:49:56.917813+00:00",
+    "requires_review": false,
+    "warnings": [
+      "The Level 3 rule refers to 'GM maize', while the question and commentary refer to GM soya; this appears to be an authored inconsistency or typographical error."
+    ]
+  }
+}

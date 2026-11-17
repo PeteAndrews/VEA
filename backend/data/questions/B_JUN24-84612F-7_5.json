@@ -1,0 +1,1284 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "B_JUN24-84612F-7_5",
+  "question_id": "7_5",
+  "metadata": {
+    "subject": null,
+    "qualification": null,
+    "paper": null,
+    "maximum_mark": 4,
+    "assessment_objective": null,
+    "specification_reference": null,
+    "marking_mode": "level_of_response"
+  },
+  "documents": [
+    {
+      "document_id": "q_7_5",
+      "document_type": "question",
+      "source_file": "B_JUN24-84612F-7_5-Q.txt",
+      "segments": [
+        {
+          "id": "q_7_5-label",
+          "type": "other_question_content",
+          "text": "QS7.5",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_7_5-context-1",
+          "type": "question_text",
+          "text": "The gardener has four types of geranium plant: A, B, C and D.",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "four",
+              "start": 17,
+              "end": 21
+            },
+            {
+              "type": "domain_term",
+              "text": "geranium plant",
+              "start": 31,
+              "end": 45
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_7_5-context-2",
+          "type": "question_text",
+          "text": "Plant A produces larger, more brightly-coloured flowers than any of the other plants.",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Plant A",
+              "start": 0,
+              "end": 7
+            },
+            {
+              "type": "qualifier",
+              "text": "larger",
+              "start": 17,
+              "end": 23
+            },
+            {
+              "type": "qualifier",
+              "text": "more",
+              "start": 25,
+              "end": 29
+            },
+            {
+              "type": "domain_term",
+              "text": "brightly-coloured flowers",
+              "start": 30,
+              "end": 55
+            },
+            {
+              "type": "qualifier",
+              "text": "any",
+              "start": 61,
+              "end": 64
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_7_5-context-3",
+          "type": "question_text",
+          "text": "The gardener wants to grow more plants of type A.",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "more",
+              "start": 27,
+              "end": 31
+            },
+            {
+              "type": "domain_term",
+              "text": "plants of type A",
+              "start": 32,
+              "end": 48
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_7_5-instruction",
+          "type": "question_instruction",
+          "text": "Explain why the gardener chooses to take cuttings from plant A instead of growing \nseeds from plant A.",
+          "order": 5,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "Explain",
+              "start": 0,
+              "end": 7
+            },
+            {
+              "type": "domain_term",
+              "text": "cuttings",
+              "start": 41,
+              "end": 49
+            },
+            {
+              "type": "domain_term",
+              "text": "seeds",
+              "start": 83,
+              "end": 88
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-Q.txt",
+            "page": null
+          },
+          "marks": 4,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_7_5-mark-label",
+          "type": "other_question_content",
+          "text": "[4 marks]",
+          "order": 6,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "4",
+              "start": 1,
+              "end": 2
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-Q.txt",
+            "page": null
+          },
+          "marks": 4,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    },
+    {
+      "document_id": "ms_7_5",
+      "document_type": "mark_scheme",
+      "source_file": "B_JUN24-84612F-7_5-MS.txt",
+      "segments": [
+        {
+          "id": "ms_7_5-level-2",
+          "type": "level_descriptor",
+          "text": "Level 2:  Relevant points (reasons/causes) are identified, given in \ndetail and logically linked to form a clear account. \n3–4",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": {
+            "min": 3,
+            "max": 4
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-level-1",
+          "type": "level_descriptor",
+          "text": "Level 1: Points are identified and stated simply, but their relevance \nis not clear and there is no attempt at logical thinking. \n1–2",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": {
+            "min": 1,
+            "max": 2
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-no-content",
+          "type": "level_rule",
+          "text": "No relevant content 0",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": 0,
+          "level": 0,
+          "mark_range": {
+            "min": 0,
+            "max": 0
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-indicative-content",
+          "type": "indicative_content_group",
+          "text": "Indicative content",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-taking-cuttings",
+          "type": "indicative_content_group",
+          "text": "Taking cuttings:",
+          "order": 5,
+          "parent_id": "ms_7_5-indicative-content",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "cuttings",
+              "start": 7,
+              "end": 15
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-point-quicker",
+          "type": "indicative_point",
+          "text": "• quicker",
+          "order": 6,
+          "parent_id": "ms_7_5-taking-cuttings",
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "quicker",
+              "start": 2,
+              "end": 9
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-detail-wait",
+          "type": "indicative_point",
+          "text": "o (because) do not have to wait as long for flowers / fruits / \nseeds (to form)",
+          "order": 7,
+          "parent_id": "ms_7_5-point-quicker",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "flowers",
+              "start": 44,
+              "end": 51
+            },
+            {
+              "type": "domain_term",
+              "text": "fruits",
+              "start": 54,
+              "end": 60
+            },
+            {
+              "type": "domain_term",
+              "text": "seeds",
+              "start": 64,
+              "end": 69
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-point-identical-flowers",
+          "type": "indicative_point",
+          "text": "• all offspring identical (in appearance) or all have large /  \nbrightly-coloured flowers",
+          "order": 8,
+          "parent_id": "ms_7_5-taking-cuttings",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "offspring",
+              "start": 6,
+              "end": 15
+            },
+            {
+              "type": "qualifier",
+              "text": "identical",
+              "start": 16,
+              "end": 25
+            },
+            {
+              "type": "domain_term",
+              "text": "appearance",
+              "start": 30,
+              "end": 40
+            },
+            {
+              "type": "qualifier",
+              "text": "large",
+              "start": 54,
+              "end": 59
+            },
+            {
+              "type": "domain_term",
+              "text": "brightly-coloured flowers",
+              "start": 64,
+              "end": 89
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-detail-same-genes",
+          "type": "indicative_point",
+          "text": "o (because) all have the same alleles / genes / DNA",
+          "order": 9,
+          "parent_id": "ms_7_5-point-identical-flowers",
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "same",
+              "start": 25,
+              "end": 29
+            },
+            {
+              "type": "domain_term",
+              "text": "alleles",
+              "start": 30,
+              "end": 37
+            },
+            {
+              "type": "domain_term",
+              "text": "genes",
+              "start": 40,
+              "end": 45
+            },
+            {
+              "type": "domain_term",
+              "text": "DNA",
+              "start": 48,
+              "end": 51
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-point-asexual",
+          "type": "indicative_point",
+          "text": "• asexual reproduction or not sexual reproduction or cloning",
+          "order": 10,
+          "parent_id": "ms_7_5-taking-cuttings",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "asexual reproduction",
+              "start": 2,
+              "end": 22
+            },
+            {
+              "type": "domain_term",
+              "text": "cloning",
+              "start": 53,
+              "end": 60
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-detail-gametes",
+          "type": "indicative_point",
+          "text": "o (so) no fusing of gametes",
+          "order": 11,
+          "parent_id": "ms_7_5-point-asexual",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "fusing of gametes",
+              "start": 10,
+              "end": 27
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-detail-mixing-1",
+          "type": "indicative_point",
+          "text": "o (so) no mixing of alleles / genes from two parents",
+          "order": 12,
+          "parent_id": "ms_7_5-point-asexual",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "mixing of alleles",
+              "start": 10,
+              "end": 27
+            },
+            {
+              "type": "domain_term",
+              "text": "genes",
+              "start": 30,
+              "end": 35
+            },
+            {
+              "type": "quantifier",
+              "text": "two",
+              "start": 41,
+              "end": 44
+            },
+            {
+              "type": "domain_term",
+              "text": "parents",
+              "start": 45,
+              "end": 52
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-detail-identical-offspring",
+          "type": "indicative_point",
+          "text": "o (so) offspring are identical (in appearance)",
+          "order": 13,
+          "parent_id": "ms_7_5-point-asexual",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "offspring",
+              "start": 7,
+              "end": 16
+            },
+            {
+              "type": "qualifier",
+              "text": "identical",
+              "start": 21,
+              "end": 30
+            },
+            {
+              "type": "domain_term",
+              "text": "appearance",
+              "start": 35,
+              "end": 45
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-point-mitosis",
+          "type": "indicative_point",
+          "text": "• involves mitosis",
+          "order": 14,
+          "parent_id": "ms_7_5-taking-cuttings",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "mitosis",
+              "start": 11,
+              "end": 18
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-detail-copies-material",
+          "type": "indicative_point",
+          "text": "o (which) copies genetic material / chromosomes",
+          "order": 15,
+          "parent_id": "ms_7_5-point-mitosis",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "genetic material",
+              "start": 17,
+              "end": 33
+            },
+            {
+              "type": "domain_term",
+              "text": "chromosomes",
+              "start": 36,
+              "end": 47
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-point-meiosis",
+          "type": "indicative_point",
+          "text": "• does not involve meiosis",
+          "order": 16,
+          "parent_id": "ms_7_5-taking-cuttings",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "meiosis",
+              "start": 19,
+              "end": 26
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-detail-different-material",
+          "type": "indicative_point",
+          "text": "o (which) gives different genetic material / chromosomes",
+          "order": 17,
+          "parent_id": "ms_7_5-point-meiosis",
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "different",
+              "start": 16,
+              "end": 25
+            },
+            {
+              "type": "domain_term",
+              "text": "genetic material",
+              "start": 26,
+              "end": 42
+            },
+            {
+              "type": "domain_term",
+              "text": "chromosomes",
+              "start": 45,
+              "end": 56
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-point-variation",
+          "type": "indicative_point",
+          "text": "• avoids variation in flowers",
+          "order": 18,
+          "parent_id": "ms_7_5-taking-cuttings",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "variation in flowers",
+              "start": 9,
+              "end": 29
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-detail-pollination",
+          "type": "indicative_point",
+          "text": "o due to pollination / cross pollination (from other geraniums)",
+          "order": 19,
+          "parent_id": "ms_7_5-point-variation",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "cross pollination",
+              "start": 23,
+              "end": 40
+            },
+            {
+              "type": "domain_term",
+              "text": "geraniums",
+              "start": 53,
+              "end": 62
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-detail-mixing-2",
+          "type": "indicative_point",
+          "text": "o (as) no mixing of alleles / genes from two parents",
+          "order": 20,
+          "parent_id": "ms_7_5-point-variation",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "mixing of alleles",
+              "start": 10,
+              "end": 27
+            },
+            {
+              "type": "domain_term",
+              "text": "genes",
+              "start": 30,
+              "end": 35
+            },
+            {
+              "type": "quantifier",
+              "text": "two",
+              "start": 41,
+              "end": 44
+            },
+            {
+              "type": "domain_term",
+              "text": "parents",
+              "start": 45,
+              "end": 52
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-point-profitability",
+          "type": "indicative_point",
+          "text": "• increased profitability",
+          "order": 21,
+          "parent_id": "ms_7_5-taking-cuttings",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "increased profitability",
+              "start": 2,
+              "end": 25
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-detail-resources",
+          "type": "indicative_point",
+          "text": "o less resources needed",
+          "order": 22,
+          "parent_id": "ms_7_5-point-profitability",
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "less",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "type": "domain_term",
+              "text": "resources",
+              "start": 7,
+              "end": 16
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-detail-turnover",
+          "type": "indicative_point",
+          "text": "o quicker turnover",
+          "order": 23,
+          "parent_id": "ms_7_5-point-profitability",
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "quicker",
+              "start": 2,
+              "end": 9
+            },
+            {
+              "type": "domain_term",
+              "text": "turnover",
+              "start": 10,
+              "end": 18
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_7_5-detail-quality",
+          "type": "indicative_point",
+          "text": "o consistent quality of plants / flowers",
+          "order": 24,
+          "parent_id": "ms_7_5-point-profitability",
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "consistent",
+              "start": 2,
+              "end": 12
+            },
+            {
+              "type": "domain_term",
+              "text": "plants",
+              "start": 24,
+              "end": 30
+            },
+            {
+              "type": "domain_term",
+              "text": "flowers",
+              "start": 33,
+              "end": 40
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    },
+    {
+      "document_id": "commentary_7_5",
+      "document_type": "commentary",
+      "source_file": "B_JUN24-84612F-7_5-C.txt",
+      "segments": [
+        {
+          "id": "commentary_7_5-text-1",
+          "type": "commentary_text",
+          "text": "In this extended response question it is important to remember that what is printed on the mark scheme is Indicative Content i.e. there may be other responses which are worthy of credit.",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_7_5-guidance-level-1",
+          "type": "commentary_guidance",
+          "text": "Level 1 answers will contain points which are not linked.",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not linked",
+              "start": 46,
+              "end": 56
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_7_5-guidance-level-2",
+          "type": "commentary_guidance",
+          "text": "Level 2 answers will contain points which are clearly and correctly linked.",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "clearly and correctly linked",
+              "start": 46,
+              "end": 74
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_7_5-guidance-link-words",
+          "type": "commentary_guidance",
+          "text": "Words such as because, so, which, as, whereas are good indicators that two points may be linked.",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "two",
+              "start": 71,
+              "end": 74
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_7_5-guidance-valid-links",
+          "type": "commentary_guidance",
+          "text": "Remember that valid links are not limited to adjacent solid and open bullet points in the mark scheme.",
+          "order": 5,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "valid",
+              "start": 14,
+              "end": 19
+            },
+            {
+              "type": "qualifier",
+              "text": "not limited",
+              "start": 30,
+              "end": 41
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_7_5-guidance-read-answer",
+          "type": "commentary_guidance",
+          "text": "Read the whole answer and credit sound statements.",
+          "order": 6,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "whole",
+              "start": 9,
+              "end": 14
+            },
+            {
+              "type": "qualifier",
+              "text": "sound",
+              "start": 33,
+              "end": 38
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_7_5-guidance-meaning",
+          "type": "commentary_guidance",
+          "text": "Think about the meaning of what the student has written and do not expect to see phrases in the answer which are identical to those in the mark scheme.",
+          "order": 7,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_7_5-example-variation",
+          "type": "commentary_example",
+          "text": "Eg bp2 there is no variation = identical.",
+          "order": 8,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "no variation",
+              "start": 16,
+              "end": 28
+            },
+            {
+              "type": "domain_term",
+              "text": "variation",
+              "start": 19,
+              "end": 28
+            },
+            {
+              "type": "qualifier",
+              "text": "identical",
+              "start": 31,
+              "end": 40
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_7_5-guidance-reverse",
+          "type": "commentary_guidance",
+          "text": "You may see reverse arguments which should be credited if correct.",
+          "order": 9,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "reverse",
+              "start": 12,
+              "end": 19
+            },
+            {
+              "type": "qualifier",
+              "text": "correct",
+              "start": 58,
+              "end": 65
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_7_5-guidance-duplicate-marks",
+          "type": "commentary_guidance",
+          "text": "Be careful that you do not give two marks for the same marking point which has been given in a slightly different way twice in the answer.",
+          "order": 10,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "two marks",
+              "start": 32,
+              "end": 41
+            },
+            {
+              "type": "qualifier",
+              "text": "same",
+              "start": 50,
+              "end": 54
+            },
+            {
+              "type": "qualifier",
+              "text": "slightly different",
+              "start": 95,
+              "end": 113
+            },
+            {
+              "type": "quantifier",
+              "text": "twice",
+              "start": 118,
+              "end": 123
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_7_5-guidance-genetic-information",
+          "type": "commentary_guidance",
+          "text": "If a student uses the term “genetic information” it may be given credit but only to raise them within Level 1 i.e. from 1 mark to 2 marks.",
+          "order": 11,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "genetic information",
+              "start": 28,
+              "end": 47
+            },
+            {
+              "type": "qualifier",
+              "text": "only",
+              "start": 76,
+              "end": 80
+            },
+            {
+              "type": "quantifier",
+              "text": "1 mark",
+              "start": 120,
+              "end": 126
+            },
+            {
+              "type": "quantifier",
+              "text": "2 marks",
+              "start": 130,
+              "end": 137
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": {
+            "min": 1,
+            "max": 2
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_7_5-guidance-vague",
+          "type": "commentary_guidance",
+          "text": "It is too vague above this level.",
+          "order": 12,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "too vague",
+              "start": 6,
+              "end": 15
+            }
+          ],
+          "source": {
+            "file": "B_JUN24-84612F-7_5-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-11-17T11:52:03.686360+00:00",
+    "requires_review": false,
+    "warnings": []
+  }
+}

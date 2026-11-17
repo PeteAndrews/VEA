@@ -1,0 +1,1176 @@
+{
+  "schema_version": "0.1",
+  "assessment_id": "B-JUN24-84611F-4_1",
+  "question_id": "4_1",
+  "metadata": {
+    "subject": null,
+    "qualification": null,
+    "paper": null,
+    "maximum_mark": 4,
+    "assessment_objective": null,
+    "specification_reference": null,
+    "marking_mode": "level_of_response"
+  },
+  "documents": [
+    {
+      "document_id": "q_4_1",
+      "document_type": "question",
+      "source_file": "B-JUN24-84611F-4_1-Q.txt",
+      "segments": [
+        {
+          "id": "q_4_1-question-number",
+          "type": "other_question_content",
+          "text": "Q04.1",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_4_1-context",
+          "type": "question_text",
+          "text": "Starch and sugar are two types of carbohydrate.",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Starch",
+              "start": 0,
+              "end": 6
+            },
+            {
+              "type": "domain_term",
+              "text": "sugar",
+              "start": 11,
+              "end": 16
+            },
+            {
+              "type": "quantifier",
+              "text": "two",
+              "start": 21,
+              "end": 24
+            },
+            {
+              "type": "domain_term",
+              "text": "carbohydrate",
+              "start": 34,
+              "end": 46
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_4_1-describe-tests",
+          "type": "question_instruction",
+          "text": "Describe the chemical tests that a student could use to show if bread contains:",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "Describe",
+              "start": 0,
+              "end": 8
+            },
+            {
+              "type": "domain_term",
+              "text": "chemical tests",
+              "start": 13,
+              "end": 27
+            },
+            {
+              "type": "domain_term",
+              "text": "bread",
+              "start": 64,
+              "end": 69
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_4_1-starch-subquestion",
+          "type": "subquestion",
+          "text": "starch",
+          "order": 4,
+          "parent_id": "q_4_1-describe-tests",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "starch",
+              "start": 0,
+              "end": 6
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_4_1-sugar-subquestion",
+          "type": "subquestion",
+          "text": "sugar.",
+          "order": 5,
+          "parent_id": "q_4_1-describe-tests",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "sugar",
+              "start": 0,
+              "end": 5
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_4_1-results-instruction",
+          "type": "question_instruction",
+          "text": "You should include the results of a positive test and a negative test for each type of carbohydrate.",
+          "order": 6,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "command_word",
+              "text": "include",
+              "start": 11,
+              "end": 18
+            },
+            {
+              "type": "domain_term",
+              "text": "positive test",
+              "start": 36,
+              "end": 49
+            },
+            {
+              "type": "domain_term",
+              "text": "negative test",
+              "start": 56,
+              "end": 69
+            },
+            {
+              "type": "quantifier",
+              "text": "each",
+              "start": 74,
+              "end": 78
+            },
+            {
+              "type": "domain_term",
+              "text": "carbohydrate",
+              "start": 87,
+              "end": 99
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-Q.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "q_4_1-mark-label",
+          "type": "other_question_content",
+          "text": "[4 marks]",
+          "order": 7,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "4",
+              "start": 1,
+              "end": 2
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-Q.txt",
+            "page": null
+          },
+          "marks": 4,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    },
+    {
+      "document_id": "ms_4_1",
+      "document_type": "mark_scheme",
+      "source_file": "B-JUN24-84611F-4_1-MS.txt",
+      "segments": [
+        {
+          "id": "ms_4_1-question-number",
+          "type": "other_mark_scheme_content",
+          "text": "04.1",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_4_1-level-2",
+          "type": "level_descriptor",
+          "text": "Level 2: Scientifically relevant facts, events or processes are \nidentified and given in detail to form an accurate account. 3–4",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "Scientifically relevant",
+              "start": 9,
+              "end": 32
+            },
+            {
+              "type": "qualifier",
+              "text": "in detail",
+              "start": 86,
+              "end": 95
+            },
+            {
+              "type": "qualifier",
+              "text": "accurate",
+              "start": 107,
+              "end": 115
+            },
+            {
+              "type": "quantifier",
+              "text": "3–4",
+              "start": 125,
+              "end": 128
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": {
+            "min": 3,
+            "max": 4
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_4_1-level-1",
+          "type": "level_descriptor",
+          "text": "Level 1: Facts, events or processes are identified and simply \nstated but their relevance is not clear. 1–2",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "simply",
+              "start": 55,
+              "end": 61
+            },
+            {
+              "type": "qualifier",
+              "text": "not clear",
+              "start": 93,
+              "end": 102
+            },
+            {
+              "type": "quantifier",
+              "text": "1–2",
+              "start": 104,
+              "end": 107
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": {
+            "min": 1,
+            "max": 2
+          },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_4_1-no-content",
+          "type": "level_rule",
+          "text": "No relevant content 0",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "No relevant content",
+              "start": 0,
+              "end": 19
+            },
+            {
+              "type": "quantifier",
+              "text": "0",
+              "start": 20,
+              "end": 21
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-MS.txt",
+            "page": null
+          },
+          "marks": 0,
+          "level": 0,
+          "mark_range": {
+              "min": 0,
+              "max": 0
+            },
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_4_1-indicative-content",
+          "type": "indicative_content_group",
+          "text": "Indicative content:",
+          "order": 5,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_4_1-starch-group",
+          "type": "indicative_content_group",
+          "text": "Starch",
+          "order": 6,
+          "parent_id": "ms_4_1-indicative-content",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Starch",
+              "start": 0,
+              "end": 6
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_4_1-starch-test",
+          "type": "indicative_point",
+          "text": "• iodine (solution) tests for starch",
+          "order": 7,
+          "parent_id": "ms_4_1-starch-group",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "iodine (solution)",
+              "start": 2,
+              "end": 19
+            },
+            {
+              "type": "domain_term",
+              "text": "starch",
+              "start": 30,
+              "end": 36
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_4_1-starch-positive",
+          "type": "indicative_point",
+          "text": "• iodine (solution) turns to blue-black or black or dark blue (if \nstarch is present)",
+          "order": 8,
+          "parent_id": "ms_4_1-starch-group",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "iodine (solution)",
+              "start": 2,
+              "end": 19
+            },
+            {
+              "type": "domain_term",
+              "text": "blue-black",
+              "start": 29,
+              "end": 39
+            },
+            {
+              "type": "domain_term",
+              "text": "black",
+              "start": 43,
+              "end": 48
+            },
+            {
+              "type": "domain_term",
+              "text": "dark blue",
+              "start": 52,
+              "end": 61
+            },
+            {
+              "type": "domain_term",
+              "text": "starch",
+              "start": 67,
+              "end": 73
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_4_1-starch-negative",
+          "type": "indicative_point",
+          "text": "• iodine (solution) remains unchanged / yellow / orange / brown (if \nno starch is present)",
+          "order": 9,
+          "parent_id": "ms_4_1-starch-group",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "iodine (solution)",
+              "start": 2,
+              "end": 19
+            },
+            {
+              "type": "domain_term",
+              "text": "unchanged",
+              "start": 28,
+              "end": 37
+            },
+            {
+              "type": "domain_term",
+              "text": "yellow",
+              "start": 40,
+              "end": 46
+            },
+            {
+              "type": "domain_term",
+              "text": "orange",
+              "start": 49,
+              "end": 55
+            },
+            {
+              "type": "domain_term",
+              "text": "brown",
+              "start": 58,
+              "end": 63
+            },
+            {
+              "type": "quantifier",
+              "text": "no",
+              "start": 69,
+              "end": 71
+            },
+            {
+              "type": "domain_term",
+              "text": "starch",
+              "start": 72,
+              "end": 78
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_4_1-sugar-group",
+          "type": "indicative_content_group",
+          "text": "Sugar",
+          "order": 10,
+          "parent_id": "ms_4_1-indicative-content",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Sugar",
+              "start": 0,
+              "end": 5
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_4_1-sugar-test",
+          "type": "indicative_point",
+          "text": "• Benedict’s (reagent / solution) tests for sugar",
+          "order": 11,
+          "parent_id": "ms_4_1-sugar-group",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Benedict’s (reagent / solution)",
+              "start": 2,
+              "end": 33
+            },
+            {
+              "type": "domain_term",
+              "text": "sugar",
+              "start": 44,
+              "end": 49
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_4_1-heating",
+          "type": "indicative_point",
+          "text": "• boil or heat (to at least 60 °C)",
+          "order": 12,
+          "parent_id": "ms_4_1-sugar-group",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "boil",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "type": "domain_term",
+              "text": "heat",
+              "start": 10,
+              "end": 14
+            },
+            {
+              "type": "qualifier",
+              "text": "at least",
+              "start": 19,
+              "end": 27
+            },
+            {
+              "type": "domain_term",
+              "text": "60 °C",
+              "start": 28,
+              "end": 33
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_4_1-sugar-positive",
+          "type": "indicative_point",
+          "text": "• Benedict’s (reagent / solution) turns green / yellow / orange / \nbrown / (brick) red (if sugar is present)",
+          "order": 13,
+          "parent_id": "ms_4_1-sugar-group",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Benedict’s (reagent / solution)",
+              "start": 2,
+              "end": 33
+            },
+            {
+              "type": "domain_term",
+              "text": "green",
+              "start": 40,
+              "end": 45
+            },
+            {
+              "type": "domain_term",
+              "text": "yellow",
+              "start": 48,
+              "end": 54
+            },
+            {
+              "type": "domain_term",
+              "text": "orange",
+              "start": 57,
+              "end": 63
+            },
+            {
+              "type": "domain_term",
+              "text": "brown",
+              "start": 67,
+              "end": 72
+            },
+            {
+              "type": "domain_term",
+              "text": "(brick) red",
+              "start": 75,
+              "end": 86
+            },
+            {
+              "type": "domain_term",
+              "text": "sugar",
+              "start": 91,
+              "end": 96
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_4_1-sugar-negative",
+          "type": "indicative_point",
+          "text": "• Benedict’s (reagent / solution) remains unchanged / blue (if no \nsugar is present)",
+          "order": 14,
+          "parent_id": "ms_4_1-sugar-group",
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Benedict’s (reagent / solution)",
+              "start": 2,
+              "end": 33
+            },
+            {
+              "type": "domain_term",
+              "text": "unchanged",
+              "start": 42,
+              "end": 51
+            },
+            {
+              "type": "domain_term",
+              "text": "blue",
+              "start": 54,
+              "end": 58
+            },
+            {
+              "type": "quantifier",
+              "text": "no",
+              "start": 63,
+              "end": 65
+            },
+            {
+              "type": "domain_term",
+              "text": "sugar",
+              "start": 67,
+              "end": 72
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "ms_4_1-level-2-rule",
+          "type": "level_rule",
+          "text": "For Level 2, the response must give details of the tests for starch \nand sugar.",
+          "order": 15,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "must",
+              "start": 26,
+              "end": 30
+            },
+            {
+              "type": "domain_term",
+              "text": "tests",
+              "start": 51,
+              "end": 56
+            },
+            {
+              "type": "domain_term",
+              "text": "starch",
+              "start": 61,
+              "end": 67
+            },
+            {
+              "type": "domain_term",
+              "text": "sugar",
+              "start": 73,
+              "end": 78
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-MS.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    },
+    {
+      "document_id": "commentary_4_1",
+      "document_type": "commentary",
+      "source_file": "B-JUN24-84611F-4_1-C.txt",
+      "segments": [
+        {
+          "id": "commentary_4_1-heading",
+          "type": "commentary_heading",
+          "text": "Q.04.1",
+          "order": 1,
+          "parent_id": null,
+          "annotations": [],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_4_1-level-2-access",
+          "type": "commentary_guidance",
+          "text": "To gain access to Level 2 (3 marks), students must refer to the reagents needed to test for both types of carbohydrate and must also give one colour (positive or negative) for one of the tests.",
+          "order": 2,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "must",
+              "start": 46,
+              "end": 50
+            },
+            {
+              "type": "domain_term",
+              "text": "reagents",
+              "start": 64,
+              "end": 72
+            },
+            {
+              "type": "quantifier",
+              "text": "both",
+              "start": 92,
+              "end": 96
+            },
+            {
+              "type": "domain_term",
+              "text": "carbohydrate",
+              "start": 106,
+              "end": 118
+            },
+            {
+              "type": "qualifier",
+              "text": "must",
+              "start": 123,
+              "end": 127
+            },
+            {
+              "type": "quantifier",
+              "text": "one",
+              "start": 138,
+              "end": 141
+            },
+            {
+              "type": "domain_term",
+              "text": "colour",
+              "start": 142,
+              "end": 148
+            },
+            {
+              "type": "domain_term",
+              "text": "positive or negative",
+              "start": 150,
+              "end": 170
+            },
+            {
+              "type": "quantifier",
+              "text": "one",
+              "start": 176,
+              "end": 179
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_4_1-level-2-higher-mark",
+          "type": "commentary_guidance",
+          "text": " To achieve the higher mark within this level, the student must address all parts of the question by including the expected positive and negative results for both of the tests as well.",
+          "order": 3,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "higher",
+              "start": 16,
+              "end": 22
+            },
+            {
+              "type": "qualifier",
+              "text": "must",
+              "start": 59,
+              "end": 63
+            },
+            {
+              "type": "quantifier",
+              "text": "all",
+              "start": 72,
+              "end": 75
+            },
+            {
+              "type": "qualifier",
+              "text": "expected",
+              "start": 115,
+              "end": 123
+            },
+            {
+              "type": "domain_term",
+              "text": "positive and negative results",
+              "start": 124,
+              "end": 153
+            },
+            {
+              "type": "quantifier",
+              "text": "both",
+              "start": 158,
+              "end": 162
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 2,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_4_1-level-1-access",
+          "type": "commentary_guidance",
+          "text": "To gain access to Level 1 (1 mark), students must give an indicative point from the mark scheme.",
+          "order": 4,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "1",
+              "start": 24,
+              "end": 25
+            },
+            {
+              "type": "quantifier",
+              "text": "1",
+              "start": 27,
+              "end": 28
+            },
+            {
+              "type": "qualifier",
+              "text": "must",
+              "start": 45,
+              "end": 49
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_4_1-level-1-limit",
+          "type": "commentary_guidance",
+          "text": "If more than one indicative point is given about one carbohydrate only, then the higher mark may be awarded but the response will remain in Level 1.",
+          "order": 5,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "quantifier",
+              "text": "more than one",
+              "start": 3,
+              "end": 16
+            },
+            {
+              "type": "quantifier",
+              "text": "one",
+              "start": 49,
+              "end": 52
+            },
+            {
+              "type": "domain_term",
+              "text": "carbohydrate",
+              "start": 53,
+              "end": 65
+            },
+            {
+              "type": "qualifier",
+              "text": "only",
+              "start": 66,
+              "end": 70
+            },
+            {
+              "type": "qualifier",
+              "text": "higher",
+              "start": 81,
+              "end": 87
+            },
+            {
+              "type": "qualifier",
+              "text": "may",
+              "start": 93,
+              "end": 96
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_4_1-heat-guidance",
+          "type": "commentary_guidance",
+          "text": " Note that although heat is not required to achieve Level 2, heat can be used as a creditworthy point in Level 1.",
+          "order": 6,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "not required",
+              "start": 28,
+              "end": 40
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": null,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_4_1-benedicts-example",
+          "type": "commentary_example",
+          "text": "For example, ‘Benedict’s tests for sugar and you need to heat it’ would achieve 2 marks in Level 1.",
+          "order": 7,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "domain_term",
+              "text": "Benedict’s tests",
+              "start": 14,
+              "end": 30
+            },
+            {
+              "type": "domain_term",
+              "text": "sugar",
+              "start": 35,
+              "end": 40
+            },
+            {
+              "type": "domain_term",
+              "text": "heat",
+              "start": 57,
+              "end": 61
+            },
+            {
+              "type": "quantifier",
+              "text": "2",
+              "start": 80,
+              "end": 81
+            },
+            {
+              "type": "quantifier",
+              "text": "1",
+              "start": 97,
+              "end": 98
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        },
+        {
+          "id": "commentary_4_1-context-guidance",
+          "type": "commentary_guidance",
+          "text": "Reference to ‘boil’ or ‘heat’ without any context is not creditworthy, whereas ‘boiling or heating Benedict’s (reagent)’ or ‘the sugar test needs heating’ would gain one mark in Level 1.",
+          "order": 8,
+          "parent_id": null,
+          "annotations": [
+            {
+              "type": "qualifier",
+              "text": "without any context",
+              "start": 30,
+              "end": 49
+            },
+            {
+              "type": "qualifier",
+              "text": "not",
+              "start": 53,
+              "end": 56
+            },
+            {
+              "type": "domain_term",
+              "text": "boiling or heating Benedict’s (reagent)",
+              "start": 80,
+              "end": 119
+            },
+            {
+              "type": "domain_term",
+              "text": "sugar test",
+              "start": 129,
+              "end": 139
+            },
+            {
+              "type": "quantifier",
+              "text": "one",
+              "start": 166,
+              "end": 169
+            },
+            {
+              "type": "quantifier",
+              "text": "1",
+              "start": 184,
+              "end": 185
+            }
+          ],
+          "source": {
+            "file": "B-JUN24-84611F-4_1-C.txt",
+            "page": null
+          },
+          "marks": null,
+          "level": 1,
+          "mark_range": null,
+          "assessment_objective": null,
+          "specification_reference": null
+        }
+      ]
+    }
+  ],
+  "extraction": {
+    "model": "gpt-5.6",
+    "timestamp": "2026-11-17T09:54:16.873076+00:00",
+    "requires_review": false,
+    "warnings": []
+  }
+}
