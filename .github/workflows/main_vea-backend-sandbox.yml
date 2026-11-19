@@ -24,6 +24,11 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Use CPU-only PyTorch for Azure
+        run: |
+          sed -i 's|^torch[[:space:]]*>=.*$|torch @ https://download.pytorch.org/whl/cpu/torch-2.12.1%2Bcpu-cp311-cp311-manylinux_2_28_x86_64.whl|' backend/requirements.txt
+          grep -F 'torch @ https://download.pytorch.org/whl/cpu/' backend/requirements.txt
+
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
