@@ -29,6 +29,15 @@ jobs:
           sed -i 's|^torch[[:space:]]*>=.*$|torch @ https://download.pytorch.org/whl/cpu/torch-2.12.1%2Bcpu-cp311-cp311-manylinux_2_28_x86_64.whl|' backend/requirements.txt
           grep -F 'torch @ https://download.pytorch.org/whl/cpu/' backend/requirements.txt
 
+      - name: Ingest Biology assessment
+        working-directory: backend
+        env:
+          VEA_EMBED_DEVICE: cpu
+        run: |
+          python -m pip install --no-cache-dir -r requirements.txt
+          python -m app.cli ingest-assessment B-JUN24-84612H-09_1
+          test -s data/registry.json
+
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
