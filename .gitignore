@@ -1,8 +1,11 @@
-# Environment and secrets
+# Environment and secrets (local dev only; .env.production is tracked for Azure)
 .env
 .env.local
 .env.*.local
 backend/.env
+!.env.production
+!backend/.env.production
+!frontend/.env.production
 
 # Python
 __pycache__/
