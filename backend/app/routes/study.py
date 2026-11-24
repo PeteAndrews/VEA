@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import os
+
 from fastapi import APIRouter, HTTPException, Request, Response
 from pydantic import BaseModel, Field
 
@@ -38,11 +40,14 @@ def create_study_session(body: StudySessionRequest, response: Response) -> dict:
         payload = study_service().authenticate_token(body.token)
     except ValueError as exc:
         raise HTTPException(status_code=401, detail=str(exc)) from None
+    cross_site = os.getenv("VEA_CROSS_SITE_COOKIES", "0") == "1"
+
     response.set_cookie(
         key=STUDY_SESSION_COOKIE,
         value=payload["session_id"],
         httponly=True,
-        samesite="lax",
+        secure=cross_site,
+        samesite="none" if cross_site else "lax",
         max_age=60 * 60 * 24 * 30,
     )
     return payload
