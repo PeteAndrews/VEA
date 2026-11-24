@@ -25,7 +25,19 @@ async function fetchJson(path, options = {}) {
     const handled = await requestInterceptor(path, options);
     if (handled !== undefined) return handled;
   }
-  const response = await fetch(path, { credentials: "include", ...options });
+ 
+  const apiBase = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
+
+  const requestUrl =
+    apiBase && path.startsWith("/api/")
+      ? `${apiBase}${path.slice(4)}`
+      : path;
+
+  const response = await fetch(requestUrl, {
+    credentials: "include",
+    ...options,
+  });
+
   if (!response.ok) {
     const detail = await response.text();
     throw new Error(formatApiError(response.status, detail));
